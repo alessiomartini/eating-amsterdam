@@ -1,0 +1,15 @@
+{
+  "name": "eating-amsterdam",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mappa dei posti dove mangiare bene e spendere poco ad Amsterdam",
+  "type": "module",
+  "scripts": {
+    "fetch:osm": "node scripts/fetch-osm.mjs",
+    "enrich:google": "node scripts/enrich-google.mjs",
+    "merge:contributions": "node scripts/merge-contributions.mjs",
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

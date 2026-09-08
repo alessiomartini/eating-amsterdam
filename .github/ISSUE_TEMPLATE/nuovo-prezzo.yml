@@ -1,0 +1,43 @@
+name: Segnala un prezzo
+description: Hai mangiato da qualche parte? Dicci quanto hai pagato.
+title: "[prezzo] "
+labels: ["prezzo"]
+body:
+  - type: input
+    id: locale
+    attributes:
+      label: Nome del locale
+      placeholder: Bird Snackbar
+    validations:
+      required: true
+  - type: input
+    id: indirizzo
+    attributes:
+      label: Indirizzo o link Google Maps
+  - type: textarea
+    id: prezzi
+    attributes:
+      label: Prezzi
+      description: Un piatto per riga, nel formato "piatto — prezzo".
+      placeholder: |
+        Döner in pita — 7,50
+        Kapsalon piccolo — 9,00
+      render: text
+    validations:
+      required: true
+  - type: dropdown
+    id: dieta
+    attributes:
+      label: Opzioni vegetariane/vegane
+      options:
+        - Non lo so
+        - Nessuna
+        - Qualche piatto vegetariano
+        - Qualche piatto vegano
+        - Tutto vegetariano
+        - Tutto vegano
+  - type: textarea
+    id: note
+    attributes:
+      label: Note
+      placeholder: Porzioni enormi, aperto fino a tardi, solo contanti…

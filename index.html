@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Eating Amsterdam — mangiare bene spendendo poco</title>
+<meta name="description" content="Mappa collaborativa di fast food, döner e ristoranti economici ad Amsterdam, con prezzi reali inseriti dagli utenti e filtri vegetariano/vegano." />
+<meta name="color-scheme" content="dark light" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥙</text></svg>" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <h1><span aria-hidden="true">🥙</span> Eating Amsterdam</h1>
+  <p class="tagline">Dove mangiare bene spendendo poco</p>
+  <div class="topbar-actions">
+    <button type="button" id="btn-locate" class="ghost" title="Centra sulla mia posizione">📍 Vicino a me</button>
+    <button type="button" id="btn-data" class="ghost" title="Importa, esporta e aggiorna i dati">⚙️ Dati</button>
+  </div>
+</header>
+
+<main class="layout" id="layout">
+  <aside class="sidebar" id="sidebar">
+    <form class="filters" id="filters" autocomplete="off">
+      <div class="field">
+        <input type="search" id="f-query" placeholder="Cerca nome, cucina, via…" aria-label="Cerca" />
+      </div>
+
+      <div class="field">
+        <label for="f-maxprice">Prezzo massimo a pasto: <output id="f-maxprice-out">qualsiasi</output></label>
+        <input type="range" id="f-maxprice" min="4" max="31" step="1" value="31" />
+        <p class="hint">Basato sui prezzi inseriti dagli utenti; i locali senza prezzo restano visibili.</p>
+      </div>
+
+      <fieldset class="field">
+        <legend>Dieta</legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" id="f-vegetarian" /><span>🥗 Vegetariano</span></label>
+          <label class="chip"><input type="checkbox" id="f-vegan" /><span>🌱 Vegano</span></label>
+          <label class="chip"><input type="checkbox" id="f-veg-strict" /><span>Solo tag verificati</span></label>
+        </div>
+      </fieldset>
+
+      <details class="more" id="more-filters">
+        <summary>Altri filtri <span id="more-count" class="badge" hidden></span></summary>
+        <div class="field">
+          <label for="f-minrating">Voto minimo: <output id="f-minrating-out">qualsiasi</output></label>
+          <input type="range" id="f-minrating" min="0" max="5" step="0.5" value="0" />
+        </div>
+
+        <fieldset class="field">
+          <legend>Tipo di locale</legend>
+          <div class="chips" id="f-categories"></div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Cucina</legend>
+          <div class="chips" id="f-cuisines"></div>
+        </fieldset>
+        <fieldset class="field">
+          <legend>Altro</legend>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" id="f-open" /><span>🕒 Aperto ora</span></label>
+            <label class="chip"><input type="checkbox" id="f-haspri" /><span>💶 Con prezzo</span></label>
+            <label class="chip"><input type="checkbox" id="f-fav" /><span>⭐ Preferiti</span></label>
+          </div>
+        </fieldset>
+      </details>
+
+      <div class="field row">
+        <label for="f-sort">Ordina per</label>
+        <select id="f-sort">
+          <option value="price">Prezzo</option>
+          <option value="rating">Voto</option>
+          <option value="distance">Distanza</option>
+          <option value="name">Nome</option>
+        </select>
+        <button type="button" id="btn-reset" class="ghost">Azzera</button>
+      </div>
+    </form>
+
+    <div class="results-head">
+      <span id="results-count">Caricamento…</span>
+      <button type="button" id="btn-add" class="ghost small">+ Aggiungi locale</button>
+    </div>
+    <ul class="results" id="results"></ul>
+  </aside>
+
+  <div class="map-wrap">
+    <div id="map"></div>
+    <div class="map-legend" id="map-legend" hidden>
+      <span><i class="dot cheap"></i> ≤ 10 €</span>
+      <span><i class="dot mid"></i> 10–18 €</span>
+      <span><i class="dot pricey"></i> &gt; 18 €</span>
+      <span><i class="dot unknown"></i> prezzo ignoto</span>
+    </div>
+  </div>
+</main>
+
+<nav class="mobile-tabs" id="mobile-tabs">
+  <button type="button" data-view="list" class="active">Lista</button>
+  <button type="button" data-view="map">Mappa</button>
+</nav>
+
+<dialog id="detail" class="sheet"></dialog>
+<dialog id="modal" class="sheet"></dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+<script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

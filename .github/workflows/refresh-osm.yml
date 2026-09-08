@@ -1,0 +1,41 @@
+name: Aggiorna dati OSM
+
+# Overpass a volte è lento o in manutenzione: il job si limita a riprovare
+# la settimana dopo, i dati vecchi restano validi nel frattempo.
+on:
+  schedule:
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Scarica i locali da OpenStreetMap
+        run: npm run fetch:osm
+
+      - name: Arricchisci con i voti Google (se la chiave è configurata)
+        if: env.GOOGLE_MAPS_API_KEY != ''
+        run: npm run enrich:google -- --limit 400
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/places.json; then
+            echo "Nessuna modifica."
+            exit 0
+          fi
+          git add data/places.json
+          git commit -m "dati: aggiornamento automatico da OpenStreetMap"
+          git push
