@@ -3,6 +3,12 @@ name: Deploy su GitHub Pages
 on:
   push:
     branches: [main]
+  # I push fatti col GITHUB_TOKEN (quelli del workflow "Aggiorna dati OSM") non
+  # innescano altri workflow, quindi senza questo il sito continuerebbe a
+  # servire il dataset vecchio dopo ogni rinfresco automatico.
+  workflow_run:
+    workflows: ["Aggiorna dati OSM"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +22,8 @@ concurrency:
 
 jobs:
   deploy:
+    # su workflow_run non ha senso ripubblicare se il rinfresco è fallito
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages

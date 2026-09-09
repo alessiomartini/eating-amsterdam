@@ -39,7 +39,11 @@ function parseTimeRanges(token) {
 /** @returns {boolean|null} true aperto, false chiuso, null se non interpretabile. */
 export function isOpenNow(openingHours, now = new Date()) {
   if (!openingHours) return null;
-  const spec = openingHours.trim();
+  // Alcuni locali separano le regole con la virgola invece che col punto e
+  // virgola ("Su-Th 11:00-03:00, Fr,Sa 11:00-24:00"). Normalizziamo solo le
+  // virgole che seguono un orario e precedono un giorno: quelle dentro una
+  // lista di giorni ("Fr,Sa") o di orari ("09:00-12:00,14:00-18:00") restano.
+  const spec = openingHours.trim().replace(/(\d{1,2}:\d{2})\s*,\s*(?=(?:Mo|Tu|We|Th|Fr|Sa|Su)\b)/g, '$1; ');
   if (/^24\/7$/i.test(spec)) return true;
   if (/^(off|closed)$/i.test(spec)) return false;
   if (/(PH|SH|sunset|sunrise|week|easter|\[)/i.test(spec)) return null;

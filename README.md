@@ -43,6 +43,7 @@ singolo prezzo sbagliato non falsa tutto), e i marker sono colorati per fascia:
 
 ```bash
 npm run dev       # http://localhost:5173
+npm test          # test unitari del parser degli orari
 ```
 
 Non serve installare nulla: nessuna dipendenza npm, Leaflet arriva da CDN.
@@ -110,6 +111,7 @@ assets/js/
   ui.js                    lista, scheda locale, finestre di dialogo
   store.js                 contributi dell'utente (localStorage)
   hours.js                 "aperto ora" da opening_hours di OSM
+tests/hours.test.mjs       casi limite del parser degli orari
 scripts/
   osm-common.js            query Overpass e normalizzazione (usato da Node e dal browser)
   fetch-osm.mjs            popola data/places.json
