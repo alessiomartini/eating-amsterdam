@@ -1,13 +1,13 @@
 // Punto di ingresso: collega dati, filtri, mappa e lista.
 
 import { decorate, loadPlaces } from './data.js';
-import { applyFilters, CATEGORIES, CUISINE_GROUPS, DEFAULT_FILTERS } from './filters.js';
+import { applyFilters, CATEGORIES, CUISINE_GROUPS, DEFAULT_FILTERS, PRICE_ITEM_OPTIONS } from './filters.js';
 import { focusPlace, highlight, initMap, invalidate, setPlaces, showUser } from './map.js';
 import { openAddPlaceModal, openDataModal, openDetail, renderList, toast } from './ui.js';
 import { store } from './store.js';
 
-const MAX_PRICE = 31; // 31 = "qualsiasi" sullo slider
-const FILTERS_KEY = 'eating-amsterdam:filters:v1';
+const MAX_PRICE = 41; // il massimo dello slider vale "qualsiasi prezzo"
+const FILTERS_KEY = 'eating-amsterdam:filters:v2';
 
 const el = (id) => document.getElementById(id);
 const state = {
@@ -21,30 +21,34 @@ const state = {
 
 /* ---------------------------------------------------------------- filtri UI */
 
-function renderChips() {
+function renderControls() {
   el('f-categories').innerHTML = CATEGORIES.map(
     (c) => `<label class="chip"><input type="checkbox" name="category" value="${c.id}" /><span>${c.label}</span></label>`,
   ).join('');
   el('f-cuisines').innerHTML = CUISINE_GROUPS.map(
     (c) => `<label class="chip"><input type="checkbox" name="cuisine" value="${c.id}" /><span>${c.label}</span></label>`,
   ).join('');
+  el('f-priceitem').innerHTML = PRICE_ITEM_OPTIONS.map(
+    (o) => `<option value="${o.id}">${o.label}</option>`,
+  ).join('');
 }
 
 function readFilters() {
   const maxPrice = Number(el('f-maxprice').value);
-  const minRating = Number(el('f-minrating').value);
   return {
     ...DEFAULT_FILTERS,
     query: el('f-query').value,
+    priceItem: el('f-priceitem').value,
     maxPrice: maxPrice >= MAX_PRICE ? null : maxPrice,
-    minRating,
+    useEstimates: el('f-estimates').checked,
+    measuredOnly: el('f-measured').checked,
+    minRating: Number(el('f-minrating').value),
     categories: new Set([...document.querySelectorAll('input[name="category"]:checked')].map((i) => i.value)),
     cuisines: new Set([...document.querySelectorAll('input[name="cuisine"]:checked')].map((i) => i.value)),
     vegetarian: el('f-vegetarian').checked,
     vegan: el('f-vegan').checked,
     strictVeg: el('f-veg-strict').checked,
     openNow: el('f-open').checked,
-    hasPrice: el('f-haspri').checked,
     favoritesOnly: el('f-fav').checked,
     sort: el('f-sort').value,
   };
@@ -53,13 +57,15 @@ function readFilters() {
 function writeFilters(saved) {
   if (!saved) return;
   el('f-query').value = saved.query ?? '';
+  el('f-priceitem').value = saved.priceItem ?? 'any';
   el('f-maxprice').value = saved.maxPrice ?? MAX_PRICE;
+  el('f-estimates').checked = saved.useEstimates !== false;
+  el('f-measured').checked = Boolean(saved.measuredOnly);
   el('f-minrating').value = saved.minRating ?? 0;
   el('f-vegetarian').checked = Boolean(saved.vegetarian);
   el('f-vegan').checked = Boolean(saved.vegan);
   el('f-veg-strict').checked = Boolean(saved.strictVeg);
   el('f-open').checked = Boolean(saved.openNow);
-  el('f-haspri').checked = Boolean(saved.hasPrice);
   el('f-fav').checked = Boolean(saved.favoritesOnly);
   el('f-sort').value = saved.sort ?? 'price';
   for (const value of saved.categories ?? []) {
@@ -82,14 +88,16 @@ function persistFilters(filters) {
 }
 
 function syncOutputs(filters) {
-  el('f-maxprice-out').textContent = filters.maxPrice == null ? 'qualsiasi' : `${filters.maxPrice} €`;
-  el('f-minrating-out').textContent = filters.minRating ? `⭐ ${filters.minRating}` : 'qualsiasi';
+  el('f-maxprice-out').textContent = filters.maxPrice == null ? 'any' : `€${filters.maxPrice}`;
+  el('f-minrating-out').textContent = filters.minRating ? `⭐ ${filters.minRating}` : 'any';
+
+  // "solo prezzi veri" e "includi stime" si contraddicono: il primo vince
+  el('f-estimates').disabled = filters.measuredOnly;
 
   // quanti filtri secondari sono attivi, così restano visibili anche da chiusi
   const hidden =
     filters.categories.size + filters.cuisines.size +
-    (filters.minRating > 0 ? 1 : 0) + (filters.openNow ? 1 : 0) +
-    (filters.hasPrice ? 1 : 0) + (filters.favoritesOnly ? 1 : 0);
+    (filters.minRating > 0 ? 1 : 0) + (filters.openNow ? 1 : 0) + (filters.favoritesOnly ? 1 : 0);
   const badge = el('more-count');
   badge.textContent = hidden;
   badge.hidden = hidden === 0;
@@ -104,7 +112,9 @@ function update({ keepView = false } = {}) {
   persistFilters(filters);
 
   state.filtered = applyFilters(state.places, filters, state.position);
-  el('results-count').textContent = `${state.filtered.length} locali`;
+
+  const measured = state.filtered.filter((p) => p.shown && p.shown.source !== 'estimate').length;
+  el('results-count').textContent = `${state.filtered.length} places · ${measured} with a real price`;
 
   renderList(el('results'), state.filtered, { onSelect: select });
   setPlaces(state.filtered);
@@ -130,7 +140,7 @@ function select(id) {
 /* ---------------------------------------------------------------- avvio */
 
 async function boot({ force = false } = {}) {
-  el('results-count').textContent = 'Caricamento…';
+  el('results-count').textContent = 'Loading…';
   try {
     const data = await loadPlaces({ force, onProgress: (msg) => { el('results-count').textContent = msg; } });
     state.meta = { updatedAt: data.updatedAt, source: data.source };
@@ -138,14 +148,17 @@ async function boot({ force = false } = {}) {
     el('map-legend').hidden = false;
     refreshFromStore({ keepView: false });
   } catch (err) {
-    el('results').innerHTML = `<li class="empty">Non riesco a scaricare i dati.<br />${err.message}<br />
-      <button type="button" class="ghost" id="btn-retry">Riprova</button></li>`;
-    el('results-count').textContent = 'Errore';
+    el('results').innerHTML = `<li class="empty">Could not load the data.<br />${err.message}<br />
+      <button type="button" class="ghost" id="btn-retry">Try again</button></li>`;
+    el('results-count').textContent = 'Error';
     el('btn-retry')?.addEventListener('click', () => boot({ force: true }));
   }
 }
 
 function wire() {
+  // solo 'input': con anche 'change' il blur del campo di ricerca ridisegnava la
+  // lista proprio mentre l'utente cliccava un risultato, e il click si perdeva.
+  // I <select> e le checkbox emettono 'input' come tutto il resto.
   el('filters').addEventListener('input', () => update({ keepView: true }));
   el('filters').addEventListener('submit', (e) => e.preventDefault());
 
@@ -153,13 +166,14 @@ function wire() {
     el('filters').reset();
     el('f-maxprice').value = MAX_PRICE;
     el('f-minrating').value = 0;
+    el('f-priceitem').value = 'any';
     el('more-filters').open = false;
     update({ keepView: true });
   });
 
   el('btn-locate').addEventListener('click', () => {
-    if (!navigator.geolocation) return toast('Geolocalizzazione non disponibile');
-    toast('Cerco la tua posizione…');
+    if (!navigator.geolocation) return toast('Geolocation is not available');
+    toast('Looking for your location…');
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         state.position = { lat: pos.coords.latitude, lon: pos.coords.longitude };
@@ -167,7 +181,7 @@ function wire() {
         el('f-sort').value = 'distance';
         update({ keepView: true });
       },
-      () => toast('Posizione non disponibile'),
+      () => toast('Location not available'),
     );
   });
 
@@ -199,7 +213,7 @@ function wire() {
   });
 }
 
-renderChips();
+renderControls();
 try {
   writeFilters(JSON.parse(localStorage.getItem(FILTERS_KEY) ?? 'null'));
 } catch { /* filtri salvati illeggibili */ }

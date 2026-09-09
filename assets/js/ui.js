@@ -1,8 +1,10 @@
 // Rendering della lista, della scheda locale e delle finestre di dialogo.
+// I testi rivolti all'utente sono in inglese; i commenti restano in italiano.
 
 import { store } from './store.js';
 import { decorate, priceBand } from './data.js';
 import { CATEGORIES } from './filters.js';
+import { REFERENCE_ITEMS, itemApplies } from './items.js';
 import { isOpenNow, humanize } from './hours.js';
 
 const CATEGORY_LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
@@ -10,7 +12,7 @@ const CATEGORY_LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label])
 export const esc = (value) =>
   String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
 
-export const money = (n) => `${Number(n).toFixed(2).replace('.', ',')} €`;
+export const money = (n) => `€${Number(n).toFixed(2)}`;
 
 let toastTimer;
 export function toast(message) {
@@ -24,33 +26,43 @@ export function toast(message) {
 function dietBadges(place) {
   const badges = [];
   const { vegetarian, vegan, inferred } = place.diet ?? {};
-  if (vegan === 'only') badges.push('<span class="badge vegan">100% vegano</span>');
-  else if (vegan === 'yes') badges.push('<span class="badge vegan">🌱 opzioni vegane</span>');
-  if (vegetarian === 'only') badges.push('<span class="badge veg">100% vegetariano</span>');
-  else if (vegetarian === 'yes') badges.push('<span class="badge veg">🥗 opzioni veg</span>');
-  if (!badges.length && inferred) badges.push('<span class="badge veg guess">probabile veg</span>');
+  if (vegan === 'only') badges.push('<span class="badge vegan">100% vegan</span>');
+  else if (vegan === 'yes') badges.push('<span class="badge vegan">🌱 vegan options</span>');
+  if (vegetarian === 'only') badges.push('<span class="badge veg">100% vegetarian</span>');
+  else if (vegetarian === 'yes') badges.push('<span class="badge veg">🥗 veggie options</span>');
+  if (!badges.length && inferred) badges.push('<span class="badge veg guess">likely veggie-friendly</span>');
   return badges.join('');
 }
 
+const SOURCE_LABEL = {
+  measured: 'measured by a visitor',
+  menu: 'read from the place’s own menu',
+  estimate: 'our estimate, not a real price',
+};
+
+/** Il prezzo in lista: le stime si distinguono a colpo d'occhio da un prezzo vero. */
 function priceCell(place) {
-  if (place.price == null) {
-    const level = place.priceLevel;
-    if (level != null) return `<span class="price unknown">${'€'.repeat(Math.max(level, 1))} (stima Google)</span>`;
-    return '<span class="price unknown">prezzo ignoto</span>';
+  const shown = place.shown;
+  if (!shown) return '<span class="price unknown">no price yet</span>';
+
+  const item = REFERENCE_ITEMS.find((i) => i.id === shown.itemId);
+  const what = item ? ` ${item.icon}` : '';
+  if (shown.source === 'estimate') {
+    return `<span class="price est" title="${esc(SOURCE_LABEL.estimate)} — ${esc(shown.basis.join(', '))}">≈${money(shown.amount)}${what}</span>`;
   }
-  return `<span class="price ${priceBand(place.price)}">${money(place.price)}</span>`;
+  return `<span class="price ${priceBand(shown.amount)}" title="${esc(SOURCE_LABEL[shown.source])}">${money(shown.amount)}${what}${shown.source === 'menu' ? ' <span class="badge">menu</span>' : ''}</span>`;
 }
 
 function ratingCell(place) {
   if (place.rating == null) return '';
-  const source = { mine: 'tuo voto', community: 'community', google: 'Google' }[place.ratingSource] ?? '';
+  const source = { mine: 'your rating', community: 'community', google: 'Google' }[place.ratingSource] ?? '';
   const reviews = place.ratingSource === 'google' && place.reviews ? ` · ${place.reviews}` : '';
   return `<span title="${esc(source)}">⭐ ${place.rating.toFixed(1)}${reviews}</span>`;
 }
 
 export function renderList(container, places, { onSelect, limit = 300 } = {}) {
   if (!places.length) {
-    container.innerHTML = `<li class="empty">Nessun locale con questi filtri.<br />Prova ad allargare la ricerca.</li>`;
+    container.innerHTML = '<li class="empty">No places match these filters.<br />Try widening your search.</li>';
     return;
   }
 
@@ -58,7 +70,7 @@ export function renderList(container, places, { onSelect, limit = 300 } = {}) {
   container.innerHTML = shown
     .map((place) => {
       const open = isOpenNow(place.openingHours);
-      const openBadge = open === true ? '<span class="badge open">aperto</span>' : open === false ? '<span class="badge closed">chiuso</span>' : '';
+      const openBadge = open === true ? '<span class="badge open">open</span>' : open === false ? '<span class="badge closed">closed</span>' : '';
       const distance = place.distance != null
         ? `<span>${place.distance < 1 ? `${Math.round(place.distance * 1000)} m` : `${place.distance.toFixed(1)} km`}</span>`
         : '';
@@ -80,7 +92,7 @@ export function renderList(container, places, { onSelect, limit = 300 } = {}) {
     .join('');
 
   if (places.length > shown.length) {
-    container.insertAdjacentHTML('beforeend', `<li class="empty">…e altri ${places.length - shown.length}. Restringi i filtri o usa la mappa.</li>`);
+    container.insertAdjacentHTML('beforeend', `<li class="empty">…and ${places.length - shown.length} more. Narrow the filters or use the map.</li>`);
   }
 
   container.querySelectorAll('.card').forEach((card) => {
@@ -89,76 +101,129 @@ export function renderList(container, places, { onSelect, limit = 300 } = {}) {
 }
 
 function sheet(dialog, html) {
-  dialog.innerHTML = `<button type="button" class="sheet-close" aria-label="Chiudi">×</button><div class="sheet-body">${html}</div>`;
+  dialog.innerHTML = `<button type="button" class="sheet-close" aria-label="Close">×</button><div class="sheet-body">${html}</div>`;
   dialog.querySelector('.sheet-close').addEventListener('click', () => dialog.close());
   if (!dialog.open) dialog.showModal();
 }
 
 /* ---------------------------------------------------------------- scheda locale */
 
+/** La tabella delle sei voci: valore, provenienza e campo per correggerla. */
+function itemsTable(place) {
+  const rows = REFERENCE_ITEMS.filter((item) => itemApplies(item.id, place)).map((item) => {
+    const entry = place.items?.[item.id];
+    let value = '<span class="muted">—</span>';
+
+    if (entry?.source === 'estimate') {
+      value = `<span class="est">≈${money(entry.amount)}</span>
+        <span class="src" title="${esc(entry.basis.join(' · '))}">estimate · ${esc(entry.basis.join(' · '))}</span>`;
+    } else if (entry?.source === 'menu') {
+      value = `<strong>${money(entry.amount)}</strong><span class="src">from their menu</span>`;
+    } else if (entry?.source === 'measured') {
+      value = `<strong>${money(entry.amount)}</strong><span class="src">${entry.samples} real ${entry.samples === 1 ? 'price' : 'prices'}</span>`;
+    }
+
+    return `<tr>
+      <th scope="row">${item.icon} ${esc(item.label)}<span class="src">${esc(item.hint)}</span></th>
+      <td>${value}</td>
+      <td><input type="number" min="0.5" max="200" step="0.10" name="item-${item.id}" placeholder="€" aria-label="Your price for ${esc(item.label)}" /></td>
+    </tr>`;
+  });
+
+  if (!rows.length) return '<p class="hint">None of the six reference items fit this place.</p>';
+  return `<table class="items">${rows.join('')}</table>`;
+}
+
 export function openDetail(place, { onChange } = {}) {
   const dialog = document.getElementById('detail');
   const gmaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} ${place.address ?? 'Amsterdam'}`)}`;
   const directions = `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lon}`;
-  const open = isOpenNow(place.openingHours);
 
   const render = () => {
-    // ricalcolo a ogni render: prezzo e voto cambiano mentre la scheda è aperta
+    // ricalcolo a ogni render: prezzi e voto cambiano mentre la scheda è aperta
     place = decorate(place);
     const mine = store.get(place.id) ?? { prices: [], rating: null, note: '', favorite: false };
-    const allPrices = [...mine.prices.map((p) => ({ ...p, own: true })), ...(place.communityPrices ?? [])];
+    const open = isOpenNow(place.openingHours);
+    const otherPrices = [
+      ...mine.prices.filter((p) => !p.item).map((p) => ({ ...p, own: true })),
+      ...(place.communityPrices ?? []).filter((p) => !p.item),
+    ];
 
     sheet(dialog, `
       <h2>${esc(place.name)}</h2>
       <p class="sub">${esc(CATEGORY_LABEL[place.category] ?? place.category)}${place.cuisines?.length ? ` · ${esc(place.cuisines.join(', '))}` : ''}</p>
-      <div class="badges">${dietBadges(place)}${open === true ? '<span class="badge open">aperto ora</span>' : open === false ? '<span class="badge closed">chiuso ora</span>' : ''}</div>
+      <div class="badges">${dietBadges(place)}${open === true ? '<span class="badge open">open now</span>' : open === false ? '<span class="badge closed">closed now</span>' : ''}</div>
 
-      <h3>Info</h3>
+      <h3>What things cost</h3>
+      <form id="items-form">
+        ${itemsTable(place)}
+        <div class="actions"><button type="submit" class="primary">Save my prices</button></div>
+      </form>
+      <p class="hint">Values marked <span class="est">≈</span> are estimates from the price level, the neighbourhood and the type of place — not real prices. Type what you actually paid and the estimate is replaced.</p>
+
+      <h3>Details</h3>
       <dl class="kv">
-        ${place.address ? `<dt>Indirizzo</dt><dd>${esc(place.address)}</dd>` : ''}
-        ${place.openingHours ? `<dt>Orari</dt><dd>${esc(humanize(place.openingHours))}</dd>` : ''}
-        ${place.rating != null ? `<dt>Voto</dt><dd>⭐ ${place.rating.toFixed(1)}${place.reviews ? ` (${place.reviews} recensioni Google)` : ''}</dd>` : ''}
-        ${place.priceLevel != null ? `<dt>Fascia Google</dt><dd>${'€'.repeat(Math.max(place.priceLevel, 1))}</dd>` : ''}
-        ${place.takeaway ? `<dt>Asporto</dt><dd>${esc(place.takeaway)}</dd>` : ''}
+        ${place.address ? `<dt>Address</dt><dd>${esc(place.address)}</dd>` : ''}
+        ${place.openingHours ? `<dt>Opening hours</dt><dd>${esc(humanize(place.openingHours))}</dd>` : ''}
+        ${place.rating != null ? `<dt>Rating</dt><dd>⭐ ${place.rating.toFixed(1)}${place.reviews ? ` (${place.reviews} Google reviews)` : ''}</dd>` : ''}
+        ${place.google?.priceLevel != null ? `<dt>Google price level</dt><dd>${'€'.repeat(Math.max(place.google.priceLevel, 1))}</dd>` : ''}
+        ${place.takeaway ? `<dt>Takeaway</dt><dd>${esc(place.takeaway)}</dd>` : ''}
       </dl>
 
       <div class="links">
         <a href="${gmaps}" target="_blank" rel="noopener">Google Maps ↗</a>
-        <a href="${directions}" target="_blank" rel="noopener">Indicazioni ↗</a>
-        ${place.website ? `<a href="${esc(place.website)}" target="_blank" rel="noopener">Sito ↗</a>` : ''}
+        <a href="${directions}" target="_blank" rel="noopener">Directions ↗</a>
+        ${place.website ? `<a href="${esc(place.website)}" target="_blank" rel="noopener">Website ↗</a>` : ''}
         ${place.osmUrl ? `<a href="${esc(place.osmUrl)}" target="_blank" rel="noopener">OpenStreetMap ↗</a>` : ''}
         ${place.phone ? `<a href="tel:${esc(place.phone)}">${esc(place.phone)}</a>` : ''}
       </div>
 
-      <h3>Prezzi ${place.price != null ? `— mediana ${money(place.price)}` : ''}</h3>
-      ${allPrices.length
-        ? `<ul class="price-list">${allPrices
+      <h3>Other dishes</h3>
+      ${otherPrices.length
+        ? `<ul class="price-list">${otherPrices
             .map((p, i) => `<li>
                 <span>${esc(p.dish)}${p.own ? '' : ` <span class="badge">${esc(p.by ?? 'community')}</span>`}</span>
-                <span>${money(p.amount)}${p.own ? ` <button type="button" class="del" data-price="${i}" title="Elimina">🗑</button>` : ''}</span>
+                <span>${money(p.amount)}${p.own ? ` <button type="button" class="del" data-dish="${esc(p.dish)}" title="Delete">🗑</button>` : ''}</span>
               </li>`)
             .join('')}</ul>`
-        : '<p class="hint">Nessun prezzo ancora. Aggiungi il primo qui sotto: è così che la mappa diventa utile.</p>'}
+        : '<p class="hint">Nothing else recorded yet.</p>'}
 
       <form class="form-grid" id="price-form" style="margin-top:12px">
-        <label>Piatto<input type="text" name="dish" placeholder="Döner, kapsalon, menu…" required /></label>
-        <label>Prezzo €<input type="number" name="amount" min="0.5" max="200" step="0.10" required /></label>
-        <button type="submit" class="primary">Aggiungi</button>
+        <label>Dish<input type="text" name="dish" placeholder="Kapsalon, broodje…" required /></label>
+        <label>Price €<input type="number" name="amount" min="0.5" max="200" step="0.10" required /></label>
+        <button type="submit" class="primary">Add</button>
       </form>
 
-      <h3>Il tuo voto</h3>
+      <h3>Your rating</h3>
       <div class="stars" id="stars">
-        ${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-star="${n}" class="${(mine.rating ?? 0) >= n ? 'on' : ''}" aria-label="${n} stelle">★</button>`).join('')}
+        ${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-star="${n}" class="${(mine.rating ?? 0) >= n ? 'on' : ''}" aria-label="${n} stars">★</button>`).join('')}
       </div>
 
-      <h3>Note</h3>
-      <textarea id="note" rows="3" placeholder="Il kapsalon è enorme, meglio in due…" style="width:100%;background:var(--bg-elev-2);color:inherit;border:1px solid var(--line);border-radius:8px;padding:8px">${esc(mine.note)}</textarea>
+      <h3>Notes</h3>
+      <textarea id="note" rows="3" placeholder="Huge portions, cash only, open late…" style="width:100%;background:var(--bg-elev-2);color:inherit;border:1px solid var(--line);border-radius:8px;padding:8px">${esc(mine.note)}</textarea>
 
       <div class="actions">
-        <button type="button" class="ghost" id="btn-fav">${mine.favorite ? '⭐ Nei preferiti' : '☆ Aggiungi ai preferiti'}</button>
-        ${place.source === 'custom' ? '<button type="button" class="ghost" id="btn-remove">Elimina locale</button>' : ''}
+        <button type="button" class="ghost" id="btn-fav">${mine.favorite ? '⭐ In favourites' : '☆ Add to favourites'}</button>
+        ${place.source === 'custom' ? '<button type="button" class="ghost" id="btn-remove">Delete place</button>' : ''}
       </div>
     `);
+
+    dialog.querySelector('#items-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      let saved = 0;
+      for (const input of event.target.querySelectorAll('input[name^="item-"]')) {
+        const amount = Number(input.value);
+        if (!input.value || !Number.isFinite(amount) || amount <= 0) continue;
+        const itemId = input.name.slice('item-'.length);
+        const item = REFERENCE_ITEMS.find((i) => i.id === itemId);
+        store.addPrice(place.id, { dish: item.label, amount, item: itemId });
+        saved += 1;
+      }
+      if (!saved) return toast('Type at least one price first');
+      onChange?.();
+      render();
+      toast(`Saved ${saved} ${saved === 1 ? 'price' : 'prices'} — thank you`);
+    });
 
     dialog.querySelector('#price-form').addEventListener('submit', (event) => {
       event.preventDefault();
@@ -166,12 +231,12 @@ export function openDetail(place, { onChange } = {}) {
       store.addPrice(place.id, { dish: data.get('dish'), amount: data.get('amount') });
       onChange?.();
       render();
-      toast('Prezzo salvato');
+      toast('Price saved');
     });
 
-    dialog.querySelectorAll('[data-price]').forEach((btn) => {
+    dialog.querySelectorAll('[data-dish]').forEach((btn) => {
       btn.addEventListener('click', () => {
-        store.removePrice(place.id, Number(btn.dataset.price));
+        store.removePriceByDish(place.id, btn.dataset.dish);
         onChange?.();
         render();
       });
@@ -200,7 +265,7 @@ export function openDetail(place, { onChange } = {}) {
       store.removeCustomPlace(place.id);
       dialog.close();
       onChange?.();
-      toast('Locale eliminato');
+      toast('Place deleted');
     });
   };
 
@@ -215,28 +280,29 @@ export function openDataModal({ meta, count, onReload, onChange }) {
   const contributed = Object.values(state.places).reduce((sum, e) => sum + (e.prices?.length ?? 0), 0);
 
   sheet(dialog, `
-    <h2>Dati</h2>
-    <p class="sub">${count} locali · fonte: ${esc(meta.source ?? 'sconosciuta')} · aggiornati il ${esc(meta.updatedAt ?? '?')}</p>
+    <h2>Data</h2>
+    <p class="sub">${count} places · source: ${esc(meta.source ?? 'unknown')} · updated ${esc(meta.updatedAt ?? '?')}</p>
 
-    <h3>I tuoi contributi</h3>
-    <p class="hint">${contributed} prezzi, ${Object.values(state.places).filter((e) => e.rating).length} voti, ${state.custom.length} locali aggiunti a mano.
-    Sono salvati solo in questo browser: esportali per non perderli e per condividerli.</p>
+    <h3>Your contributions</h3>
+    <p class="hint">${contributed} prices, ${Object.values(state.places).filter((e) => e.rating).length} ratings, ${state.custom.length} places you added.
+    They live in this browser only: export them so they are not lost, and so they can be shared.</p>
 
-    <label style="display:grid;gap:4px;font-size:12px;color:var(--muted);margin-top:12px">Il tuo nome (finisce accanto ai prezzi che condividi)
+    <label style="display:grid;gap:4px;font-size:12px;color:var(--muted);margin-top:12px">Your name (shown next to prices you share)
       <input type="text" id="author" value="${esc(state.author)}" placeholder="alessio" style="background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;padding:8px" />
     </label>
 
     <div class="actions">
-      <button type="button" class="primary" id="btn-export">⬇ Esporta i miei dati</button>
-      <button type="button" class="ghost" id="btn-import">⬆ Importa</button>
-      <button type="button" class="ghost" id="btn-reload">🔄 Riscarica da OpenStreetMap</button>
-      <button type="button" class="ghost" id="btn-wipe">Cancella tutto</button>
+      <button type="button" class="primary" id="btn-export">⬇ Export my data</button>
+      <button type="button" class="ghost" id="btn-import">⬆ Import</button>
+      <button type="button" class="ghost" id="btn-reload">🔄 Refetch from OpenStreetMap</button>
+      <button type="button" class="ghost" id="btn-wipe">Erase everything</button>
     </div>
     <input type="file" id="file" accept="application/json" hidden />
 
-    <h3>Da dove vengono i dati</h3>
-    <p class="hint">Nomi, posizione, cucina e tag vegetariano/vegano arrivano da OpenStreetMap (licenza ODbL).
-    Voti e fascia di prezzo, se presenti, dalla Google Places API. I prezzi dei singoli piatti non esistono in nessuna API pubblica: li mettiamo noi.</p>
+    <h3>Where the data comes from</h3>
+    <p class="hint">Names, location, cuisine and the vegetarian/vegan tags come from OpenStreetMap (ODbL licence).
+    Ratings and price level, where present, from the Google Places API. Menu prices are read from each place’s own website.
+    Everything else is an estimate until someone types in what they actually paid.</p>
   `);
 
   dialog.querySelector('#author').addEventListener('change', (e) => store.setAuthor(e.target.value));
@@ -245,7 +311,7 @@ export function openDataModal({ meta, count, onReload, onChange }) {
     const blob = new Blob([store.export()], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `eating-amsterdam-${state.author || 'contributi'}.json`;
+    a.download = `eating-amsterdam-${state.author || 'contributions'}.json`;
     a.click();
     URL.revokeObjectURL(a.href);
   });
@@ -259,9 +325,9 @@ export function openDataModal({ meta, count, onReload, onChange }) {
       store.import(await chosen.text());
       onChange?.();
       dialog.close();
-      toast('Contributi importati');
+      toast('Contributions imported');
     } catch (err) {
-      toast(`Import fallito: ${err.message}`);
+      toast(`Import failed: ${err.message}`);
     }
   });
 
@@ -271,46 +337,44 @@ export function openDataModal({ meta, count, onReload, onChange }) {
   });
 
   dialog.querySelector('#btn-wipe').addEventListener('click', () => {
-    if (!confirm('Cancellare prezzi, voti e locali aggiunti da questo browser?')) return;
+    if (!confirm('Erase the prices, ratings and places stored in this browser?')) return;
     store.reset();
     onChange?.();
     dialog.close();
-    toast('Dati locali cancellati');
+    toast('Local data erased');
   });
 }
 
 /* ---------------------------------------------------------------- nuovo locale */
 
+const inputStyle = 'background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;padding:8px';
+const labelStyle = 'display:grid;gap:4px;font-size:12px;color:var(--muted)';
+
 export function openAddPlaceModal({ center, onAdded }) {
   const dialog = document.getElementById('modal');
   sheet(dialog, `
-    <h2>Aggiungi un locale</h2>
-    <p class="sub">Per i posti che non sono su OpenStreetMap. Resta salvato nel tuo browser (e nell'export).</p>
+    <h2>Add a place</h2>
+    <p class="sub">For spots that are not on OpenStreetMap. Stored in your browser and included in your export.</p>
     <form id="add-form" style="display:grid;gap:10px">
-      <label style="display:grid;gap:4px;font-size:12px;color:var(--muted)">Nome
-        <input name="name" required style="background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;padding:8px" /></label>
-      <label style="display:grid;gap:4px;font-size:12px;color:var(--muted)">Indirizzo
-        <input name="address" style="background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;padding:8px" /></label>
+      <label style="${labelStyle}">Name<input name="name" required style="${inputStyle}" /></label>
+      <label style="${labelStyle}">Address<input name="address" style="${inputStyle}" /></label>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <label style="display:grid;gap:4px;font-size:12px;color:var(--muted)">Latitudine
-          <input name="lat" type="number" step="0.000001" value="${center.lat.toFixed(6)}" required style="background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;padding:8px" /></label>
-        <label style="display:grid;gap:4px;font-size:12px;color:var(--muted)">Longitudine
-          <input name="lon" type="number" step="0.000001" value="${center.lon.toFixed(6)}" required style="background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;padding:8px" /></label>
+        <label style="${labelStyle}">Latitude<input name="lat" type="number" step="0.000001" value="${center.lat.toFixed(6)}" required style="${inputStyle}" /></label>
+        <label style="${labelStyle}">Longitude<input name="lon" type="number" step="0.000001" value="${center.lon.toFixed(6)}" required style="${inputStyle}" /></label>
       </div>
-      <p class="hint">Il centro della mappa è già compilato: sposta la mappa sul punto giusto prima di aprire questa finestra.</p>
+      <p class="hint">Prefilled with the centre of the map: pan to the right spot before opening this dialog.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <label style="display:grid;gap:4px;font-size:12px;color:var(--muted)">Tipo
-          <select name="category" style="background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;padding:8px">
+        <label style="${labelStyle}">Type
+          <select name="category" style="${inputStyle}">
             ${CATEGORIES.map((c) => `<option value="${c.id}">${c.label}</option>`).join('')}
           </select></label>
-        <label style="display:grid;gap:4px;font-size:12px;color:var(--muted)">Cucina (separata da virgole)
-          <input name="cuisines" placeholder="kebab, turkish" style="background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;padding:8px" /></label>
+        <label style="${labelStyle}">Cuisine (comma separated)<input name="cuisines" placeholder="kebab, turkish" style="${inputStyle}" /></label>
       </div>
       <div class="chips">
-        <label class="chip"><input type="checkbox" name="vegetarian" /><span>🥗 Opzioni vegetariane</span></label>
-        <label class="chip"><input type="checkbox" name="vegan" /><span>🌱 Opzioni vegane</span></label>
+        <label class="chip"><input type="checkbox" name="vegetarian" /><span>🥗 Vegetarian options</span></label>
+        <label class="chip"><input type="checkbox" name="vegan" /><span>🌱 Vegan options</span></label>
       </div>
-      <div class="actions"><button type="submit" class="primary">Aggiungi</button></div>
+      <div class="actions"><button type="submit" class="primary">Add</button></div>
     </form>
   `);
 
@@ -338,6 +402,6 @@ export function openAddPlaceModal({ center, onAdded }) {
     store.addCustomPlace(place);
     dialog.close();
     onAdded?.(place);
-    toast('Locale aggiunto');
+    toast('Place added');
   });
 }

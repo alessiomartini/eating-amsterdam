@@ -317,3 +317,23 @@ output { color: var(--text); font-weight: 600; }
 .more[open] > summary::before { transform: rotate(90deg); }
 .more > summary:hover { border-color: var(--accent); }
 .more > summary .badge { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
+
+/* ---------- tabella delle sei voci di riferimento ---------- */
+.items { width: 100%; border-collapse: collapse; font-size: 14px; }
+.items th, .items td { padding: 7px 6px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.items th { font-weight: 500; width: 45%; }
+.items td:last-child { width: 92px; }
+.items input {
+  width: 100%;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+.items input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.src { display: block; font-size: 11px; color: var(--muted); font-weight: 400; }
+.muted { color: var(--unknown); }
+
+/* le stime non devono mai somigliare a un prezzo reale */
+.est { color: var(--muted); font-style: italic; }
+.price.est { font-weight: 500; }

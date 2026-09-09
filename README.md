@@ -4,7 +4,28 @@ Mappa collaborativa dei posti dove si mangia bene spendendo poco ad Amsterdam e
 dintorni: snackbar, döner, falafel, ristoranti economici. Filtri per prezzo, voto, tipo di
 cucina e **opzioni vegetariane/vegane**.
 
+L'interfaccia è in inglese; il codice e questi appunti restano in italiano.
 Sito statico, senza backend e senza database: si può pubblicare gratis su GitHub Pages.
+
+## Le sei voci di riferimento
+
+Invece di prezzi sciolti ("ho pagato 7,50"), ogni locale risponde alle stesse sei
+domande, così i locali diventano confrontabili: **caffè, birra, döner, pizza,
+primo più economico, secondo più economico**. Ogni voce compare solo dove ha
+senso — il döner solo dove si fa il döner, la birra non nei fast food.
+
+Ogni prezzo porta con sé la propria provenienza, e la provenienza è sempre
+visibile:
+
+| | |
+|---|---|
+| **misurato** | l'ha inserito qualcuno che era lì. È il dato buono |
+| **da menu** | letto dal sito del locale (`npm run scrape:menus`) |
+| **stimato** | calcolato da noi, mostrato con `≈` e in corsivo |
+
+Le stime non entrano mai nella media dei prezzi reali e si possono escludere dai
+filtri con "Real prices only". Una stima spacciata per prezzo vero sarebbe
+peggio di nessun prezzo.
 
 ---
 
@@ -18,7 +39,8 @@ Serve dirlo subito, perché condiziona tutto il resto:
 | Tag `diet:vegetarian` / `diet:vegan` | **OpenStreetMap** |
 | Stelle e numero di recensioni | **Google Places API** (facoltativo, serve una chiave) |
 | Fascia di prezzo `€`…`€€€€` | **Google Places API** (`priceLevel`) |
-| **Prezzo del singolo piatto** | **gli utenti** — non esiste in nessuna API |
+| **Prezzi del menu** | **il sito del locale**, letto da `scripts/scrape-menus.mjs` |
+| **Prezzo del singolo piatto** | **gli utenti** — è l'unica fonte davvero affidabile |
 
 Due precisazioni:
 
@@ -32,9 +54,8 @@ Due precisazioni:
    dato che serve davvero, ed è anche la cosa che rende il progetto utile rispetto
    a Google Maps.
 
-Nel sito ogni locale ha una scheda dove chiunque aggiunge `piatto → prezzo`. La
-mappa mostra la **mediana** dei prezzi inseriti (la mediana, non la media, così un
-singolo prezzo sbagliato non falsa tutto), e i marker sono colorati per fascia:
+Quando ci sono più prezzi per la stessa voce si usa la **mediana**, non la media,
+così un singolo prezzo sbagliato non falsa tutto. I marker sono colorati per fascia:
 🟢 ≤ 10 € · 🟡 10–18 € · 🔴 > 18 € · ⚪ prezzo ancora ignoto.
 
 ---
@@ -64,6 +85,42 @@ anche se Overpass è giù):
 ```bash
 npm run fetch:osm
 ```
+
+## Leggere i prezzi dai menu
+
+```bash
+npm run scrape:menus -- --limit 300 --max-age 90
+```
+
+Per ogni locale che ha un sito (2437 sui 4027 del dataset) legge la homepage e,
+se non basta, un paio di pagine che sembrano il menu. Riconosce i formati di
+prezzo olandesi e inglesi (`€ 3,50`, `3.50 euro`, `€12,-`), scarta i valori
+implausibili — un caffè a 45 € è un numero di telefono, non un caffè — e per
+primi e secondi prende il piatto più economico della sezione.
+
+Si comporta bene: si identifica con uno User-Agent, rispetta `robots.txt`, non fa
+mai due richieste insieme sullo stesso host e lascia un secondo fra una pagina e
+l'altra. Registra anche i tentativi a vuoto, per non ripeterli ogni settimana.
+
+**Non fa scraping di Google Maps**: quelle pagine sono coperte dai ToS di Google,
+cambiano di continuo e bloccano gli IP dei datacenter. Il "simbolo dell'euro" di
+Google si ottiene in modo lecito dalla Places API, qui sotto.
+
+## Come nasce una stima
+
+Quando per una voce non c'è né un prezzo misurato né uno dal menu, il sito ne
+stima uno (`assets/js/items.js`) partendo da un prezzo tipico di Amsterdam e
+correggendolo con i segnali disponibili:
+
+- la **fascia di prezzo di Google** (`priceLevel`), se c'è: è il segnale migliore;
+- altrimenti il **tipo di locale** (un fast food costa meno di un ristorante);
+- la **zona**, come distanza dalla Dam: centro, prima cintura, periferia;
+- il **voto**, con peso piccolo: i locali molto votati costano un po' di più.
+
+Il risultato è un intervallo, non un numero secco: quando manca `priceLevel`
+l'intervallo si allarga, perché è il modo onesto di dire quanto ne sappiamo poco.
+I numeri di partenza sono un'ipotesi ragionevole, non un dato: esistono per
+essere sostituiti dai prezzi veri man mano che arrivano.
 
 ## Voti e fasce di prezzo da Google (facoltativo)
 
@@ -117,7 +174,10 @@ assets/js/
   ui.js                    lista, scheda locale, finestre di dialogo
   store.js                 contributi dell'utente (localStorage)
   hours.js                 "aperto ora" da opening_hours di OSM
-tests/hours.test.mjs       casi limite del parser degli orari
+  items.js                 le sei voci di riferimento e le stime
+scripts/menu-parse.js      estrazione dei prezzi dall'HTML (senza rete)
+scripts/scrape-menus.mjs   scraper dei menu dai siti dei locali
+tests/                     `npm test` — parser degli orari e dei menu
 scripts/
   osm-common.js            zona coperta, query Overpass e normalizzazione
                            (condiviso fra lo script Node e il browser)

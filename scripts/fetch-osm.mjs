@@ -87,7 +87,8 @@ async function fetchPlaces() {
   );
 }
 
-/** Riporta i prezzi/voti già presenti nel file, che non arrivano da OSM. */
+/** Riporta ciò che non arriva da OSM: senza questo il rinfresco settimanale
+ *  cancellerebbe menu, voti e prezzi raccolti nelle settimane precedenti. */
 async function keepLocalFields(places) {
   let previous = [];
   try {
@@ -99,7 +100,7 @@ async function keepLocalFields(places) {
   return places.map((p) => {
     const before = old.get(p.id);
     if (!before) return p;
-    return { ...p, google: before.google ?? undefined, community: before.community ?? undefined };
+    return { ...p, google: before.google, community: before.community, menu: before.menu };
   });
 }
 

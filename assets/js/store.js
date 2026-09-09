@@ -48,16 +48,26 @@ export const store = {
     persist();
   },
 
-  addPrice(placeId, { dish, amount }) {
+  /** `item` è l'id di una delle sei voci di riferimento; assente per i piatti liberi. */
+  addPrice(placeId, { dish, amount, item = null }) {
     const entry = entryFor(placeId);
-    entry.prices.push({ dish: dish.trim() || 'Piatto', amount: Number(amount), currency: 'EUR', date: new Date().toISOString().slice(0, 10) });
+    // una voce di riferimento ha un solo prezzo per persona: il nuovo sostituisce il vecchio
+    if (item) entry.prices = entry.prices.filter((p) => p.item !== item);
+    entry.prices.push({
+      dish: String(dish).trim() || 'Dish',
+      amount: Number(amount),
+      currency: 'EUR',
+      date: new Date().toISOString().slice(0, 10),
+      ...(item ? { item } : {}),
+    });
     persist();
   },
 
-  removePrice(placeId, index) {
+  removePriceByDish(placeId, dish) {
     const entry = state.places[placeId];
     if (!entry) return;
-    entry.prices.splice(index, 1);
+    const index = entry.prices.findIndex((p) => !p.item && p.dish === dish);
+    if (index >= 0) entry.prices.splice(index, 1);
     persist();
   },
 
@@ -105,9 +115,9 @@ export const store = {
     state.author ||= incoming.author ?? '';
     for (const [id, entry] of Object.entries(incoming.places ?? {})) {
       const mine = entryFor(id);
-      const seen = new Set(mine.prices.map((p) => `${p.dish}|${p.amount}|${p.date}`));
+      const seen = new Set(mine.prices.map((p) => `${p.item ?? ''}|${p.dish}|${p.amount}|${p.date}`));
       for (const price of entry.prices ?? []) {
-        if (!seen.has(`${price.dish}|${price.amount}|${price.date}`)) mine.prices.push(price);
+        if (!seen.has(`${price.item ?? ''}|${price.dish}|${price.amount}|${price.date}`)) mine.prices.push(price);
       }
       mine.rating ??= entry.rating ?? null;
       mine.note ||= entry.note ?? '';

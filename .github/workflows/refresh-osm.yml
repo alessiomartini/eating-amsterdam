@@ -24,6 +24,10 @@ jobs:
       - name: Scarica i locali da OpenStreetMap
         run: npm run fetch:osm
 
+      - name: Leggi i prezzi dai siti dei locali
+        run: npm run scrape:menus -- --limit 300 --max-age 90
+        continue-on-error: true
+
       - name: Arricchisci con i voti Google (se la chiave è configurata)
         if: env.GOOGLE_MAPS_API_KEY != ''
         run: npm run enrich:google -- --limit 400

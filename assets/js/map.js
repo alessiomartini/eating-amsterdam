@@ -13,7 +13,7 @@ let activeId = null;
 function iconFor(place, active) {
   return L.divIcon({
     className: '',
-    html: `<div class="marker-pin ${priceBand(place.price)}${active ? ' active' : ''}"></div>`,
+    html: `<div class="marker-pin ${priceBand(place.shown?.amount)}${active ? ' active' : ''}"></div>`,
     iconSize: [14, 14],
     iconAnchor: [7, 7],
   });

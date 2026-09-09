@@ -8,16 +8,10 @@
 
 import { OVERPASS_ENDPOINTS, OVERPASS_STRATEGIES, normalizeElement, finalize } from '../../scripts/osm-common.js';
 import { store } from './store.js';
+import { buildItems } from './items.js';
 
 const CACHE_KEY = 'eating-amsterdam:osm-cache:v1';
 const CACHE_TTL = 7 * 864e5;
-
-function median(values) {
-  const s = [...values].sort((a, b) => a - b);
-  if (!s.length) return null;
-  const mid = s.length >> 1;
-  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
-}
 
 async function loadFile() {
   try {
@@ -79,10 +73,7 @@ export function decorate(place) {
 
   const myPrices = mine?.prices ?? [];
   const communityPrices = community.prices ?? [];
-  const amounts = [...myPrices, ...communityPrices].map((p) => p.amount).filter(Number.isFinite);
-
-  const price = median(amounts);
-  const priceSource = myPrices.length ? 'mine' : communityPrices.length ? 'community' : null;
+  const measured = [...myPrices, ...communityPrices];
 
   const rating = mine?.rating ?? community.avgRating ?? place.google?.rating ?? null;
   const ratingSource = mine?.rating ? 'mine' : community.avgRating ? 'community' : place.google?.rating ? 'google' : null;
@@ -91,9 +82,7 @@ export function decorate(place) {
     ...place,
     myPrices,
     communityPrices,
-    price,
-    priceSource,
-    priceLevel: place.google?.priceLevel ?? null,
+    items: buildItems(place, measured),
     rating,
     ratingSource,
     reviews: place.google?.reviews ?? null,
