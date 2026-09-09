@@ -23,9 +23,23 @@ export const PLAUSIBLE = {
   beer: [2, 14],
   doner: [3, 22],
   pizza: [5, 30],
-  first: [2, 30],
-  main: [5, 60],
+  // sotto queste soglie non è un piatto, è una bevanda finita nella sezione sbagliata
+  first: [3.5, 30],
+  main: [7, 60],
 };
+
+/** Altre intestazioni di menu: servono a capire dove finisce una sezione. */
+const OTHER_HEADINGS = [
+  'drank', 'dranken', 'drinks', 'beverage', 'bier', 'wijn', 'wine', 'cocktail', 'koffie', 'thee',
+  'dessert', 'nagerecht', 'toetje', 'sweet', 'ijs',
+  'bijgerecht', 'side', 'sides', 'salade', 'saus', 'sauzen',
+  'kinder', 'kids', 'lunch', 'ontbijt', 'breakfast', 'borrel', 'snack', 'bites',
+  'pizza', 'pasta', 'sushi', 'wok', 'menu van', 'specials', 'extra',
+];
+
+// Una sezione lunghissima è il sintomo di un'intestazione di fine mai trovata:
+// meglio fermarsi che raccogliere mezzo menu.
+const MAX_SECTION_LINES = 40;
 
 // Nei menu gli accenti sono spesso scritti come entità ("D&ouml;ner"): sostituirle
 // con uno spazio spezzerebbe la parola e la parola chiave non corrisponderebbe più.
@@ -107,12 +121,14 @@ export function findItemPrice(lines, itemId) {
  */
 export function findSectionPrice(lines, sectionId) {
   const keywords = SECTION_KEYWORDS[sectionId];
-  const otherKeywords = Object.entries(SECTION_KEYWORDS)
-    .filter(([id]) => id !== sectionId)
-    .flatMap(([, words]) => words);
+  const otherKeywords = [
+    ...Object.entries(SECTION_KEYWORDS).filter(([id]) => id !== sectionId).flatMap(([, w]) => w),
+    ...OTHER_HEADINGS,
+  ];
 
   let best = null;
   let inSection = false;
+  let linesInSection = 0;
 
   for (const line of lines) {
     const lower = line.toLowerCase();
@@ -120,13 +136,19 @@ export function findSectionPrice(lines, sectionId) {
 
     if (isHeading && keywords.some((k) => lower.includes(k))) {
       inSection = true;
-      continue;
-    }
-    if (inSection && isHeading && otherKeywords.some((k) => lower.includes(k))) {
-      inSection = false;
+      linesInSection = 0;
       continue;
     }
     if (!inSection) continue;
+
+    if (isHeading && otherKeywords.some((k) => lower.includes(k))) {
+      inSection = false;
+      continue;
+    }
+    if (++linesInSection > MAX_SECTION_LINES) {
+      inSection = false;
+      continue;
+    }
 
     for (const amount of pricesIn(line)) {
       if (inRange(amount, sectionId) && (best === null || amount < best)) best = amount;
@@ -146,6 +168,13 @@ export function extractItems(html) {
   for (const sectionId of Object.keys(SECTION_KEYWORDS)) {
     const price = findSectionPrice(lines, sectionId);
     if (price !== null) items[sectionId] = price;
+  }
+
+  // un secondo che costa meno di un primo vuol dire che abbiamo sbagliato
+  // sezione: non sapendo quale delle due, si buttano entrambe
+  if (items.first != null && items.main != null && items.main < items.first) {
+    delete items.first;
+    delete items.main;
   }
   return items;
 }

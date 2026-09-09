@@ -6,6 +6,13 @@ on:
   schedule:
     - cron: '0 4 * * 1'
   workflow_dispatch:
+    inputs:
+      scrape_limit:
+        description: 'Quanti siti leggere in questo giro'
+        default: '300'
+      scrape_max_age:
+        description: 'Rileggi i siti visitati da più di N giorni (0 = tutti)'
+        default: '90'
 
 permissions:
   contents: write
@@ -25,7 +32,7 @@ jobs:
         run: npm run fetch:osm
 
       - name: Leggi i prezzi dai siti dei locali
-        run: npm run scrape:menus -- --limit 300 --max-age 90
+        run: npm run scrape:menus -- --limit ${{ inputs.scrape_limit || 300 }} --max-age ${{ inputs.scrape_max_age || 90 }}
         continue-on-error: true
 
       - name: Arricchisci con i voti Google (se la chiave è configurata)

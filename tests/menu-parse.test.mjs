@@ -102,3 +102,22 @@ test('gli accenti scritti come entità non spezzano le parole chiave', () => {
   assert.equal(decodeEntities('Cr&egrave;me br&ucirc;l&eacute;e'), 'Crème brûlée');
   assert.equal(decodeEntities('caf&#233; &#x2014; 3'), 'café — 3');
 });
+
+test('una sezione finisce anche a un\'intestazione non di piatti', () => {
+  // caso reale trovato sui menu di Amsterdam: senza questo la sezione non
+  // finiva mai e il "primo più economico" diventava il caffè della sezione bevande
+  const lines = ['Voorgerechten', 'Carpaccio € 12,00', 'Dranken', 'Koffie € 2,50', 'Cola € 3,00'];
+  assert.equal(findSectionPrice(lines, 'first'), 12);
+});
+
+test('scarta primi e secondi incoerenti fra loro', () => {
+  const html = `<p>Voorgerechten</p><p>Soep € 9,00</p><p>Hoofdgerechten</p><p>Broodje € 8,00</p>`;
+  const items = extractItems(html);
+  assert.equal(items.first, undefined, 'un secondo più economico del primo significa sezioni sbagliate');
+  assert.equal(items.main, undefined);
+});
+
+test('una bevanda non viene scambiata per un piatto', () => {
+  const lines = ['Starters', 'Huisgemaakte limonade € 2,50', 'Bruschetta € 7,50'];
+  assert.equal(findSectionPrice(lines, 'first'), 7.5);
+});
