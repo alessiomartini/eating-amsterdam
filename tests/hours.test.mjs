@@ -2,7 +2,7 @@
 // meglio bloccarne il comportamento, comprese le forme che NON sappiamo leggere.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isOpenNow } from '../assets/js/hours.js';
+import { isOpenNow, humanize } from '../assets/js/hours.js';
 
 // 2026-09-06 è una domenica: da qui i giorni sono espliciti e leggibili.
 const DOM = 0, LUN = 1, MER = 3, SAB = 6;
@@ -61,4 +61,9 @@ test('quello che non sappiamo leggere torna null, non una bugia', () => {
   assert.equal(isOpenNow('Mo-Fr 09:00-17:00; PH off', at(MER, 12)), null, 'festivi: non li sappiamo calcolare');
   assert.equal(isOpenNow('sunrise-sunset', at(MER, 12)), null);
   assert.equal(isOpenNow('quando capita', at(MER, 12)), null);
+});
+
+test('gli orari si leggono in inglese, come il resto del sito', () => {
+  assert.equal(humanize('Mo-Sa 11:00-22:00; Su 12:00-20:00'), 'Mon-Sat 11:00-22:00 · Sun 12:00-20:00');
+  assert.equal(humanize('24/7'), 'always open');
 });

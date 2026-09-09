@@ -84,9 +84,12 @@ export function isOpenNow(openingHours, now = new Date()) {
   return understood ? open : null;
 }
 
-/** Versione leggibile: "Mo-Sa 11:00-22:00" → "Lun-Sab 11:00-22:00". */
+/** Versione leggibile: "Mo-Sa 11:00-22:00" → "Mon–Sat 11:00-22:00". */
 export function humanize(openingHours) {
   if (!openingHours) return null;
-  const it = { Mo: 'Lun', Tu: 'Mar', We: 'Mer', Th: 'Gio', Fr: 'Ven', Sa: 'Sab', Su: 'Dom' };
-  return openingHours.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su)\b/g, (d) => it[d]).replace(/;\s*/g, ' · ');
+  const en = { Mo: 'Mon', Tu: 'Tue', We: 'Wed', Th: 'Thu', Fr: 'Fri', Sa: 'Sat', Su: 'Sun' };
+  return openingHours
+    .replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su)\b/g, (d) => en[d])
+    .replace(/;\s*/g, ' · ')
+    .replace(/24\/7/, 'always open');
 }
