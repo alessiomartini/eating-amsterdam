@@ -30,6 +30,15 @@ jobs:
 
       - name: Commit
         run: |
+          # Rete di sicurezza: un dataset vuoto non deve mai finire su main,
+          # anche se lo script dovesse tornare a considerarlo un successo.
+          count=$(node -p "JSON.parse(require('fs').readFileSync('data/places.json','utf8')).places.length")
+          echo "Locali nel dataset: $count"
+          if [ "$count" -lt 100 ]; then
+            echo "::error::Solo $count locali: sospetto un problema con Overpass, non committo."
+            exit 1
+          fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet -- data/places.json; then

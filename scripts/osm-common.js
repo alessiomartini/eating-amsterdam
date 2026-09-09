@@ -2,10 +2,13 @@
 // Condiviso tra lo script Node (scripts/fetch-osm.mjs) e il browser
 // (assets/js/sources/osm.js importa la stessa logica via una copia ESM).
 
+// Solo istanze con copertura mondiale: i mirror regionali (per esempio
+// overpass.osm.ch, che ha i soli dati svizzeri) rispondono 200 con zero
+// risultati per Amsterdam, che è molto peggio di un errore.
 export const OVERPASS_ENDPOINTS = [
   'https://overpass-api.de/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter',
-  'https://overpass.osm.ch/api/interpreter',
+  'https://overpass.private.coffee/api/interpreter',
 ];
 
 // Amsterdam, comune (admin_level 8). Il bbox è un fallback se l'area non risolve.
