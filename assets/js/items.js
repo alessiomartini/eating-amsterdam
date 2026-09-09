@@ -144,8 +144,9 @@ export function buildItems(place, prices) {
   const table = {};
 
   for (const { id } of REFERENCE_ITEMS) {
-    if (!itemApplies(id, place)) continue;
-
+    // Un prezzo vero vale più della nostra regola: se il menu di un caffè elenca
+    // dei primi, quel caffè i primi li fa, e la regola è solo un'euristica.
+    // L'euristica decide invece cosa ha senso stimare e cosa chiedere all'utente.
     const measured = prices.filter((p) => p.item === id).map((p) => p.amount).filter(Number.isFinite);
     if (measured.length) {
       table[id] = { amount: median(measured), source: 'measured', samples: measured.length };
@@ -158,6 +159,7 @@ export function buildItems(place, prices) {
       continue;
     }
 
+    if (!itemApplies(id, place)) continue;
     const guess = estimate(id, place);
     if (guess) table[id] = { ...guess, source: 'estimate' };
   }

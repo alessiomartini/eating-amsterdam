@@ -110,7 +110,8 @@ function sheet(dialog, html) {
 
 /** La tabella delle sei voci: valore, provenienza e campo per correggerla. */
 function itemsTable(place) {
-  const rows = REFERENCE_ITEMS.filter((item) => itemApplies(item.id, place)).map((item) => {
+  // mostriamo anche le voci fuori euristica per cui però un prezzo vero esiste
+  const rows = REFERENCE_ITEMS.filter((item) => itemApplies(item.id, place) || place.items?.[item.id]).map((item) => {
     const entry = place.items?.[item.id];
     let value = '<span class="muted">—</span>';
 

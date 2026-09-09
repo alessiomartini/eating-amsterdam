@@ -72,10 +72,17 @@ export function resolvePrice(place, itemId = 'any', useEstimates = true) {
     return usable(entry) ? { ...entry, itemId } : null;
   }
 
+  // Prima la provenienza, poi il prezzo: un prezzo vero, anche se più alto, vale
+  // più di una stima più bassa. Altrimenti la stima del caffè coprirebbe il
+  // prezzo del piatto letto davvero dal menu.
+  const rank = { measured: 0, menu: 1, estimate: 2 };
   let best = null;
   for (const [id, entry] of Object.entries(table)) {
     if (!usable(entry)) continue;
-    if (!best || entry.amount < best.amount) best = { ...entry, itemId: id };
+    const candidate = { ...entry, itemId: id };
+    if (!best) { best = candidate; continue; }
+    const better = rank[candidate.source] - rank[best.source] || candidate.amount - best.amount;
+    if (better < 0) best = candidate;
   }
   return best;
 }
