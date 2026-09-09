@@ -121,3 +121,8 @@ test('una bevanda non viene scambiata per un piatto', () => {
   const lines = ['Starters', 'Huisgemaakte limonade € 2,50', 'Bruschetta € 7,50'];
   assert.equal(findSectionPrice(lines, 'first'), 7.5);
 });
+
+test('un caffè con dolce non passa per un caffè', () => {
+  assert.equal(findItemPrice(['Koffie met gebak € 8,00'], 'coffee'), null);
+  assert.equal(findItemPrice(['Koffie € 3,20', 'Koffie met gebak € 8,00'], 'coffee'), 3.2);
+});

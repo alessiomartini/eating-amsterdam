@@ -19,7 +19,8 @@ export const SECTION_KEYWORDS = {
 // Ci sono prezzi che, se estratti, sarebbero palesemente sbagliati: un caffè a
 // 45 € è un numero di telefono o un anno, non un prezzo. Ogni voce ha i suoi limiti.
 export const PLAUSIBLE = {
-  coffee: [1, 8],
+  // un "caffè" da 8 € è un caffè con dolce o una colazione, non un caffè
+  coffee: [1.5, 6],
   beer: [2, 14],
   doner: [3, 22],
   pizza: [5, 30],
