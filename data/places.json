@@ -1,6 +1,5 @@
 {
-  "updatedAt": null,
+  "updatedAt": "2026-09-09",
   "source": "OpenStreetMap (ODbL)",
-  "note": "Vuoto di proposito: esegui `npm run fetch:osm` (o il workflow GitHub Actions 'Aggiorna dati OSM') per popolarlo. Finché è vuoto, il sito interroga Overpass direttamente dal browser.",
   "places": []
 }
