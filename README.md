@@ -1,7 +1,7 @@
 # 🥙 Eating Amsterdam
 
-Mappa collaborativa dei posti dove si mangia bene spendendo poco ad Amsterdam:
-snackbar, döner, falafel, ristoranti economici. Filtri per prezzo, voto, tipo di
+Mappa collaborativa dei posti dove si mangia bene spendendo poco ad Amsterdam e
+dintorni: snackbar, döner, falafel, ristoranti economici. Filtri per prezzo, voto, tipo di
 cucina e **opzioni vegetariane/vegane**.
 
 Sito statico, senza backend e senza database: si può pubblicare gratis su GitHub Pages.
@@ -50,7 +50,13 @@ Non serve installare nulla: nessuna dipendenza npm, Leaflet arriva da CDN.
 
 Al primo avvio `data/places.json` è vuoto, quindi **il sito interroga Overpass
 direttamente dal browser** e mette in cache il risultato per una settimana. Dopo
-qualche secondo compaiono ~2000 locali di Amsterdam.
+qualche secondo compaiono i locali della zona.
+
+**Che zona copre.** Non il confine comunale ma un rettangolo più largo
+(`METRO_BBOX` in `scripts/osm-common.js`): Amsterdam più Diemen, Amstelveen,
+Ouder-Amstel, Badhoevedorp e il bordo sud di Zaandam. Per chi cerca un döner un
+confine amministrativo non vuole dire niente. Per cambiarla basta modificare
+quelle quattro coordinate.
 
 Per committare il dataset nel repo (così il sito carica istantaneamente e funziona
 anche se Overpass è giù):
@@ -113,7 +119,8 @@ assets/js/
   hours.js                 "aperto ora" da opening_hours di OSM
 tests/hours.test.mjs       casi limite del parser degli orari
 scripts/
-  osm-common.js            query Overpass e normalizzazione (usato da Node e dal browser)
+  osm-common.js            zona coperta, query Overpass e normalizzazione
+                           (condiviso fra lo script Node e il browser)
   fetch-osm.mjs            popola data/places.json
   enrich-google.mjs        aggiunge stelle e fascia di prezzo
   merge-contributions.mjs  unisce i contributi esportati nel dataset

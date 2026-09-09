@@ -6,7 +6,7 @@
 //      mette in cache il risultato per una settimana in localStorage;
 //   3. i locali aggiunti a mano dall'utente si sommano sempre agli altri.
 
-import { OVERPASS_ENDPOINTS, OVERPASS_QUERY, OVERPASS_QUERY_BBOX, normalizeElement, finalize } from '../../scripts/osm-common.js';
+import { OVERPASS_ENDPOINTS, OVERPASS_STRATEGIES, normalizeElement, finalize } from '../../scripts/osm-common.js';
 import { store } from './store.js';
 
 const CACHE_KEY = 'eating-amsterdam:osm-cache:v1';
@@ -45,31 +45,28 @@ async function loadOverpass({ force = false, onProgress } = {}) {
   }
   let lastError;
   for (const endpoint of OVERPASS_ENDPOINTS) {
-    try {
-      onProgress?.(`Scarico i locali da OpenStreetMap…`);
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ data: OVERPASS_QUERY }),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const raw = await res.json();
-      let places = finalize((raw.elements ?? []).map(normalizeElement));
-      if (!places.length) {
-        const alt = await fetch(endpoint, {
+    for (const { label, query } of OVERPASS_STRATEGIES) {
+      try {
+        onProgress?.('Scarico i locali da OpenStreetMap…');
+        const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({ data: OVERPASS_QUERY_BBOX }),
+          body: new URLSearchParams({ data: query }),
         });
-        places = finalize(((await alt.json()).elements ?? []).map(normalizeElement));
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const raw = await res.json();
+        const places = finalize((raw.elements ?? []).map(normalizeElement));
+        // una risposta 200 con zero risultati non è un successo: proviamo la strategia dopo
+        if (!places.length) continue;
+
+        const doc = { updatedAt: new Date().toISOString().slice(0, 10), source: `OpenStreetMap (ODbL) — live, ${label}`, places };
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), doc }));
+        } catch { /* dataset troppo grande per la quota: pazienza */ }
+        return doc;
+      } catch (err) {
+        lastError = err;
       }
-      const doc = { updatedAt: new Date().toISOString().slice(0, 10), source: 'OpenStreetMap (ODbL) — live', places };
-      try {
-        localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), doc }));
-      } catch { /* dataset troppo grande per la quota: pazienza */ }
-      return doc;
-    } catch (err) {
-      lastError = err;
     }
   }
   throw lastError ?? new Error('Overpass non raggiungibile');

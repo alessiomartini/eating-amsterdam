@@ -7,7 +7,7 @@ import { writeFile, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import {
-  OVERPASS_ENDPOINTS, OVERPASS_QUERY, OVERPASS_QUERY_BBOX, normalizeElement, finalize,
+  OVERPASS_ENDPOINTS, OVERPASS_STRATEGIES, normalizeElement, finalize,
 } from './osm-common.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -65,12 +65,7 @@ async function overpass(query) {
  * il fallback deve scattare sul risultato vuoto, non solo su un'eccezione.
  */
 async function fetchPlaces() {
-  const strategies = [
-    ['area amministrativa di Amsterdam', OVERPASS_QUERY],
-    ['bounding box di Amsterdam', OVERPASS_QUERY_BBOX],
-  ];
-
-  for (const [label, query] of strategies) {
+  for (const { label, query } of OVERPASS_STRATEGIES) {
     log(`Strategia: ${label}`);
     let raw;
     try {

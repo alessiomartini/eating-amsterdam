@@ -11,25 +11,40 @@ export const OVERPASS_ENDPOINTS = [
   'https://overpass.private.coffee/api/interpreter',
 ];
 
-// Amsterdam, comune (admin_level 8). Il bbox è un fallback se l'area non risolve.
-export const AMSTERDAM_BBOX = [52.278, 4.728, 52.431, 5.068]; // S,W,N,E
+// "Amsterdam e dintorni": il comune più i vicini dove ha senso andare a mangiare
+// — Diemen, Amstelveen, Ouder-Amstel/Duivendrecht, Badhoevedorp, il bordo sud di
+// Zaandam. Il bounding box è volutamente più largo del confine amministrativo:
+// per chi cerca un döner un confine comunale non vuole dire niente.
+export const METRO_BBOX = [52.26, 4.72, 52.45, 5.08]; // S,O,N,E
 
-export const OVERPASS_QUERY = `
+const AMENITIES = '^(fast_food|restaurant|cafe|ice_cream|food_court)$';
+
+// In ordine di preferenza: se la prima non produce nulla si passa alla seconda.
+// Il ripiego copre meno zona ma non dipende dall'indice delle aree di Overpass,
+// che è la parte più fragile della query.
+export const OVERPASS_STRATEGIES = [
+  {
+    label: 'Amsterdam e dintorni (bounding box)',
+    query: `
+[out:json][timeout:120];
+(
+  nwr["amenity"~"${AMENITIES}"](${METRO_BBOX.join(',')});
+);
+out center tags;
+`.trim(),
+  },
+  {
+    label: 'solo comune di Amsterdam (ripiego)',
+    query: `
 [out:json][timeout:90];
 area["boundary"="administrative"]["admin_level"="8"]["name"="Amsterdam"]->.a;
 (
-  nwr["amenity"~"^(fast_food|restaurant|cafe|ice_cream|food_court)$"](area.a);
+  nwr["amenity"~"${AMENITIES}"](area.a);
 );
 out center tags;
-`.trim();
-
-export const OVERPASS_QUERY_BBOX = `
-[out:json][timeout:90];
-(
-  nwr["amenity"~"^(fast_food|restaurant|cafe|ice_cream|food_court)$"](${AMSTERDAM_BBOX.join(',')});
-);
-out center tags;
-`.trim();
+`.trim(),
+  },
+];
 
 const YES = new Set(['yes', 'only', 'limited']);
 
