@@ -151,3 +151,21 @@ test('la validazione arrotonda ai centesimi', () => {
   assert.deepEqual(errors, []);
   assert.equal(value.amount, 5.24);
 });
+
+/* --- lettura dell'output di wrangler, usata dalla procedura automatica --- */
+
+test('trova il database_id in tutti i formati che wrangler produce', async () => {
+  const { extractDatabaseId, extractWorkerUrl } = await import('../backend/parse-wrangler.js');
+  const id = '12345678-90ab-cdef-1234-567890abcdef';
+
+  assert.equal(extractDatabaseId(JSON.stringify({ uuid: id, name: 'x' })), id);
+  assert.equal(extractDatabaseId(JSON.stringify({ d1_databases: [{ database_id: id }] })), id);
+  assert.equal(extractDatabaseId(`✅ Successfully created DB!\n  database_id = "${id}"`), id);
+  assert.equal(extractDatabaseId('nessun identificatore qui'), null, 'meglio fermarsi che inventare un id');
+
+  assert.equal(
+    extractWorkerUrl('Published eating-amsterdam-api\n  https://eating-amsterdam-api.tizio.workers.dev'),
+    'https://eating-amsterdam-api.tizio.workers.dev',
+  );
+  assert.equal(extractWorkerUrl('deploy fallito'), null);
+});

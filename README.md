@@ -200,7 +200,8 @@ preferisce segnalare un prezzo senza toccare il sito.
 
 Con un Cloudflare Worker e un database D1 i prezzi smettono di restare nel
 browser di chi li scrive: si vedono subito su tutti i dispositivi. Le istruzioni
-sono in [`backend/README.md`](backend/README.md) — sono cinque comandi.
+sono in [`backend/README.md`](backend/README.md): `npx wrangler login` e poi
+`npm run backend:setup`, che fa tutto il resto.
 
 Finché `data/config.json` ha `apiBase: null` il sito funziona esattamente come
 prima, quindi il backend si può accendere e spegnere senza toccare il resto.

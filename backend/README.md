@@ -6,38 +6,39 @@ copre ampiamente un progetto come questo.
 
 ## Metterlo in piedi
 
-Dalla cartella `backend/`, una volta sola:
+Dalla radice del progetto:
 
 ```bash
-npx wrangler login                       # apre il browser
-npx wrangler d1 create eating-amsterdam  # stampa un database_id
+npx wrangler login    # apre il browser, una volta sola
+npm run backend:setup
 ```
 
-Incolla il `database_id` in `wrangler.toml`, poi:
+Il secondo comando fa tutto: crea il database, scrive il `database_id` in
+`wrangler.toml`, applica lo schema, genera il token, pubblica il Worker e mette
+l'URL in `data/config.json`. È idempotente — rilanciarlo non rompe niente.
+
+Alla fine stampa le **due cose che deve fare una persona**, perché richiedono
+l'interfaccia di GitHub (*Settings → Secrets and variables → Actions*):
+
+- **Variables → New**: `API_BASE` = l'URL del Worker
+- **Secrets → New**: `ADMIN_TOKEN` = il token stampato
+
+Servono al workflow settimanale, che porta prezzi e segnalazioni dentro il repo.
+Poi si committa `data/config.json` e il sito comincia a condividere i prezzi.
+
+<details>
+<summary>Farlo a mano, se qualcosa va storto</summary>
 
 ```bash
+cd backend
+npx wrangler d1 create eating-amsterdam        # copia il database_id in wrangler.toml
 npx wrangler d1 execute eating-amsterdam --file schema.sql --remote
-npx wrangler secret put ADMIN_TOKEN      # inventane uno lungo a caso
-npx wrangler deploy
+npx wrangler secret put ADMIN_TOKEN            # inventane uno lungo a caso
+npx wrangler deploy                            # stampa l'URL del Worker
 ```
 
-L'ultimo comando stampa l'URL del Worker, del tipo
-`https://eating-amsterdam-api.<tuo-nome>.workers.dev`.
-
-## Accenderlo
-
-Tre posti, tutti obbligatori:
-
-1. **`data/config.json`** nella radice del repo: metti quell'URL in `apiBase` e
-   committa. Da quel momento il sito condivide i prezzi invece di tenerli nel
-   browser.
-2. **Variabile del repo** su GitHub (*Settings → Secrets and variables → Actions
-   → Variables*): `API_BASE` con lo stesso URL.
-3. **Segreto del repo** (stessa pagina, tab *Secrets*): `ADMIN_TOKEN`, uguale a
-   quello messo con `wrangler secret put`.
-
-Le ultime due servono al workflow settimanale, che porta prezzi e segnalazioni
-dentro il repo.
+Poi metti l'URL in `data/config.json` come `apiBase`.
+</details>
 
 Se `ALLOWED_ORIGINS` in `wrangler.toml` non contiene il dominio da cui apri il
 sito, il browser rifiuta le chiamate: è la protezione che impedisce a un altro
