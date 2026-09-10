@@ -141,7 +141,7 @@ function itemsTable(place) {
     </tr>`;
   });
 
-  if (!rows.length) return '<p class="hint">None of the six reference items fit this place.</p>';
+  if (!rows.length) return '<p class="hint">None of the reference items fit this place.</p>';
 
   // lo storico completo, per chi vuole vedere come si è mosso un prezzo
   const history = REFERENCE_ITEMS

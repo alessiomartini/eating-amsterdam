@@ -177,3 +177,13 @@ test('su Windows npx si invoca passando dalla shell', async () => {
   assert.deepEqual(npxInvocation('darwin'), { command: 'npx', shell: false });
   assert.deepEqual(npxInvocation('linux'), { command: 'npx', shell: false });
 });
+
+test('il server accetta le voci nuove e ne controlla i limiti', async () => {
+  const env = makeEnv();
+  for (const [item, amount] of [['fries', 4.5], ['icecream', 2.5], ['cocktail', 12]]) {
+    const res = await handleRequest(post('/api/prices', { placeId: 'p', item, amount, clientId: 'x' }), env);
+    assert.equal(res.status, 201, `${item} rifiutato`);
+  }
+  const assurdo = await handleRequest(post('/api/prices', { placeId: 'p', item: 'icecream', amount: 40, clientId: 'x' }), env);
+  assert.equal(assurdo.status, 400, 'un gelato a 40 € non è un gelato');
+});

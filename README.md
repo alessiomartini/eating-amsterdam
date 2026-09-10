@@ -7,12 +7,19 @@ cucina e **opzioni vegetariane/vegane**.
 L'interfaccia è in inglese; il codice e questi appunti restano in italiano.
 Sito statico, senza backend e senza database: si può pubblicare gratis su GitHub Pages.
 
-## Le sei voci di riferimento
+## Le voci di riferimento
 
-Invece di prezzi sciolti ("ho pagato 7,50"), ogni locale risponde alle stesse sei
-domande, così i locali diventano confrontabili: **caffè, birra, döner, pizza,
-primo più economico, secondo più economico**. Ogni voce compare solo dove ha
-senso — il döner solo dove si fa il döner, la birra non nei fast food.
+Invece di prezzi sciolti ("ho pagato 7,50"), ogni locale risponde alle stesse
+domande, così i locali diventano confrontabili:
+
+| da bere | da spizzicare | da sedersi |
+|---|---|---|
+| caffè, birra, cocktail più economico | patatine, döner, pizza, gelato | primo e secondo più economici |
+
+Ogni voce compare solo dove ha senso: il döner dove si fa il döner, il cocktail
+non in un chiosco di friet, il friet non in un ristorante. Il "piatto più
+economico" invece vale anche per una falafeleria, che è il caso che conta di più
+qui.
 
 Ogni prezzo porta con sé la propria provenienza, e la provenienza è sempre
 visibile:

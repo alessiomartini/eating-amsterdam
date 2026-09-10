@@ -49,3 +49,20 @@ test('birra e piatto economico valgono anche nei pub', () => {
   assert.equal(itemApplies('main', pub), true);
   assert.ok(estimate('beer', pub).amount > 0);
 });
+
+test('le voci nuove compaiono dove ha senso', () => {
+  const snackbar = { category: 'fast_food', cuisines: ['friture'], lat: 52.37, lon: 4.89 };
+  const gelateria = { category: 'ice_cream', cuisines: [], lat: 52.37, lon: 4.89 };
+  const cocktailBar = { category: 'bar', cuisines: [], lat: 52.37, lon: 4.89 };
+  const ristorante = { category: 'restaurant', cuisines: ['french'], lat: 52.37, lon: 4.89 };
+
+  assert.equal(itemApplies('fries', snackbar), true);
+  assert.equal(itemApplies('fries', ristorante), false, 'il friet non è una voce da ristorante');
+  assert.equal(itemApplies('icecream', gelateria), true);
+  assert.equal(itemApplies('icecream', snackbar), false);
+  assert.equal(itemApplies('cocktail', cocktailBar), true);
+  assert.equal(itemApplies('cocktail', snackbar), false, 'i cocktail non si bevono in un chiosco di friet');
+
+  assert.ok(estimate('fries', snackbar).amount > 1);
+  assert.ok(estimate('icecream', gelateria).amount > 1);
+});

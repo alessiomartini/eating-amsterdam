@@ -12,7 +12,9 @@
 // cui sono definiti, così non possono divergere.
 import { PLAUSIBLE } from '../../scripts/menu-parse.js';
 
-const REFERENCE_ITEMS = new Set(['coffee', 'beer', 'doner', 'pizza', 'first', 'main']);
+// Derivate dai limiti invece che riscritte: un elenco a parte prima o poi
+// divergerebbe, e il sito accetterebbe voci che il server rifiuta.
+const REFERENCE_ITEMS = new Set(Object.keys(PLAUSIBLE));
 
 const MAX_PER_HOUR = 40;
 const MAX_TEXT = 4000;

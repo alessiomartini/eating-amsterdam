@@ -1,4 +1,4 @@
-// Le sei voci di riferimento: invece di prezzi sciolti ("ho pagato 7,50"), ogni
+// Le voci di riferimento: invece di prezzi sciolti ("ho pagato 7,50"), ogni
 // locale risponde alle stesse domande, così i locali diventano confrontabili.
 //
 // Ogni voce può avere tre provenienze, in ordine di fiducia decrescente:
@@ -8,11 +8,15 @@
 // La provenienza viaggia sempre insieme al numero e viene mostrata: una stima
 // spacciata per prezzo reale sarebbe peggio di nessun prezzo.
 
+// In ordine: da bere, da spizzicare, da sedersi.
 export const REFERENCE_ITEMS = [
   { id: 'coffee', label: 'Coffee', hint: 'espresso or filter', icon: '☕' },
   { id: 'beer', label: 'Beer', hint: 'small draught, 0.25–0.33 l', icon: '🍺' },
+  { id: 'cocktail', label: 'Cheapest cocktail', hint: 'from the cocktail list', icon: '🍸' },
+  { id: 'fries', label: 'Fries', hint: 'friet or patat, medium', icon: '🍟' },
   { id: 'doner', label: 'Döner kebab', hint: 'in pita or bread', icon: '🥙' },
   { id: 'pizza', label: 'Pizza', hint: 'margherita or cheapest', icon: '🍕' },
+  { id: 'icecream', label: 'Ice cream', hint: 'one scoop or a small cone', icon: '🍦' },
   { id: 'first', label: 'Cheapest first course', hint: 'starter, soup, pasta', icon: '🥗' },
   { id: 'main', label: 'Cheapest main course', hint: 'cheapest full dish', icon: '🍽️' },
 ];
@@ -22,6 +26,8 @@ export const ITEM_BY_ID = Object.fromEntries(REFERENCE_ITEMS.map((i) => [i.id, i
 const DONER_CUISINES = new Set(['kebab', 'doner', 'döner', 'turkish', 'shawarma', 'gyros']);
 const PIZZA_CUISINES = new Set(['pizza', 'italian']);
 const COFFEE_CUISINES = new Set(['coffee_shop', 'coffee', 'cake', 'bakery', 'sandwich', 'breakfast']);
+const FRIES_CUISINES = new Set(['friture', 'chips', 'french_fries', 'fries', 'snack', 'snack_bar', 'fish_and_chips', 'burger']);
+const ICECREAM_CUISINES = new Set(['ice_cream', 'gelato', 'frozen_yogurt']);
 
 /** Un döner da un ristorante francese non ha senso: chiediamo solo il pertinente. */
 export function itemApplies(itemId, place) {
@@ -36,7 +42,15 @@ export function itemApplies(itemId, place) {
       return place.category === 'cafe' || servesMeals || [...cuisines].some((c) => COFFEE_CUISINES.has(c));
     // la birra invece raramente: chiederla a un fast food produrrebbe solo rumore
     case 'beer':
+    case 'cocktail':
       return place.category === 'cafe' || isRestaurant || isBar;
+    // la friggitoria è roba da snackbar e da pub, non da ristorante
+    case 'fries':
+      return place.category === 'fast_food' || place.category === 'food_court'
+        || place.category === 'pub' || [...cuisines].some((c) => FRIES_CUISINES.has(c));
+    case 'icecream':
+      return place.category === 'ice_cream' || place.category === 'cafe'
+        || [...cuisines].some((c) => ICECREAM_CUISINES.has(c));
     case 'doner':
       return [...cuisines].some((c) => DONER_CUISINES.has(c));
     case 'pizza':
@@ -57,7 +71,10 @@ export function itemApplies(itemId, place) {
 // Prezzi tipici ad Amsterdam per un locale di fascia media (priceLevel 2), in euro.
 // Sono il punto di partenza di una stima, non un dato: esistono per essere
 // corretti dai prezzi veri man mano che arrivano.
-const BASE_EUR = { coffee: 3.2, beer: 5.2, doner: 8.0, pizza: 12.0, first: 9.0, main: 19.0 };
+const BASE_EUR = {
+  coffee: 3.2, beer: 5.2, cocktail: 12.0, fries: 3.6,
+  doner: 8.0, pizza: 12.0, icecream: 2.6, first: 9.0, main: 19.0,
+};
 
 const PRICE_LEVEL_FACTOR = { 1: 0.78, 2: 1, 3: 1.28, 4: 1.7 };
 
@@ -174,7 +191,7 @@ export function summarisePrices(prices) {
 }
 
 /**
- * Costruisce la tabella delle sei voci per un locale, scegliendo per ognuna la
+ * Costruisce la tabella delle voci per un locale, scegliendo per ognuna la
  * fonte migliore disponibile. `prices` sono i prezzi misurati (miei + community).
  */
 export function buildItems(place, prices) {

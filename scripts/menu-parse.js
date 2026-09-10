@@ -2,12 +2,22 @@
 // Funzioni pure, senza rete: è la parte che va davvero testata.
 // I menu di Amsterdam sono in olandese o in inglese, spesso mescolati.
 
-/** Parole che identificano una voce, in ordine: la più specifica per prima. */
+/**
+ * Parole che identificano una voce. Si confrontano sui confini di parola, non
+ * come sottostringhe: in olandese "prijs" contiene "ijs" (gelato) e "bieren"
+ * contiene "bier", quindi cercare sottostringhe farebbe scambiare l'intestazione
+ * di una colonna dei prezzi per un gelato.
+ */
 export const ITEM_KEYWORDS = {
   coffee: ['espresso', 'koffie', 'coffee', 'americano', 'filterkoffie', 'lungo'],
-  beer: ['pils', 'biertje', 'bier ', 'bier\t', 'draught', 'draft beer', 'beer ', 'tap bier'],
+  beer: ['pils', 'biertje', 'bier', 'bieren', 'draught', 'draft beer', 'beer', 'tap bier'],
+  fries: ['friet', 'frieten', 'patat', 'patatje', 'fries', 'french fries', 'frietjes'],
   doner: ['döner', 'doner', 'kebab', 'shoarma', 'shawarma', 'gyros'],
-  pizza: ['margherita', 'margarita', 'pizza'],
+  // "margarita" starebbe qui come refuso di margherita, ma è anche un cocktail:
+  // troppo ambigua per fidarsene, meglio perdere una pizza che inventarne una
+  pizza: ['margherita', 'pizza'],
+  cocktail: ['cocktail', 'cocktails', 'mojito', 'negroni', 'spritz', 'aperol', 'daiquiri', 'caipirinha', 'gin tonic'],
+  icecream: ['ijsje', 'softijs', 'schepijs', 'ice cream', 'gelato', 'bolletje', 'coupe'],
 };
 
 /** Sezioni di menu da cui prendere il piatto più economico. */
@@ -24,6 +34,9 @@ export const PLAUSIBLE = {
   beer: [2, 14],
   doner: [3, 22],
   pizza: [5, 30],
+  fries: [1.5, 12],
+  icecream: [1, 10],
+  cocktail: [5, 30],
   // sotto queste soglie non è un piatto, è una bevanda finita nella sezione sbagliata
   first: [3.5, 30],
   main: [7, 60],
@@ -100,6 +113,20 @@ const inRange = (amount, itemId) => {
   return amount >= min && amount <= max;
 };
 
+const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const keywordMatchers = new Map();
+
+/** Una parola chiave corrisponde solo se è una parola intera. */
+function mentions(line, keywords) {
+  let matcher = keywordMatchers.get(keywords);
+  if (!matcher) {
+    matcher = new RegExp(`(?<![\\p{L}])(?:${keywords.map(escapeRegex).join('|')})(?![\\p{L}])`, 'iu');
+    keywordMatchers.set(keywords, matcher);
+  }
+  return matcher.test(line);
+}
+
 /** Il prezzo di una voce: il più basso fra quelli su righe che la nominano. */
 export function findItemPrice(lines, itemId) {
   const keywords = ITEM_KEYWORDS[itemId];
@@ -107,8 +134,7 @@ export function findItemPrice(lines, itemId) {
   let best = null;
 
   for (const line of lines) {
-    const lower = line.toLowerCase();
-    if (!keywords.some((k) => lower.includes(k))) continue;
+    if (!mentions(line, keywords)) continue;
     for (const amount of pricesIn(line)) {
       if (inRange(amount, itemId) && (best === null || amount < best)) best = amount;
     }

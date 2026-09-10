@@ -126,3 +126,25 @@ test('un caffè con dolce non passa per un caffè', () => {
   assert.equal(findItemPrice(['Koffie met gebak € 8,00'], 'coffee'), null);
   assert.equal(findItemPrice(['Koffie € 3,20', 'Koffie met gebak € 8,00'], 'coffee'), 3.2);
 });
+
+test('le parole chiave si confrontano su parole intere, non sottostringhe', () => {
+  // in olandese "prijs" contiene "ijs" (gelato) e "rijst" contiene "ijs":
+  // cercare sottostringhe farebbe leggere l'intestazione dei prezzi come un gelato
+  assert.equal(findItemPrice(['Prijs per persoon € 25,00'], 'icecream'), null);
+  assert.equal(findItemPrice(['Rijst met kip € 9,00'], 'icecream'), null);
+  assert.equal(findItemPrice(['IJsje € 2,50'], 'icecream'), 2.5);
+  assert.equal(findItemPrice(['Softijs € 2,00'], 'icecream'), 2);
+});
+
+test('patatine e cocktail si riconoscono nelle forme comuni', () => {
+  assert.equal(findItemPrice(['Patatje oorlog € 4,50'], 'fries'), 4.5);
+  assert.equal(findItemPrice(['Friet met mayonaise € 3,20'], 'fries'), 3.2);
+  assert.equal(findItemPrice(['Mojito € 11,00', 'Negroni € 10,50'], 'cocktail'), 10.5);
+  assert.equal(findItemPrice(['Kapsalon € 8,00'], 'fries'), null, 'il kapsalon non è un cono di patatine');
+});
+
+test('la margarita cocktail non diventa una pizza margherita', () => {
+  // due parole quasi identiche per due cose diverse: meglio non indovinare
+  assert.equal(findItemPrice(['Margarita € 12,00'], 'pizza'), null);
+  assert.equal(findItemPrice(['Pizza margherita € 11,00'], 'pizza'), 11);
+});
