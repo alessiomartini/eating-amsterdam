@@ -11,7 +11,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { randomBytes } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { extractDatabaseId, extractWorkerUrl } from './parse-wrangler.js';
+import { extractDatabaseId, extractWorkerUrl, npxInvocation } from './parse-wrangler.js';
 import { dirname, join } from 'node:path';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -23,10 +23,13 @@ const DB_NAME = 'eating-amsterdam';
 const step = (n, text) => process.stdout.write(`\n[${n}/5] ${text}\n`);
 const ok = (text) => process.stdout.write(`      ✓ ${text}\n`);
 
+const npx = npxInvocation();
+
 function wrangler(args, { capture = true } = {}) {
-  return execFileSync('npx', ['--yes', 'wrangler', ...args], {
+  return execFileSync(npx.command, ['--yes', 'wrangler', ...args], {
     cwd: HERE,
     encoding: 'utf8',
+    shell: npx.shell,
     stdio: capture ? ['inherit', 'pipe', 'inherit'] : 'inherit',
   });
 }
@@ -70,8 +73,8 @@ ok('schema applicato');
 /* 3 — token */
 step(3, 'Token per leggere le segnalazioni');
 const token = randomBytes(24).toString('base64url');
-execFileSync('npx', ['--yes', 'wrangler', 'secret', 'put', 'ADMIN_TOKEN'], {
-  cwd: HERE, input: `${token}\n`, encoding: 'utf8', stdio: ['pipe', 'inherit', 'inherit'],
+execFileSync(npx.command, ['--yes', 'wrangler', 'secret', 'put', 'ADMIN_TOKEN'], {
+  cwd: HERE, input: `${token}\n`, encoding: 'utf8', shell: npx.shell, stdio: ['pipe', 'inherit', 'inherit'],
 });
 ok('generato e salvato su Cloudflare');
 

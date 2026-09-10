@@ -169,3 +169,11 @@ test('trova il database_id in tutti i formati che wrangler produce', async () =>
   );
   assert.equal(extractWorkerUrl('deploy fallito'), null);
 });
+
+test('su Windows npx si invoca passando dalla shell', async () => {
+  const { npxInvocation } = await import('../backend/parse-wrangler.js');
+  // .cmd non è eseguibile con execFile da Node 18.20/20.12 in poi
+  assert.deepEqual(npxInvocation('win32'), { command: 'npx.cmd', shell: true });
+  assert.deepEqual(npxInvocation('darwin'), { command: 'npx', shell: false });
+  assert.deepEqual(npxInvocation('linux'), { command: 'npx', shell: false });
+});

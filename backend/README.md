@@ -15,7 +15,16 @@ possiede l'account.
 
 ## Metterlo in piedi
 
-Dalla radice del progetto:
+I comandi vanno dati **dentro la cartella del progetto**, non da un'altra: `npm`
+cerca il `package.json` lì dove lo lanci. Se non hai ancora il progetto in
+locale:
+
+```bash
+git clone https://github.com/alessiomartini/eating-amsterdam.git
+cd eating-amsterdam
+```
+
+Poi:
 
 ```bash
 npx wrangler login    # apre il browser, una volta sola

@@ -16,3 +16,14 @@ export function extractDatabaseId(output) {
 export function extractWorkerUrl(output) {
   return output.match(/https:\/\/[^\s"']+\.workers\.dev/)?.[0] ?? null;
 }
+
+/**
+ * Come invocare npx. Su Windows npx è uno script .cmd, e da Node 18.20 e 20.12
+ * execFile si rifiuta di eseguire .cmd senza passare dalla shell (fu una
+ * correzione di sicurezza). Senza questo, su Windows lo script muore con ENOENT.
+ */
+export function npxInvocation(platform = process.platform) {
+  return platform === 'win32'
+    ? { command: 'npx.cmd', shell: true }
+    : { command: 'npx', shell: false };
+}
