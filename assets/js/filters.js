@@ -28,6 +28,8 @@ export const CATEGORIES = [
   { id: 'fast_food', label: '🍟 Fast food' },
   { id: 'restaurant', label: '🍽️ Restaurant' },
   { id: 'cafe', label: '☕ Café' },
+  { id: 'bar', label: '🍸 Bar' },
+  { id: 'pub', label: '🍻 Pub' },
   { id: 'ice_cream', label: '🍦 Ice cream' },
   { id: 'food_court', label: '🏬 Food court' },
 ];

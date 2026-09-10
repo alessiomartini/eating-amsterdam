@@ -30,6 +30,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # marca gli asset con un hash: chi ha già visitato il sito riceve la
+      # versione nuova invece di quella in cache
+      - name: Applica la versione agli asset
+        run: node scripts/stamp-version.mjs
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

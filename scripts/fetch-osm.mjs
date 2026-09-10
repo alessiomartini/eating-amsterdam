@@ -7,7 +7,7 @@ import { writeFile, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import {
-  OVERPASS_ENDPOINTS, OVERPASS_STRATEGIES, normalizeElement, finalize,
+  OVERPASS_ENDPOINTS, OVERPASS_STRATEGIES, extraPlacesQuery, normalizeElement, finalize,
 } from './osm-common.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -87,6 +87,43 @@ async function fetchPlaces() {
   );
 }
 
+/**
+ * I locali elencati a mano in data/extra-places.json: posti dove si mangia ma
+ * che OSM classifica altrimenti (un cinema con bar non è un amenity=bar).
+ * Nessuna query per amenity potrà mai catturarli, quindi si nominano per id.
+ */
+async function fetchExtras() {
+  let config;
+  try {
+    config = JSON.parse(await readFile(join(ROOT, 'data', 'extra-places.json'), 'utf8'));
+  } catch {
+    return [];
+  }
+  const entries = config.elements ?? [];
+  const query = extraPlacesQuery(entries.map((e) => e.ref));
+  if (!query) return [];
+
+  log(`Aggiunte manuali: ${entries.length} elementi da data/extra-places.json`);
+  let raw;
+  try {
+    raw = await overpass(query);
+  } catch (err) {
+    log(`  non recuperate: ${err.message}`);
+    return [];
+  }
+
+  const byRef = new Map(entries.map((e) => [e.ref, e]));
+  return (raw.elements ?? [])
+    .map((el) => {
+      const place = normalizeElement(el);
+      if (!place) return null;
+      const entry = byRef.get(`${el.type}/${el.id}`);
+      // la categoria la decidiamo noi: per OSM restano cinema o teatri
+      return { ...place, category: entry?.category ?? place.category, addedBecause: entry?.why ?? null };
+    })
+    .filter(Boolean);
+}
+
 /** Riporta ciò che non arriva da OSM: senza questo il rinfresco settimanale
  *  cancellerebbe menu, voti e prezzi raccolti nelle settimane precedenti. */
 async function keepLocalFields(places) {
@@ -104,7 +141,10 @@ async function keepLocalFields(places) {
   });
 }
 
-const places = await keepLocalFields(await fetchPlaces());
+const found = await fetchPlaces();
+const extras = await fetchExtras();
+log(`  ${extras.length} aggiunte manuali recuperate`);
+const places = await keepLocalFields(finalize([...found, ...extras]));
 
 await writeFile(
   OUT,

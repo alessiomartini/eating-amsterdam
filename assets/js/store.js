@@ -4,7 +4,7 @@
 
 const KEY = 'eating-amsterdam:v1';
 
-const empty = () => ({ author: '', places: {}, custom: [] });
+const empty = () => ({ author: '', places: {}, custom: [], notes: [] });
 
 function read() {
   try {
@@ -125,8 +125,20 @@ export const store = {
     }
     const ids = new Set(state.custom.map((p) => p.id));
     for (const place of incoming.custom ?? []) if (!ids.has(place.id)) state.custom.push(place);
+    const seenNotes = new Set(state.notes.map((n) => n.at));
+    for (const note of incoming.notes ?? []) if (!seenNotes.has(note.at)) state.notes.push(note);
     persist();
   },
+
+  /** Le segnalazioni scritte dal sito: restano qui anche dopo l'invio. */
+  addNote(note) {
+    state.notes.unshift({ ...note, at: new Date().toISOString() });
+    state.notes = state.notes.slice(0, 50);
+    persist();
+    return state.notes[0];
+  },
+
+  notes: () => state.notes ?? [],
 
   reset() {
     state = empty();

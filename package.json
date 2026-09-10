@@ -11,7 +11,8 @@
     "merge:contributions": "node scripts/merge-contributions.mjs",
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
-    "scrape:menus": "node scripts/scrape-menus.mjs"
+    "scrape:menus": "node scripts/scrape-menus.mjs",
+    "stamp": "node scripts/stamp-version.mjs"
   },
   "engines": {
     "node": ">=20"

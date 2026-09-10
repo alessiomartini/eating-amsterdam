@@ -27,6 +27,18 @@ Le stime non entrano mai nella media dei prezzi reali e si possono escludere dai
 filtri con "Real prices only". Una stima spacciata per prezzo vero sarebbe
 peggio di nessun prezzo.
 
+### Lo storico, come nelle app dei carburanti
+
+Di ogni voce si mostra **l'ultimo prezzo inserito**, non la media: i prezzi
+cambiano e una media invecchia. Lo storico completo resta consultabile nella
+scheda del locale.
+
+Se l'ultimo prezzo si discosta troppo dai precedenti (più del 60% sopra o del
+40% sotto, con almeno due prezzi prima) compare la spunta **`?`**: il prezzo si
+mostra comunque, ma dicendo che non ne siamo sicuri. Può essere un errore di
+battitura, un piatto diverso, o un rincaro vero — lo risolve il prossimo che
+passa di lì e inserisce il suo.
+
 ---
 
 ## Il nodo dei prezzi (e perché non si fa scraping di Google Maps)
@@ -59,6 +71,38 @@ così un singolo prezzo sbagliato non falsa tutto. I marker sono colorati per fa
 🟢 ≤ 10 € · 🟡 10–18 € · 🔴 > 18 € · ⚪ prezzo ancora ignoto.
 
 ---
+
+## Cosa finisce in mappa
+
+Non solo ristoranti e fast food: anche **bar, pub e biergarten**, perché ad
+Amsterdam nelle bruine kroegen e nei bar studenteschi si mangia e si beve per
+poco, che è il punto di questo sito.
+
+Restano fuori i locali che OpenStreetMap classifica come altro — 'Skek è un
+`amenity=pub` e si prende, ma Kriterion è un `amenity=cinema` e nessuna query
+per categoria lo prenderà mai. Per quelli c'è `data/extra-places.json`: si
+elenca l'id OSM e il prossimo rinfresco li include.
+
+Per capire perché un locale manca:
+
+```bash
+node scripts/osm-lookup.mjs "Kriterion"
+```
+
+Stampa i tag che OSM conosce, così si vede subito se il problema è la query, il
+bounding box, o che il locale su OSM non c'è proprio. C'è anche come workflow,
+per lanciarlo senza avere il progetto in locale.
+
+## Segnalazioni dal sito
+
+Il bottone **Feedback** apre una casella di testo; premendo Invia si apre una
+issue GitHub **già scritta**, con allegato quello che l'utente stava guardando
+(filtri attivi, numero di risultati, locale selezionato). All'utente resta un
+clic su Submit.
+
+È il compromesso del "niente backend": serve un account GitHub e la segnalazione
+è pubblica. In cambio arriva davvero a chi sviluppa, senza che nessuno faccia
+copia-incolla. Una copia resta nel browser di chi scrive.
 
 ## Provarlo in locale
 
@@ -176,6 +220,9 @@ assets/js/
   hours.js                 "aperto ora" da opening_hours di OSM
   items.js                 le sei voci di riferimento e le stime
 scripts/menu-parse.js      estrazione dei prezzi dall'HTML (senza rete)
+scripts/osm-lookup.mjs     come è taggato un locale su OSM (diagnosi)
+scripts/stamp-version.mjs  marca gli asset per invalidare la cache
+data/extra-places.json     locali da includere a mano, per id OSM
 scripts/scrape-menus.mjs   scraper dei menu dai siti dei locali
 tests/                     `npm test` — parser degli orari e dei menu
 scripts/

@@ -337,3 +337,14 @@ output { color: var(--text); font-weight: 600; }
 /* le stime non devono mai somigliare a un prezzo reale */
 .est { color: var(--muted); font-style: italic; }
 .price.est { font-weight: 500; }
+
+/* ---------- storico e prezzi da verificare ---------- */
+.badge.warn { color: var(--mid); border-color: #6b5320; cursor: help; }
+.history { margin-top: 8px; }
+.history > summary { cursor: pointer; font-size: 12.5px; color: var(--muted); padding: 4px 0; }
+.history .price-list { margin: 6px 0 2px; }
+.history .price-list li { font-size: 13px; padding: 4px 10px; }
+
+/* ---------- segnalazioni ---------- */
+.feedback-note { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding: 7px 10px; background: var(--bg-elev-2); border-radius: 8px; margin-top: 6px; }
+.feedback-note time { color: var(--muted); white-space: nowrap; }

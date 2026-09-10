@@ -27,7 +27,8 @@ const COFFEE_CUISINES = new Set(['coffee_shop', 'coffee', 'cake', 'bakery', 'san
 export function itemApplies(itemId, place) {
   const cuisines = new Set(place.cuisines ?? []);
   const isRestaurant = place.category === 'restaurant' || place.category === 'food_court';
-  const servesMeals = isRestaurant || place.category === 'fast_food';
+  const isBar = place.category === 'bar' || place.category === 'pub' || place.category === 'biergarten';
+  const servesMeals = isRestaurant || place.category === 'fast_food' || isBar;
 
   switch (itemId) {
     // gli snackbar olandesi il caffè lo fanno quasi sempre
@@ -35,7 +36,7 @@ export function itemApplies(itemId, place) {
       return place.category === 'cafe' || servesMeals || [...cuisines].some((c) => COFFEE_CUISINES.has(c));
     // la birra invece raramente: chiederla a un fast food produrrebbe solo rumore
     case 'beer':
-      return place.category === 'cafe' || isRestaurant;
+      return place.category === 'cafe' || isRestaurant || isBar;
     case 'doner':
       return [...cuisines].some((c) => DONER_CUISINES.has(c));
     case 'pizza':
@@ -89,6 +90,7 @@ function tierFactor(place) {
   }
   if (place.category === 'fast_food') return { factor: 0.8, label: 'fast food', confident: false };
   if (place.category === 'cafe') return { factor: 0.9, label: 'café', confident: false };
+  if (place.category === 'bar' || place.category === 'pub') return { factor: 0.9, label: 'bar', confident: false };
   return { factor: 1, label: 'no price signal', confident: false };
 }
 
@@ -136,6 +138,41 @@ const median = (values) => {
   return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
 };
 
+// Quanto l'ultimo prezzo può discostarsi dai precedenti prima di essere sospetto.
+// I prezzi salgono, quindi tolleriamo di più verso l'alto che verso il basso.
+const SUSPICIOUS_ABOVE = 1.6;
+const SUSPICIOUS_BELOW = 0.6;
+
+/**
+ * Come nelle app dei prezzi dei carburanti: vale l'ultimo prezzo inserito, non
+ * la media, perché i prezzi cambiano e la media invecchia. Ma un prezzo molto
+ * diverso dai precedenti può essere un errore di battitura o un piatto diverso,
+ * quindi lo si mostra segnalando che non ne siamo sicuri, senza nasconderlo.
+ */
+export function summarisePrices(prices) {
+  const sorted = [...prices]
+    .filter((p) => Number.isFinite(p.amount))
+    .sort((a, b) => String(a.date ?? '').localeCompare(String(b.date ?? '')));
+  if (!sorted.length) return null;
+
+  const latest = sorted[sorted.length - 1];
+  const previous = sorted.slice(0, -1).map((p) => p.amount);
+  const reference = previous.length >= 2 ? median(previous) : null;
+
+  const uncertain = reference !== null
+    && (latest.amount > reference * SUSPICIOUS_ABOVE || latest.amount < reference * SUSPICIOUS_BELOW);
+
+  return {
+    amount: latest.amount,
+    date: latest.date ?? null,
+    by: latest.by ?? null,
+    samples: sorted.length,
+    history: sorted,
+    uncertain,
+    reference: uncertain ? reference : null,
+  };
+}
+
 /**
  * Costruisce la tabella delle sei voci per un locale, scegliendo per ognuna la
  * fonte migliore disponibile. `prices` sono i prezzi misurati (miei + community).
@@ -147,15 +184,15 @@ export function buildItems(place, prices) {
     // Un prezzo vero vale più della nostra regola: se il menu di un caffè elenca
     // dei primi, quel caffè i primi li fa, e la regola è solo un'euristica.
     // L'euristica decide invece cosa ha senso stimare e cosa chiedere all'utente.
-    const measured = prices.filter((p) => p.item === id).map((p) => p.amount).filter(Number.isFinite);
-    if (measured.length) {
-      table[id] = { amount: median(measured), source: 'measured', samples: measured.length };
+    const measured = summarisePrices(prices.filter((p) => p.item === id));
+    if (measured) {
+      table[id] = { ...measured, source: 'measured' };
       continue;
     }
 
     const fromMenu = place.menu?.items?.[id];
     if (Number.isFinite(fromMenu)) {
-      table[id] = { amount: fromMenu, source: 'menu', sourceUrl: place.menu.url ?? null };
+      table[id] = { amount: fromMenu, source: 'menu', sourceUrl: place.menu.url ?? null, date: place.menu.scrapedAt?.slice(0, 10) ?? null };
       continue;
     }
 

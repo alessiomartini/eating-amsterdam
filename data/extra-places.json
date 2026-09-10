@@ -1,0 +1,10 @@
+{
+  "note": "Locali che la query per amenity non cattura, elencati a mano per id OSM. Servono per i posti dove si mangia e si beve ma che OpenStreetMap classifica come altro: cinema, teatri, centri culturali. Aggiungi una riga e il prossimo rinfresco li includerà.",
+  "elements": [
+    {
+      "ref": "node/253130481",
+      "why": "Kriterion: cinema studentesco con bar, aperto fino alle 3",
+      "category": "bar"
+    }
+  ]
+}

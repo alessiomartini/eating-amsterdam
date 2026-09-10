@@ -34,8 +34,10 @@ function dietBadges(place) {
   return badges.join('');
 }
 
+const UNCERTAIN_HINT = 'The latest report is far from the earlier ones — it may be a typo or a different dish. Add yours to settle it.';
+
 const SOURCE_LABEL = {
-  measured: 'measured by a visitor',
+  measured: 'reported by a visitor',
   menu: 'read from the place’s own menu',
   estimate: 'our estimate, not a real price',
 };
@@ -50,7 +52,8 @@ function priceCell(place) {
   if (shown.source === 'estimate') {
     return `<span class="price est" title="${esc(SOURCE_LABEL.estimate)} — ${esc(shown.basis.join(', '))}">≈${money(shown.amount)}${what}</span>`;
   }
-  return `<span class="price ${priceBand(shown.amount)}" title="${esc(SOURCE_LABEL[shown.source])}">${money(shown.amount)}${what}${shown.source === 'menu' ? ' <span class="badge">menu</span>' : ''}</span>`;
+  const flag = shown.uncertain ? `<span class="badge warn" title="${esc(UNCERTAIN_HINT)}">?</span>` : '';
+  return `<span class="price ${priceBand(shown.amount)}" title="${esc(SOURCE_LABEL[shown.source])}">${money(shown.amount)}${what}${shown.source === 'menu' ? ' <span class="badge">menu</span>' : ''}${flag}</span>`;
 }
 
 function ratingCell(place) {
@@ -121,7 +124,13 @@ function itemsTable(place) {
     } else if (entry?.source === 'menu') {
       value = `<strong>${money(entry.amount)}</strong><span class="src">from their menu</span>`;
     } else if (entry?.source === 'measured') {
-      value = `<strong>${money(entry.amount)}</strong><span class="src">${entry.samples} real ${entry.samples === 1 ? 'price' : 'prices'}</span>`;
+      // come nelle app dei carburanti: si mostra l'ultimo prezzo, con la data
+      const when = entry.date ? ` on ${esc(entry.date)}` : '';
+      const others = entry.samples > 1 ? ` · ${entry.samples} reports` : '';
+      const warn = entry.uncertain
+        ? `<span class="badge warn" title="${esc(UNCERTAIN_HINT)}">? unverified</span>`
+        : '';
+      value = `<strong>${money(entry.amount)}</strong> ${warn}<span class="src">latest${when}${others}</span>`;
     }
 
     return `<tr>
@@ -132,7 +141,20 @@ function itemsTable(place) {
   });
 
   if (!rows.length) return '<p class="hint">None of the six reference items fit this place.</p>';
-  return `<table class="items">${rows.join('')}</table>`;
+
+  // lo storico completo, per chi vuole vedere come si è mosso un prezzo
+  const history = REFERENCE_ITEMS
+    .filter((item) => (place.items?.[item.id]?.history ?? []).length > 1)
+    .map((item) => {
+      const entry = place.items[item.id];
+      const points = entry.history
+        .map((p) => `<li><span>${esc(p.date ?? '?')}${p.by ? ` · ${esc(p.by)}` : ''}</span><span>${money(p.amount)}</span></li>`)
+        .join('');
+      return `<details class="history"><summary>${item.icon} ${esc(item.label)} — ${entry.samples} reports</summary><ul class="price-list">${points}</ul></details>`;
+    })
+    .join('');
+
+  return `<table class="items">${rows.join('')}</table>${history}`;
 }
 
 export function openDetail(place, { onChange } = {}) {
@@ -404,5 +426,67 @@ export function openAddPlaceModal({ center, onAdded }) {
     dialog.close();
     onAdded?.(place);
     toast('Place added');
+  });
+}
+
+/* ---------------------------------------------------------------- segnalazioni */
+
+const REPO = 'alessiomartini/eating-amsterdam';
+
+/**
+ * La casella per dire cosa non va. Senza un backend l'unico modo perché una
+ * segnalazione arrivi davvero a chi sviluppa — e sia leggibile da lì senza che
+ * nessuno faccia copia-incolla — è farla diventare una issue su GitHub: il testo
+ * viaggia già scritto nell'URL, all'utente resta un clic su "Submit".
+ * Una copia resta comunque salvata nel browser, così nulla va perso.
+ */
+export function openFeedbackModal({ context }) {
+  const dialog = document.getElementById('modal');
+  const previous = store.notes();
+
+  sheet(dialog, `
+    <h2>Something to improve?</h2>
+    <p class="sub">Missing place, wrong price, confusing filter — anything.</p>
+
+    <form id="note-form" style="display:grid;gap:10px">
+      <textarea name="text" rows="4" required placeholder="Kriterion is missing. The döner filter shows places that don't do döner…"
+        style="width:100%;background:var(--bg-elev-2);color:inherit;border:1px solid var(--line);border-radius:8px;padding:10px"></textarea>
+      <label class="chip" style="justify-self:start"><input type="checkbox" name="withContext" checked /><span>Attach what I was looking at</span></label>
+      <div class="actions">
+        <button type="submit" class="primary">Send</button>
+      </div>
+    </form>
+
+    <p class="hint">Send opens a prefilled GitHub issue — the text is already written, you only press Submit.
+    It needs a GitHub account, and it is public. A copy is kept in this browser either way.</p>
+
+    ${previous.length ? `<h3>Sent from this browser</h3>${previous.slice(0, 8).map((n) => `
+      <div class="feedback-note"><span>${esc(n.text)}</span><time>${esc(n.at.slice(0, 10))}</time></div>`).join('')}` : ''}
+  `);
+
+  dialog.querySelector('#note-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const text = String(data.get('text')).trim();
+    if (!text) return;
+
+    const note = store.addNote({ text, context: data.get('withContext') ? context : null });
+
+    const body = [
+      text,
+      '',
+      '---',
+      data.get('withContext') ? `<!-- context -->\n\`\`\`json\n${JSON.stringify(context, null, 2)}\n\`\`\`` : '',
+      '_Sent from the Eating Amsterdam site._',
+    ].filter(Boolean).join('\n');
+
+    const url = `https://github.com/${REPO}/issues/new`
+      + `?labels=feedback&title=${encodeURIComponent(text.slice(0, 70))}`
+      + `&body=${encodeURIComponent(body)}`;
+
+    window.open(url, '_blank', 'noopener');
+    dialog.close();
+    toast('Saved — finish by pressing Submit on GitHub');
+    return note;
   });
 }

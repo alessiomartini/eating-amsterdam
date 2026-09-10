@@ -17,11 +17,25 @@ export const OVERPASS_ENDPOINTS = [
 // per chi cerca un döner un confine comunale non vuole dire niente.
 export const METRO_BBOX = [52.26, 4.72, 52.45, 5.08]; // S,O,N,E
 
-const AMENITIES = '^(fast_food|restaurant|cafe|ice_cream|food_court)$';
+// Bar e pub stavano fuori, ed è un errore ad Amsterdam: nelle bruine kroegen e
+// nei bar studenteschi si mangia e si beve per poco, che è il punto di questo sito.
+const AMENITIES = '^(fast_food|restaurant|cafe|ice_cream|food_court|bar|pub|biergarten)$';
 
 // In ordine di preferenza: se la prima non produce nulla si passa alla seconda.
 // Il ripiego copre meno zona ma non dipende dall'indice delle aree di Overpass,
 // che è la parte più fragile della query.
+/** Query per gli id elencati a mano in data/extra-places.json. */
+export function extraPlacesQuery(refs) {
+  if (!refs.length) return null;
+  const parts = refs
+    .map((ref) => {
+      const [type, id] = ref.split('/');
+      return `  ${type}(${id});`;
+    })
+    .join('\n');
+  return `[out:json][timeout:60];\n(\n${parts}\n);\nout center tags;`;
+}
+
 export const OVERPASS_STRATEGIES = [
   {
     label: 'Amsterdam e dintorni (bounding box)',

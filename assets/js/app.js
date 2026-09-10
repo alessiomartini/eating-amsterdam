@@ -3,7 +3,7 @@
 import { decorate, loadPlaces } from './data.js';
 import { applyFilters, CATEGORIES, CUISINE_GROUPS, DEFAULT_FILTERS, PRICE_ITEM_OPTIONS } from './filters.js';
 import { focusPlace, highlight, initMap, invalidate, setPlaces, showUser } from './map.js';
-import { openAddPlaceModal, openDataModal, openDetail, renderList, toast } from './ui.js';
+import { openAddPlaceModal, openDataModal, openDetail, openFeedbackModal, renderList, toast } from './ui.js';
 import { store } from './store.js';
 
 const MAX_PRICE = 41; // il massimo dello slider vale "qualsiasi prezzo"
@@ -200,6 +200,24 @@ function wire() {
       onAdded: (place) => {
         refreshFromStore();
         select(place.id);
+      },
+    });
+  });
+
+  el('btn-feedback').addEventListener('click', () => {
+    // il contesto evita il classico "non funziona" senza sapere cosa guardava
+    const filters = readFilters();
+    openFeedbackModal({
+      context: {
+        dataset: state.meta,
+        results: state.filtered.length,
+        selected: state.places.find((p) => p.id === state.selectedId)?.name ?? null,
+        filters: {
+          ...filters,
+          categories: [...filters.categories],
+          cuisines: [...filters.cuisines],
+        },
+        viewport: `${window.innerWidth}×${window.innerHeight}`,
       },
     });
   });
