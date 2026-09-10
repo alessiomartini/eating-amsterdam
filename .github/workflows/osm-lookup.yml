@@ -1,0 +1,20 @@
+name: Cerca un locale su OSM
+
+# Strumento di diagnosi: "perché il locale X non compare in mappa?".
+# Non modifica niente, stampa soltanto i tag che OpenStreetMap conosce.
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Nome del locale da cercare'
+        required: true
+
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/osm-lookup.mjs "${{ inputs.name }}"
