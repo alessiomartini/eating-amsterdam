@@ -11,6 +11,14 @@ import { store } from './store.js';
 import { buildItems } from './items.js';
 
 const CACHE_KEY = 'eating-amsterdam:osm-cache:v1';
+
+// Prezzi condivisi arrivati dal backend dopo l'ultima sincronizzazione del
+// dataset: stanno a parte perché non fanno parte del file committato.
+const livePrices = new Map();
+
+export function setLivePrices(placeId, prices) {
+  livePrices.set(placeId, prices ?? []);
+}
 const CACHE_TTL = 7 * 864e5;
 
 async function loadFile() {
@@ -72,7 +80,10 @@ export function decorate(place) {
   const community = place.community ?? {};
 
   const myPrices = mine?.prices ?? [];
-  const communityPrices = community.prices ?? [];
+  const live = livePrices.get(place.id);
+  // il server è più aggiornato del file: quando c'è, sostituisce i prezzi
+  // committati invece di sommarsi a loro, altrimenti si conterebbero due volte
+  const communityPrices = live ?? community.prices ?? [];
   const measured = [...myPrices, ...communityPrices];
 
   const rating = mine?.rating ?? community.avgRating ?? place.google?.rating ?? null;

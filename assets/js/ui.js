@@ -2,7 +2,8 @@
 // I testi rivolti all'utente sono in inglese; i commenti restano in italiano.
 
 import { store } from './store.js';
-import { decorate, priceBand } from './data.js';
+import { decorate, priceBand, setLivePrices } from './data.js';
+import { fetchPlacePrices, isOnline, submitFeedback, submitPrice } from './api.js';
 import { CATEGORIES } from './filters.js';
 import { REFERENCE_ITEMS, itemApplies } from './items.js';
 import { isOpenNow, humanize } from './hours.js';
@@ -159,6 +160,16 @@ function itemsTable(place) {
 
 export function openDetail(place, { onChange } = {}) {
   const dialog = document.getElementById('detail');
+
+  // i prezzi condivisi arrivati dopo l'ultima sincronizzazione del dataset
+  if (isOnline()) {
+    fetchPlacePrices(place.id).then((prices) => {
+      if (!prices || !dialog.open) return;
+      setLivePrices(place.id, prices);
+      onChange?.();
+      render();
+    });
+  }
   const gmaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} ${place.address ?? 'Amsterdam'}`)}`;
   const directions = `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lon}`;
 
@@ -231,8 +242,9 @@ export function openDetail(place, { onChange } = {}) {
       </div>
     `);
 
-    dialog.querySelector('#items-form').addEventListener('submit', (event) => {
+    dialog.querySelector('#items-form').addEventListener('submit', async (event) => {
       event.preventDefault();
+      const sent = [];
       let saved = 0;
       for (const input of event.target.querySelectorAll('input[name^="item-"]')) {
         const amount = Number(input.value);
@@ -240,21 +252,24 @@ export function openDetail(place, { onChange } = {}) {
         const itemId = input.name.slice('item-'.length);
         const item = REFERENCE_ITEMS.find((i) => i.id === itemId);
         store.addPrice(place.id, { dish: item.label, amount, item: itemId });
+        sent.push(submitPrice({ placeId: place.id, item: itemId, dish: item.label, amount }));
         saved += 1;
       }
       if (!saved) return toast('Type at least one price first');
       onChange?.();
       render();
-      toast(`Saved ${saved} ${saved === 1 ? 'price' : 'prices'} — thank you`);
+      reportOutcome(saved, await Promise.all(sent));
     });
 
-    dialog.querySelector('#price-form').addEventListener('submit', (event) => {
+    dialog.querySelector('#price-form').addEventListener('submit', async (event) => {
       event.preventDefault();
       const data = new FormData(event.target);
-      store.addPrice(place.id, { dish: data.get('dish'), amount: data.get('amount') });
+      const dish = data.get('dish');
+      const amount = data.get('amount');
+      store.addPrice(place.id, { dish, amount });
       onChange?.();
       render();
-      toast('Price saved');
+      reportOutcome(1, [await submitPrice({ placeId: place.id, item: null, dish, amount: Number(amount) })]);
     });
 
     dialog.querySelectorAll('[data-dish]').forEach((btn) => {
@@ -307,8 +322,10 @@ export function openDataModal({ meta, count, onReload, onChange }) {
     <p class="sub">${count} places · source: ${esc(meta.source ?? 'unknown')} · updated ${esc(meta.updatedAt ?? '?')}</p>
 
     <h3>Your contributions</h3>
-    <p class="hint">${contributed} prices, ${Object.values(state.places).filter((e) => e.rating).length} ratings, ${state.custom.length} places you added.
-    They live in this browser only: export them so they are not lost, and so they can be shared.</p>
+    <p class="hint">${contributed} prices, ${Object.values(state.places).filter((e) => e.rating).length} ratings, ${state.custom.length} places you added.</p>
+    <p class="hint">${isOnline()
+      ? 'Prices you add are <strong>shared publicly</strong> with everyone using the site — that is what makes it useful. Ratings, notes and favourites stay in this browser.'
+      : 'Everything stays in this browser: export it so it is not lost, and so it can be shared.'}</p>
 
     <label style="display:grid;gap:4px;font-size:12px;color:var(--muted);margin-top:12px">Your name (shown next to prices you share)
       <input type="text" id="author" value="${esc(state.author)}" placeholder="alessio" style="background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;padding:8px" />
@@ -457,21 +474,31 @@ export function openFeedbackModal({ context }) {
       </div>
     </form>
 
-    <p class="hint">Send opens a prefilled GitHub issue — the text is already written, you only press Submit.
-    It needs a GitHub account, and it is public. A copy is kept in this browser either way.</p>
+    <p class="hint">${isOnline()
+      ? 'Goes straight to the people working on the site. A copy stays in this browser.'
+      : 'Send opens a prefilled GitHub issue — the text is already written, you only press Submit. It needs a GitHub account, and it is public.'}</p>
 
     ${previous.length ? `<h3>Sent from this browser</h3>${previous.slice(0, 8).map((n) => `
       <div class="feedback-note"><span>${esc(n.text)}</span><time>${esc(n.at.slice(0, 10))}</time></div>`).join('')}` : ''}
   `);
 
-  dialog.querySelector('#note-form').addEventListener('submit', (event) => {
+  dialog.querySelector('#note-form').addEventListener('submit', async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const text = String(data.get('text')).trim();
     if (!text) return;
 
-    const note = store.addNote({ text, context: data.get('withContext') ? context : null });
+    const attached = data.get('withContext') ? context : null;
+    store.addNote({ text, context: attached });
 
+    if (isOnline()) {
+      const outcome = await submitFeedback({ text, context: attached });
+      dialog.close();
+      toast(outcome === 'queued' ? 'Saved — will be sent when you are back online' : 'Sent — thank you');
+      return;
+    }
+
+    // senza backend l'unico modo perché arrivi davvero è farla diventare una issue
     const body = [
       text,
       '',
@@ -489,4 +516,13 @@ export function openFeedbackModal({ context }) {
     toast('Saved — finish by pressing Submit on GitHub');
     return note;
   });
+}
+
+/** Dice all'utente dove è finito quello che ha scritto, senza girarci intorno. */
+function reportOutcome(count, results) {
+  const what = count === 1 ? 'price' : `${count} prices`;
+  if (!isOnline()) return toast(`Saved ${what} in this browser`);
+  if (results.includes('rejected')) return toast('The server rejected that price — does it look right?');
+  if (results.includes('queued')) return toast(`Saved ${what} — will be shared when you are back online`);
+  return toast(`Shared ${what} — thank you`);
 }

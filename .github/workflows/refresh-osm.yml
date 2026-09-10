@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      API_BASE: ${{ vars.API_BASE }}
+      ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -39,6 +41,10 @@ jobs:
         if: env.GOOGLE_MAPS_API_KEY != ''
         run: npm run enrich:google -- --limit 400
 
+      - name: Porta nel repo prezzi e segnalazioni dal backend
+        if: env.API_BASE != ''
+        run: npm run sync:backend
+
       - name: Commit
         run: |
           # Rete di sicurezza: un dataset vuoto non deve mai finire su main,
@@ -52,10 +58,10 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data/places.json; then
+          if git diff --quiet -- data/ && git diff --cached --quiet -- data/; then
             echo "Nessuna modifica."
             exit 0
           fi
-          git add data/places.json
+          git add data/places.json data/feedback.json 2>/dev/null || git add data/places.json
           git commit -m "dati: aggiornamento automatico da OpenStreetMap"
           git push

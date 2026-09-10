@@ -12,7 +12,8 @@
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
     "scrape:menus": "node scripts/scrape-menus.mjs",
-    "stamp": "node scripts/stamp-version.mjs"
+    "stamp": "node scripts/stamp-version.mjs",
+    "sync:backend": "node scripts/sync-backend.mjs"
   },
   "engines": {
     "node": ">=20"

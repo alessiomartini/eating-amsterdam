@@ -1,0 +1,4 @@
+{
+  "apiBase": null,
+  "note": "URL del Worker, per esempio https://eating-amsterdam-api.tuonome.workers.dev — finché è null il sito funziona come prima: i contributi restano nel browser e si condividono esportandoli."
+}

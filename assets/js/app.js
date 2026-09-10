@@ -5,6 +5,7 @@ import { applyFilters, CATEGORIES, CUISINE_GROUPS, DEFAULT_FILTERS, PRICE_ITEM_O
 import { focusPlace, highlight, initMap, invalidate, setPlaces, showUser } from './map.js';
 import { openAddPlaceModal, openDataModal, openDetail, openFeedbackModal, renderList, toast } from './ui.js';
 import { store } from './store.js';
+import { flushOutbox, initApi } from './api.js';
 
 const MAX_PRICE = 41; // il massimo dello slider vale "qualsiasi prezzo"
 const FILTERS_KEY = 'eating-amsterdam:filters:v2';
@@ -142,6 +143,8 @@ function select(id) {
 async function boot({ force = false } = {}) {
   el('results-count').textContent = 'Loading…';
   try {
+    // prima il backend: se c'è, i prezzi inseriti da altri sono già condivisi
+    await initApi();
     const data = await loadPlaces({ force, onProgress: (msg) => { el('results-count').textContent = msg; } });
     state.meta = { updatedAt: data.updatedAt, source: data.source };
     state.base = data.places;
@@ -235,6 +238,11 @@ renderControls();
 try {
   writeFilters(JSON.parse(localStorage.getItem(FILTERS_KEY) ?? 'null'));
 } catch { /* filtri salvati illeggibili */ }
+
+window.addEventListener('online', () => {
+  // il telefono è tornato in rete: partono i prezzi rimasti in coda
+  flushOutbox().then(({ sent }) => { if (sent) toast(`Shared ${sent} pending ${sent === 1 ? 'entry' : 'entries'}`); });
+});
 
 window.__map = initMap(el('map'), { onSelect: select });
 el('layout').dataset.view = window.matchMedia('(max-width: 860px)').matches ? 'list' : 'both';

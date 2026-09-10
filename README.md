@@ -95,14 +95,15 @@ per lanciarlo senza avere il progetto in locale.
 
 ## Segnalazioni dal sito
 
-Il bottone **Feedback** apre una casella di testo; premendo Invia si apre una
-issue GitHub **già scritta**, con allegato quello che l'utente stava guardando
-(filtri attivi, numero di risultati, locale selezionato). All'utente resta un
-clic su Submit.
+Il bottone **Feedback** apre una casella di testo, con allegato quello che
+l'utente stava guardando (filtri attivi, numero di risultati, locale
+selezionato): evita il classico "non funziona" senza sapere cosa fosse in
+schermo.
 
-È il compromesso del "niente backend": serve un account GitHub e la segnalazione
-è pubblica. In cambio arriva davvero a chi sviluppa, senza che nessuno faccia
-copia-incolla. Una copia resta nel browser di chi scrive.
+Col backend acceso la segnalazione parte direttamente e finisce in
+`data/feedback.json` al rinfresco successivo. Senza backend si apre una issue
+GitHub già scritta, e all'utente resta un clic su Submit. In entrambi i casi una
+copia resta nel browser di chi scrive.
 
 ## Provarlo in locale
 
@@ -191,10 +192,29 @@ git commit -am "prezzi: contributi di alessio"
 C'è anche un [template di issue](.github/ISSUE_TEMPLATE/nuovo-prezzo.yml) per chi
 preferisce segnalare un prezzo senza toccare il sito.
 
-> Questo è il compromesso "zero backend": funziona subito e non costa niente, ma i
-> prezzi diventano pubblici solo quando qualcuno fa il merge. Se un domani i
-> contributi diventano tanti, il passo successivo è un piccolo backend (Cloudflare
-> D1, Supabase…) che li raccolga direttamente: la struttura dati è già quella giusta.
+> Questa è la modalità senza backend, che resta il comportamento predefinito.
+> Con il backend acceso (`backend/`) i prezzi diventano pubblici nel momento in
+> cui si inseriscono, e l'export serve solo a farsene una copia.
+
+## Prezzi condivisi (backend)
+
+Con un Cloudflare Worker e un database D1 i prezzi smettono di restare nel
+browser di chi li scrive: si vedono subito su tutti i dispositivi. Le istruzioni
+sono in [`backend/README.md`](backend/README.md) — sono cinque comandi.
+
+Finché `data/config.json` ha `apiBase: null` il sito funziona esattamente come
+prima, quindi il backend si può accendere e spegnere senza toccare il resto.
+
+Come si comporta il sito quando è acceso:
+
+- un prezzo inserito parte subito verso il server, e **se la rete non c'è resta
+  in coda** e riparte al caricamento successivo o appena il telefono torna
+  online. È un sito che si usa per strada: non deve perdere niente;
+- aprendo la scheda di un locale si scaricano i prezzi arrivati dopo l'ultima
+  sincronizzazione, così si vede subito quello che hanno inserito gli altri;
+- il workflow settimanale porta prezzi e segnalazioni dentro il repo
+  (`data/places.json` e `data/feedback.json`): il sito resta veloce, funziona
+  anche col Worker giù, e i dati sono versionati.
 
 ## Pubblicare online
 
@@ -223,6 +243,9 @@ scripts/menu-parse.js      estrazione dei prezzi dall'HTML (senza rete)
 scripts/osm-lookup.mjs     come è taggato un locale su OSM (diagnosi)
 scripts/stamp-version.mjs  marca gli asset per invalidare la cache
 data/extra-places.json     locali da includere a mano, per id OSM
+data/config.json           URL del backend (null = tutto in locale)
+scripts/sync-backend.mjs   porta prezzi e segnalazioni dal backend al repo
+backend/                   Cloudflare Worker + schema D1 + istruzioni
 scripts/scrape-menus.mjs   scraper dei menu dai siti dei locali
 tests/                     `npm test` — parser degli orari e dei menu
 scripts/

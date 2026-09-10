@@ -1,0 +1,16 @@
+name = "eating-amsterdam-api"
+main = "src/worker.js"
+compatibility_date = "2026-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "eating-amsterdam"
+# database_id lo stampa `npx wrangler d1 create eating-amsterdam`: incollalo qui
+database_id = "SOSTITUISCI_CON_IL_TUO_DATABASE_ID"
+
+[vars]
+# Da dove il sito può chiamare l'API. Il resto viene rifiutato dal browser.
+ALLOWED_ORIGINS = "https://alessiomartini.github.io,http://localhost:5173"
+
+# Il token per leggere le segnalazioni si imposta come segreto, non qui:
+#   npx wrangler secret put ADMIN_TOKEN
