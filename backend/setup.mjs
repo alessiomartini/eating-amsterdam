@@ -72,11 +72,24 @@ ok('schema applicato');
 
 /* 3 — token */
 step(3, 'Token per leggere le segnalazioni');
-const token = randomBytes(24).toString('base64url');
-execFileSync(npx.command, ['--yes', 'wrangler', 'secret', 'put', 'ADMIN_TOKEN'], {
-  cwd: HERE, input: `${token}\n`, encoding: 'utf8', shell: npx.shell, stdio: ['pipe', 'inherit', 'inherit'],
-});
-ok('generato e salvato su Cloudflare');
+const forceNewToken = process.argv.includes('--new-token');
+let existingToken = false;
+try {
+  existingToken = /ADMIN_TOKEN/.test(wrangler(['secret', 'list']));
+} catch { /* nessun segreto ancora, o Worker non ancora pubblicato */ }
+
+let token = null;
+if (existingToken && !forceNewToken) {
+  // rigenerarlo scollegherebbe il segreto già messo su GitHub, e la
+  // sincronizzazione delle segnalazioni smetterebbe di funzionare in silenzio
+  ok('già presente, lasciato com\'è (--new-token per sostituirlo)');
+} else {
+  token = randomBytes(24).toString('base64url');
+  execFileSync(npx.command, ['--yes', 'wrangler', 'secret', 'put', 'ADMIN_TOKEN'], {
+    cwd: HERE, input: `${token}\n`, encoding: 'utf8', shell: npx.shell, stdio: ['pipe', 'inherit', 'inherit'],
+  });
+  ok('generato e salvato su Cloudflare');
+}
 
 /* 4 — deploy */
 step(4, 'Pubblicazione del Worker');
@@ -98,18 +111,23 @@ writeFileSync(CONFIG, `${JSON.stringify(config, null, 2)}\n`);
 ok('data/config.json aggiornato');
 
 process.stdout.write(`
-Fatto. Restano due cose che devo fare per forza tu, su GitHub
-(Settings → Secrets and variables → Actions):
+Fatto. Worker pubblicato su ${url}
+${token ? `
+Su GitHub (Settings → Secrets and variables → Actions):
 
   Variables → New:  API_BASE      = ${url}
   Secrets   → New:  ADMIN_TOKEN   = ${token}
 
-Poi committa data/config.json e il sito comincia a condividere i prezzi:
+Il token non viene mostrato di nuovo. Se lo perdi:
+  npm run backend:setup -- --new-token
+e aggiorna il segreto su GitHub, altrimenti le segnalazioni smettono di
+arrivare nel repo.
+` : `
+Il token esisteva già e non l'ho toccato: quello che hai su GitHub resta valido.
+`}
+Se data/config.json è cambiato, committalo:
 
   git add data/config.json backend/wrangler.toml
-  git commit -m "Accendi il backend"
+  git commit -m "Aggiorna il backend"
   git push
-
-Il token qui sopra non viene mostrato di nuovo: se lo perdi, rilancia questo
-comando e ne genera uno nuovo.
 `);
