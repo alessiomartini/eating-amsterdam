@@ -62,7 +62,7 @@ if (databaseId) {
   ok(`creato e scritto in wrangler.toml (${databaseId})`);
 }
 
-/* 2 — schema */
+/* 2 — schema (già applicato se il database viene da lontano, ma è idempotente) */
 step(2, 'Tabelle');
 wrangler(['d1', 'execute', DB_NAME, '--file', 'schema.sql', '--remote', '--yes'], { capture: false });
 ok('schema applicato');

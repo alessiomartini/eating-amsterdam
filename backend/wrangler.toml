@@ -5,8 +5,8 @@ compatibility_date = "2026-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "eating-amsterdam"
-# database_id lo stampa `npx wrangler d1 create eating-amsterdam`: incollalo qui
-database_id = "SOSTITUISCI_CON_IL_TUO_DATABASE_ID"
+# Database creato il 2026-09-10, replica primaria in Europa occidentale
+database_id = "b5f9bc0f-3423-4a27-a34d-9061c357cf20"
 
 [vars]
 # Da dove il sito può chiamare l'API. Il resto viene rifiutato dal browser.

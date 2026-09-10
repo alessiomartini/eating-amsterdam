@@ -4,6 +4,15 @@ API dei prezzi condivisi e delle segnalazioni: un Cloudflare Worker davanti a un
 database D1 (SQLite gestito). Niente server da amministrare, e il piano gratuito
 copre ampiamente un progetto come questo.
 
+## Stato
+
+Il database **esiste già**: `eating-amsterdam`, id
+`b5f9bc0f-3423-4a27-a34d-9061c357cf20`, replica primaria in Europa occidentale,
+tabelle e indici applicati. L'id è già in `wrangler.toml`, non serve toccarlo.
+
+Manca solo la pubblicazione del Worker, che richiede le credenziali di chi
+possiede l'account.
+
 ## Metterlo in piedi
 
 Dalla radice del progetto:
@@ -13,9 +22,10 @@ npx wrangler login    # apre il browser, una volta sola
 npm run backend:setup
 ```
 
-Il secondo comando fa tutto: crea il database, scrive il `database_id` in
-`wrangler.toml`, applica lo schema, genera il token, pubblica il Worker e mette
-l'URL in `data/config.json`. È idempotente — rilanciarlo non rompe niente.
+Il comando salta la creazione del database (c'è già), riapplica lo schema —
+innocuo, le `CREATE TABLE IF NOT EXISTS` non fanno danno — genera il token,
+pubblica il Worker e mette l'URL in `data/config.json`. È idempotente:
+rilanciarlo non rompe niente.
 
 Alla fine stampa le **due cose che deve fare una persona**, perché richiedono
 l'interfaccia di GitHub (*Settings → Secrets and variables → Actions*):
