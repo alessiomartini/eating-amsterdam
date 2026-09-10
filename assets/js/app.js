@@ -50,6 +50,7 @@ function readFilters() {
     vegan: el('f-vegan').checked,
     strictVeg: el('f-veg-strict').checked,
     openNow: el('f-open').checked,
+    studentDiscount: el('f-student').checked,
     favoritesOnly: el('f-fav').checked,
     sort: el('f-sort').value,
   };
@@ -67,6 +68,7 @@ function writeFilters(saved) {
   el('f-vegan').checked = Boolean(saved.vegan);
   el('f-veg-strict').checked = Boolean(saved.strictVeg);
   el('f-open').checked = Boolean(saved.openNow);
+  el('f-student').checked = Boolean(saved.studentDiscount);
   el('f-fav').checked = Boolean(saved.favoritesOnly);
   el('f-sort').value = saved.sort ?? 'price';
   for (const value of saved.categories ?? []) {
@@ -98,7 +100,8 @@ function syncOutputs(filters) {
   // quanti filtri secondari sono attivi, così restano visibili anche da chiusi
   const hidden =
     filters.categories.size + filters.cuisines.size +
-    (filters.minRating > 0 ? 1 : 0) + (filters.openNow ? 1 : 0) + (filters.favoritesOnly ? 1 : 0);
+    (filters.minRating > 0 ? 1 : 0) + (filters.openNow ? 1 : 0)
+    + (filters.studentDiscount ? 1 : 0) + (filters.favoritesOnly ? 1 : 0);
   const badge = el('more-count');
   badge.textContent = hidden;
   badge.hidden = hidden === 0;

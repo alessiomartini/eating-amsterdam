@@ -9,6 +9,7 @@
 import { OVERPASS_ENDPOINTS, OVERPASS_STRATEGIES, normalizeElement, finalize } from '../../scripts/osm-common.js';
 import { store } from './store.js';
 import { buildItems } from './items.js';
+import { summariseFlags } from './flags.js';
 
 const CACHE_KEY = 'eating-amsterdam:osm-cache:v1';
 
@@ -16,8 +17,14 @@ const CACHE_KEY = 'eating-amsterdam:osm-cache:v1';
 // dataset: stanno a parte perché non fanno parte del file committato.
 const livePrices = new Map();
 
+const liveFlags = new Map();
+
 export function setLivePrices(placeId, prices) {
   livePrices.set(placeId, prices ?? []);
+}
+
+export function setLiveFlags(placeId, flags) {
+  liveFlags.set(placeId, flags ?? []);
 }
 const CACHE_TTL = 7 * 864e5;
 
@@ -94,6 +101,7 @@ export function decorate(place) {
     myPrices,
     communityPrices,
     items: buildItems(place, measured),
+    flags: summariseFlags(liveFlags.get(place.id) ?? place.flagReports ?? []),
     rating,
     ratingSource,
     reviews: place.google?.reviews ?? null,

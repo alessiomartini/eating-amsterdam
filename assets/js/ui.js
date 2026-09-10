@@ -2,11 +2,12 @@
 // I testi rivolti all'utente sono in inglese; i commenti restano in italiano.
 
 import { store } from './store.js';
-import { decorate, priceBand, setLivePrices } from './data.js';
-import { fetchPlacePrices, isOnline, submitFeedback, submitPrice } from './api.js';
+import { decorate, priceBand, setLiveFlags, setLivePrices } from './data.js';
+import { fetchPlaceDetails, isOnline, submitFeedback, submitFlag, submitPrice } from './api.js';
 import { CATEGORIES } from './filters.js';
 import { REFERENCE_ITEMS, itemApplies } from './items.js';
 import { isOpenNow, humanize } from './hours.js';
+import { FLAGS } from './flags.js';
 
 const CATEGORY_LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
 
@@ -33,6 +34,21 @@ function dietBadges(place) {
   else if (vegetarian === 'yes') badges.push('<span class="badge veg">🥗 veggie options</span>');
   if (!badges.length && inferred) badges.push('<span class="badge veg guess">likely veggie-friendly</span>');
   return badges.join('');
+}
+
+/** Bollini dei fatti segnalati: si mostrano solo quando qualcuno li ha confermati. */
+function flagBadges(place) {
+  return FLAGS
+    .map((flag) => {
+      const entry = place.flags?.[flag.id];
+      if (!entry?.value) return '';
+      const disputed = entry.disputed
+        ? ` <span class="badge warn" title="Reports disagree: ${entry.yes} say yes, ${entry.no} say no">?</span>`
+        : '';
+      const title = entry.note ? `${flag.label}: ${entry.note}` : flag.label;
+      return `<span class="badge student" title="${esc(title)}">${flag.icon} ${esc(flag.label.toLowerCase())}</span>${disputed}`;
+    })
+    .join('');
 }
 
 const UNCERTAIN_HINT = 'The latest report is far from the earlier ones — it may be a typo or a different dish. Add yours to settle it.';
@@ -88,7 +104,7 @@ export function renderList(container, places, { onSelect, limit = 300 } = {}) {
             ${distance}
             ${openBadge}
           </div>
-          <div class="badges">${dietBadges(place)}</div>
+          <div class="badges">${flagBadges(place)}${dietBadges(place)}</div>
           ${place.address ? `<div class="meta"><span>${esc(place.address)}</span></div>` : ''}
         </button>
       </li>`;
@@ -163,9 +179,10 @@ export function openDetail(place, { onChange } = {}) {
 
   // i prezzi condivisi arrivati dopo l'ultima sincronizzazione del dataset
   if (isOnline()) {
-    fetchPlacePrices(place.id).then((prices) => {
-      if (!prices || !dialog.open) return;
-      setLivePrices(place.id, prices);
+    fetchPlaceDetails(place.id).then((details) => {
+      if (!details || !dialog.open) return;
+      setLivePrices(place.id, details.prices);
+      setLiveFlags(place.id, details.flags);
       onChange?.();
       render();
     });
@@ -186,7 +203,21 @@ export function openDetail(place, { onChange } = {}) {
     sheet(dialog, `
       <h2>${esc(place.name)}</h2>
       <p class="sub">${esc(CATEGORY_LABEL[place.category] ?? place.category)}${place.cuisines?.length ? ` · ${esc(place.cuisines.join(', '))}` : ''}</p>
-      <div class="badges">${dietBadges(place)}${open === true ? '<span class="badge open">open now</span>' : open === false ? '<span class="badge closed">closed now</span>' : ''}</div>
+      <div class="badges">${flagBadges(place)}${dietBadges(place)}${open === true ? '<span class="badge open">open now</span>' : open === false ? '<span class="badge closed">closed now</span>' : ''}</div>
+
+      ${FLAGS.map((flag) => {
+        const entry = place.flags?.[flag.id];
+        const state = !entry ? 'nobody has said yet'
+          : entry.disputed ? `disputed — ${entry.yes} say yes, ${entry.no} say no`
+          : `${entry.value ? 'yes' : 'no'}, ${entry.reports} ${entry.reports === 1 ? 'report' : 'reports'}${entry.date ? ` · latest ${esc(entry.date)}` : ''}`;
+        return `<div class="flag-row" data-flag="${flag.id}">
+          <div><strong>${flag.icon} ${esc(flag.question)}</strong><span class="src">${esc(state)}${entry?.note ? ` · ${esc(entry.note)}` : ''}</span></div>
+          <div class="flag-buttons">
+            <button type="button" class="ghost small${entry?.value === true ? ' on' : ''}" data-answer="yes">Yes</button>
+            <button type="button" class="ghost small${entry?.value === false ? ' on' : ''}" data-answer="no">No</button>
+          </div>
+        </div>`;
+      }).join('')}
 
       <h3>What things cost</h3>
       <form id="items-form">
@@ -291,6 +322,27 @@ export function openDetail(place, { onChange } = {}) {
     dialog.querySelector('#note').addEventListener('change', (event) => {
       store.setNote(place.id, event.target.value);
       onChange?.();
+    });
+
+    dialog.querySelectorAll('.flag-row [data-answer]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const flagId = btn.closest('.flag-row').dataset.flag;
+        const value = btn.dataset.answer === 'yes';
+        const flag = FLAGS.find((f) => f.id === flagId);
+        const note = value ? (prompt(`${flag.label} — any detail? (optional)`, place.flags?.[flagId]?.note ?? '') ?? '') : '';
+        const outcome = await submitFlag({ placeId: place.id, flag: flagId, value, note });
+        if (outcome === 'local') return toast('Sharing is off — nothing was sent');
+        if (outcome === 'rejected') return toast('The server rejected that report');
+        toast(outcome === 'queued' ? 'Saved — will be shared when you are back online' : 'Thanks — shared');
+        // rileggiamo dal server invece di indovinare come cambia il conteggio
+        const details = await fetchPlaceDetails(place.id);
+        if (details) {
+          setLivePrices(place.id, details.prices);
+          setLiveFlags(place.id, details.flags);
+          onChange?.();
+          render();
+        }
+      });
     });
 
     dialog.querySelector('#btn-fav').addEventListener('click', () => {

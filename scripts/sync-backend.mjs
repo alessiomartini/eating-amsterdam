@@ -82,6 +82,23 @@ for (const place of doc.places) {
   touched += 1;
 }
 
+/* --------------------------------------------------------- fatti segnalati */
+
+const { flags } = await getJson('/api/flags?limit=20000');
+log(`${flags.length} fatti segnalati dal backend`);
+
+const flagsByPlace = new Map();
+for (const f of flags) {
+  if (!flagsByPlace.has(f.placeId)) flagsByPlace.set(f.placeId, []);
+  flagsByPlace.get(f.placeId).push({ flag: f.flag, value: f.value, note: f.note ?? undefined, by: f.by ?? 'anon', date: f.date });
+}
+
+for (const place of doc.places) {
+  const reports = flagsByPlace.get(place.id);
+  if (reports) place.flagReports = reports;
+  else if (place.flagReports) delete place.flagReports;
+}
+
 doc.updatedAt = new Date().toISOString().slice(0, 10);
 await writeFile(PLACES, `${JSON.stringify(doc, null, 2)}\n`);
 log(`${touched} locali aggiornati${orphans ? `, ${orphans} prezzi per locali non nel dataset (rinominati o spariti da OSM)` : ''}`);

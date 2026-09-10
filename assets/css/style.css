@@ -348,3 +348,19 @@ output { color: var(--text); font-weight: 600; }
 /* ---------- segnalazioni ---------- */
 .feedback-note { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding: 7px 10px; background: var(--bg-elev-2); border-radius: 8px; margin-top: 6px; }
 .feedback-note time { color: var(--muted); white-space: nowrap; }
+
+/* ---------- fatti segnalati dagli utenti ---------- */
+.badge.student { color: #8ab4ff; border-color: #2f4570; }
+.flag-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: var(--bg-elev-2);
+  border-radius: var(--radius);
+}
+.flag-row strong { font-size: 14px; font-weight: 500; }
+.flag-buttons { display: flex; gap: 6px; }
+.flag-buttons .ghost.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }

@@ -3,6 +3,7 @@
 
 import { isOpenNow } from './hours.js';
 import { REFERENCE_ITEMS } from './items.js';
+import { FLAGS } from './flags.js';
 
 export const CUISINE_GROUPS = [
   { id: 'kebab', label: '🥙 Döner / kebab', match: ['kebab', 'doner', 'döner', 'turkish', 'shawarma', 'gyros'] },
@@ -55,6 +56,7 @@ export const DEFAULT_FILTERS = {
   vegan: false,
   strictVeg: false,
   openNow: false,
+  studentDiscount: false,
   measuredOnly: false,
   favoritesOnly: false,
   sort: 'price',
@@ -140,6 +142,7 @@ export function applyFilters(places, filters, position) {
 
     if (filters.minRating > 0 && (place.rating ?? 0) < filters.minRating) return false;
     if (filters.openNow && isOpenNow(place.openingHours) !== true) return false;
+    if (filters.studentDiscount && place.flags?.student_discount?.value !== true) return false;
     return true;
   });
 

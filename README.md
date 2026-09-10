@@ -34,6 +34,19 @@ Le stime non entrano mai nella media dei prezzi reali e si possono escludere dai
 filtri con "Real prices only". Una stima spacciata per prezzo vero sarebbe
 peggio di nessun prezzo.
 
+### Il bollino sconto studenti
+
+Alcuni locali fanno sconti agli studenti — 'Skek per esempio — ma non esiste un
+tag OpenStreetMap standard per dirlo, e non compare in nessuna API: lo sa solo
+chi c'è stato. Quindi è una segnalazione come i prezzi, con la stessa regola:
+vale l'ultima, e **se le segnalazioni si contraddicono la contraddizione si
+mostra** invece di far vincere in silenzio la più recente. Il bollino 🎓 compare
+in lista e c'è il filtro corrispondente.
+
+La struttura è generica (tabella `flags`): aggiungere altri fatti booleani —
+"solo contanti", "aperto a notte fonda" — costa una voce in `assets/js/flags.js`
+e una nel Worker.
+
 ### Lo storico, come nelle app dei carburanti
 
 Di ogni voce si mostra **l'ultimo prezzo inserito**, non la media: i prezzi

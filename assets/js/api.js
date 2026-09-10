@@ -122,14 +122,28 @@ export async function submitFeedback({ text, context }) {
 
 /* ---------------------------------------------------------------- lettura */
 
-/** I prezzi condivisi di un locale, per vedere subito quelli arrivati dopo l'ultima sincronizzazione. */
-export async function fetchPlacePrices(placeId) {
+/** Prezzi e fatti di un locale in una chiamata sola, quando si apre la scheda. */
+export async function fetchPlaceDetails(placeId) {
   if (!apiBase) return null;
   try {
     const res = await fetch(`${apiBase}/api/prices/${encodeURIComponent(placeId)}`);
     if (!res.ok) return null;
-    return (await res.json()).prices ?? [];
+    const body = await res.json();
+    return { prices: body.prices ?? [], flags: body.flags ?? [] };
   } catch {
     return null;
+  }
+}
+
+/** @returns 'sent' | 'queued' | 'local' | 'rejected' */
+export async function submitFlag({ placeId, flag, value, note }) {
+  if (!apiBase) return 'local';
+  const payload = { placeId, flag, value, note, reporter: store.all().author || null };
+  try {
+    const res = await send('/api/flags', payload);
+    return res.ok ? 'sent' : 'rejected';
+  } catch {
+    enqueue('/api/flags', payload);
+    return 'queued';
   }
 }

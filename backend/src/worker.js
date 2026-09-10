@@ -16,6 +16,9 @@ import { PLAUSIBLE } from '../../scripts/menu-parse.js';
 // divergerebbe, e il sito accetterebbe voci che il server rifiuta.
 const REFERENCE_ITEMS = new Set(Object.keys(PLAUSIBLE));
 
+// Estendibile: bastano una voce qui e una in assets/js/flags.js.
+const ALLOWED_FLAGS = new Set(['student_discount']);
+
 const MAX_PER_HOUR = 40;
 const MAX_TEXT = 4000;
 const WINDOW_MS = 3600_000;
@@ -130,11 +133,19 @@ const priceRow = (row) => ({
   createdAt: row.created_at,
 });
 
-async function getPlacePrices(env, placeId) {
+/** Prezzi e fatti insieme: una sola chiamata quando si apre la scheda di un locale. */
+async function getPlaceDetails(env, placeId) {
   const { results } = await env.DB.prepare(
     'SELECT * FROM prices WHERE place_id = ? AND hidden = 0 ORDER BY created_at ASC',
   ).bind(placeId).all();
-  return json({ placeId, prices: (results ?? []).map(priceRow) });
+  const flags = await env.DB.prepare(
+    'SELECT * FROM flags WHERE place_id = ? AND hidden = 0 ORDER BY created_at ASC',
+  ).bind(placeId).all();
+  return json({
+    placeId,
+    prices: (results ?? []).map(priceRow),
+    flags: (flags.results ?? []).map(flagRow),
+  });
 }
 
 async function getAllPrices(env, url) {
@@ -145,6 +156,60 @@ async function getAllPrices(env, url) {
     : env.DB.prepare('SELECT * FROM prices WHERE hidden = 0 ORDER BY created_at ASC LIMIT ?').bind(limit);
   const { results } = await statement.all();
   return json({ count: results?.length ?? 0, prices: (results ?? []).map(priceRow) });
+}
+
+export function validateFlag(body) {
+  const errors = [];
+  const placeId = String(body.placeId ?? '').trim();
+  if (!placeId || placeId.length > 120) errors.push('placeId mancante o troppo lungo');
+
+  const flag = String(body.flag ?? '');
+  if (!ALLOWED_FLAGS.has(flag)) errors.push(`flag sconosciuto: ${flag}`);
+
+  if (typeof body.value !== 'boolean') errors.push('value deve essere true o false');
+
+  return { errors, value: { placeId, flag, value: body.value ? 1 : 0, note: String(body.note ?? '').slice(0, 200) || null } };
+}
+
+async function postFlag(request, env) {
+  const body = await readBody(request);
+  if (!body) return json({ error: 'corpo della richiesta non valido' }, 400);
+
+  const { errors, value } = validateFlag(body);
+  if (errors.length) return json({ error: 'segnalazione rifiutata', details: errors }, 400);
+
+  if (await overRateLimit(env, `flag:${clientKey(request, body)}`)) {
+    return json({ error: 'troppe segnalazioni in un\'ora, riprova più tardi' }, 429);
+  }
+
+  const createdAt = new Date().toISOString();
+  await env.DB.prepare(
+    'INSERT INTO flags (place_id, flag, value, note, reporter, client_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
+  ).bind(
+    value.placeId, value.flag, value.value, value.note,
+    String(body.reporter ?? '').slice(0, 60) || null,
+    String(body.clientId ?? '').slice(0, 64) || null, createdAt,
+  ).run();
+
+  return json({ ok: true, flag: { ...value, createdAt } }, 201);
+}
+
+const flagRow = (row) => ({
+  placeId: row.place_id,
+  flag: row.flag,
+  value: row.value === 1,
+  note: row.note,
+  by: row.reporter,
+  date: String(row.created_at).slice(0, 10),
+  createdAt: row.created_at,
+});
+
+async function getAllFlags(env, url) {
+  const limit = Math.min(Number(url.searchParams.get('limit')) || 5000, 20000);
+  const { results } = await env.DB.prepare(
+    'SELECT * FROM flags WHERE hidden = 0 ORDER BY created_at ASC LIMIT ?',
+  ).bind(limit).all();
+  return json({ count: results?.length ?? 0, flags: (results ?? []).map(flagRow) });
 }
 
 async function postFeedback(request, env) {
@@ -217,7 +282,12 @@ export async function handleRequest(request, env) {
 
   const placeMatch = path.match(/^\/api\/prices\/(.+)$/);
   if (placeMatch && request.method === 'GET') {
-    return withCors(await getPlacePrices(env, decodeURIComponent(placeMatch[1])));
+    return withCors(await getPlaceDetails(env, decodeURIComponent(placeMatch[1])));
+  }
+
+  if (path === '/api/flags') {
+    if (request.method === 'POST') return withCors(await postFlag(request, env));
+    if (request.method === 'GET') return withCors(await getAllFlags(env, url));
   }
 
   if (path === '/api/feedback') {

@@ -187,3 +187,25 @@ test('il server accetta le voci nuove e ne controlla i limiti', async () => {
   const assurdo = await handleRequest(post('/api/prices', { placeId: 'p', item: 'icecream', amount: 40, clientId: 'x' }), env);
   assert.equal(assurdo.status, 400, 'un gelato a 40 € non è un gelato');
 });
+
+test('i fatti segnalati si scrivono e si rileggono col locale', async () => {
+  const env = makeEnv();
+  const sent = await handleRequest(post('/api/flags', {
+    placeId: 'osm:node/2', flag: 'student_discount', value: true, note: '10% with card', clientId: 'x',
+  }), env);
+  assert.equal(sent.status, 201);
+
+  const details = await (await handleRequest(get('/api/prices/osm%3Anode%2F2'), env)).json();
+  assert.equal(details.flags.length, 1);
+  assert.equal(details.flags[0].value, true, 'torna come booleano, non come 1');
+  assert.equal(details.flags[0].note, '10% with card');
+});
+
+test('rifiuta i fatti sconosciuti e i valori non booleani', async () => {
+  const env = makeEnv();
+  const unknown = await handleRequest(post('/api/flags', { placeId: 'p', flag: 'sconto_amici', value: true, clientId: 'x' }), env);
+  assert.equal(unknown.status, 400);
+
+  const notBoolean = await handleRequest(post('/api/flags', { placeId: 'p', flag: 'student_discount', value: 'forse', clientId: 'x' }), env);
+  assert.equal(notBoolean.status, 400);
+});
