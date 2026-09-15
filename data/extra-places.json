@@ -5,6 +5,11 @@
       "ref": "node/253130481",
       "why": "Kriterion: cinema studentesco con bar, aperto fino alle 3",
       "category": "bar"
+    },
+    {
+      "ref": "node/965276888",
+      "why": "Heeren van Aemstel: amenity=nightclub, ma è un locale da studenti con sconto sulla birra il giovedì (folia.nl)",
+      "category": "bar"
     }
   ]
 }
