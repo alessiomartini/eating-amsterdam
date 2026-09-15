@@ -39,8 +39,11 @@ rilanciarlo non rompe niente.
 Alla fine stampa le **due cose che deve fare una persona**, perché richiedono
 l'interfaccia di GitHub (*Settings → Secrets and variables → Actions*):
 
-- **Variables → New**: `API_BASE` = l'URL del Worker
-- **Secrets → New**: `ADMIN_TOKEN` = il token stampato
+- `API_BASE` = l'URL del Worker — va bene sia come **Variable** sia come
+  **Secret**, il workflow li accetta entrambi (è solo un URL pubblico, già
+  in chiaro in `data/config.json`)
+- `ADMIN_TOKEN` = il token stampato, come **Secret** — questo invece è
+  sensibile: dà accesso in lettura alle segnalazioni
 
 Servono al workflow settimanale, che porta prezzi e segnalazioni dentro il repo.
 Poi si committa `data/config.json` e il sito comincia a condividere i prezzi.

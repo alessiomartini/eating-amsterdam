@@ -22,7 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
-      API_BASE: ${{ vars.API_BASE }}
+      # API_BASE è solo un URL pubblico (è già in data/config.json in chiaro),
+      # quindi si accetta sia da Variables sia da Secrets: chi lo configura non
+      # deve ricordarsi in quale delle due schede di GitHub l'ha messo.
+      API_BASE: ${{ vars.API_BASE || secrets.API_BASE }}
       ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
     steps:
       - uses: actions/checkout@v4
