@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14",
+  "updatedAt": "2026-09-15",
   "source": "OpenStreetMap (ODbL)",
   "places": [
     {
@@ -21397,7 +21397,22 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5391860951",
-      "source": "osm"
+      "source": "osm",
+      "community": {
+        "prices": [
+          {
+            "item": "beer",
+            "dish": "Beer",
+            "amount": 2.6,
+            "currency": "EUR",
+            "by": "Folia (folia.nl)",
+            "date": "2026-09-15"
+          }
+        ],
+        "medianPrice": 2.6,
+        "ratings": [],
+        "avgRating": null
+      }
     },
     {
       "id": "osm:node/2506027863",
@@ -24374,6 +24389,21 @@
         "url": "https://www.cafesportpark.nl",
         "scrapedAt": "2026-09-10T00:25:28.327Z",
         "items": {}
+      },
+      "community": {
+        "prices": [
+          {
+            "item": "beer",
+            "dish": "Beer",
+            "amount": 3.1,
+            "currency": "EUR",
+            "by": "Folia (folia.nl)",
+            "date": "2026-09-15"
+          }
+        ],
+        "medianPrice": 3.1,
+        "ratings": [],
+        "avgRating": null
       }
     },
     {
@@ -68523,6 +68553,21 @@
         "url": "https://www.kriterion.nl",
         "scrapedAt": "2026-09-14T09:21:38.717Z",
         "items": {}
+      },
+      "community": {
+        "prices": [
+          {
+            "item": "beer",
+            "dish": "Jupiler",
+            "amount": 2.7,
+            "currency": "EUR",
+            "by": "Folia (folia.nl)",
+            "date": "2026-09-15"
+          }
+        ],
+        "medianPrice": 2.7,
+        "ratings": [],
+        "avgRating": null
       }
     },
     {
@@ -78940,7 +78985,22 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/472861004",
-      "source": "osm"
+      "source": "osm",
+      "community": {
+        "prices": [
+          {
+            "item": "doner",
+            "dish": "Döner kebab",
+            "amount": 10,
+            "currency": "EUR",
+            "by": "anon",
+            "date": "2026-09-10"
+          }
+        ],
+        "medianPrice": 10,
+        "ratings": [],
+        "avgRating": null
+      }
     },
     {
       "id": "osm:node/9208532914",
