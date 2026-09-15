@@ -29,7 +29,16 @@
         "url": "http://skekamsterdam.cargo.site",
         "scrapedAt": "2026-09-10T00:24:40.328Z",
         "items": {}
-      }
+      },
+      "flagReports": [
+        {
+          "flag": "student_discount",
+          "value": true,
+          "note": "for beers",
+          "by": "Alessio (WebSite owner)",
+          "date": "2026-09-10"
+        }
+      ]
     },
     {
       "id": "osm:node/2925736801",
@@ -24401,11 +24410,6 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/940042019",
       "source": "osm",
-      "menu": {
-        "url": "https://www.cafesportpark.nl",
-        "scrapedAt": "2026-09-10T00:25:28.327Z",
-        "items": {}
-      },
       "community": {
         "prices": [
           {
@@ -24420,6 +24424,11 @@
         "medianPrice": 3.1,
         "ratings": [],
         "avgRating": null
+      },
+      "menu": {
+        "url": "https://www.cafesportpark.nl",
+        "scrapedAt": "2026-09-10T00:25:28.327Z",
+        "items": {}
       }
     },
     {
@@ -68609,11 +68618,6 @@
       "osmUrl": "https://www.openstreetmap.org/node/253130481",
       "source": "osm",
       "addedBecause": "Kriterion: cinema studentesco con bar, aperto fino alle 3",
-      "menu": {
-        "url": "https://www.kriterion.nl",
-        "scrapedAt": "2026-09-14T09:21:38.717Z",
-        "items": {}
-      },
       "community": {
         "prices": [
           {
@@ -68628,6 +68632,11 @@
         "medianPrice": 2.7,
         "ratings": [],
         "avgRating": null
+      },
+      "menu": {
+        "url": "https://www.kriterion.nl",
+        "scrapedAt": "2026-09-14T09:21:38.717Z",
+        "items": {}
       }
     },
     {
@@ -79060,7 +79069,15 @@
         "medianPrice": 10,
         "ratings": [],
         "avgRating": null
-      }
+      },
+      "flagReports": [
+        {
+          "flag": "student_discount",
+          "value": false,
+          "by": "Alessio (WebSite owner)",
+          "date": "2026-09-14"
+        }
+      ]
     },
     {
       "id": "osm:node/9208532914",

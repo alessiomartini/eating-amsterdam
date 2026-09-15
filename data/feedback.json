@@ -1,6 +1,5 @@
 {
-  "updatedAt": null,
+  "updatedAt": "2026-09-15T23:55:05.894Z",
   "count": 0,
-  "note": "Riempito dal workflow settimanale leggendo il backend, quando API_BASE e ADMIN_TOKEN sono configurati. Serve a poter leggere le segnalazioni dal repo, senza che nessuno le inoltri a mano.",
   "feedback": []
 }
