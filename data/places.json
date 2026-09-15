@@ -10349,7 +10349,7 @@
       "address": "Eerste Goudsbloemdwarsstraat 3-H, 1015JV Amsterdam",
       "website": "https://www.bayufoodandart.com",
       "phone": "+31 20 6230181",
-      "openingHours": "Tu-Su 16:00-21:00",
+      "openingHours": "Tu,Sa,Su 16:00-21:00; We-Fr 17:00-21:00; Mo off",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
@@ -10677,6 +10677,32 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2724284522",
+      "source": "osm"
+    },
+    {
+      "id": "osm:node/14180376374",
+      "name": "Bella Storia",
+      "lat": 52.381179,
+      "lon": 4.885552,
+      "category": "restaurant",
+      "cuisines": [
+        "pizza"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": null,
+      "website": null,
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/14180376374",
       "source": "osm"
     },
     {
@@ -13956,35 +13982,6 @@
       }
     },
     {
-      "id": "osm:node/9041243942",
-      "name": "Bongusta",
-      "lat": 52.388467,
-      "lon": 4.837641,
-      "category": "fast_food",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "Zaventemweg 1, 1043EH Amsterdam",
-      "website": "https://bongusta.nl",
-      "phone": "+31 20 820 8127",
-      "openingHours": "Mo-Fr 11:00-18:00",
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/9041243942",
-      "source": "osm",
-      "menu": {
-        "url": "https://bongusta.nl",
-        "scrapedAt": "2026-09-09T20:35:31.380Z",
-        "items": {}
-      }
-    },
-    {
       "id": "osm:node/11226753252",
       "name": "bonjour càphê",
       "lat": 52.379949,
@@ -16924,10 +16921,10 @@
       }
     },
     {
-      "id": "osm:node/14178350088",
+      "id": "osm:node/8337544530",
       "name": "Bumpy's Chicken",
-      "lat": 52.357732,
-      "lon": 4.805127,
+      "lat": 52.35773,
+      "lon": 4.805129,
       "category": "fast_food",
       "cuisines": [
         "fast_food"
@@ -16939,20 +16936,15 @@
       },
       "address": "Osdorpplein 1013, 1068TG Amsterdam",
       "website": "https://www.bumpyschicken.nl/",
-      "phone": "0203086504",
+      "phone": "+31 20 308 6504",
       "openingHours": null,
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
       "wheelchair": null,
       "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/14178350088",
-      "source": "osm",
-      "menu": {
-        "url": "https://www.bumpyschicken.nl/",
-        "scrapedAt": "2026-09-14T09:19:29.822Z",
-        "items": {}
-      }
+      "osmUrl": "https://www.openstreetmap.org/node/8337544530",
+      "source": "osm"
     },
     {
       "id": "osm:node/14162198095",
@@ -24019,6 +24011,30 @@
         "scrapedAt": "2026-09-09T20:36:50.685Z",
         "items": {}
       }
+    },
+    {
+      "id": "osm:node/14183733501",
+      "name": "Café Restaurant De Baanderij",
+      "lat": 52.401474,
+      "lon": 4.891111,
+      "category": "restaurant",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "NDSM-kade 5, 1033 PG",
+      "website": "https://caferestaurantdebaanderij.nl/",
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/14183733501",
+      "source": "osm"
     },
     {
       "id": "osm:node/9047480944",
@@ -51299,6 +51315,35 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/9041243942",
+      "name": "Frites Royaal",
+      "lat": 52.388467,
+      "lon": 4.837641,
+      "category": "fast_food",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Zaventemweg 1, 1043EH Amsterdam",
+      "website": null,
+      "phone": null,
+      "openingHours": "Mo-Fr 11:00-18:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/9041243942",
+      "source": "osm",
+      "menu": {
+        "url": "https://bongusta.nl",
+        "scrapedAt": "2026-09-09T20:35:31.380Z",
+        "items": {}
+      }
+    },
+    {
       "id": "osm:node/4728910364",
       "name": "Fruittuin van West",
       "lat": 52.381749,
@@ -52549,10 +52594,10 @@
       "source": "osm"
     },
     {
-      "id": "osm:node/14178350089",
+      "id": "osm:node/9036166512",
       "name": "GIA Restaurant",
-      "lat": 52.35781,
-      "lon": 4.804772,
+      "lat": 52.357814,
+      "lon": 4.804776,
       "category": "restaurant",
       "cuisines": [],
       "diet": {
@@ -52562,20 +52607,15 @@
       },
       "address": "Osdorpplein 594, 1068TB Amsterdam",
       "website": "http://www.giarestaurant.nl/",
-      "phone": "0207864674",
+      "phone": "+31 20 786 4674",
       "openingHours": null,
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
       "wheelchair": null,
       "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/14178350089",
-      "source": "osm",
-      "menu": {
-        "url": "http://www.giarestaurant.nl/",
-        "scrapedAt": "2026-09-14T09:19:31.814Z",
-        "items": {}
-      }
+      "osmUrl": "https://www.openstreetmap.org/node/9036166512",
+      "source": "osm"
     },
     {
       "id": "osm:node/2817854291",
@@ -53639,10 +53679,10 @@
       "source": "osm"
     },
     {
-      "id": "osm:node/14178350090",
+      "id": "osm:node/11449960264",
       "name": "Graça Amsterdam",
       "lat": 52.357983,
-      "lon": 4.805712,
+      "lon": 4.805722,
       "category": "restaurant",
       "cuisines": [],
       "diet": {
@@ -53650,22 +53690,17 @@
         "vegan": null,
         "inferred": false
       },
-      "address": "Osdorpplein 937-K, 1068TD Amsterdam",
+      "address": "Osdorpplein 937K, 1068TD Amsterdam",
       "website": "http://www.graca.nl/",
-      "phone": "0203703047",
+      "phone": "+31 20 370 3047",
       "openingHours": null,
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
       "wheelchair": null,
       "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/14178350090",
-      "source": "osm",
-      "menu": {
-        "url": "http://www.graca.nl/",
-        "scrapedAt": "2026-09-14T09:19:34.146Z",
-        "items": {}
-      }
+      "osmUrl": "https://www.openstreetmap.org/node/11449960264",
+      "source": "osm"
     },
     {
       "id": "osm:node/2817535153",
@@ -56651,6 +56686,31 @@
           "first": 6
         }
       }
+    },
+    {
+      "id": "osm:node/965276888",
+      "name": "Heeren van Aemstel",
+      "lat": 52.365452,
+      "lon": 4.896132,
+      "category": "bar",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": null,
+      "website": "https://www.dhva.nl",
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": "yes",
+      "wheelchair": "limited",
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/965276888",
+      "source": "osm",
+      "addedBecause": "Heeren van Aemstel: amenity=nightclub, ma è un locale da studenti con sconto sulla birra il giovedì (folia.nl)"
     },
     {
       "id": "osm:node/7736498749",
@@ -93456,7 +93516,7 @@
       },
       "address": "Frans Halsstraat 63-H, 1072BM Amsterdam",
       "website": "https://www.instagram.com/porchetteria_amsterdam",
-      "phone": "+31 6 57068202",
+      "phone": "+31 6 5706 8202",
       "openingHours": "Mo-Tu off; We-Sa 17:30-22:00; Su 11:30-15:30",
       "takeaway": "yes",
       "delivery": null,
@@ -94211,6 +94271,32 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1055573894",
+      "source": "osm"
+    },
+    {
+      "id": "osm:node/2725755277",
+      "name": "Raan Phad Thai",
+      "lat": 52.369965,
+      "lon": 4.898719,
+      "category": "restaurant",
+      "cuisines": [
+        "asian"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Raamgracht 9-H, 1011KH Amsterdam",
+      "website": "http://raanphadthai.nl/en",
+      "phone": "06 26423841",
+      "openingHours": "Tu-Sa 16:30-22:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/2725755277",
       "source": "osm"
     },
     {
@@ -109567,10 +109653,10 @@
       "source": "osm"
     },
     {
-      "id": "osm:node/10848354621",
+      "id": "osm:node/8366804207",
       "name": "Taco Bell",
-      "lat": 52.357757,
-      "lon": 4.805265,
+      "lat": 52.357755,
+      "lon": 4.805266,
       "category": "fast_food",
       "cuisines": [
         "tex-mex"
@@ -109589,7 +109675,7 @@
       "outdoorSeating": null,
       "wheelchair": null,
       "brand": "Taco Bell",
-      "osmUrl": "https://www.openstreetmap.org/node/10848354621",
+      "osmUrl": "https://www.openstreetmap.org/node/8366804207",
       "source": "osm"
     },
     {
@@ -116356,7 +116442,7 @@
     },
     {
       "id": "osm:node/4459777500",
-      "name": "Toko Kopi Tuku",
+      "name": "Toko Kopi Tuku - De Hallen",
       "lat": 52.367142,
       "lon": 4.869046,
       "category": "cafe",
@@ -116367,9 +116453,9 @@
         "inferred": false
       },
       "address": "Tollensstraat 57Y, 1053RS Amsterdam",
-      "website": null,
+      "website": "https://netherlands.tuku.coffee/",
       "phone": null,
-      "openingHours": "Mo,We-Fr 09:00-17:00; Sa,Su 09:00-18:00; Tu off",
+      "openingHours": "Mo, We-Fr 09:00-17:00; Sa-Su 09:00-18:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
