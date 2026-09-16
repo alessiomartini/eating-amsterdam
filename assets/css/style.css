@@ -11,6 +11,17 @@
   --mid: #ffc247;
   --pricey: #ff6b6b;
   --unknown: #6b7383;
+
+  /* Colori dei pallini sulla mappa: separati da quelli sopra apposta. Le tile
+     OSM scurite da .leaflet-tile hanno una base verde-oliva a saturazione medio-
+     bassa, e su quello sfondo variabile un colore "giusto" ma senza alone si
+     confonde comunque — verificato rendendo gli stessi colori sopra campioni di
+     tile (parco/acqua/strada/edificio) con lo stesso filtro: il grigio spariva
+     quasi ovunque, e pure verde/giallo/rosso perdevano molto contrasto. */
+  --map-cheap: #2fe08a;
+  --map-mid: #ff9f1c;
+  --map-pricey: #ff5252;
+  --map-unknown: #f4f6fb;
   --radius: 12px;
   --topbar-h: 56px;
   color-scheme: dark;
@@ -178,16 +189,18 @@ output { color: var(--text); font-weight: 600; }
 
 /* ---------- mappa ---------- */
 .marker-pin {
-  width: 14px; height: 14px;
+  width: 18px; height: 18px;
   border-radius: 50%;
-  border: 2px solid #0f1115;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.25);
+  border: 2px solid rgba(8,10,14,.95);
+  /* l'alone chiaro è quello che fa il lavoro vero: un pallino si vede sopra
+     qualunque sfondo di tile solo se il contorno spicca, non basta il colore */
+  box-shadow: 0 0 0 2.5px rgba(255,255,255,.9), 0 1px 6px rgba(0,0,0,.8);
 }
-.marker-pin.cheap { background: var(--cheap); }
-.marker-pin.mid { background: var(--mid); }
-.marker-pin.pricey { background: var(--pricey); }
-.marker-pin.unknown { background: var(--unknown); }
-.marker-pin.active { transform: scale(1.6); box-shadow: 0 0 0 3px var(--accent); }
+.marker-pin.cheap { background: var(--map-cheap); }
+.marker-pin.mid { background: var(--map-mid); }
+.marker-pin.pricey { background: var(--map-pricey); }
+.marker-pin.unknown { background: var(--map-unknown); }
+.marker-pin.active { transform: scale(1.5); box-shadow: 0 0 0 3px var(--accent), 0 0 0 5px rgba(255,255,255,.9); }
 
 .map-legend {
   position: absolute;
@@ -201,11 +214,19 @@ output { color: var(--text); font-weight: 600; }
   font-size: 12px;
   color: var(--muted);
 }
-.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
-.dot.cheap { background: var(--cheap); }
-.dot.mid { background: var(--mid); }
-.dot.pricey { background: var(--pricey); }
-.dot.unknown { background: var(--unknown); }
+.dot {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  border: 1.5px solid rgba(8,10,14,.9);
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,.75);
+}
+.dot.cheap { background: var(--map-cheap); }
+.dot.mid { background: var(--map-mid); }
+.dot.pricey { background: var(--map-pricey); }
+.dot.unknown { background: var(--map-unknown); }
 
 .leaflet-container { background: #10131a; font: inherit; }
 .leaflet-tile { filter: brightness(.72) invert(1) contrast(.85) hue-rotate(190deg) saturate(.5) brightness(.92); }

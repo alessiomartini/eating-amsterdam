@@ -14,8 +14,8 @@ function iconFor(place, active) {
   return L.divIcon({
     className: '',
     html: `<div class="marker-pin ${priceBand(place.shown?.amount)}${active ? ' active' : ''}"></div>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
   });
 }
 
@@ -28,9 +28,13 @@ export function initMap(container, { onSelect } = {}) {
   }).addTo(map);
 
   cluster = L.markerClusterGroup({
-    maxClusterRadius: 45,
+    maxClusterRadius: 40,
     showCoverageOnHover: false,
-    disableClusteringAtZoom: 17,
+    // a 17 (livello del singolo edificio) bisognava zoomare moltissimo prima di
+    // vedere un solo pallino colorato invece di una bolla arancione col numero;
+    // 15 mostra i pallini già a livello di quartiere, e la città intera resta
+    // raggruppata (4600+ locali sovrapposti sarebbero illeggibili comunque)
+    disableClusteringAtZoom: 15,
   });
   cluster.on('click', (event) => onSelect?.(event.layer.options.placeId));
   map.addLayer(cluster);
