@@ -1,8 +1,11 @@
 # 🥙 Eating Amsterdam
 
 Mappa collaborativa dei posti dove si mangia bene spendendo poco ad Amsterdam e
-dintorni: snackbar, döner, falafel, ristoranti economici. Filtri per prezzo, voto, tipo di
-cucina e **opzioni vegetariane/vegane**.
+dintorni: snackbar, döner, falafel, ristoranti economici. Non si filtra per tipo
+di locale o cucina, ma per **cosa si vuole bere o mangiare**: si scelgono una o
+più voci (caffè, birra, döner, pizza...) e la mappa mostra solo i locali che le
+hanno tutte, colorati per il prezzo totale di quello che si è scelto. Filtri
+anche per voto, distanza e **opzioni vegetariane/vegane**.
 
 L'interfaccia è in inglese; il codice e questi appunti restano in italiano.
 Sito statico, senza backend e senza database: si può pubblicare gratis su GitHub Pages.
@@ -14,12 +17,20 @@ domande, così i locali diventano confrontabili:
 
 | da bere | da spizzicare | da sedersi |
 |---|---|---|
-| caffè, birra, cocktail più economico | patatine, döner, pizza, gelato | primo e secondo più economici |
+| caffè, birra, vino, cocktail più economico | patatine, croissant, döner, pizza, gelato | pasta, primo e secondo più economici |
 
 Ogni voce compare solo dove ha senso: il döner dove si fa il döner, il cocktail
-non in un chiosco di friet, il friet non in un ristorante. Il "piatto più
-economico" invece vale anche per una falafeleria, che è il caso che conta di più
-qui.
+non in un chiosco di friet, la pasta in un posto italiano. Il "piatto più
+economico del locale", invece — una pseudo-voce che valeva per qualunque posto —
+non c'è più: non voleva dire niente per confrontare due locali diversi,
+esattamente come filtrare per tipo di cucina o categoria del locale. Si sceglie
+sempre una voce concreta, o niente.
+
+Si può scegliere **più di una voce insieme** ("mi va caffè e birra"): il locale
+compare solo se le offre entrambe (AND, non "quasi"), e il prezzo mostrato — usato
+anche per ordinare e colorare i marker — è la **somma semplice** delle voci
+scelte, non una media pesata: coloranti e classifica cambiano a seconda di cosa
+si è scelto, non restano un numero fisso per locale.
 
 Ogni prezzo porta con sé la propria provenienza, e la provenienza è sempre
 visibile:
@@ -254,12 +265,12 @@ assets/css/style.css       tema scuro, layout mappa + lista
 assets/js/
   app.js                   avvio e collegamento dei pezzi
   data.js                  caricamento dataset, campi derivati (prezzo, voto)
-  filters.js               raggruppamento cucine e logica dei filtri
+  filters.js               logica dei filtri: voci scelte (AND), somma, ordinamento
   map.js                   Leaflet + cluster di marker
   ui.js                    lista, scheda locale, finestre di dialogo
   store.js                 contributi dell'utente (localStorage)
   hours.js                 "aperto ora" da opening_hours di OSM
-  items.js                 le sei voci di riferimento e le stime
+  items.js                 le voci di riferimento e le stime
 scripts/menu-parse.js      estrazione dei prezzi dall'HTML (senza rete)
 scripts/osm-lookup.mjs     come è taggato un locale su OSM (diagnosi)
 scripts/stamp-version.mjs  marca gli asset per invalidare la cache
@@ -268,7 +279,7 @@ data/config.json           URL del backend (null = tutto in locale)
 scripts/sync-backend.mjs   porta prezzi e segnalazioni dal backend al repo
 backend/                   Cloudflare Worker + schema D1 + istruzioni
 scripts/scrape-menus.mjs   scraper dei menu dai siti dei locali
-tests/                     `npm test` — parser degli orari e dei menu
+tests/                     `npm test` — parser di orari e menu, voci e filtri
 scripts/
   osm-common.js            zona coperta, query Overpass e normalizzazione
                            (condiviso fra lo script Node e il browser)
@@ -282,7 +293,8 @@ data/places.json           il dataset
 ### Idee per il seguito
 
 - backend leggero per i prezzi condivisi, al posto dell'export manuale;
-- "quanto spendo davvero": filtro su un piatto specifico (döner, kapsalon, menu);
+- foto del locale nella scheda: servirebbe una fonte di immagini affidabile
+  (es. Google Places Photos) e non è ancora collegata;
 - foto del menù con estrazione dei prezzi;
 - segnalazione dei prezzi vecchi (> 12 mesi) da riverificare.
 

@@ -1,30 +1,17 @@
-// Raggruppamento delle cucine OSM in categorie sensate, risoluzione del prezzo
-// da mostrare e logica dei filtri.
+// Logica dei filtri: quali locali comparire e con quale prezzo mostrarli.
+//
+// Il modello è "cosa voglio bere/mangiare, non che tipo di locale è": non si
+// filtra più per tipo di posto o cucina, si sceglie una o più delle voci di
+// riferimento (caffè, birra, döner...). Con più voci selezionate un locale
+// compare solo se le offre tutte (AND), e il prezzo mostrato/usato per
+// ordinare e colorare è la somma semplice delle voci scelte — non una media
+// pesata, che richiederebbe decidere pesi arbitrari senza un motivo migliore.
 
 import { isOpenNow } from './hours.js';
 import { REFERENCE_ITEMS } from './items.js';
-import { FLAGS } from './flags.js';
 
-export const CUISINE_GROUPS = [
-  { id: 'kebab', label: '🥙 Döner / kebab', match: ['kebab', 'doner', 'döner', 'turkish', 'shawarma', 'gyros'] },
-  { id: 'friet', label: '🍟 Snack bar / fries', match: ['friture', 'chips', 'french_fries', 'fish_and_chips', 'snack', 'snack_bar', 'fries'] },
-  { id: 'burger', label: '🍔 Burgers', match: ['burger', 'american', 'hot_dog'] },
-  { id: 'pizza', label: '🍕 Pizza / Italian', match: ['pizza', 'italian', 'pasta'] },
-  { id: 'asian', label: '🍜 Asian', match: ['chinese', 'thai', 'vietnamese', 'japanese', 'sushi', 'korean', 'asian', 'ramen', 'noodle', 'wok', 'dumpling', 'malaysian', 'filipino'] },
-  { id: 'indo', label: '🍛 Indonesian / Surinamese', match: ['indonesian', 'surinamese', 'javanese'] },
-  { id: 'indian', label: '🍛 Indian', match: ['indian', 'pakistani', 'nepalese', 'bangladeshi'] },
-  { id: 'middle_east', label: '🧆 Falafel / Middle Eastern', match: ['falafel', 'lebanese', 'middle_eastern', 'syrian', 'persian', 'egyptian', 'israeli', 'moroccan'] },
-  { id: 'sandwich', label: '🥪 Sandwiches / bagels', match: ['sandwich', 'bagel', 'deli', 'broodjes', 'wrap'] },
-  { id: 'mexican', label: '🌮 Mexican / Latin', match: ['mexican', 'tex-mex', 'burrito', 'peruvian', 'brazilian', 'argentinian', 'latin_american'] },
-  { id: 'african', label: '🍲 African / Ethiopian', match: ['ethiopian', 'african', 'eritrean', 'senegalese', 'ghanaian'] },
-  { id: 'veg', label: '🌱 Veggie / vegan', match: ['vegetarian', 'vegan'] },
-  { id: 'sweet', label: '🍩 Sweets / coffee', match: ['coffee_shop', 'coffee', 'cake', 'ice_cream', 'bakery', 'pancake', 'waffle', 'donut', 'stroopwafel', 'crepe'] },
-  { id: 'dutch', label: '🇳🇱 Dutch', match: ['dutch', 'herring', 'pannenkoeken'] },
-];
-
-const GROUP_BY_CUISINE = new Map();
-for (const group of CUISINE_GROUPS) for (const c of group.match) GROUP_BY_CUISINE.set(c, group.id);
-
+// Serve ancora per l'etichetta del tipo di locale sulle card e per il
+// <select> di "Aggiungi un locale": non è più un filtro nella sidebar.
 export const CATEGORIES = [
   { id: 'fast_food', label: '🍟 Fast food' },
   { id: 'restaurant', label: '🍽️ Restaurant' },
@@ -35,23 +22,12 @@ export const CATEGORIES = [
   { id: 'food_court', label: '🏬 Food court' },
 ];
 
-export function groupsOf(place) {
-  const ids = new Set();
-  for (const c of place.cuisines ?? []) {
-    const id = GROUP_BY_CUISINE.get(c);
-    if (id) ids.add(id);
-  }
-  return ids;
-}
-
 export const DEFAULT_FILTERS = {
   query: '',
-  priceItem: 'any',
+  items: new Set(),
   maxPrice: null,
   useEstimates: true,
   minRating: 0,
-  categories: new Set(),
-  cuisines: new Set(),
   vegetarian: false,
   vegan: false,
   strictVeg: false,
@@ -63,32 +39,35 @@ export const DEFAULT_FILTERS = {
 };
 
 /**
- * Il prezzo da mostrare e su cui filtrare: quello della voce scelta, oppure —
- * con "any" — la voce più economica fra quelle note. Senza `useEstimates` le
- * stime non contano né per il filtro né per l'ordinamento.
+ * Il prezzo su cui filtrare/ordinare/colorare, per le voci scelte.
+ *
+ * - nessuna voce scelta → null: nessun prezzo da mostrare, nessun filtro.
+ * - una o più voci scelte → il locale deve averle TUTTE (altrimenti null, e
+ *   applyFilters lo esclude): niente "quasi" quando hai chiesto "caffè e birra".
+ * - il prezzo è la somma delle voci trovate. `hasEstimate` è true se anche una
+ *   sola componente è una stima: la somma eredita l'incertezza della parte
+ *   meno affidabile, non fa la media fra "sicuro" e "indovinato".
  */
-export function resolvePrice(place, itemId = 'any', useEstimates = true) {
+export function resolvePrice(place, items, useEstimates = true) {
+  if (!items || items.size === 0) return null;
   const table = place.items ?? {};
-  const usable = (entry) => entry && (useEstimates || entry.source !== 'estimate');
 
-  if (itemId !== 'any') {
-    const entry = table[itemId];
-    return usable(entry) ? { ...entry, itemId } : null;
+  let amount = 0;
+  let hasEstimate = false;
+  let uncertain = false;
+  const breakdown = [];
+
+  for (const id of items) {
+    const entry = table[id];
+    if (!entry) return null; // AND: manca questa voce, il locale non risponde alla domanda
+    if (!useEstimates && entry.source === 'estimate') return null;
+    amount += entry.amount;
+    if (entry.source === 'estimate') hasEstimate = true;
+    if (entry.uncertain) uncertain = true;
+    breakdown.push({ id, amount: entry.amount, source: entry.source });
   }
 
-  // Prima la provenienza, poi il prezzo: un prezzo vero, anche se più alto, vale
-  // più di una stima più bassa. Altrimenti la stima del caffè coprirebbe il
-  // prezzo del piatto letto davvero dal menu.
-  const rank = { measured: 0, menu: 1, estimate: 2 };
-  let best = null;
-  for (const [id, entry] of Object.entries(table)) {
-    if (!usable(entry)) continue;
-    const candidate = { ...entry, itemId: id };
-    if (!best) { best = candidate; continue; }
-    const better = rank[candidate.source] - rank[best.source] || candidate.amount - best.amount;
-    if (better < 0) best = candidate;
-  }
-  return best;
+  return { amount: Math.round(amount * 100) / 100, hasEstimate, uncertain, itemIds: [...items], breakdown };
 }
 
 export function distanceKm(a, b) {
@@ -117,7 +96,7 @@ export function applyFilters(places, filters, position) {
 
   const decorated = places.map((place) => ({
     ...place,
-    shown: resolvePrice(place, filters.priceItem, filters.useEstimates),
+    shown: resolvePrice(place, filters.items, filters.useEstimates),
     distance: position ? distanceKm(position, place) : null,
   }));
 
@@ -126,18 +105,12 @@ export function applyFilters(places, filters, position) {
       const haystack = `${place.name} ${(place.cuisines ?? []).join(' ')} ${place.address ?? ''} ${place.brand ?? ''}`.toLowerCase();
       if (!haystack.includes(query)) return false;
     }
-    if (filters.categories.size && !filters.categories.has(place.category)) return false;
-    if (filters.cuisines.size) {
-      const groups = groupsOf(place);
-      if (![...filters.cuisines].some((id) => groups.has(id))) return false;
-    }
     if (!matchesDiet(place, filters)) return false;
     if (filters.favoritesOnly && !place.favorite) return false;
 
-    // chiedere una voce specifica significa volere solo i locali che ce l'hanno
-    if (filters.priceItem !== 'any' && !place.shown) return false;
-    if (filters.measuredOnly && place.shown?.source === 'estimate') return false;
-    if (filters.measuredOnly && !place.shown) return false;
+    // aver chiesto una o più voci significa volere solo i locali che le hanno tutte
+    if (filters.items.size && !place.shown) return false;
+    if (filters.measuredOnly && place.shown?.hasEstimate) return false;
     if (filters.maxPrice != null && place.shown && place.shown.amount > filters.maxPrice) return false;
 
     if (filters.minRating > 0 && (place.rating ?? 0) < filters.minRating) return false;
@@ -157,7 +130,4 @@ export function applyFilters(places, filters, position) {
   return [...filtered].sort(sorters[filters.sort] ?? sorters.price);
 }
 
-export const PRICE_ITEM_OPTIONS = [
-  { id: 'any', label: 'Cheapest item' },
-  ...REFERENCE_ITEMS.map((i) => ({ id: i.id, label: `${i.icon} ${i.label}` })),
-];
+export const ITEM_CHIPS = REFERENCE_ITEMS.map((i) => ({ id: i.id, label: `${i.icon} ${i.label}` }));

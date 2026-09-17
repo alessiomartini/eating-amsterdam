@@ -5,7 +5,7 @@ import { store } from './store.js';
 import { decorate, priceBand, setLiveFlags, setLivePrices } from './data.js';
 import { fetchPlaceDetails, isOnline, submitFeedback, submitFlag, submitPrice } from './api.js';
 import { CATEGORIES } from './filters.js';
-import { REFERENCE_ITEMS, itemApplies } from './items.js';
+import { ITEM_BY_ID, REFERENCE_ITEMS, itemApplies } from './items.js';
 import { isOpenNow, humanize } from './hours.js';
 import { FLAGS } from './flags.js';
 
@@ -53,24 +53,26 @@ function flagBadges(place) {
 
 const UNCERTAIN_HINT = 'The latest report is far from the earlier ones — it may be a typo or a different dish. Add yours to settle it.';
 
-const SOURCE_LABEL = {
-  measured: 'reported by a visitor',
-  menu: 'read from the place’s own menu',
-  estimate: 'our estimate, not a real price',
-};
-
-/** Il prezzo in lista: le stime si distinguono a colpo d'occhio da un prezzo vero. */
+/**
+ * Il prezzo in lista: se sono state scelte più voci è la loro somma, con
+ * l'icona di ognuna e il dettaglio nel tooltip. Una stima anche in una sola
+ * componente marca l'intera somma con ≈, invece di far sembrare reale un
+ * totale che in parte non lo è.
+ */
 function priceCell(place) {
   const shown = place.shown;
   if (!shown) return '<span class="price unknown">no price yet</span>';
 
-  const item = REFERENCE_ITEMS.find((i) => i.id === shown.itemId);
-  const what = item ? ` ${item.icon}` : '';
-  if (shown.source === 'estimate') {
-    return `<span class="price est" title="${esc(SOURCE_LABEL.estimate)} — ${esc(shown.basis.join(', '))}">≈${money(shown.amount)}${what}</span>`;
+  const icons = shown.itemIds.map((id) => ITEM_BY_ID[id]?.icon ?? '').join(' ');
+  const breakdown = shown.breakdown
+    .map((b) => `${ITEM_BY_ID[b.id]?.label ?? b.id} ${money(b.amount)}${b.source === 'estimate' ? ' (estimate)' : ''}`)
+    .join(' + ');
+  const flag = shown.uncertain ? ` <span class="badge warn" title="${esc(UNCERTAIN_HINT)}">?</span>` : '';
+
+  if (shown.hasEstimate) {
+    return `<span class="price est" title="${esc(breakdown)}">≈${money(shown.amount)} ${icons}</span>${flag}`;
   }
-  const flag = shown.uncertain ? `<span class="badge warn" title="${esc(UNCERTAIN_HINT)}">?</span>` : '';
-  return `<span class="price ${priceBand(shown.amount)}" title="${esc(SOURCE_LABEL[shown.source])}">${money(shown.amount)}${what}${shown.source === 'menu' ? ' <span class="badge">menu</span>' : ''}${flag}</span>`;
+  return `<span class="price ${priceBand(shown.amount)}" title="${esc(breakdown)}">${money(shown.amount)} ${icons}</span>${flag}`;
 }
 
 function ratingCell(place) {
@@ -120,9 +122,21 @@ export function renderList(container, places, { onSelect, limit = 300 } = {}) {
   });
 }
 
+// Un dialog nativo non si chiude da solo cliccando fuori: bisogna intercettare
+// il click sul ::backdrop, che arriva come click sul <dialog> stesso quando il
+// target non è un suo discendente. Il listener va attaccato una volta sola per
+// dialog (si riusano #detail/#modal a ogni apertura), non a ogni sheet().
+const lightDismissBound = new WeakSet();
+
 function sheet(dialog, html) {
   dialog.innerHTML = `<button type="button" class="sheet-close" aria-label="Close">×</button><div class="sheet-body">${html}</div>`;
   dialog.querySelector('.sheet-close').addEventListener('click', () => dialog.close());
+  if (!lightDismissBound.has(dialog)) {
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    lightDismissBound.add(dialog);
+  }
   if (!dialog.open) dialog.showModal();
 }
 
@@ -224,7 +238,6 @@ export function openDetail(place, { onChange } = {}) {
         ${itemsTable(place)}
         <div class="actions"><button type="submit" class="primary">Save my prices</button></div>
       </form>
-      <p class="hint">Values marked <span class="est">≈</span> are estimates from the price level, the neighbourhood and the type of place — not real prices. Type what you actually paid and the estimate is replaced.</p>
 
       <h3>Details</h3>
       <dl class="kv">
@@ -259,13 +272,7 @@ export function openDetail(place, { onChange } = {}) {
         <button type="submit" class="primary">Add</button>
       </form>
 
-      <h3>Your rating</h3>
-      <div class="stars" id="stars">
-        ${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-star="${n}" class="${(mine.rating ?? 0) >= n ? 'on' : ''}" aria-label="${n} stars">★</button>`).join('')}
-      </div>
-
-      <h3>Notes</h3>
-      <textarea id="note" rows="3" placeholder="Huge portions, cash only, open late…" style="width:100%;background:var(--bg-elev-2);color:inherit;border:1px solid var(--line);border-radius:8px;padding:8px">${esc(mine.note)}</textarea>
+      <textarea id="note" class="notes" rows="2" placeholder="Notes: cash only, open late…">${esc(mine.note)}</textarea>
 
       <div class="actions">
         <button type="button" class="ghost" id="btn-fav">${mine.favorite ? '⭐ In favourites' : '☆ Add to favourites'}</button>
@@ -306,14 +313,6 @@ export function openDetail(place, { onChange } = {}) {
     dialog.querySelectorAll('[data-dish]').forEach((btn) => {
       btn.addEventListener('click', () => {
         store.removePriceByDish(place.id, btn.dataset.dish);
-        onChange?.();
-        render();
-      });
-    });
-
-    dialog.querySelectorAll('[data-star]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        store.setRating(place.id, Number(btn.dataset.star));
         onChange?.();
         render();
       });
@@ -394,7 +393,8 @@ export function openDataModal({ meta, count, onReload, onChange }) {
     <h3>Where the data comes from</h3>
     <p class="hint">Names, location, cuisine and the vegetarian/vegan tags come from OpenStreetMap (ODbL licence).
     Ratings and price level, where present, from the Google Places API. Menu prices are read from each place’s own website.
-    Everything else is an estimate until someone types in what they actually paid.</p>
+    Everything else, shown with <span class="est">≈</span>, is an estimate from the price level, the neighbourhood and the
+    type of place — not a real price. Type what you actually paid on any place’s page and the estimate is replaced.</p>
   `);
 
   dialog.querySelector('#author').addEventListener('change', (e) => store.setAuthor(e.target.value));
@@ -566,7 +566,6 @@ export function openFeedbackModal({ context }) {
     window.open(url, '_blank', 'noopener');
     dialog.close();
     toast('Saved — finish by pressing Submit on GitHub');
-    return note;
   });
 }
 

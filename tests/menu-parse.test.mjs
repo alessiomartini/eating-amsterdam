@@ -148,3 +148,15 @@ test('la margarita cocktail non diventa una pizza margherita', () => {
   assert.equal(findItemPrice(['Margarita € 12,00'], 'pizza'), null);
   assert.equal(findItemPrice(['Pizza margherita € 11,00'], 'pizza'), 11);
 });
+
+test('vino, pasta e croissant si riconoscono nelle forme comuni', () => {
+  assert.equal(findItemPrice(['Huiswijn glas € 5,50'], 'wine'), 5.5);
+  assert.equal(findItemPrice(['Rode wijn € 4,80', 'Witte wijn € 5,20'], 'wine'), 4.8);
+  assert.equal(findItemPrice(['Spaghetti carbonara € 13,50'], 'pasta'), 13.5);
+  assert.equal(findItemPrice(['Croissant € 2,80'], 'croissant'), 2.8);
+});
+
+test('vino e pasta rispettano comunque i limiti di plausibilità', () => {
+  assert.equal(findItemPrice(['Wijnkaart pagina 3'], 'wine'), null, 'niente prezzo sulla riga, niente da leggere');
+  assert.equal(findItemPrice(['Pasta della casa € 45,00'], 'pasta'), null, 'una pasta a 45 € è un errore');
+});

@@ -8,23 +8,28 @@
 // La provenienza viaggia sempre insieme al numero e viene mostrata: una stima
 // spacciata per prezzo reale sarebbe peggio di nessun prezzo.
 
-// In ordine: da bere, da spizzicare, da sedersi.
+// Raggruppate per come si consumano: da bere, da spizzicare, da sedersi.
+// L'ordine è anche quello in cui compaiono i chip nella sidebar.
 export const REFERENCE_ITEMS = [
   { id: 'coffee', label: 'Coffee', hint: 'espresso or filter', icon: '☕' },
   { id: 'beer', label: 'Beer', hint: 'small draught, 0.25–0.33 l', icon: '🍺' },
-  { id: 'cocktail', label: 'Cheapest cocktail', hint: 'from the cocktail list', icon: '🍸' },
+  { id: 'wine', label: 'Wine', hint: 'a glass of house wine', icon: '🍷' },
+  { id: 'cocktail', label: 'Cocktail', hint: 'cheapest on the list', icon: '🍸' },
+  { id: 'croissant', label: 'Croissant', hint: 'plain or filled', icon: '🥐' },
   { id: 'fries', label: 'Fries', hint: 'friet or patat, medium', icon: '🍟' },
   { id: 'doner', label: 'Döner kebab', hint: 'in pita or bread', icon: '🥙' },
   { id: 'pizza', label: 'Pizza', hint: 'margherita or cheapest', icon: '🍕' },
+  { id: 'pasta', label: 'Pasta', hint: 'cheapest pasta dish', icon: '🍝' },
   { id: 'icecream', label: 'Ice cream', hint: 'one scoop or a small cone', icon: '🍦' },
-  { id: 'first', label: 'Cheapest first course', hint: 'starter, soup, pasta', icon: '🥗' },
-  { id: 'main', label: 'Cheapest main course', hint: 'cheapest full dish', icon: '🍽️' },
+  { id: 'first', label: 'Starter', hint: 'cheapest starter, soup', icon: '🥗' },
+  { id: 'main', label: 'Main course', hint: 'cheapest full dish', icon: '🍽️' },
 ];
 
 export const ITEM_BY_ID = Object.fromEntries(REFERENCE_ITEMS.map((i) => [i.id, i]));
 
 const DONER_CUISINES = new Set(['kebab', 'doner', 'döner', 'turkish', 'shawarma', 'gyros']);
 const PIZZA_CUISINES = new Set(['pizza', 'italian']);
+const PASTA_CUISINES = new Set(['italian', 'pasta']);
 const COFFEE_CUISINES = new Set(['coffee_shop', 'coffee', 'cake', 'bakery', 'sandwich', 'breakfast']);
 const FRIES_CUISINES = new Set(['friture', 'chips', 'french_fries', 'fries', 'snack', 'snack_bar', 'fish_and_chips', 'burger']);
 const ICECREAM_CUISINES = new Set(['ice_cream', 'gelato', 'frozen_yogurt']);
@@ -37,11 +42,13 @@ export function itemApplies(itemId, place) {
   const servesMeals = isRestaurant || place.category === 'fast_food' || isBar;
 
   switch (itemId) {
-    // gli snackbar olandesi il caffè lo fanno quasi sempre
+    // gli snackbar olandesi il caffè (e il cornetto) li fanno quasi sempre
     case 'coffee':
+    case 'croissant':
       return place.category === 'cafe' || servesMeals || [...cuisines].some((c) => COFFEE_CUISINES.has(c));
-    // la birra invece raramente: chiederla a un fast food produrrebbe solo rumore
+    // birra, vino e cocktail invece raramente: chiederli a un fast food produrrebbe solo rumore
     case 'beer':
+    case 'wine':
     case 'cocktail':
       return place.category === 'cafe' || isRestaurant || isBar;
     // la friggitoria è roba da snackbar e da pub, non da ristorante
@@ -55,6 +62,8 @@ export function itemApplies(itemId, place) {
       return [...cuisines].some((c) => DONER_CUISINES.has(c));
     case 'pizza':
       return [...cuisines].some((c) => PIZZA_CUISINES.has(c));
+    case 'pasta':
+      return [...cuisines].some((c) => PASTA_CUISINES.has(c));
     // l'antipasto è un concetto da ristorante; il "piatto più economico" no:
     // in un posto da falafel è la voce che conta di più
     case 'first':
@@ -72,8 +81,8 @@ export function itemApplies(itemId, place) {
 // Sono il punto di partenza di una stima, non un dato: esistono per essere
 // corretti dai prezzi veri man mano che arrivano.
 const BASE_EUR = {
-  coffee: 3.2, beer: 5.2, cocktail: 12.0, fries: 3.6,
-  doner: 8.0, pizza: 12.0, icecream: 2.6, first: 9.0, main: 19.0,
+  coffee: 3.2, beer: 5.2, wine: 5.8, cocktail: 12.0, croissant: 3.0, fries: 3.6,
+  doner: 8.0, pizza: 12.0, pasta: 14.0, icecream: 2.6, first: 9.0, main: 19.0,
 };
 
 const PRICE_LEVEL_FACTOR = { 1: 0.78, 2: 1, 3: 1.28, 4: 1.7 };

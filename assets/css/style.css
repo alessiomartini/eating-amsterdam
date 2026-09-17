@@ -252,15 +252,19 @@ output { color: var(--text); font-weight: 600; }
   background: var(--bg-elev);
   color: var(--text);
   padding: 0;
-  width: min(560px, calc(100vw - 24px));
-  max-height: min(86dvh, 900px);
+  width: min(520px, calc(100vw - 24px));
+  max-height: min(82dvh, 820px);
+  /* Chrome dà a <dialog> un overflow:auto di default: senza azzerarlo qui,
+     sia il dialog sia .sheet-body (sotto) scrollano, e vengono due barre
+     invece di una. Solo .sheet-body deve scorrere. */
+  overflow: hidden;
 }
 .sheet::backdrop { background: rgba(0,0,0,.6); }
-.sheet-body { padding: 18px 20px 22px; overflow-y: auto; max-height: inherit; }
-.sheet h2 { margin: 0 0 2px; font-size: 20px; }
-.sheet h3 { margin: 20px 0 8px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.sheet-body { padding: 16px 18px 18px; overflow-y: auto; max-height: inherit; }
+.sheet h2 { margin: 0 0 2px; font-size: 19px; }
+.sheet h3 { margin: 16px 0 6px; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
 .sheet-close { position: absolute; top: 10px; right: 12px; background: none; border: 0; font-size: 22px; color: var(--muted); cursor: pointer; }
-.sheet .sub { color: var(--muted); margin: 0 0 12px; font-size: 13.5px; }
+.sheet .sub { color: var(--muted); margin: 0 0 10px; font-size: 13.5px; }
 
 .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 14px; }
 .kv dt { color: var(--muted); }
@@ -279,11 +283,18 @@ output { color: var(--text); font-weight: 600; }
   padding: 8px 10px;
   width: 100%;
 }
-.stars { display: flex; gap: 4px; font-size: 24px; }
-.stars button { background: none; border: 0; cursor: pointer; color: var(--unknown); padding: 0; line-height: 1; }
-.stars button.on { color: var(--mid); }
+.notes {
+  width: 100%;
+  background: var(--bg-elev-2);
+  color: inherit;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 8px;
+  font-size: 13px;
+  resize: vertical;
+}
 
-.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .links { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13.5px; margin-top: 10px; }
 .links a { color: var(--accent); }
 

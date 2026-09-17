@@ -11,13 +11,16 @@
 export const ITEM_KEYWORDS = {
   coffee: ['espresso', 'koffie', 'coffee', 'americano', 'filterkoffie', 'lungo'],
   beer: ['pils', 'biertje', 'bier', 'bieren', 'draught', 'draft beer', 'beer', 'tap bier'],
+  wine: ['wijn', 'wine', 'huiswijn', 'wijn glas', 'glas wijn', 'rode wijn', 'witte wijn', 'rosé'],
   fries: ['friet', 'frieten', 'patat', 'patatje', 'fries', 'french fries', 'frietjes'],
   doner: ['döner', 'doner', 'kebab', 'shoarma', 'shawarma', 'gyros'],
   // "margarita" starebbe qui come refuso di margherita, ma è anche un cocktail:
   // troppo ambigua per fidarsene, meglio perdere una pizza che inventarne una
   pizza: ['margherita', 'pizza'],
+  pasta: ['pasta', 'spaghetti', 'tagliatelle', 'penne', 'lasagne', 'ravioli', 'gnocchi', 'linguine'],
   cocktail: ['cocktail', 'cocktails', 'mojito', 'negroni', 'spritz', 'aperol', 'daiquiri', 'caipirinha', 'gin tonic'],
   icecream: ['ijsje', 'softijs', 'schepijs', 'ice cream', 'gelato', 'bolletje', 'coupe'],
+  croissant: ['croissant', 'pain au chocolat', 'chocoladebroodje'],
 };
 
 /** Sezioni di menu da cui prendere il piatto più economico. */
@@ -32,11 +35,14 @@ export const PLAUSIBLE = {
   // un "caffè" da 8 € è un caffè con dolce o una colazione, non un caffè
   coffee: [1.5, 6],
   beer: [2, 14],
+  wine: [3, 14],
   doner: [3, 22],
   pizza: [5, 30],
+  pasta: [7, 22],
   fries: [1.5, 12],
   icecream: [1, 10],
   cocktail: [5, 30],
+  croissant: [1.5, 6],
   // sotto queste soglie non è un piatto, è una bevanda finita nella sezione sbagliata
   first: [3.5, 30],
   main: [7, 60],

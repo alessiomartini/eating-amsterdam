@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Eating Amsterdam — good food, small budget</title>
-<meta name="description" content="Community map of cheap fast food, döner and restaurants in Amsterdam and around, with real prices for six reference items and vegetarian/vegan filters." />
+<meta name="description" content="Community map of cheap fast food, döner and restaurants in Amsterdam and around. Pick what you want to eat or drink and see real prices, coloured on the map." />
 <meta name="color-scheme" content="dark light" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥙</text></svg>" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
@@ -29,13 +29,14 @@
         <input type="search" id="f-query" placeholder="Search name, cuisine, street…" aria-label="Search" />
       </div>
 
-      <div class="field">
-        <label for="f-priceitem">Price of</label>
-        <select id="f-priceitem"></select>
-      </div>
+      <fieldset class="field">
+        <legend>What are you after?</legend>
+        <div class="chips" id="f-items"></div>
+        <p class="hint">Pick more than one to see places that have all of them — the price shown is their sum.</p>
+      </fieldset>
 
       <div class="field">
-        <label for="f-maxprice">Max price: <output id="f-maxprice-out">any</output></label>
+        <label for="f-maxprice">Max total: <output id="f-maxprice-out">any</output></label>
         <input type="range" id="f-maxprice" min="1" max="41" step="1" value="41" />
         <div class="chips">
           <label class="chip"><input type="checkbox" id="f-estimates" checked /><span>Include estimates</span></label>
@@ -58,16 +59,6 @@
           <label for="f-minrating">Minimum rating: <output id="f-minrating-out">any</output></label>
           <input type="range" id="f-minrating" min="0" max="5" step="0.5" value="0" />
         </div>
-
-        <fieldset class="field">
-          <legend>Place type</legend>
-          <div class="chips" id="f-categories"></div>
-        </fieldset>
-
-        <fieldset class="field">
-          <legend>Cuisine</legend>
-          <div class="chips" id="f-cuisines"></div>
-        </fieldset>
 
         <fieldset class="field">
           <legend>Other</legend>

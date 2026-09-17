@@ -66,3 +66,18 @@ test('le voci nuove compaiono dove ha senso', () => {
   assert.ok(estimate('fries', snackbar).amount > 1);
   assert.ok(estimate('icecream', gelateria).amount > 1);
 });
+
+test('vino, cocktail e cornetto valgono dove ha senso', () => {
+  const bar = { category: 'bar', cuisines: [], lat: 52.37, lon: 4.89 };
+  const italianRestaurant = { category: 'restaurant', cuisines: ['italian'], lat: 52.37, lon: 4.89 };
+  const snackbar = { category: 'fast_food', cuisines: ['friture'], lat: 52.37, lon: 4.89 };
+
+  assert.equal(itemApplies('wine', bar), true);
+  assert.equal(itemApplies('wine', snackbar), false, 'il vino non si beve in un chiosco di friet');
+  assert.equal(itemApplies('pasta', italianRestaurant), true);
+  assert.equal(itemApplies('pasta', snackbar), false);
+  assert.equal(itemApplies('croissant', snackbar), true, 'gli snackbar olandesi il cornetto lo fanno');
+
+  assert.ok(estimate('wine', bar).amount > 0);
+  assert.ok(estimate('pasta', italianRestaurant).amount > 0);
+});

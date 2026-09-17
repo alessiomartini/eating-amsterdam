@@ -1,14 +1,14 @@
 // Punto di ingresso: collega dati, filtri, mappa e lista.
 
 import { decorate, loadPlaces } from './data.js';
-import { applyFilters, CATEGORIES, CUISINE_GROUPS, DEFAULT_FILTERS, PRICE_ITEM_OPTIONS } from './filters.js';
+import { applyFilters, DEFAULT_FILTERS, ITEM_CHIPS } from './filters.js';
 import { focusPlace, highlight, initMap, invalidate, setPlaces, showUser } from './map.js';
 import { openAddPlaceModal, openDataModal, openDetail, openFeedbackModal, renderList, toast } from './ui.js';
 import { store } from './store.js';
 import { flushOutbox, initApi } from './api.js';
 
 const MAX_PRICE = 41; // il massimo dello slider vale "qualsiasi prezzo"
-const FILTERS_KEY = 'eating-amsterdam:filters:v2';
+const FILTERS_KEY = 'eating-amsterdam:filters:v3'; // v3: chip di voci al posto di select/categoria/cucina
 
 const el = (id) => document.getElementById(id);
 const state = {
@@ -23,14 +23,8 @@ const state = {
 /* ---------------------------------------------------------------- filtri UI */
 
 function renderControls() {
-  el('f-categories').innerHTML = CATEGORIES.map(
-    (c) => `<label class="chip"><input type="checkbox" name="category" value="${c.id}" /><span>${c.label}</span></label>`,
-  ).join('');
-  el('f-cuisines').innerHTML = CUISINE_GROUPS.map(
-    (c) => `<label class="chip"><input type="checkbox" name="cuisine" value="${c.id}" /><span>${c.label}</span></label>`,
-  ).join('');
-  el('f-priceitem').innerHTML = PRICE_ITEM_OPTIONS.map(
-    (o) => `<option value="${o.id}">${o.label}</option>`,
+  el('f-items').innerHTML = ITEM_CHIPS.map(
+    (c) => `<label class="chip"><input type="checkbox" name="item" value="${c.id}" /><span>${c.label}</span></label>`,
   ).join('');
 }
 
@@ -39,13 +33,11 @@ function readFilters() {
   return {
     ...DEFAULT_FILTERS,
     query: el('f-query').value,
-    priceItem: el('f-priceitem').value,
+    items: new Set([...document.querySelectorAll('input[name="item"]:checked')].map((i) => i.value)),
     maxPrice: maxPrice >= MAX_PRICE ? null : maxPrice,
     useEstimates: el('f-estimates').checked,
     measuredOnly: el('f-measured').checked,
     minRating: Number(el('f-minrating').value),
-    categories: new Set([...document.querySelectorAll('input[name="category"]:checked')].map((i) => i.value)),
-    cuisines: new Set([...document.querySelectorAll('input[name="cuisine"]:checked')].map((i) => i.value)),
     vegetarian: el('f-vegetarian').checked,
     vegan: el('f-vegan').checked,
     strictVeg: el('f-veg-strict').checked,
@@ -59,7 +51,6 @@ function readFilters() {
 function writeFilters(saved) {
   if (!saved) return;
   el('f-query').value = saved.query ?? '';
-  el('f-priceitem').value = saved.priceItem ?? 'any';
   el('f-maxprice').value = saved.maxPrice ?? MAX_PRICE;
   el('f-estimates').checked = saved.useEstimates !== false;
   el('f-measured').checked = Boolean(saved.measuredOnly);
@@ -71,22 +62,15 @@ function writeFilters(saved) {
   el('f-student').checked = Boolean(saved.studentDiscount);
   el('f-fav').checked = Boolean(saved.favoritesOnly);
   el('f-sort').value = saved.sort ?? 'price';
-  for (const value of saved.categories ?? []) {
-    const input = document.querySelector(`input[name="category"][value="${value}"]`);
-    if (input) input.checked = true;
-  }
-  for (const value of saved.cuisines ?? []) {
-    const input = document.querySelector(`input[name="cuisine"][value="${value}"]`);
+  for (const value of saved.items ?? []) {
+    const input = document.querySelector(`input[name="item"][value="${value}"]`);
     if (input) input.checked = true;
   }
 }
 
 function persistFilters(filters) {
   try {
-    localStorage.setItem(
-      FILTERS_KEY,
-      JSON.stringify({ ...filters, categories: [...filters.categories], cuisines: [...filters.cuisines] }),
-    );
+    localStorage.setItem(FILTERS_KEY, JSON.stringify({ ...filters, items: [...filters.items] }));
   } catch { /* storage non disponibile */ }
 }
 
@@ -99,7 +83,6 @@ function syncOutputs(filters) {
 
   // quanti filtri secondari sono attivi, così restano visibili anche da chiusi
   const hidden =
-    filters.categories.size + filters.cuisines.size +
     (filters.minRating > 0 ? 1 : 0) + (filters.openNow ? 1 : 0)
     + (filters.studentDiscount ? 1 : 0) + (filters.favoritesOnly ? 1 : 0);
   const badge = el('more-count');
@@ -117,7 +100,7 @@ function update({ keepView = false } = {}) {
 
   state.filtered = applyFilters(state.places, filters, state.position);
 
-  const measured = state.filtered.filter((p) => p.shown && p.shown.source !== 'estimate').length;
+  const measured = state.filtered.filter((p) => p.shown && !p.shown.hasEstimate).length;
   el('results-count').textContent = `${state.filtered.length} places · ${measured} with a real price`;
 
   renderList(el('results'), state.filtered, { onSelect: select });
@@ -172,7 +155,6 @@ function wire() {
     el('filters').reset();
     el('f-maxprice').value = MAX_PRICE;
     el('f-minrating').value = 0;
-    el('f-priceitem').value = 'any';
     el('more-filters').open = false;
     update({ keepView: true });
   });
@@ -218,11 +200,7 @@ function wire() {
         dataset: state.meta,
         results: state.filtered.length,
         selected: state.places.find((p) => p.id === state.selectedId)?.name ?? null,
-        filters: {
-          ...filters,
-          categories: [...filters.categories],
-          cuisines: [...filters.cuisines],
-        },
+        filters: { ...filters, items: [...filters.items] },
         viewport: `${window.innerWidth}×${window.innerHeight}`,
       },
     });
