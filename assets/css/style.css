@@ -189,18 +189,18 @@ output { color: var(--text); font-weight: 600; }
 
 /* ---------- mappa ---------- */
 .marker-pin {
-  width: 18px; height: 18px;
+  width: 9px; height: 9px;
   border-radius: 50%;
-  border: 2px solid rgba(8,10,14,.95);
+  border: 1px solid rgba(8,10,14,.95);
   /* l'alone chiaro è quello che fa il lavoro vero: un pallino si vede sopra
      qualunque sfondo di tile solo se il contorno spicca, non basta il colore */
-  box-shadow: 0 0 0 2.5px rgba(255,255,255,.9), 0 1px 6px rgba(0,0,0,.8);
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,.9), 0 1px 3px rgba(0,0,0,.8);
 }
 .marker-pin.cheap { background: var(--map-cheap); }
 .marker-pin.mid { background: var(--map-mid); }
 .marker-pin.pricey { background: var(--map-pricey); }
 .marker-pin.unknown { background: var(--map-unknown); }
-.marker-pin.active { transform: scale(1.5); box-shadow: 0 0 0 3px var(--accent), 0 0 0 5px rgba(255,255,255,.9); }
+.marker-pin.active { transform: scale(1.5); box-shadow: 0 0 0 2px var(--accent), 0 0 0 3px rgba(255,255,255,.9); }
 
 .map-legend {
   position: absolute;

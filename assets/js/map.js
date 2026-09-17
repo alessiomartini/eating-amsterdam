@@ -14,8 +14,8 @@ function iconFor(place, active) {
   return L.divIcon({
     className: '',
     html: `<div class="marker-pin ${priceBand(place.shown?.amount)}${active ? ' active' : ''}"></div>`,
-    iconSize: [18, 18],
-    iconAnchor: [9, 9],
+    iconSize: [9, 9],
+    iconAnchor: [4.5, 4.5],
   });
 }
 
