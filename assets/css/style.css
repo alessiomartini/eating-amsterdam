@@ -284,6 +284,8 @@ output { color: var(--text); font-weight: 600; }
   width: 100%;
 }
 .notes {
+  display: block;
+  margin-top: 14px;
   width: 100%;
   background: var(--bg-elev-2);
   color: inherit;
@@ -363,7 +365,6 @@ output { color: var(--text); font-weight: 600; }
   padding: 6px 8px;
 }
 .items input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
-.src { display: block; font-size: 11px; color: var(--muted); font-weight: 400; }
 .muted { color: var(--unknown); }
 
 /* le stime non devono mai somigliare a un prezzo reale */
@@ -383,16 +384,12 @@ output { color: var(--text); font-weight: 600; }
 
 /* ---------- fatti segnalati dagli utenti ---------- */
 .badge.student { color: #8ab4ff; border-color: #2f4570; }
-.flag-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 12px;
-  padding: 10px 12px;
-  background: var(--bg-elev-2);
-  border-radius: var(--radius);
-}
-.flag-row strong { font-size: 14px; font-weight: 500; }
-.flag-buttons { display: flex; gap: 6px; }
-.flag-buttons .ghost.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+
+/* titolo e domanda (es. sconto studenti) sulla stessa riga: la domanda sta
+   piccola a destra, con un margine per non finire sotto la × di chiusura */
+.detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding-right: 22px; }
+.detail-head h2 { flex: 1; min-width: 0; }
+.flag-mini { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; padding-top: 2px; }
+.flag-chip { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px; font-size: 11px; color: var(--muted); }
+.ghost.mini { padding: 2px 7px; font-size: 11px; }
+.flag-chip .ghost.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }

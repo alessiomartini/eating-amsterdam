@@ -51,6 +51,23 @@ function flagBadges(place) {
     .join('');
 }
 
+/** Domanda(e) tipo "sconto studenti?", piccola e accanto al titolo: si vota
+ * lì, e lo stato (confermato/conteso) resta nel bollino di .badges. */
+function flagMini(place) {
+  return `<div class="flag-mini">${FLAGS.map((flag) => {
+    const entry = place.flags?.[flag.id];
+    const state = !entry ? 'nobody has said yet'
+      : entry.disputed ? `disputed — ${entry.yes} say yes, ${entry.no} say no`
+      : `${entry.value ? 'yes' : 'no'}, ${entry.reports} ${entry.reports === 1 ? 'report' : 'reports'}${entry.date ? ` · latest ${esc(entry.date)}` : ''}`;
+    return `<div class="flag-chip" data-flag="${flag.id}" title="${esc(state)}${entry?.note ? ` · ${esc(entry.note)}` : ''}">
+      <span>${flag.icon} ${esc(flag.label)}?</span>
+      <button type="button" class="ghost mini${entry?.value === true ? ' on' : ''}" data-answer="yes">Yes</button>
+      <button type="button" class="ghost mini${entry?.value === false ? ' on' : ''}" data-answer="no">No</button>
+      ${entry?.disputed ? '<span class="badge warn" title="Reports disagree">?</span>' : ''}
+    </div>`;
+  }).join('')}</div>`;
+}
+
 const UNCERTAIN_HINT = 'The latest report is far from the earlier ones — it may be a typo or a different dish. Add yours to settle it.';
 
 /**
@@ -215,23 +232,12 @@ export function openDetail(place, { onChange } = {}) {
     ];
 
     sheet(dialog, `
-      <h2>${esc(place.name)}</h2>
+      <div class="detail-head">
+        <h2>${esc(place.name)}</h2>
+        ${flagMini(place)}
+      </div>
       <p class="sub">${esc(CATEGORY_LABEL[place.category] ?? place.category)}${place.cuisines?.length ? ` · ${esc(place.cuisines.join(', '))}` : ''}</p>
       <div class="badges">${flagBadges(place)}${dietBadges(place)}${open === true ? '<span class="badge open">open now</span>' : open === false ? '<span class="badge closed">closed now</span>' : ''}</div>
-
-      ${FLAGS.map((flag) => {
-        const entry = place.flags?.[flag.id];
-        const state = !entry ? 'nobody has said yet'
-          : entry.disputed ? `disputed — ${entry.yes} say yes, ${entry.no} say no`
-          : `${entry.value ? 'yes' : 'no'}, ${entry.reports} ${entry.reports === 1 ? 'report' : 'reports'}${entry.date ? ` · latest ${esc(entry.date)}` : ''}`;
-        return `<div class="flag-row" data-flag="${flag.id}">
-          <div><strong>${flag.icon} ${esc(flag.question)}</strong><span class="src">${esc(state)}${entry?.note ? ` · ${esc(entry.note)}` : ''}</span></div>
-          <div class="flag-buttons">
-            <button type="button" class="ghost small${entry?.value === true ? ' on' : ''}" data-answer="yes">Yes</button>
-            <button type="button" class="ghost small${entry?.value === false ? ' on' : ''}" data-answer="no">No</button>
-          </div>
-        </div>`;
-      }).join('')}
 
       <h3>What things cost</h3>
       <form id="items-form">
@@ -323,9 +329,9 @@ export function openDetail(place, { onChange } = {}) {
       onChange?.();
     });
 
-    dialog.querySelectorAll('.flag-row [data-answer]').forEach((btn) => {
+    dialog.querySelectorAll('.flag-chip [data-answer]').forEach((btn) => {
       btn.addEventListener('click', async () => {
-        const flagId = btn.closest('.flag-row').dataset.flag;
+        const flagId = btn.closest('.flag-chip').dataset.flag;
         const value = btn.dataset.answer === 'yes';
         const flag = FLAGS.find((f) => f.id === flagId);
         const note = value ? (prompt(`${flag.label} — any detail? (optional)`, place.flags?.[flagId]?.note ?? '') ?? '') : '';
