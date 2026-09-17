@@ -115,12 +115,15 @@ function refreshFromStore({ keepView = true } = {}) {
   update({ keepView });
 }
 
-function select(id) {
+function select(id, { focus = true } = {}) {
   const place = state.places.find((p) => p.id === id);
   if (!place) return;
   state.selectedId = id;
   highlight(id);
-  focusPlace(place);
+  // cliccare un pin già visibile sulla mappa non deve spostarla: si clicca
+  // proprio perché lo si vede già dove sta. Zoomare/centrare resta utile
+  // solo scegliendo un locale dalla lista, che non mostra dove si trova.
+  if (focus) focusPlace(place);
   openDetail(place, { onChange: refreshFromStore });
 }
 

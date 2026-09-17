@@ -36,7 +36,7 @@ export function initMap(container, { onSelect } = {}) {
     // raggruppata (4600+ locali sovrapposti sarebbero illeggibili comunque)
     disableClusteringAtZoom: 15,
   });
-  cluster.on('click', (event) => onSelect?.(event.layer.options.placeId));
+  cluster.on('click', (event) => onSelect?.(event.layer.options.placeId, { focus: false }));
   map.addLayer(cluster);
 
   return map;
