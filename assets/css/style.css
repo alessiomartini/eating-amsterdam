@@ -366,6 +366,7 @@ output { color: var(--text); font-weight: 600; }
 }
 .items input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .muted { color: var(--unknown); }
+.src { display: block; font-size: 11px; color: var(--muted); font-weight: 400; }
 
 /* le stime non devono mai somigliare a un prezzo reale */
 .est { color: var(--muted); font-style: italic; }

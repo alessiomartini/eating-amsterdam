@@ -159,7 +159,25 @@ function sheet(dialog, html) {
 
 /* ---------------------------------------------------------------- scheda locale */
 
-/** La tabella delle sei voci: valore, provenienza e campo per correggerla. */
+/**
+ * L'ultima data in cui è cambiato un prezzo vero di questo locale (misurato o
+ * da menu — le stime non hanno una data, si ricalcolano sempre). Una sola
+ * data per tutto il pannello, invece di ripeterla riga per riga.
+ */
+function lastPricesUpdate(place) {
+  const dates = REFERENCE_ITEMS
+    .map((item) => place.items?.[item.id])
+    .filter((entry) => entry && entry.source !== 'estimate' && entry.date)
+    .map((entry) => entry.date);
+  return dates.length ? dates.sort().at(-1) : null;
+}
+
+/**
+ * La tabella delle voci: valore e campo per correggerla. Niente provenienza
+ * o data accanto al prezzo — il "≈" da solo dice che è una stima, un numero
+ * in chiaro che in qualche modo è verificato; il dettaglio (da menu, quante
+ * segnalazioni, su cosa si basa una stima) resta nel tooltip per chi lo vuole.
+ */
 function itemsTable(place) {
   // mostriamo anche le voci fuori euristica per cui però un prezzo vero esiste
   const rows = REFERENCE_ITEMS.filter((item) => itemApplies(item.id, place) || place.items?.[item.id]).map((item) => {
@@ -167,18 +185,16 @@ function itemsTable(place) {
     let value = '<span class="muted">—</span>';
 
     if (entry?.source === 'estimate') {
-      value = `<span class="est">≈${money(entry.amount)}</span>
-        <span class="src" title="${esc(entry.basis.join(' · '))}">estimate · ${esc(entry.basis.join(' · '))}</span>`;
+      value = `<span class="est" title="estimate · ${esc(entry.basis.join(' · '))}">≈${money(entry.amount)}</span>`;
     } else if (entry?.source === 'menu') {
-      value = `<strong>${money(entry.amount)}</strong><span class="src">from their menu</span>`;
+      value = `<strong title="from their menu">${money(entry.amount)}</strong>`;
     } else if (entry?.source === 'measured') {
-      // come nelle app dei carburanti: si mostra l'ultimo prezzo, con la data
       const when = entry.date ? ` on ${esc(entry.date)}` : '';
       const others = entry.samples > 1 ? ` · ${entry.samples} reports` : '';
       const warn = entry.uncertain
         ? `<span class="badge warn" title="${esc(UNCERTAIN_HINT)}">? unverified</span>`
         : '';
-      value = `<strong>${money(entry.amount)}</strong> ${warn}<span class="src">latest${when}${others}</span>`;
+      value = `<strong title="latest${when}${others}">${money(entry.amount)}</strong> ${warn}`;
     }
 
     return `<tr>
@@ -189,6 +205,8 @@ function itemsTable(place) {
   });
 
   if (!rows.length) return '<p class="hint">None of the reference items fit this place.</p>';
+
+  const updated = lastPricesUpdate(place);
 
   // lo storico completo, per chi vuole vedere come si è mosso un prezzo
   const history = REFERENCE_ITEMS
@@ -202,7 +220,8 @@ function itemsTable(place) {
     })
     .join('');
 
-  return `<table class="items">${rows.join('')}</table>${history}`;
+  const updatedLine = updated ? `<p class="hint">Prices last updated ${esc(updated)}.</p>` : '';
+  return `${updatedLine}<table class="items">${rows.join('')}</table>${history}`;
 }
 
 export function openDetail(place, { onChange } = {}) {
