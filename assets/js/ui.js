@@ -258,6 +258,8 @@ export function openDetail(place, { onChange } = {}) {
       <p class="sub">${esc(CATEGORY_LABEL[place.category] ?? place.category)}${place.cuisines?.length ? ` · ${esc(place.cuisines.join(', '))}` : ''}</p>
       <div class="badges">${flagBadges(place)}${dietBadges(place)}${open === true ? '<span class="badge open">open now</span>' : open === false ? '<span class="badge closed">closed now</span>' : ''}</div>
 
+      <div class="actions"><a href="${directions}" target="_blank" rel="noopener" class="primary">🧭 Navigate</a></div>
+
       <h3>What things cost</h3>
       <form id="items-form">
         ${itemsTable(place)}
@@ -275,7 +277,6 @@ export function openDetail(place, { onChange } = {}) {
 
       <div class="links">
         <a href="${gmaps}" target="_blank" rel="noopener">Google Maps ↗</a>
-        <a href="${directions}" target="_blank" rel="noopener">Directions ↗</a>
         ${place.website ? `<a href="${esc(place.website)}" target="_blank" rel="noopener">Website ↗</a>` : ''}
         ${place.osmUrl ? `<a href="${esc(place.osmUrl)}" target="_blank" rel="noopener">OpenStreetMap ↗</a>` : ''}
         ${place.phone ? `<a href="tel:${esc(place.phone)}">${esc(place.phone)}</a>` : ''}

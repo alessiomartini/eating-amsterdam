@@ -77,6 +77,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
   font-weight: 600;
   cursor: pointer;
 }
+/* i bottoni sono <button> quasi ovunque, ma un link esterno (es. "Navigate")
+   usa le stesse classi su un <a>: senza queste due regole perderebbe la
+   sottolineatura di default e non si comporterebbe come un blocco */
+a.primary, a.ghost { display: inline-block; text-decoration: none; }
 
 /* ---------- layout ---------- */
 .layout {
