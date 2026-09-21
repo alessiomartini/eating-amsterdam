@@ -292,11 +292,9 @@ data/places.json           il dataset
 
 ### Idee per il seguito
 
-- backend leggero per i prezzi condivisi, al posto dell'export manuale;
-- foto del locale nella scheda: servirebbe una fonte di immagini affidabile
-  (es. Google Places Photos) e non è ancora collegata;
-- foto del menù con estrazione dei prezzi;
-- segnalazione dei prezzi vecchi (> 12 mesi) da riverificare.
+Il backend per i prezzi condivisi c'è già (sezione sopra). Per le idee non
+ancora realizzate e le proposte allo studio vedi
+[`FUTURE-ARCHITECTURE.md`](FUTURE-ARCHITECTURE.md).
 
 ## Licenze
 
