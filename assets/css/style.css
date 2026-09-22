@@ -36,18 +36,29 @@ body {
   background: var(--bg);
   color: var(--text);
   font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  overflow: hidden;
+  /* overflow: hidden → overflow auto: su mobile la barra del browser si
+     nasconde solo quando la pagina scrolla. Con hidden la barra restava
+     sempre visibile, sprecando 50-80px verticali. La sidebar e la mappa
+     scrollano internamente (overscroll-behavior: contain), quindi il body
+     non scrolla mai in pratica. */
+  overflow: auto;
+  overscroll-behavior: contain;
+  /* safe-area per l'intrusione della barra di navigazione inferiore
+     (iPhone) e per il display a angoli tondi */
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ---------- topbar ---------- */
 .topbar {
-  height: var(--topbar-h);
+  height: calc(var(--topbar-h) + env(safe-area-inset-top));
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0 14px;
+  padding: env(safe-area-inset-top) 14px 0;
   background: var(--bg-elev);
   border-bottom: 1px solid var(--line);
 }
@@ -86,7 +97,12 @@ a.primary, a.ghost { display: inline-block; text-decoration: none; }
 .layout {
   display: grid;
   grid-template-columns: minmax(320px, 380px) 1fr;
-  height: calc(100dvh - var(--topbar-h));
+  /* fallback per Safari < 15.4 che non supporta dvh: usa vh, che su mobile
+     significa "altezza con barra del browser aperta" (non dinamica). */
+  height: calc(100vh - var(--topbar-h) - env(safe-area-inset-top));
+  /* dvh (dynamic viewport height) si riduce quando la barra del browser si
+     nasconde: su mobile recuperi 50-80px in più. */
+  height: calc(100dvh - var(--topbar-h) - env(safe-area-inset-top));
 }
 
 .sidebar {
@@ -94,6 +110,9 @@ a.primary, a.ghost { display: inline-block; text-decoration: none; }
   overflow-y: auto;
   overscroll-behavior: contain;
   background: var(--bg);
+  /* su mobile evita che la lista o i filtri si nascondano sotto la barra
+     di navigazione del browser (safe-area-inset-bottom) */
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
 }
 
 .map-wrap { position: relative; }
@@ -257,14 +276,24 @@ output { color: var(--text); font-weight: 600; }
   color: var(--text);
   padding: 0;
   width: min(520px, calc(100vw - 24px));
+  max-height: min(82vh, 820px);
   max-height: min(82dvh, 820px);
+  /* su mobile spinge il fondo del dialog sopra la barra di navigazione */
+  max-height: min(82dvh - env(safe-area-inset-bottom), 820px);
   /* Chrome dà a <dialog> un overflow:auto di default: senza azzerarlo qui,
      sia il dialog sia .sheet-body (sotto) scrollano, e vengono due barre
      invece di una. Solo .sheet-body deve scorrere. */
   overflow: hidden;
 }
 .sheet::backdrop { background: rgba(0,0,0,.6); }
-.sheet-body { padding: 16px 18px 18px; overflow-y: auto; max-height: inherit; }
+.sheet-body {
+  padding: 16px 18px 18px;
+  /* spazio a fondo per la barra di navigazione mobile, così l'ultimo
+     pulsante ("Save my prices") non compare sotto le dita */
+  padding-bottom: max(18px, calc(18px + env(safe-area-inset-bottom)));
+  overflow-y: auto;
+  max-height: inherit;
+}
 .sheet h2 { margin: 0 0 2px; font-size: 19px; }
 .sheet h3 { margin: 16px 0 6px; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
 .sheet-close { position: absolute; top: 10px; right: 12px; background: none; border: 0; font-size: 22px; color: var(--muted); cursor: pointer; }
@@ -319,16 +348,25 @@ output { color: var(--text); font-weight: 600; }
 .mobile-tabs { display: none; }
 
 @media (max-width: 860px) {
-  .layout { grid-template-columns: 1fr; height: calc(100dvh - var(--topbar-h) - 52px); }
+  .layout {
+    grid-template-columns: 1fr;
+    /* topbar è alta topbar-h + env(top); mobile-tabs aggiunge
+       52px + env(bottom). Il body scrolla in alto la barra del browser. */
+    height: calc(100vh - var(--topbar-h) - env(safe-area-inset-top) - 52px - env(safe-area-inset-bottom));
+    height: calc(100dvh - var(--topbar-h) - env(safe-area-inset-top) - 52px - env(safe-area-inset-bottom));
+  }
   .sidebar { border-right: 0; }
   .layout[data-view="map"] .sidebar { display: none; }
   .layout[data-view="list"] .map-wrap { display: none; }
+  .map-legend { padding-bottom: env(safe-area-inset-bottom); }
   .mobile-tabs {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    height: 52px;
     border-top: 1px solid var(--line);
     background: var(--bg-elev);
+    /* tasti sempre al di sotto della barra di navigazione mobile */
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(52px + env(safe-area-inset-bottom));
   }
   .mobile-tabs button { background: none; border: 0; color: var(--muted); font-weight: 600; cursor: pointer; }
   .mobile-tabs button.active { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
