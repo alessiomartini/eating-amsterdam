@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-15",
+  "updatedAt": "2026-09-21",
   "source": "OpenStreetMap (ODbL)",
   "places": [
     {
@@ -418,7 +418,8 @@
       "lon": 4.888419,
       "category": "fast_food",
       "cuisines": [
-        "burger"
+        "friture",
+        "fries"
       ],
       "diet": {
         "vegetarian": null,
@@ -8514,6 +8515,35 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/6301356665",
+      "name": "Bar Brasserie Central",
+      "lat": 52.298905,
+      "lon": 4.954071,
+      "category": "restaurant",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Pietersbergweg 275, 1105BM Amsterdam",
+      "website": "https://brasseriecentral.nl/",
+      "phone": "+31629745671",
+      "openingHours": "Mo-Fr 11:00-15:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/6301356665",
+      "source": "osm",
+      "menu": {
+        "url": "https://brasseriecentral.nl/",
+        "scrapedAt": "2026-09-21T09:22:06.855Z",
+        "items": {}
+      }
+    },
+    {
       "id": "osm:node/2568815251",
       "name": "Bar Brother",
       "lat": 52.361926,
@@ -10121,35 +10151,6 @@
       }
     },
     {
-      "id": "osm:node/4538946791",
-      "name": "Bartack",
-      "lat": 52.364436,
-      "lon": 4.850765,
-      "category": "restaurant",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": "yes",
-        "vegan": "yes",
-        "inferred": false
-      },
-      "address": "Postjesweg 124, 1057EH Amsterdam",
-      "website": "https://www.bartack.nl/",
-      "phone": "+31 20 261 6969",
-      "openingHours": "Mo-Th 08:00-24:00; Fr 08:00-02:00; Sa 09:00-02:00; Su 09:00-24:00",
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": "yes",
-      "wheelchair": "limited",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/4538946791",
-      "source": "osm",
-      "menu": {
-        "url": "https://www.bartack.nl/",
-        "scrapedAt": "2026-09-09T20:35:02.065Z",
-        "items": {}
-      }
-    },
-    {
       "id": "osm:node/2300261652",
       "name": "Basilico",
       "lat": 52.381302,
@@ -11034,6 +11035,35 @@
       }
     },
     {
+      "id": "osm:node/14200822002",
+      "name": "Benji's Café",
+      "lat": 52.348653,
+      "lon": 4.837008,
+      "category": "cafe",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Maassluisstraat 243, 1062 GA",
+      "website": "https://www.benjis.amsterdam/",
+      "phone": "+31203542037",
+      "openingHours": "Mo-Fr 09:00-15:30; Sa-Su 09:00-16:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/14200822002",
+      "source": "osm",
+      "menu": {
+        "url": "https://www.benjis.amsterdam/",
+        "scrapedAt": "2026-09-21T09:22:05.474Z",
+        "items": {}
+      }
+    },
+    {
       "id": "osm:node/2848272534",
       "name": "Benny's Lunchroom",
       "lat": 52.392286,
@@ -11139,30 +11169,6 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/9051994488",
-      "source": "osm"
-    },
-    {
-      "id": "osm:node/251165506",
-      "name": "Bern",
-      "lat": 52.372486,
-      "lon": 4.900935,
-      "category": "pub",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/251165506",
       "source": "osm"
     },
     {
@@ -14611,30 +14617,6 @@
       }
     },
     {
-      "id": "osm:node/7159162085",
-      "name": "Braine",
-      "lat": 52.366678,
-      "lon": 4.866846,
-      "category": "restaurant",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": "no",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/7159162085",
-      "source": "osm"
-    },
-    {
       "id": "osm:node/4987288027",
       "name": "Brandmeesters",
       "lat": 52.344746,
@@ -16953,7 +16935,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/8337544530",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.bumpyschicken.nl/",
+        "scrapedAt": "2026-09-21T09:22:05.851Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/14162198095",
@@ -19407,6 +19394,30 @@
       }
     },
     {
+      "id": "osm:node/251165506",
+      "name": "Café Bern",
+      "lat": 52.372486,
+      "lon": 4.900935,
+      "category": "pub",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": null,
+      "website": null,
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/251165506",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/12672923420",
       "name": "Café Bert",
       "lat": 52.363955,
@@ -20467,7 +20478,21 @@
           "coffee": 3.1,
           "beer": 3.7
         }
-      }
+      },
+      "flagReports": [
+        {
+          "flag": "student_discount",
+          "value": false,
+          "by": "anon",
+          "date": "2026-09-18"
+        },
+        {
+          "flag": "student_discount",
+          "value": false,
+          "by": "anon",
+          "date": "2026-09-18"
+        }
+      ]
     },
     {
       "id": "osm:node/2724317543",
@@ -21986,6 +22011,30 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/8727834784",
+      "name": "Café Het Wapen van Ten Kate",
+      "lat": 52.366548,
+      "lon": 4.866985,
+      "category": "cafe",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Ten Katestraat 32, 1053CT Amsterdam",
+      "website": null,
+      "phone": null,
+      "openingHours": "Tu-Sa 09:30-19:00; Mo 13:00-19:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": "no",
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/8727834784",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/279405755",
       "name": "Café Heuvel",
       "lat": 52.362464,
@@ -22860,30 +22909,6 @@
       }
     },
     {
-      "id": "osm:node/8727834784",
-      "name": "Cafe Marktzicht",
-      "lat": 52.366548,
-      "lon": 4.866985,
-      "category": "cafe",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "Ten Katestraat 32, 1053CG Amsterdam",
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": "no",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/8727834784",
-      "source": "osm"
-    },
-    {
       "id": "osm:node/2809594813",
       "name": "Café Marktzicht",
       "lat": 52.375227,
@@ -23313,30 +23338,6 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2848305295",
-      "source": "osm"
-    },
-    {
-      "id": "osm:node/4866706202",
-      "name": "Café Old Town",
-      "lat": 52.372505,
-      "lon": 4.89701,
-      "category": "pub",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/4866706202",
       "source": "osm"
     },
     {
@@ -24043,7 +24044,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/14183733501",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://caferestaurantdebaanderij.nl/",
+        "scrapedAt": "2026-09-21T09:22:10.380Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/9047480944",
@@ -24972,6 +24978,30 @@
         "scrapedAt": "2026-09-09T20:37:01.505Z",
         "items": {}
       }
+    },
+    {
+      "id": "osm:node/2724369221",
+      "name": "Café Vrij Walvis",
+      "lat": 52.372505,
+      "lon": 4.89701,
+      "category": "pub",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Oudezijds Voorburgwal 141-H, 1012ES Amsterdam",
+      "website": null,
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/2724369221",
+      "source": "osm"
     },
     {
       "id": "osm:node/4820570423",
@@ -28801,6 +28831,39 @@
       }
     },
     {
+      "id": "osm:node/2817513824",
+      "name": "Chingu",
+      "lat": 52.356143,
+      "lon": 4.895641,
+      "category": "restaurant",
+      "cuisines": [
+        "asian",
+        "korean",
+        "taiwanese"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Albert Cuypstraat 203D-H, 1073BE Amsterdam",
+      "website": "https://chinguamsterdam.nl/",
+      "phone": "+31 6 4422 7658",
+      "openingHours": "Mo-Sa 11:00-17:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/2817513824",
+      "source": "osm",
+      "menu": {
+        "url": "https://chinguamsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:22:05.773Z",
+        "items": {}
+      }
+    },
+    {
       "id": "osm:node/2138577025",
       "name": "Chipsy King",
       "lat": 52.364802,
@@ -31590,30 +31653,6 @@
         "scrapedAt": "2026-09-09T20:38:04.915Z",
         "items": {}
       }
-    },
-    {
-      "id": "osm:node/11368129470",
-      "name": "Collins",
-      "lat": 52.367824,
-      "lon": 4.871438,
-      "category": "restaurant",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/11368129470",
-      "source": "osm"
     },
     {
       "id": "osm:node/2720878134",
@@ -38940,16 +38979,21 @@
         "inferred": false
       },
       "address": "Jacques Veltmanstraat 56-58, 1065EM Amsterdam",
-      "website": null,
+      "website": "https://www.cafederooseboom.com/",
       "phone": "+31 20 615 6503",
-      "openingHours": null,
+      "openingHours": "Tu-Sa 15:00-00:00; Su 15:00-21:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1709778081",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.cafederooseboom.com/",
+        "scrapedAt": "2026-09-21T09:22:07.050Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2192123632",
@@ -50469,7 +50513,7 @@
         "inferred": false
       },
       "address": "Prinsengracht 411-H, 1016HM Amsterdam",
-      "website": "https://foufow.nl/",
+      "website": "http://foufowudon.nl",
       "phone": "+31 20 3415015",
       "openingHours": null,
       "takeaway": null,
@@ -50538,6 +50582,38 @@
       "menu": {
         "url": "https://www.franggo.nl",
         "scrapedAt": "2026-09-09T20:40:44.253Z",
+        "items": {}
+      }
+    },
+    {
+      "id": "osm:node/14188557601",
+      "name": "Franggo West",
+      "lat": 52.370232,
+      "lon": 4.866534,
+      "category": "restaurant",
+      "cuisines": [
+        "chicken",
+        "portuguese"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "De Clercqstraat 106h, 1052NM",
+      "website": "http://franggo.nl",
+      "phone": null,
+      "openingHours": "Mo-Su 12:00-22:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/14188557601",
+      "source": "osm",
+      "menu": {
+        "url": "http://franggo.nl",
+        "scrapedAt": "2026-09-21T09:22:13.036Z",
         "items": {}
       }
     },
@@ -50661,17 +50737,22 @@
         "vegan": null,
         "inferred": false
       },
-      "address": null,
-      "website": null,
+      "address": "Tollensstraat 65, 1053RS",
+      "website": "http://fredskoffie.nl",
       "phone": null,
-      "openingHours": null,
+      "openingHours": "Mo-Fr 07:30-18:00; Sa-Su 09:00-18:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11049877818",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://fredskoffie.nl",
+        "scrapedAt": "2026-09-21T09:22:06.420Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721517853",
@@ -51619,6 +51700,37 @@
       "menu": {
         "url": "https://fumi-amstelveen.nl/",
         "scrapedAt": "2026-09-09T20:40:55.469Z",
+        "items": {}
+      }
+    },
+    {
+      "id": "osm:node/14197265902",
+      "name": "Funky Thai",
+      "lat": 52.36617,
+      "lon": 4.867847,
+      "category": "restaurant",
+      "cuisines": [
+        "thai"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": true
+      },
+      "address": "Kinkerstraat 178, 1053EK",
+      "website": "http://funkythai.nl",
+      "phone": null,
+      "openingHours": "Su-Th 16:00-22:00; Fr-Sa 16:00-23:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/14197265902",
+      "source": "osm",
+      "menu": {
+        "url": "http://funkythai.nl",
+        "scrapedAt": "2026-09-21T09:22:06.319Z",
         "items": {}
       }
     },
@@ -52624,7 +52736,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/9036166512",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.giarestaurant.nl/",
+        "scrapedAt": "2026-09-21T09:22:09.539Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817854291",
@@ -53709,7 +53826,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11449960264",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.graca.nl/",
+        "scrapedAt": "2026-09-21T09:22:06.853Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817535153",
@@ -53921,7 +54043,7 @@
       "address": "Diemerplein 194, 1111JD Diemen",
       "website": "http://cheers-diemen.nl/",
       "phone": "+31 20 233 3150",
-      "openingHours": "Mo-Fr 09:00-24:00; We 08:00-24:00; Sa,Su 00:00-02:00,09:00-24:00",
+      "openingHours": "Mo-Su 09:00-24:00",
       "takeaway": null,
       "delivery": "yes",
       "outdoorSeating": "yes",
@@ -56719,7 +56841,12 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/965276888",
       "source": "osm",
-      "addedBecause": "Heeren van Aemstel: amenity=nightclub, ma è un locale da studenti con sconto sulla birra il giovedì (folia.nl)"
+      "addedBecause": "Heeren van Aemstel: amenity=nightclub, ma è un locale da studenti con sconto sulla birra il giovedì (folia.nl)",
+      "menu": {
+        "url": "https://www.dhva.nl",
+        "scrapedAt": "2026-09-21T09:22:08.930Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/7736498749",
@@ -57434,7 +57561,7 @@
         "inferred": false
       },
       "address": "Warmoesstraat 16, 1012JD Amsterdam",
-      "website": "https://www.hetkarbeel.nl",
+      "website": "https://hetkarbeel.nl/",
       "phone": "+31 20 627 4995",
       "openingHours": "Mo-Su 09:00-23:00",
       "takeaway": null,
@@ -58554,37 +58681,6 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10799554606",
       "source": "osm"
-    },
-    {
-      "id": "osm:node/4839718254",
-      "name": "Hoogendam",
-      "lat": 52.383396,
-      "lon": 4.89155,
-      "category": "restaurant",
-      "cuisines": [
-        "international"
-      ],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "Westerdoksplein 10, 1013AZ Amsterdam",
-      "website": "https://caferestauranthoogendam.nl/",
-      "phone": "+31 20 370 7686",
-      "openingHours": "Su-Th 09:00-23:00; Fr-Sa 09:00-24:00",
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": "yes",
-      "wheelchair": "limited",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/4839718254",
-      "source": "osm",
-      "menu": {
-        "url": "https://caferestauranthoogendam.nl/",
-        "scrapedAt": "2026-09-14T09:20:20.767Z",
-        "items": {}
-      }
     },
     {
       "id": "osm:node/567951945",
@@ -60900,6 +60996,32 @@
       }
     },
     {
+      "id": "osm:node/14201218701",
+      "name": "Ikaria Food",
+      "lat": 52.368761,
+      "lon": 4.870789,
+      "category": "cafe",
+      "cuisines": [
+        "greek"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Bilderdijkstraat 108k, 1053KZ",
+      "website": null,
+      "phone": null,
+      "openingHours": "Mo-Fr 07:30-16:30; Sa-Su 08:00-17:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/14201218701",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/2809211901",
       "name": "Ikaria Park",
       "lat": 52.372198,
@@ -62206,37 +62328,6 @@
       }
     },
     {
-      "id": "osm:node/2743194721",
-      "name": "Instock Amsterdam",
-      "lat": 52.368625,
-      "lon": 4.926513,
-      "category": "restaurant",
-      "cuisines": [
-        "international"
-      ],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "Czaar Peterstraat 21, 1018NW Amsterdam",
-      "website": "https://www.instock.nl/restaurant-amsterdam",
-      "phone": "+31 20 363 5765",
-      "openingHours": "Mo-Su 08:30-23:00",
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": "yes",
-      "wheelchair": "yes",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/2743194721",
-      "source": "osm",
-      "menu": {
-        "url": "https://www.instock.nl/restaurant-amsterdam",
-        "scrapedAt": "2026-09-14T09:20:44.072Z",
-        "items": {}
-      }
-    },
-    {
       "id": "osm:node/2860116012",
       "name": "Intersnack",
       "lat": 52.308443,
@@ -63488,7 +63579,7 @@
     },
     {
       "id": "osm:node/11530866466",
-      "name": "Jinju",
+      "name": "Jinja Asian Kitchen & Bar",
       "lat": 52.370258,
       "lon": 4.867862,
       "category": "restaurant",
@@ -63500,17 +63591,22 @@
         "vegan": null,
         "inferred": false
       },
-      "address": null,
-      "website": null,
+      "address": "De Clercqstraat 79, 1053AG",
+      "website": "http://jinjaamsterdam.nl",
       "phone": null,
-      "openingHours": null,
+      "openingHours": "Th-Sa 17:00-01:00; Su, Tu-We 17:00-00:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11530866466",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://jinjaamsterdam.nl",
+        "scrapedAt": "2026-09-21T09:22:11.299Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/440356406",
@@ -65054,14 +65150,19 @@
       "lat": 52.362028,
       "lon": 4.928301,
       "category": "cafe",
-      "cuisines": [],
+      "cuisines": [
+        "cake",
+        "coffee_shop",
+        "sandwich",
+        "tea"
+      ],
       "diet": {
         "vegetarian": null,
         "vegan": null,
         "inferred": false
       },
-      "address": null,
-      "website": null,
+      "address": "Dapperplein 45, 1093GP Amsterdam",
+      "website": "https://kaffeeamsterdam.nl/",
       "phone": null,
       "openingHours": "Mo-Fr 08:00-18:00; Sa 09:00-18:00",
       "takeaway": null,
@@ -65070,7 +65171,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2364927897",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://kaffeeamsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:22:08.304Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1348523677",
@@ -69082,6 +69188,21 @@
           "doner": 4.95,
           "icecream": 2.1
         }
+      },
+      "community": {
+        "prices": [
+          {
+            "item": "fries",
+            "dish": "Fries",
+            "amount": 3.2,
+            "currency": "EUR",
+            "by": "Alessio (WebSite owner)",
+            "date": "2026-09-17"
+          }
+        ],
+        "medianPrice": 3.2,
+        "ratings": [],
+        "avgRating": null
       }
     },
     {
@@ -69548,7 +69669,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2385772430",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.laboca-restaurant.nl/",
+        "scrapedAt": "2026-09-21T09:22:11.881Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10922165570",
@@ -69574,7 +69700,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10922165570",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.labrasa.nl",
+        "scrapedAt": "2026-09-21T09:22:10.642Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1350283575",
@@ -69600,7 +69731,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1350283575",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://bruschetta.amsterdam",
+        "scrapedAt": "2026-09-21T09:22:12.526Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2737962130",
@@ -69626,7 +69762,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2737962130",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.restaurantlacacerola.nl/",
+        "scrapedAt": "2026-09-21T09:22:11.937Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1886938076",
@@ -69652,7 +69793,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1886938076",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lacantinaamsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:22:12.951Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2736734774",
@@ -69679,7 +69825,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2736734774",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lacantinawestpoort.nl",
+        "scrapedAt": "2026-09-21T09:22:11.939Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5752399161",
@@ -69777,7 +69928,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1741835157",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://casadimadonna.nl",
+        "scrapedAt": "2026-09-21T09:22:14.329Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5810048612",
@@ -69803,7 +69959,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5810048612",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://lacasadimichael.nl",
+        "scrapedAt": "2026-09-21T09:22:13.273Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2737807388",
@@ -69829,7 +69990,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2737807388",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lacasonarestaurant.nl",
+        "scrapedAt": "2026-09-21T09:22:13.143Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721773577",
@@ -69879,7 +70045,15 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5837034338",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lacontessaamsterdam.nl/la-contessa-ristorante/",
+        "scrapedAt": "2026-09-21T09:22:18.110Z",
+        "items": {
+          "pizza": 6,
+          "first": 6
+        }
+      }
     },
     {
       "id": "osm:node/2893594378",
@@ -69905,7 +70079,12 @@
       "wheelchair": null,
       "brand": "La Cubanita",
       "osmUrl": "https://www.openstreetmap.org/node/2893594378",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lacubanita.nl/tapas-zaandam",
+        "scrapedAt": "2026-09-21T09:22:15.729Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2816952595",
@@ -69931,7 +70110,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2816952595",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.nonnafrancesca.com/",
+        "scrapedAt": "2026-09-21T09:22:16.189Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4212700895",
@@ -69979,7 +70163,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/497165617",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://ladilettante.amsterdam",
+        "scrapedAt": "2026-09-21T09:22:14.230Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1595389728",
@@ -70105,7 +70294,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/8338843317",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lafucina.nl/la-fucina-javastraat/",
+        "scrapedAt": "2026-09-21T09:22:16.707Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2806907924",
@@ -70131,7 +70325,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2806907924",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lagareamstelveen.nl",
+        "scrapedAt": "2026-09-21T09:22:14.740Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5551547676",
@@ -70155,7 +70354,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5551547676",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://steakhouselagouch.nl/",
+        "scrapedAt": "2026-09-21T09:22:14.565Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721521826",
@@ -70181,7 +70385,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2721521826",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lamadonna.nl/",
+        "scrapedAt": "2026-09-21T09:22:14.779Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/474752594",
@@ -70233,7 +70442,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/413449806",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mexican.nl/",
+        "scrapedAt": "2026-09-21T09:22:18.501Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2818256470",
@@ -70259,7 +70473,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2818256470",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.restaurantlamaria.com/",
+        "scrapedAt": "2026-09-21T09:22:16.318Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2720887376",
@@ -70285,7 +70504,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2720887376",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lamaschera.nl/",
+        "scrapedAt": "2026-09-21T09:22:16.297Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2874124922",
@@ -70337,7 +70561,16 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2506386115",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lanostragigi.com/menu",
+        "scrapedAt": "2026-09-21T09:22:17.905Z",
+        "items": {
+          "pasta": 8.5,
+          "first": 8.5,
+          "main": 25.5
+        }
+      }
     },
     {
       "id": "osm:node/566346908",
@@ -70363,7 +70596,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/566346908",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.laoliva.nl",
+        "scrapedAt": "2026-09-21T09:22:20.375Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2724285108",
@@ -70389,7 +70627,14 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2724285108",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lapaella.nl/menu/soepen/",
+        "scrapedAt": "2026-09-21T09:22:23.841Z",
+        "items": {
+          "first": 4
+        }
+      }
     },
     {
       "id": "osm:node/4405516856",
@@ -70489,7 +70734,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2631200752",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://pizzaperla.nl",
+        "scrapedAt": "2026-09-21T09:22:19.244Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2385772432",
@@ -70515,7 +70765,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2385772432",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lapiazza.nl/",
+        "scrapedAt": "2026-09-21T09:22:21.040Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4396190564",
@@ -70589,7 +70844,12 @@
       "wheelchair": "yes",
       "brand": "La Place",
       "osmUrl": "https://www.openstreetmap.org/node/432862171",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.laplace.com/",
+        "scrapedAt": "2026-09-21T09:22:20.240Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/9686500164",
@@ -70613,7 +70873,12 @@
       "wheelchair": null,
       "brand": "La Place",
       "osmUrl": "https://www.openstreetmap.org/node/9686500164",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.laplace.com/nl/vestigingen/lp-schiphol-plaza-express",
+        "scrapedAt": "2026-09-21T09:23:52.294Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/621699337",
@@ -70668,7 +70933,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3450648889",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.schiphol.nl/nl/op-schiphol/eten-en-drinken/faciliteiten/la-place-express",
+        "scrapedAt": "2026-09-21T09:22:18.584Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4343735200",
@@ -70694,7 +70964,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4343735200",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lapolpettablog.wordpress.com/",
+        "scrapedAt": "2026-09-21T09:22:18.665Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10989458686",
@@ -70721,7 +70996,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10989458686",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lareinita.nl/",
+        "scrapedAt": "2026-09-21T09:22:20.452Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/12118891413",
@@ -70747,7 +71027,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/12118891413",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.pizzeriasteakhouse-la-roma.nl/",
+        "scrapedAt": "2026-09-21T09:22:21.802Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2848299576",
@@ -70797,7 +71082,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2860112915",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.delaruelle.nl",
+        "scrapedAt": "2026-09-21T09:22:22.542Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2724334289",
@@ -70895,7 +71185,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4656887390",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.coffeeshoptertulia.com",
+        "scrapedAt": "2026-09-21T09:22:22.837Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4051706090",
@@ -71045,7 +71340,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4003042243",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lab-44.nl/",
+        "scrapedAt": "2026-09-21T09:22:23.596Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/6163760194",
@@ -71069,7 +71369,15 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/6163760194",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://labyrinthamsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:22:24.607Z",
+        "items": {
+          "first": 6.5,
+          "main": 18.5
+        }
+      }
     },
     {
       "id": "osm:node/332661074",
@@ -71095,7 +71403,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/332661074",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.ladybirdfriedchicken.com/",
+        "scrapedAt": "2026-09-21T09:22:22.020Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2737808462",
@@ -71121,7 +71434,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2737808462",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.laffa.nl",
+        "scrapedAt": "2026-09-21T09:22:23.256Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/9542768989",
@@ -71199,7 +71517,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5649942686",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lagom.cafe/",
+        "scrapedAt": "2026-09-21T09:22:23.953Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817612880",
@@ -71226,7 +71549,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817612880",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lakhay.nl",
+        "scrapedAt": "2026-09-21T09:22:24.752Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4277804560",
@@ -71278,7 +71606,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1689127884",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lalibela.nl/",
+        "scrapedAt": "2026-09-21T09:22:25.591Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1043896615",
@@ -71354,7 +71687,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1421161767",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.landmarkt.nl",
+        "scrapedAt": "2026-09-21T09:22:48.468Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2722211771",
@@ -71378,7 +71716,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2722211771",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.cafelangeleo.nl",
+        "scrapedAt": "2026-09-21T09:22:24.749Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2814127751",
@@ -71426,7 +71769,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2809777639",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.larrys.nl",
+        "scrapedAt": "2026-09-21T09:22:25.673Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4656657681",
@@ -71452,7 +71800,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4656657681",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://larsamsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:22:26.770Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2729939216",
@@ -71552,7 +71905,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2725661558",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.latei.net",
+        "scrapedAt": "2026-09-21T09:22:25.530Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/775759939",
@@ -71578,7 +71936,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/775759939",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://later-aan-het-water.nl/",
+        "scrapedAt": "2026-09-21T09:22:26.681Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2912936205",
@@ -71628,7 +71991,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2730033915",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://restaurantlavash.nl/",
+        "scrapedAt": "2026-09-21T09:22:28.399Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2509600419",
@@ -71654,7 +72022,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2509600419",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://bakeryeethuislavina.shop",
+        "scrapedAt": "2026-09-21T09:22:26.000Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4344132005",
@@ -71752,7 +72125,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/9110228028",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.restaurantlazuur.nl/",
+        "scrapedAt": "2026-09-21T09:22:30.492Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2641587834",
@@ -71778,7 +72156,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2641587834",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.le4stagioni.nl/menu",
+        "scrapedAt": "2026-09-21T09:22:27.561Z",
+        "items": {
+          "first": 10
+        }
+      }
     },
     {
       "id": "osm:node/9014681540",
@@ -71804,7 +72189,12 @@
       "wheelchair": "yes",
       "brand": "Le Bistro",
       "osmUrl": "https://www.openstreetmap.org/node/9014681540",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lebistrodiemen.nl/",
+        "scrapedAt": "2026-09-21T09:22:27.312Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817854208",
@@ -71830,7 +72220,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817854208",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lefalafel-amsterdam.nl",
+        "scrapedAt": "2026-09-21T09:22:27.780Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4357964715",
@@ -71904,7 +72299,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4548142651",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lehollandais.nl",
+        "scrapedAt": "2026-09-21T09:22:31.800Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2722210445",
@@ -71930,7 +72330,12 @@
       "wheelchair": "yes",
       "brand": "Le Pain Quotidien",
       "osmUrl": "https://www.openstreetmap.org/node/2722210445",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lepainquotidien.com/nl/nl/",
+        "scrapedAt": "2026-09-21T09:22:29.424Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2778833049",
@@ -71956,7 +72361,12 @@
       "wheelchair": null,
       "brand": "Le Pain Quotidien",
       "osmUrl": "https://www.openstreetmap.org/node/2778833049",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lepainquotidien.nl",
+        "scrapedAt": "2026-09-21T09:22:29.824Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4623664037",
@@ -71982,7 +72392,12 @@
       "wheelchair": null,
       "brand": "Le Pain Quotidien",
       "osmUrl": "https://www.openstreetmap.org/node/4623664037",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lepainquotidien.com/nl/en/stores/beethovenstraat",
+        "scrapedAt": "2026-09-21T09:23:53.670Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4729959906",
@@ -72008,7 +72423,12 @@
       "wheelchair": null,
       "brand": "Le Pain Quotidien",
       "osmUrl": "https://www.openstreetmap.org/node/4729959906",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lepainquotidien.com/nl/nl/locations/oud-zuid/johannes-verhulststraat-104",
+        "scrapedAt": "2026-09-21T09:23:55.687Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5325684504",
@@ -72132,7 +72552,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2816318410",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lepetitgeorge.nl",
+        "scrapedAt": "2026-09-21T09:22:28.583Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1427417018",
@@ -72208,7 +72633,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817610652",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://le-smash.com",
+        "scrapedAt": "2026-09-21T09:22:30.350Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/11873963554",
@@ -72236,7 +72666,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11873963554",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lesud.nl/",
+        "scrapedAt": "2026-09-21T09:22:30.380Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5211676828",
@@ -72312,7 +72747,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4539823097",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lebkov.nl/",
+        "scrapedAt": "2026-09-21T09:22:30.874Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/13634472474",
@@ -72384,7 +72824,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817777791",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.leemandoner.com",
+        "scrapedAt": "2026-09-21T09:22:31.003Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/12734143603",
@@ -72434,7 +72879,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1759851506",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lellebel.nl",
+        "scrapedAt": "2026-09-21T09:22:30.541Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5056471280",
@@ -72458,7 +72908,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5056471280",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lely-amsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:22:32.091Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/8659087197",
@@ -72484,7 +72939,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/8659087197",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lemoene.nl",
+        "scrapedAt": "2026-09-21T09:22:31.339Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/947905920",
@@ -72538,7 +72998,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1123272442",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.schiphol.nl/nl/op-schiphol/eten-en-drinken/faciliteiten/leon",
+        "scrapedAt": "2026-09-21T09:22:30.925Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/11645666315",
@@ -72591,7 +73056,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817614004",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.leonardosraviolibar.com",
+        "scrapedAt": "2026-09-21T09:22:33.281Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/850735390",
@@ -72619,7 +73089,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/850735390",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.lepita.nl/lepita/menu2024.jpg",
+        "scrapedAt": "2026-09-21T09:22:31.483Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817629931",
@@ -72643,7 +73118,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817629931",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://leramatcha.com/",
+        "scrapedAt": "2026-09-21T09:22:31.427Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1566951808",
@@ -72669,7 +73149,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1566951808",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://leszazous.nl/",
+        "scrapedAt": "2026-09-21T09:22:32.018Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2737973452",
@@ -72747,7 +73232,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1684852390",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.leziz.nl/menu",
+        "scrapedAt": "2026-09-21T09:22:35.975Z",
+        "items": {
+          "first": 5
+        }
+      }
     },
     {
       "id": "osm:node/5842025469",
@@ -72773,7 +73265,14 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5842025469",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lezzetgrillroom-amsterdam.nl",
+        "scrapedAt": "2026-09-21T09:22:34.214Z",
+        "items": {
+          "first": 8.5
+        }
+      }
     },
     {
       "id": "osm:node/11343466513",
@@ -72847,7 +73346,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817508026",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.libertine.amsterdam/libertine-cafe-des-pres/home",
+        "scrapedAt": "2026-09-21T09:22:33.736Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721938790",
@@ -72895,7 +73399,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2631625103",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.libertine.amsterdam",
+        "scrapedAt": "2026-09-21T09:23:56.045Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/7931814663",
@@ -72921,7 +73430,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/7931814663",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lieverhier.nl",
+        "scrapedAt": "2026-09-21T09:22:33.210Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/3909827757",
@@ -72945,7 +73459,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3909827757",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.schiphol.nl/en/facilities/light-lounge-cafe/",
+        "scrapedAt": "2026-09-21T09:22:33.250Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/7969275381",
@@ -73043,7 +73562,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4791453246",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lilliewinerebel.nl",
+        "scrapedAt": "2026-09-21T09:22:34.012Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1698461402",
@@ -73067,7 +73591,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1698461402",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.bistrolillys.nl",
+        "scrapedAt": "2026-09-21T09:22:35.850Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2860113742",
@@ -73093,7 +73622,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2860113742",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lillys-thai-takeaway.nl",
+        "scrapedAt": "2026-09-21T09:22:34.173Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/12662750307",
@@ -73167,7 +73701,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2818887029",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://limon.amsterdam/",
+        "scrapedAt": "2026-09-21T09:22:35.363Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2795482269",
@@ -73191,7 +73730,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2795482269",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://limonpoke.nl",
+        "scrapedAt": "2026-09-21T09:22:34.590Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721356639",
@@ -73217,7 +73761,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2721356639",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://linguini.nl",
+        "scrapedAt": "2026-09-21T09:22:34.882Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2165936478",
@@ -73243,7 +73792,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2165936478",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.linguini.nl",
+        "scrapedAt": "2026-09-21T09:22:37.641Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/11757698169",
@@ -73295,7 +73849,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2862840526",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.littlechinatown.nl/",
+        "scrapedAt": "2026-09-21T09:22:37.373Z",
+        "items": {
+          "first": 5.5
+        }
+      }
     },
     {
       "id": "osm:node/2817557735",
@@ -73319,7 +73880,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817557735",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.littlecollins.nl/",
+        "scrapedAt": "2026-09-21T09:22:35.679Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2848792790",
@@ -73345,7 +73911,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2848792790",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.littlesaigon.nl/",
+        "scrapedAt": "2026-09-21T09:22:38.468Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4135821989",
@@ -73371,7 +73942,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4135821989",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.littlesaigon.nl",
+        "scrapedAt": "2026-09-21T09:24:00.515Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1174575278",
@@ -73423,7 +73999,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11099922305",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.littletokyo.nl/",
+        "scrapedAt": "2026-09-21T09:22:39.282Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2725878433",
@@ -73447,7 +74028,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2725878433",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.live-amsterdam.com",
+        "scrapedAt": "2026-09-21T09:22:39.050Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1890385348",
@@ -73521,7 +74107,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10717426705",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.localdeli.nl/",
+        "scrapedAt": "2026-09-21T09:22:39.196Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/11738626469",
@@ -73573,7 +74164,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2505967266",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.localscoffee.nl/locations/all-day-brunch-jacob",
+        "scrapedAt": "2026-09-21T09:22:39.421Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817455441",
@@ -73601,7 +74197,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817455441",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.localscoffee.nl/locations/all-day-brunch-daniel",
+        "scrapedAt": "2026-09-21T09:24:01.977Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/9035360349",
@@ -73627,7 +74228,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/9035360349",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.localscoffee.nl/",
+        "scrapedAt": "2026-09-21T09:24:02.087Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2847159782",
@@ -73651,7 +74257,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2847159782",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.locatienrd.nl/",
+        "scrapedAt": "2026-09-21T09:22:39.728Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2825110156",
@@ -73677,7 +74288,14 @@
       "wheelchair": "limited",
       "brand": "Loetje",
       "osmUrl": "https://www.openstreetmap.org/node/2825110156",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.loetje.nl/menukaart/",
+        "scrapedAt": "2026-09-21T09:22:53.476Z",
+        "items": {
+          "first": 14.25
+        }
+      }
     },
     {
       "id": "osm:node/2847025866",
@@ -73703,7 +74321,14 @@
       "wheelchair": null,
       "brand": "Loetje",
       "osmUrl": "https://www.openstreetmap.org/node/2847025866",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.loetje.nl/menukaart/",
+        "scrapedAt": "2026-09-21T09:24:08.172Z",
+        "items": {
+          "first": 14.25
+        }
+      }
     },
     {
       "id": "osm:node/4126136134",
@@ -73729,7 +74354,14 @@
       "wheelchair": "limited",
       "brand": "Loetje",
       "osmUrl": "https://www.openstreetmap.org/node/4126136134",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.loetje.nl/menukaart/",
+        "scrapedAt": "2026-09-21T09:24:14.114Z",
+        "items": {
+          "first": 14.25
+        }
+      }
     },
     {
       "id": "osm:node/4671412341",
@@ -73755,7 +74387,14 @@
       "wheelchair": null,
       "brand": "Loetje",
       "osmUrl": "https://www.openstreetmap.org/node/4671412341",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.loetje.nl/menukaart/",
+        "scrapedAt": "2026-09-21T09:24:19.765Z",
+        "items": {
+          "first": 14.25
+        }
+      }
     },
     {
       "id": "osm:node/5853215197",
@@ -73781,7 +74420,14 @@
       "wheelchair": "yes",
       "brand": "Loetje",
       "osmUrl": "https://www.openstreetmap.org/node/5853215197",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.loetje.nl/menukaart/",
+        "scrapedAt": "2026-09-21T09:24:25.480Z",
+        "items": {
+          "first": 14.25
+        }
+      }
     },
     {
       "id": "osm:node/704461695",
@@ -73807,7 +74453,14 @@
       "wheelchair": null,
       "brand": "Loetje",
       "osmUrl": "https://www.openstreetmap.org/node/704461695",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.loetje.nl/menukaart",
+        "scrapedAt": "2026-09-21T09:24:31.920Z",
+        "items": {
+          "first": 14.25
+        }
+      }
     },
     {
       "id": "osm:node/6229637753",
@@ -73857,7 +74510,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/413624765",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lokaalvandestad.nl",
+        "scrapedAt": "2026-09-21T09:22:42.652Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2412984319",
@@ -73933,7 +74591,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4047002106",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lola-italian-deli.nl",
+        "scrapedAt": "2026-09-21T09:22:41.710Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10741762805",
@@ -73957,7 +74620,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10741762805",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lola-s.nl/diner",
+        "scrapedAt": "2026-09-21T09:22:42.227Z",
+        "items": {
+          "first": 6.5
+        }
+      }
     },
     {
       "id": "osm:node/2817455223",
@@ -73981,7 +74651,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817455223",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.brasserielolita.nl",
+        "scrapedAt": "2026-09-21T09:22:43.655Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2729940406",
@@ -74008,7 +74683,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2729940406",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lombardos.nl",
+        "scrapedAt": "2026-09-21T09:22:42.369Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:way/282359995",
@@ -74058,7 +74738,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2721521925",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.londonbridge.nl/",
+        "scrapedAt": "2026-09-21T09:22:45.614Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1588328789",
@@ -74084,7 +74769,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1588328789",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.restaurant-longpura.com",
+        "scrapedAt": "2026-09-21T09:22:43.754Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/249327302",
@@ -74183,7 +74873,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1486109775",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.losargentinos.nl/",
+        "scrapedAt": "2026-09-21T09:22:43.317Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2725746634",
@@ -74283,7 +74978,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2721521310",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lostinamsterdam.com/",
+        "scrapedAt": "2026-09-21T09:22:45.325Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2909589334",
@@ -74309,11 +75009,16 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2909589334",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lot61.com",
+        "scrapedAt": "2026-09-21T09:22:44.034Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/494157331",
-      "name": "Lot Sixty One Coffee Roasters",
+      "name": "LOT61 Coffee Roasters",
       "lat": 52.366815,
       "lon": 4.870312,
       "category": "cafe",
@@ -74324,7 +75029,7 @@
         "inferred": false
       },
       "address": "Kinkerstraat 112, 1053ED Amsterdam",
-      "website": "https://www.lotsixtyonecoffee.com",
+      "website": "https://lot61.com/",
       "phone": null,
       "openingHours": "Mo-Fr 08:00-18:00; Sa,Su,PH 09:00-18:00",
       "takeaway": null,
@@ -74333,7 +75038,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/494157331",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lot61.com/",
+        "scrapedAt": "2026-09-21T09:24:32.104Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/6488569530",
@@ -74383,7 +75093,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3994255842",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.louffee.com",
+        "scrapedAt": "2026-09-21T09:22:46.075Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4711855889",
@@ -74407,7 +75122,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4711855889",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://louielouie.nl/",
+        "scrapedAt": "2026-09-21T09:22:48.167Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/12217707965",
@@ -74431,7 +75151,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/12217707965",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://louis-amsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:22:46.381Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2609207570",
@@ -74481,7 +75206,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2366138134",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://louloupizzabar.nl/",
+        "scrapedAt": "2026-09-21T09:22:46.524Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/8736208911",
@@ -74505,7 +75235,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/8736208911",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.facebook.com/loungecafela/",
+        "scrapedAt": "2026-09-21T09:22:46.133Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1222424121",
@@ -74532,7 +75267,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1222424121",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lova.cafe",
+        "scrapedAt": "2026-09-21T09:22:46.439Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1098476210",
@@ -74558,7 +75298,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1098476210",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://restaurant.lowlander.nl/",
+        "scrapedAt": "2026-09-21T09:22:48.742Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4649164937",
@@ -74584,7 +75329,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4649164937",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://luccadue.nl",
+        "scrapedAt": "2026-09-21T09:22:50.248Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/9209324036",
@@ -74608,7 +75358,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/9209324036",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lucias-restaurant.com/amstelveen-stadshart/",
+        "scrapedAt": "2026-09-21T09:22:49.257Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5752436075",
@@ -74684,7 +75439,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4538446695",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lucius.nl/",
+        "scrapedAt": "2026-09-21T09:22:50.082Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4396101395",
@@ -74710,7 +75470,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4396101395",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.luckygarden.nl",
+        "scrapedAt": "2026-09-21T09:22:58.852Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2720812936",
@@ -74736,7 +75501,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2720812936",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lucky-house.nl/",
+        "scrapedAt": "2026-09-21T09:22:53.431Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/11259444131",
@@ -74760,7 +75530,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11259444131",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://luckykingenhong.nl/",
+        "scrapedAt": "2026-09-21T09:22:53.852Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/12798410853",
@@ -74784,7 +75559,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/12798410853",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lucyensien.nl/restaurant-bar-lucy",
+        "scrapedAt": "2026-09-21T09:22:50.262Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/251528265",
@@ -74834,7 +75614,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2722211292",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://ludenamsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:22:50.517Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/13319225419",
@@ -74939,7 +75724,15 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/9077856383",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lumbinirestaurant.nl/",
+        "scrapedAt": "2026-09-21T09:22:55.038Z",
+        "items": {
+          "first": 6.95,
+          "main": 25.95
+        }
+      }
     },
     {
       "id": "osm:node/11160401818",
@@ -74963,7 +75756,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11160401818",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.luminairamsterdam.com/",
+        "scrapedAt": "2026-09-21T09:22:51.993Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2720811825",
@@ -74989,7 +75787,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2720811825",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.restaurantluna.nl",
+        "scrapedAt": "2026-09-21T09:22:53.304Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/11160893808",
@@ -75015,7 +75818,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11160893808",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.luna-rossa.nl/",
+        "scrapedAt": "2026-09-21T09:22:54.319Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2725914032",
@@ -75111,7 +75919,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/6469465685",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lunch-hoek-amsterdam.nl",
+        "scrapedAt": "2026-09-21T09:22:56.091Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/3458361055",
@@ -75159,7 +75972,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817558217",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lunchcafebozz.nl",
+        "scrapedAt": "2026-09-21T09:22:55.953Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/9141449091",
@@ -75231,7 +76049,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2741065837",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.cafewaterloo.nl",
+        "scrapedAt": "2026-09-21T09:22:55.286Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2812152611",
@@ -75305,7 +76128,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1538261147",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lunchroomcafetariamokum-amsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:22:55.157Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5577238207",
@@ -75329,7 +76157,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5577238207",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://lunchroomdedrukkerij.nl/",
+        "scrapedAt": "2026-09-21T09:22:57.367Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/9889806367",
@@ -75353,7 +76186,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/9889806367",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.lunchroomgrannies.com",
+        "scrapedAt": "2026-09-21T09:22:57.669Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2808321726",
@@ -75379,7 +76217,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2808321726",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lunchroomitaly.nl/",
+        "scrapedAt": "2026-09-21T09:22:55.556Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2829437623",
@@ -75403,7 +76246,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2829437623",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lunchroomlastig.nl",
+        "scrapedAt": "2026-09-21T09:23:06.323Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2808408195",
@@ -75427,7 +76275,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2808408195",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.leut.nl",
+        "scrapedAt": "2026-09-21T09:22:56.527Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/9722402584",
@@ -75475,7 +76328,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/977340214",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.lunchroomwilhelmina.nl/",
+        "scrapedAt": "2026-09-21T09:22:56.646Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2808856766",
@@ -75501,7 +76359,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2808856766",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.lupemexmex.com/",
+        "scrapedAt": "2026-09-21T09:22:56.705Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/257441001",
@@ -75525,7 +76388,14 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/257441001",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.eetcafelust.nl/eetkaart",
+        "scrapedAt": "2026-09-21T09:22:59.508Z",
+        "items": {
+          "main": 19.5
+        }
+      }
     },
     {
       "id": "osm:node/2737964122",
@@ -75551,7 +76421,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2737964122",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://luukscoffee.com",
+        "scrapedAt": "2026-09-21T09:22:57.538Z",
+        "items": {
+          "coffee": 1.75
+        }
+      }
     },
     {
       "id": "osm:node/5588589721",
@@ -75577,7 +76454,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5588589721",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://luukscoffee.com/",
+        "scrapedAt": "2026-09-21T09:24:32.396Z",
+        "items": {
+          "coffee": 1.75
+        }
+      }
     },
     {
       "id": "osm:node/2730036819",
@@ -75601,7 +76485,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2730036819",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.barlux.nl/",
+        "scrapedAt": "2026-09-21T09:22:59.466Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2743662582",
@@ -75649,7 +76538,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2783661196",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://maalder.nl/",
+        "scrapedAt": "2026-09-21T09:23:01.271Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2808540061",
@@ -75673,7 +76567,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2808540061",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://cafemabell.nl",
+        "scrapedAt": "2026-09-21T09:22:57.982Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4934368325",
@@ -75725,7 +76624,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4431014724",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.madamamsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:23:00.972Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/7533672000",
@@ -75823,7 +76727,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4639582776",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://madeswarung.com/amsterdam",
+        "scrapedAt": "2026-09-21T09:23:00.808Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2793711985",
@@ -75849,7 +76758,12 @@
       "wheelchair": null,
       "brand": "MADO",
       "osmUrl": "https://www.openstreetmap.org/node/2793711985",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mado-nederland.nl/amsterdam/",
+        "scrapedAt": "2026-09-21T09:22:59.529Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/7033667105",
@@ -75875,7 +76789,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/7033667105",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://madre.amsterdam/",
+        "scrapedAt": "2026-09-21T09:23:01.905Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/3585981913",
@@ -75899,7 +76818,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3585981913",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.cafemads.nl/",
+        "scrapedAt": "2026-09-21T09:23:05.113Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721523305",
@@ -75925,7 +76849,14 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2721523305",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.maenaamthai.nl/",
+        "scrapedAt": "2026-09-21T09:23:05.032Z",
+        "items": {
+          "first": 6
+        }
+      }
     },
     {
       "id": "osm:node/12733397878",
@@ -76027,7 +76958,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2506051482",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://makachi.nl",
+        "scrapedAt": "2026-09-21T09:23:06.592Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2848302468",
@@ -76075,7 +77011,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/6693359041",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.malva.amsterdam",
+        "scrapedAt": "2026-09-21T09:23:04.026Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2893584329",
@@ -76099,7 +77040,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2893584329",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mama-zaandam.nl/",
+        "scrapedAt": "2026-09-21T09:23:01.992Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2730035584",
@@ -76149,7 +77095,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11172705038",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mamamakan.com/",
+        "scrapedAt": "2026-09-21T09:23:04.548Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721771371",
@@ -76223,7 +77174,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2816113567",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mamawok.nl",
+        "scrapedAt": "2026-09-21T09:23:04.812Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2809593568",
@@ -76250,7 +77206,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2809593568",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mamasandtapas.nl/",
+        "scrapedAt": "2026-09-21T09:23:04.708Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2807398993",
@@ -76274,7 +77235,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2807398993",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://manacafe.nl/",
+        "scrapedAt": "2026-09-21T09:23:09.978Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4458925189",
@@ -76301,7 +77267,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4458925189",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://pizzamangia.nl",
+        "scrapedAt": "2026-09-21T09:23:05.612Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2737958388",
@@ -76329,7 +77300,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2737958388",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://pizzamangia.nl",
+        "scrapedAt": "2026-09-21T09:24:32.947Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2818005550",
@@ -76356,7 +77332,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2818005550",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mangiamore.nl",
+        "scrapedAt": "2026-09-21T09:23:07.244Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817630093",
@@ -76382,7 +77363,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817630093",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mangiancoraamsterdam.nl",
+        "scrapedAt": "2026-09-21T09:23:07.262Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5056469776",
@@ -76408,7 +77394,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5056469776",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mangimangi.nl/",
+        "scrapedAt": "2026-09-21T09:23:09.482Z",
+        "items": {
+          "first": 6.95
+        }
+      }
     },
     {
       "id": "osm:node/6053199425",
@@ -76456,7 +77449,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/976698244",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mankind.nl",
+        "scrapedAt": "2026-09-21T09:23:09.317Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721772626",
@@ -76506,7 +77504,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2818225699",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.manzilrestaurant.nl",
+        "scrapedAt": "2026-09-21T09:23:10.243Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2138577023",
@@ -76530,7 +77533,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2138577023",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.maozusa.com/restaurants/locations/amsterdam",
+        "scrapedAt": "2026-09-21T09:23:10.661Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2807399747",
@@ -76578,7 +77586,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3290909258",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://maozfalafel.eu/maozfalafel-falafel-restaurant-damrak-city-centre-amsterdam/",
+        "scrapedAt": "2026-09-21T09:23:08.213Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/432860535",
@@ -76602,7 +77615,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/432860535",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.maozusa.com",
+        "scrapedAt": "2026-09-21T09:24:36.572Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721578710",
@@ -76628,7 +77646,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2721578710",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://maozfalafel.eu",
+        "scrapedAt": "2026-09-21T09:23:08.307Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817455672",
@@ -76654,7 +77677,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817455672",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://maozfalafel.eu/maozfalafel-falafel-restaurant-albert-cuypstraat-market-amsterdam/",
+        "scrapedAt": "2026-09-21T09:23:08.402Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1687467626",
@@ -76781,7 +77809,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3994256030",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://margheritapizza.nl/",
+        "scrapedAt": "2026-09-21T09:23:11.045Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/11237972779",
@@ -76807,7 +77840,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11237972779",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.margosamsterdam.com/",
+        "scrapedAt": "2026-09-21T09:23:10.311Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/12218256601",
@@ -76833,7 +77871,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/12218256601",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.margosamsterdam.com/",
+        "scrapedAt": "2026-09-21T09:24:36.960Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1419479008",
@@ -76859,7 +77902,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1419479008",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://marhaba-amsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:23:11.779Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5827479095",
@@ -76885,7 +77933,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5827479095",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://marhaba-amsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:24:39.416Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817514529",
@@ -76937,7 +77990,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2793536616",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://www.marirasa.nl",
+        "scrapedAt": "2026-09-21T09:23:10.588Z",
+        "items": {
+          "first": 7.5
+        }
+      }
     },
     {
       "id": "osm:node/1174575275",
@@ -76985,7 +78045,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2725914029",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mariatogo.site123.me/",
+        "scrapedAt": "2026-09-21T09:23:10.874Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/6295748085",
@@ -77009,7 +78074,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/6295748085",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://marieamsterdam.com/",
+        "scrapedAt": "2026-09-21T09:23:10.691Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/3458361038",
@@ -77107,7 +78177,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2508437585",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://maris-piper.com",
+        "scrapedAt": "2026-09-21T09:23:10.739Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1619441662",
@@ -77131,7 +78206,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1619441662",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.maritshuiskamerrestaurant.nl",
+        "scrapedAt": "2026-09-21T09:23:11.129Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/3771893616",
@@ -77179,7 +78259,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4842843322",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://market33.nl/",
+        "scrapedAt": "2026-09-21T09:23:11.204Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10295809431",
@@ -77203,7 +78288,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10295809431",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://market27.nl/",
+        "scrapedAt": "2026-09-21T09:23:12.206Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2862835839",
@@ -77229,7 +78319,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2862835839",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.marmarisgrillpizzaamsterdam.nl",
+        "scrapedAt": "2026-09-21T09:23:11.749Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4401294508",
@@ -77330,7 +78425,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1207350295",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.barmash.nl",
+        "scrapedAt": "2026-09-21T09:23:11.437Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4455347821",
@@ -77354,7 +78454,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4455347821",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://restobarmassalia.nl/",
+        "scrapedAt": "2026-09-21T09:23:13.593Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10895972005",
@@ -77402,7 +78507,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11115143373",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.massimogelato.com/oost",
+        "scrapedAt": "2026-09-21T09:23:11.963Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/14137993402",
@@ -77426,7 +78536,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/14137993402",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.massimogelato.nl/",
+        "scrapedAt": "2026-09-21T09:23:12.476Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817709969",
@@ -77450,7 +78565,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817709969",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.massimogelato.nl/",
+        "scrapedAt": "2026-09-21T09:24:39.794Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/8736208913",
@@ -77474,7 +78594,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/8736208913",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.massimogelato.com/west",
+        "scrapedAt": "2026-09-21T09:24:40.076Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1550842307",
@@ -77503,6 +78628,32 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/11411974224",
+      "name": "MastroSupplì",
+      "lat": 52.366284,
+      "lon": 4.872545,
+      "category": "restaurant",
+      "cuisines": [
+        "italian"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Bilderdijkstraat 202, 1053LE",
+      "website": null,
+      "phone": null,
+      "openingHours": "Tu-Su 11:00-21:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": "yes",
+      "wheelchair": "yes",
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/11411974224",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/3474709738",
       "name": "Mata Hari",
       "lat": 52.374653,
@@ -77526,7 +78677,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3474709738",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.matahari-amsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:23:14.072Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/553005080",
@@ -77600,7 +78756,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2818476149",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.maxten.nl/",
+        "scrapedAt": "2026-09-21T09:23:12.215Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/497169607",
@@ -77648,7 +78809,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/497180854",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://maximussteakhouse.com/",
+        "scrapedAt": "2026-09-21T09:23:15.899Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2730033645",
@@ -77672,7 +78838,15 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2730033645",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://grillsteakhousemaya.com/",
+        "scrapedAt": "2026-09-21T09:23:13.698Z",
+        "items": {
+          "first": 8.8,
+          "main": 8.8
+        }
+      }
     },
     {
       "id": "osm:node/4071739220",
@@ -77746,7 +78920,15 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817614291",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://maydanoz-amsterdam.nl/menukaart/",
+        "scrapedAt": "2026-09-21T09:23:17.663Z",
+        "items": {
+          "fries": 4,
+          "first": 4
+        }
+      }
     },
     {
       "id": "osm:node/1477529632",
@@ -77772,7 +78954,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1477529632",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mayur.nl",
+        "scrapedAt": "2026-09-21T09:23:17.993Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2814125892",
@@ -77900,7 +79087,12 @@
       "wheelchair": null,
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/11877143657",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mcdonalds.com/nl/nl-nl/location/zaandam/mcdonalds-zaanstad-centrum/ankersmidplein-141/851351.html",
+        "scrapedAt": "2026-09-21T09:23:37.593Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1552005229",
@@ -77926,7 +79118,12 @@
       "wheelchair": "no",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/1552005229",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-nieuwendijk-70/restaurants/mcdonalds-amsterdam-nieuwendijk-70",
+        "scrapedAt": "2026-09-21T09:23:14.562Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1910667184",
@@ -77952,7 +79149,12 @@
       "wheelchair": "yes",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/1910667184",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/van-swindenstraat/restaurants/mcdonalds-amsterdam-van-swindenstraat",
+        "scrapedAt": "2026-09-21T09:24:40.482Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2707123634",
@@ -77978,7 +79180,12 @@
       "wheelchair": null,
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2707123634",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-osdorp-drive",
+        "scrapedAt": "2026-09-21T09:24:40.845Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721722757",
@@ -78030,7 +79237,12 @@
       "wheelchair": null,
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2721723343",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-damrak-92/restaurants/mcdonalds-amsterdam-damrak-92",
+        "scrapedAt": "2026-09-21T09:24:41.220Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721773502",
@@ -78056,7 +79268,12 @@
       "wheelchair": "limited",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2721773502",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-damrak-8/restaurants/amsterdam-damrak-8",
+        "scrapedAt": "2026-09-21T09:24:41.562Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2724000978",
@@ -78082,7 +79299,12 @@
       "wheelchair": "limited",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2724000978",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-kalverstraat",
+        "scrapedAt": "2026-09-21T09:24:41.840Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2730039493",
@@ -78108,7 +79330,12 @@
       "wheelchair": "limited",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2730039493",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-leidsestraat/restaurants/mcdonalds-amsterdam-leidsestraat",
+        "scrapedAt": "2026-09-21T09:24:42.107Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2733895736",
@@ -78134,7 +79361,12 @@
       "wheelchair": null,
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2733895736",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/hoofddorp",
+        "scrapedAt": "2026-09-21T09:24:42.425Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2745225718",
@@ -78160,7 +79392,12 @@
       "wheelchair": null,
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2745225718",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/schiphol-noord-spottersplaats",
+        "scrapedAt": "2026-09-21T09:24:42.736Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2807400942",
@@ -78186,7 +79423,12 @@
       "wheelchair": "limited",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2807400942",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/winkelcentrum-amstelveen-buitenplein",
+        "scrapedAt": "2026-09-21T09:24:43.019Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2809211166",
@@ -78212,7 +79454,12 @@
       "wheelchair": "yes",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2809211166",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-kinkerstraat",
+        "scrapedAt": "2026-09-21T09:24:43.321Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817456029",
@@ -78238,7 +79485,12 @@
       "wheelchair": "yes",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2817456029",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-albert-cuyp/restaurants/mcdonalds-amsterdam-albert-cuyp",
+        "scrapedAt": "2026-09-21T09:24:43.577Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2840441045",
@@ -78264,7 +79516,12 @@
       "wheelchair": null,
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2840441045",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mcdonalds.com/nl/nl-nl/location/amsterdam/mcdonalds-amsterdam-spaklerweg/spaklerweg-38/850150.html",
+        "scrapedAt": "2026-09-21T09:24:55.577Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2862834199",
@@ -78290,7 +79547,12 @@
       "wheelchair": "yes",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2862834199",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mcdonaldsrestaurant.nl/bijlmerplein-amsterdamse-poort",
+        "scrapedAt": "2026-09-21T09:23:15.110Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2862978509",
@@ -78342,7 +79604,12 @@
       "wheelchair": "yes",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/2893995483",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/zaandam-zuid/restaurants/mcdonalds-zaandam-zuid",
+        "scrapedAt": "2026-09-21T09:23:15.227Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/34044096",
@@ -78368,7 +79635,12 @@
       "wheelchair": "limited",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/34044096",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-muntplein",
+        "scrapedAt": "2026-09-21T09:24:55.873Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/3467376961",
@@ -78394,7 +79666,12 @@
       "wheelchair": "yes",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/3467376961",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/schiphol-lounge-2/restaurants/mcdonalds-schiphol-lounge-2",
+        "scrapedAt": "2026-09-21T09:24:56.123Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4109923659",
@@ -78420,7 +79697,12 @@
       "wheelchair": "yes",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/4109923659",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/winkelcentrum-osdorpplein-amsterdam",
+        "scrapedAt": "2026-09-21T09:24:56.410Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4801219372",
@@ -78446,7 +79728,12 @@
       "wheelchair": "limited",
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/node/4801219372",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-buikslotermeerplein",
+        "scrapedAt": "2026-09-21T09:24:56.697Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5770462132",
@@ -78524,7 +79811,12 @@
       "wheelchair": null,
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/way/278868734",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/diemen/restaurants/diemen",
+        "scrapedAt": "2026-09-21T09:24:56.946Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:way/44826985",
@@ -78550,7 +79842,12 @@
       "wheelchair": null,
       "brand": "McDonald's",
       "osmUrl": "https://www.openstreetmap.org/way/44826985",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mcdonaldsrestaurant.nl/amsterdam-noord-ijdoornlaan/restaurants/mcdonalds-amsterdam-noord-ijdoornlaan",
+        "scrapedAt": "2026-09-21T09:24:57.360Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2842366862",
@@ -78576,7 +79873,14 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2842366862",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mchi.nl/portfolio/mchi/menu/",
+        "scrapedAt": "2026-09-21T09:23:17.324Z",
+        "items": {
+          "first": 5.95
+        }
+      }
     },
     {
       "id": "osm:node/2737854489",
@@ -78602,7 +79906,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2737854489",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.meat-and-greek.com/",
+        "scrapedAt": "2026-09-21T09:23:16.745Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2818708251",
@@ -78626,7 +79935,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2818708251",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.facebook.com/MeatMeKosher/",
+        "scrapedAt": "2026-09-21T09:23:15.900Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/12006329289",
@@ -78674,7 +79988,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2767063887",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.meatthis.nl/aalsmeer",
+        "scrapedAt": "2026-09-21T09:23:18.354Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4352862945",
@@ -78698,7 +80017,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4352862945",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://meatlessdistrict.com/",
+        "scrapedAt": "2026-09-21T09:23:19.082Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721523160",
@@ -78772,7 +80096,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/782253208",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.restaurantmeerzicht.nl/",
+        "scrapedAt": "2026-09-21T09:23:17.797Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/12073773269",
@@ -78826,7 +80155,14 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2737805688",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://meghna.nl/menu/voorgerechten",
+        "scrapedAt": "2026-09-21T09:23:23.318Z",
+        "items": {
+          "first": 6.5
+        }
+      }
     },
     {
       "id": "osm:node/9001663259",
@@ -78852,7 +80188,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/9001663259",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "http://mehtap.nl/",
+        "scrapedAt": "2026-09-21T09:23:18.814Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4618329029",
@@ -78878,7 +80219,14 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4618329029",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.meiwah.net/",
+        "scrapedAt": "2026-09-21T09:23:20.540Z",
+        "items": {
+          "first": 3.5
+        }
+      }
     },
     {
       "id": "osm:node/2627758834",
@@ -78976,7 +80324,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3117006706",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mellyscookiebar.nl",
+        "scrapedAt": "2026-09-21T09:23:18.555Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4071739222",
@@ -79002,7 +80355,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4071739222",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://memoriesofindia.nl",
+        "scrapedAt": "2026-09-21T09:23:19.287Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721823486",
@@ -79028,7 +80386,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2721823486",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.menimpossible.com/",
+        "scrapedAt": "2026-09-21T09:23:18.999Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/472861004",
@@ -79069,6 +80432,11 @@
         "medianPrice": 10,
         "ratings": [],
         "avgRating": null
+      },
+      "menu": {
+        "url": "https://meneerkebab.nl",
+        "scrapedAt": "2026-09-21T09:23:20.334Z",
+        "items": {}
       },
       "flagReports": [
         {
@@ -79155,7 +80523,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1578160163",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://meram.nl/amsterdam-osdorp",
+        "scrapedAt": "2026-09-21T09:23:19.712Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5842297726",
@@ -79181,7 +80554,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5842297726",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://meram.nl/",
+        "scrapedAt": "2026-09-21T09:24:59.712Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5899995690",
@@ -79207,7 +80585,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5899995690",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://meram.nl/",
+        "scrapedAt": "2026-09-21T09:25:01.714Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/95288389",
@@ -79233,7 +80616,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/95288389",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://meram.nl/",
+        "scrapedAt": "2026-09-21T09:25:03.704Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2795376032",
@@ -79285,7 +80673,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2052027473",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://meram.nl/vestigingen/amsterdam-oost-cafe/",
+        "scrapedAt": "2026-09-21T09:25:03.909Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1299980492",
@@ -79309,7 +80702,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1299980492",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://restaurantmerkelbach.nl/",
+        "scrapedAt": "2026-09-21T09:23:23.664Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/12713945180",
@@ -79359,7 +80757,14 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2842369568",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://merza.sitedish.shop/",
+        "scrapedAt": "2026-09-21T09:23:22.438Z",
+        "items": {
+          "first": 4.7
+        }
+      }
     },
     {
       "id": "osm:node/2817515500",
@@ -79385,7 +80790,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817515500",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mesamesa.nl",
+        "scrapedAt": "2026-09-21T09:23:22.156Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2348150436",
@@ -79411,7 +80821,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2348150436",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://restaurantmesken.nl/",
+        "scrapedAt": "2026-09-21T09:23:25.446Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10995571851",
@@ -79487,7 +80902,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4492981872",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.metropolitan.nl/",
+        "scrapedAt": "2026-09-21T09:23:22.761Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4135906817",
@@ -79642,7 +81062,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1741827384",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.middleat-amsterdam.nl",
+        "scrapedAt": "2026-09-21T09:23:23.349Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10856181905",
@@ -79716,7 +81141,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/7459225392",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mikkelleratmorebeer.nl/",
+        "scrapedAt": "2026-09-21T09:23:27.157Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/14023935801",
@@ -79770,7 +81200,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5003012481",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.miko-amsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:23:24.558Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10796854092",
@@ -79794,7 +81229,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10796854092",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.melkweg.nl/nl/milk/",
+        "scrapedAt": "2026-09-21T09:23:23.765Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/11443848021",
@@ -79820,7 +81260,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11443848021",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mimafood.nl/menu",
+        "scrapedAt": "2026-09-21T09:23:25.179Z",
+        "items": {
+          "first": 4.95
+        }
+      }
     },
     {
       "id": "osm:node/2817713413",
@@ -79871,7 +81318,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4920779122",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mimafood.nl/menu",
+        "scrapedAt": "2026-09-21T09:25:05.189Z",
+        "items": {
+          "first": 4.95
+        }
+      }
     },
     {
       "id": "osm:node/11361561492",
@@ -79947,7 +81401,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/12697016384",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mirchirestaurant.nl",
+        "scrapedAt": "2026-09-21T09:23:25.563Z",
+        "items": {
+          "main": 7.5
+        }
+      }
     },
     {
       "id": "osm:node/2817777568",
@@ -79974,7 +81435,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817777568",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mirimary.com",
+        "scrapedAt": "2026-09-21T09:23:26.290Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10881672349",
@@ -79998,7 +81464,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10881672349",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mirindaamsterdam.nl",
+        "scrapedAt": "2026-09-21T09:23:27.436Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817632664",
@@ -80048,7 +81519,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2722210474",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.misosushi.nl/",
+        "scrapedAt": "2026-09-21T09:23:28.166Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5012899187",
@@ -80074,7 +81550,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5012899187",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://misskorea.nl",
+        "scrapedAt": "2026-09-21T09:23:25.956Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/504265778",
@@ -80129,7 +81610,16 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/8624568710",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://miss-scarlett.nl/diner-menu",
+        "scrapedAt": "2026-09-21T09:23:28.922Z",
+        "items": {
+          "icecream": 1,
+          "first": 10.5,
+          "main": 21
+        }
+      }
     },
     {
       "id": "osm:node/1578734064",
@@ -80229,7 +81719,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2827534685",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://barmitts.nl/",
+        "scrapedAt": "2026-09-21T09:23:30.368Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2724000479",
@@ -80279,7 +81774,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2506017793",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.miuz.nl",
+        "scrapedAt": "2026-09-21T09:23:30.278Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2810111108",
@@ -80303,7 +81803,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2810111108",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.miuz.nl/",
+        "scrapedAt": "2026-09-21T09:25:08.708Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2862656023",
@@ -80351,7 +81856,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3872020932",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mizubar.nl",
+        "scrapedAt": "2026-09-21T09:23:29.774Z",
+        "items": {
+          "first": 3.9
+        }
+      }
     },
     {
       "id": "osm:node/1641002657",
@@ -80375,7 +81887,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1641002657",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://binnenpret.org/mkz/",
+        "scrapedAt": "2026-09-21T09:23:29.353Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2741065352",
@@ -80399,7 +81916,17 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2741065352",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.moakpancakes.nl/pages/menu",
+        "scrapedAt": "2026-09-21T09:23:31.505Z",
+        "items": {
+          "coffee": 2.95,
+          "wine": 8.5,
+          "cocktail": 8.5,
+          "icecream": 4.5
+        }
+      }
     },
     {
       "id": "osm:node/2186372449",
@@ -80425,7 +81952,17 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2186372449",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.moakpancakes.nl/pages/menu",
+        "scrapedAt": "2026-09-21T09:25:10.589Z",
+        "items": {
+          "coffee": 2.95,
+          "wine": 8.5,
+          "cocktail": 8.5,
+          "icecream": 4.5
+        }
+      }
     },
     {
       "id": "osm:node/2829436740",
@@ -80451,7 +81988,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2829436740",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://moche.nl/",
+        "scrapedAt": "2026-09-21T09:23:34.185Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1328355092",
@@ -80477,7 +82019,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1328355092",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.moeders.com",
+        "scrapedAt": "2026-09-21T09:23:31.373Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2506039995",
@@ -80530,7 +82077,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2816343561",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mogu-food.com/",
+        "scrapedAt": "2026-09-21T09:23:32.036Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/11002748696",
@@ -80557,7 +82109,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11002748696",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mogu-food.com/",
+        "scrapedAt": "2026-09-21T09:25:12.370Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2724219947",
@@ -80607,7 +82164,12 @@
       "wheelchair": null,
       "brand": "MOJO",
       "osmUrl": "https://www.openstreetmap.org/node/6003228330",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mo-jo.eu/location/amsterdam/",
+        "scrapedAt": "2026-09-21T09:23:37.112Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/95288421",
@@ -80679,7 +82241,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/13904200690",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://poolen-amsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:23:34.096Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2765957705",
@@ -80703,7 +82270,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2765957705",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://molli.squat.net/",
+        "scrapedAt": "2026-09-21T09:23:32.764Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4598923239",
@@ -80727,7 +82299,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4598923239",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mollyinamsterdam.com/",
+        "scrapedAt": "2026-09-21T09:23:33.553Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2721358076",
@@ -80751,7 +82328,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2721358076",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://momenti-italiancuisine.nl",
+        "scrapedAt": "2026-09-21T09:23:36.563Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/863195537",
@@ -80775,7 +82357,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/863195537",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.momo-amsterdam.com",
+        "scrapedAt": "2026-09-21T09:23:35.694Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2817835828",
@@ -80801,7 +82388,15 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817835828",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.momotibet.com/menu",
+        "scrapedAt": "2026-09-21T09:23:36.700Z",
+        "items": {
+          "fries": 8.5,
+          "first": 6.5
+        }
+      }
     },
     {
       "id": "osm:node/5651692839",
@@ -80825,7 +82420,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5651692839",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://monkscoffee.nl/",
+        "scrapedAt": "2026-09-21T09:23:34.547Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2452226916",
@@ -80875,7 +82475,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2817558767",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.restaurantmontblanc.nl",
+        "scrapedAt": "2026-09-21T09:23:36.047Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10866005301",
@@ -80899,7 +82504,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10866005301",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.montepelmo.nl",
+        "scrapedAt": "2026-09-21T09:23:37.524Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/10861044413",
@@ -80949,7 +82559,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/295378745",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://themoods.eu",
+        "scrapedAt": "2026-09-21T09:23:49.876Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/13014281315",
@@ -81026,7 +82641,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/14178394824",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mooieboules.nl/amsterdamwest/",
+        "scrapedAt": "2026-09-21T09:23:37.013Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/5812407053",
@@ -81076,7 +82696,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4454997791",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://restaurantmoon.nl",
+        "scrapedAt": "2026-09-21T09:23:40.856Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4270081322",
@@ -81102,7 +82727,14 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4270081322",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.moonlighttogo.nl/",
+        "scrapedAt": "2026-09-21T09:23:39.437Z",
+        "items": {
+          "first": 12.5
+        }
+      }
     },
     {
       "id": "osm:node/2788284915",
@@ -81126,7 +82758,12 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2788284915",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://moos.goudvisch.nl/",
+        "scrapedAt": "2026-09-21T09:23:39.197Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/3820178615",
@@ -81174,7 +82811,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2725663208",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://morningowlcoffee.com/",
+        "scrapedAt": "2026-09-21T09:23:37.634Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2788130173",
@@ -81198,7 +82840,12 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2788130173",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://morrisenbella.nl/",
+        "scrapedAt": "2026-09-21T09:23:41.068Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/4350790394",
@@ -81248,7 +82895,12 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2745434808",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mosamsterdam.nl/",
+        "scrapedAt": "2026-09-21T09:23:40.258Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/1486109779",
@@ -81324,7 +82976,12 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2788448978",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://www.mosselengin.nl/",
+        "scrapedAt": "2026-09-21T09:23:39.903Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/6649035186",
@@ -81374,7 +83031,14 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2848703893",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://mteveresttandoori.nl",
+        "scrapedAt": "2026-09-21T09:23:43.911Z",
+        "items": {
+          "first": 5.95
+        }
+      }
     },
     {
       "id": "osm:node/12006385053",
@@ -82825,6 +84489,32 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/412512561",
+      "source": "osm"
+    },
+    {
+      "id": "osm:node/7159162085",
+      "name": "Narazaki",
+      "lat": 52.366678,
+      "lon": 4.866846,
+      "category": "restaurant",
+      "cuisines": [
+        "japanese"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Ten Katestraat 26, 1053CG",
+      "website": null,
+      "phone": null,
+      "openingHours": "Mo-Sa 17:30-22:30; Su 17:30-22:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": "no",
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/7159162085",
       "source": "osm"
     },
     {
@@ -87606,10 +89296,10 @@
         "vegan": null,
         "inferred": false
       },
-      "address": null,
-      "website": null,
+      "address": "Strawinskylaan 11, 1077XW",
+      "website": "https://www.oxxbucks.amsterdam/",
       "phone": null,
-      "openingHours": null,
+      "openingHours": "Mo-Fr 08:00-22:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
@@ -88211,7 +89901,7 @@
       "address": "De Ruijterkade 35, 1012AA Amsterdam",
       "website": null,
       "phone": null,
-      "openingHours": null,
+      "openingHours": "Mo-Su 09:00-17:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
@@ -90309,6 +91999,33 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/3889189976",
+      "name": "Peps",
+      "lat": 52.3675,
+      "lon": 4.871689,
+      "category": "restaurant",
+      "cuisines": [
+        "spanish",
+        "tapas"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Bilderdijkstraat 158HS, 1053LC Amsterdam",
+      "website": "http://peps-amsterdam.nl",
+      "phone": null,
+      "openingHours": "Su-We 16:00-00:00; Th-Sa 16:00-01:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/3889189976",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/2720884309",
       "name": "Pequ",
       "lat": 52.37913,
@@ -90483,6 +92200,32 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2736379585",
+      "source": "osm"
+    },
+    {
+      "id": "osm:node/8727834783",
+      "name": "PestoLab",
+      "lat": 52.366607,
+      "lon": 4.866954,
+      "category": "restaurant",
+      "cuisines": [
+        "italian"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Ten Katestraat 30-A, 1053CG Amsterdam",
+      "website": "http://pestolab.nl",
+      "phone": null,
+      "openingHours": "We-Mo 12:00-21:30",
+      "takeaway": "yes",
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/8727834783",
       "source": "osm"
     },
     {
@@ -92322,6 +94065,32 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/4292762228",
+      "name": "PizzaPezzi",
+      "lat": 52.37069,
+      "lon": 4.854979,
+      "category": "restaurant",
+      "cuisines": [
+        "pizza"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Jan Evertsenstraat 65-H, 1057BP Amsterdam",
+      "website": "https://www.pizzapezziamsterdam.nl/",
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/4292762228",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/5859533276",
       "name": "Pizzeria Bos en Lommer",
       "lat": 52.378138,
@@ -93076,6 +94845,32 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/6761981954",
+      "source": "osm"
+    },
+    {
+      "id": "osm:node/2848299554",
+      "name": "Pokebowl & Co",
+      "lat": 52.398359,
+      "lon": 4.936371,
+      "category": "restaurant",
+      "cuisines": [
+        "pokebowl"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Buikslotermeerplein 108, 1025EX Amsterdam",
+      "website": "https://www.pokebowlco.nl/",
+      "phone": "+31 20 636 5525",
+      "openingHours": "Mo-Su 12:00-21:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/2848299554",
       "source": "osm"
     },
     {
@@ -94306,7 +96101,7 @@
       },
       "address": "Raamgracht 9-H, 1011KH Amsterdam",
       "website": "http://raanphadthai.nl/en",
-      "phone": "06 26423841",
+      "phone": "+31 20 623 8708",
       "openingHours": "Tu-Sa 16:30-22:00",
       "takeaway": null,
       "delivery": null,
@@ -95602,6 +97397,35 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5810048610",
       "source": "osm"
+    },
+    {
+      "id": "osm:node/2743194721",
+      "name": "Restaurant Fyr",
+      "lat": 52.368625,
+      "lon": 4.926513,
+      "category": "restaurant",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Czaar Peterstraat 21, 1018NW Amsterdam",
+      "website": "https://www.restaurantfyr.nl/",
+      "phone": null,
+      "openingHours": "Tu-Sa 18:00-22:00; Fr-Sa 12:00-15:00,18:00-22:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": "yes",
+      "wheelchair": "yes",
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/2743194721",
+      "source": "osm",
+      "menu": {
+        "url": "https://www.instock.nl/restaurant-amsterdam",
+        "scrapedAt": "2026-09-14T09:20:44.072Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/2818066423",
@@ -98498,7 +100322,7 @@
       "address": "De Ruijterkade 44A, 1012AA Amsterdam",
       "website": "https://saigoncaphe.nl/amsterdam-centralstation/",
       "phone": "+31 20 489 7918",
-      "openingHours": "Mo-Su 10:00-22:00",
+      "openingHours": "Tu-Su 11:00-20:45; Mo 12:00-20:45",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
@@ -101974,6 +103798,32 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/11368129470",
+      "name": "SILK Amsterdam",
+      "lat": 52.367824,
+      "lon": 4.871438,
+      "category": "restaurant",
+      "cuisines": [
+        "asian"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Bilderdijkstraat 140, 1053LA",
+      "website": "http://silk-amsterdam.nl",
+      "phone": null,
+      "openingHours": "We-Th 18:00-23:00; Fr-Sa 18:00-00:00; Su 17:00-23:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/11368129470",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/2420278553",
       "name": "Silk Road Kebab House",
       "lat": 52.36192,
@@ -104878,32 +106728,6 @@
       "source": "osm"
     },
     {
-      "id": "osm:node/11411974224",
-      "name": "Soytasty",
-      "lat": 52.366284,
-      "lon": 4.872545,
-      "category": "restaurant",
-      "cuisines": [
-        "asian"
-      ],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": "yes",
-      "wheelchair": "yes",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/11411974224",
-      "source": "osm"
-    },
-    {
       "id": "osm:node/2817517264",
       "name": "Spaghetteria",
       "lat": 52.356214,
@@ -105972,6 +107796,32 @@
       "wheelchair": "yes",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2807399674",
+      "source": "osm"
+    },
+    {
+      "id": "osm:node/2745434515",
+      "name": "Stadscafé Ten Westen",
+      "lat": 52.383389,
+      "lon": 4.891562,
+      "category": "restaurant",
+      "cuisines": [
+        "international"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Westerdoksplein 10, 1013AZ Amsterdam",
+      "website": "https://www.tenwesten.amsterdam",
+      "phone": "+31 20 370 7686",
+      "openingHours": "Mo Closed; Tu-We 11:00-22:00 ; Th-Sa 11:00-24:00; Su 12:00-20:30",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": "yes",
+      "wheelchair": "limited",
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/2745434515",
       "source": "osm"
     },
     {
@@ -114430,19 +116280,19 @@
     {
       "id": "osm:node/13844407101",
       "name": "The Old Soul",
-      "lat": 52.355086,
-      "lon": 4.954455,
+      "lat": 52.354594,
+      "lon": 4.95461,
       "category": "restaurant",
       "cuisines": [],
       "diet": {
-        "vegetarian": null,
-        "vegan": null,
+        "vegetarian": "yes",
+        "vegan": "yes",
         "inferred": false
       },
       "address": null,
       "website": null,
       "phone": null,
-      "openingHours": null,
+      "openingHours": "Mo-Fr 08:00-20:00",
       "takeaway": "yes",
       "delivery": null,
       "outdoorSeating": null,
@@ -116479,32 +118329,6 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4459777500",
-      "source": "osm"
-    },
-    {
-      "id": "osm:node/2809318609",
-      "name": "Toko Mammie",
-      "lat": 52.281226,
-      "lon": 4.851651,
-      "category": "restaurant",
-      "cuisines": [
-        "indonesian"
-      ],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "Brink 18, 1188NC Amstelveen",
-      "website": null,
-      "phone": null,
-      "openingHours": "Mo 15:00-19:30; Tu-Fr 11:30-19:00; Sa 11:30-18:00; Su 13:00-17:00",
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": "yes",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/2809318609",
       "source": "osm"
     },
     {
@@ -119230,32 +121054,6 @@
       "source": "osm"
     },
     {
-      "id": "osm:node/3889189976",
-      "name": "Vegitalian",
-      "lat": 52.3675,
-      "lon": 4.871689,
-      "category": "restaurant",
-      "cuisines": [
-        "italian"
-      ],
-      "diet": {
-        "vegetarian": "yes",
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "Bilderdijkstraat 158HS, Amsterdam",
-      "website": "https://vegitalian.com/",
-      "phone": "+31 6 4193 7346",
-      "openingHours": "Mo-Su 09:00-00:00",
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/3889189976",
-      "source": "osm"
-    },
-    {
       "id": "osm:node/2817926743",
       "name": "Venetië IJs",
       "lat": 52.345742,
@@ -120593,8 +122391,8 @@
         "inferred": false
       },
       "address": null,
-      "website": null,
-      "phone": null,
+      "website": "https://wagamama.nl/",
+      "phone": "+31 20 528 7778",
       "openingHours": null,
       "takeaway": null,
       "delivery": null,
@@ -121620,7 +123418,22 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3245003914",
-      "source": "osm"
+      "source": "osm",
+      "community": {
+        "prices": [
+          {
+            "item": "beer",
+            "dish": "Beer",
+            "amount": 4,
+            "currency": "EUR",
+            "by": "anon",
+            "date": "2026-09-18"
+          }
+        ],
+        "medianPrice": 4,
+        "ratings": [],
+        "avgRating": null
+      }
     },
     {
       "id": "osm:node/1904756985",
@@ -122946,6 +124759,30 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4600410612",
+      "source": "osm"
+    },
+    {
+      "id": "osm:node/2814024287",
+      "name": "Wolff & Beer",
+      "lat": 52.364436,
+      "lon": 4.850765,
+      "category": "restaurant",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": "yes",
+        "vegan": "yes",
+        "inferred": false
+      },
+      "address": "Postjesweg 124, 1057EH Amsterdam",
+      "website": "https://www.bartack.nl/",
+      "phone": "+31 20 261 6969",
+      "openingHours": "Mo-Th 08:00-24:00; Fr 08:00-02:00; Sa 09:00-02:00; Su 09:00-24:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": "yes",
+      "wheelchair": "limited",
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/2814024287",
       "source": "osm"
     },
     {
