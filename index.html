@@ -10,15 +10,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
+<!-- tema scelto col bottone ☀/☾: applicato subito, prima del CSS di pagina, per evitare il lampo del tema sbagliato -->
+<script>try { const t = localStorage.getItem('ea-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
 <body>
 <header class="topbar">
   <h1><span aria-hidden="true">🥙</span> Eating Amsterdam</h1>
   <p class="tagline">Good food, small budget</p>
   <div class="topbar-actions">
-    <button type="button" id="btn-locate" class="ghost" title="Centre the map on my location">📍 Near me</button>
-    <button type="button" id="btn-feedback" class="ghost" title="Report something to improve">💬 Feedback</button>
-    <button type="button" id="btn-data" class="ghost" title="Import, export and refresh data">⚙️ Data</button>
+    <button type="button" id="btn-locate" class="ghost" aria-label="Near me" title="Centre the map on my location">📍<span class="lbl"> Near me</span></button>
+    <button type="button" id="btn-feedback" class="ghost" aria-label="Feedback" title="Report something to improve">💬<span class="lbl"> Feedback</span></button>
+    <button type="button" class="ghost theme-btn" aria-label="Switch theme">☾</button>
+    <button type="button" id="btn-data" class="ghost" aria-label="Data" title="Import, export and refresh data">⚙️<span class="lbl"> Data</span></button>
   </div>
 </header>
 

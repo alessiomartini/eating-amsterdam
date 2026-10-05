@@ -261,7 +261,7 @@ mattina e committa le differenze.
 
 ```
 index.html                 struttura della pagina
-assets/css/style.css       tema scuro, layout mappa + lista
+assets/css/style.css       tema chiaro/scuro (segue il sistema, bottone ☀/☾ in topbar, scelta in localStorage "ea-theme"), layout mappa + lista
 assets/js/
   app.js                   avvio e collegamento dei pezzi
   data.js                  caricamento dataset, campi derivati (prezzo, voto)

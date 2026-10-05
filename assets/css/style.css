@@ -1,16 +1,18 @@
+/* palette chiara di base; quella scura vale se il sistema è scuro o se si
+   sceglie "scuro" dal bottone in topbar (data-theme su <html>, vedi app.js) */
 :root {
-  --bg: #0f1115;
-  --bg-elev: #171a21;
-  --bg-elev-2: #1f232c;
-  --line: #2a2f3a;
-  --text: #e7e9ee;
-  --muted: #9aa3b2;
-  --accent: #ff8a3d;
-  --accent-ink: #1a0d02;
-  --cheap: #46c98b;
-  --mid: #ffc247;
-  --pricey: #ff6b6b;
-  --unknown: #6b7383;
+  --bg: #f5f6f8;
+  --bg-elev: #ffffff;
+  --bg-elev-2: #eceef2;
+  --line: #d6dae2;
+  --text: #1a1d23;
+  --muted: #5b6472;
+  --accent: #d9620f;
+  --accent-ink: #ffffff;
+  --cheap: #1d8a57;
+  --mid: #a87400;
+  --pricey: #cc3b3b;
+  --unknown: #7a8292;
 
   /* Colori dei pallini sulla mappa: separati da quelli sopra apposta. Le tile
      OSM scurite da .leaflet-tile hanno una base verde-oliva a saturazione medio-
@@ -18,12 +20,36 @@
      confonde comunque — verificato rendendo gli stessi colori sopra campioni di
      tile (parco/acqua/strada/edificio) con lo stesso filtro: il grigio spariva
      quasi ovunque, e pure verde/giallo/rosso perdevano molto contrasto. */
-  --map-cheap: #2fe08a;
-  --map-mid: #ff9f1c;
-  --map-pricey: #ff5252;
-  --map-unknown: #f4f6fb;
+  --map-cheap: #12b06a;
+  --map-mid: #f08c00;
+  --map-pricey: #e53935;
+  --map-unknown: #8a93a3;
   --radius: 12px;
   --topbar-h: 56px;
+  --map-bg: #e9ecef; --overlay: rgba(255,255,255,.92); --tile-filter: none;
+  --vegan: #1f7a4f; --student: #2f5fb8; --student-line: #a9bde6; --warn-line: #d9c48a;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1115; --bg-elev: #171a21; --bg-elev-2: #1f232c; --line: #2a2f3a;
+    --text: #e7e9ee; --muted: #9aa3b2; --accent: #ff8a3d; --accent-ink: #1a0d02;
+    --cheap: #46c98b; --mid: #ffc247; --pricey: #ff6b6b; --unknown: #6b7383;
+    --map-cheap: #2fe08a; --map-mid: #ff9f1c; --map-pricey: #ff5252; --map-unknown: #f4f6fb;
+    --map-bg: #10131a; --overlay: rgba(15,17,21,.9);
+    --tile-filter: brightness(.72) invert(1) contrast(.85) hue-rotate(190deg) saturate(.5) brightness(.92);
+    --vegan: #7ee0b1; --student: #8ab4ff; --student-line: #2f4570; --warn-line: #6b5320;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1115; --bg-elev: #171a21; --bg-elev-2: #1f232c; --line: #2a2f3a;
+  --text: #e7e9ee; --muted: #9aa3b2; --accent: #ff8a3d; --accent-ink: #1a0d02;
+  --cheap: #46c98b; --mid: #ffc247; --pricey: #ff6b6b; --unknown: #6b7383;
+  --map-cheap: #2fe08a; --map-mid: #ff9f1c; --map-pricey: #ff5252; --map-unknown: #f4f6fb;
+  --map-bg: #10131a; --overlay: rgba(15,17,21,.9);
+  --tile-filter: brightness(.72) invert(1) contrast(.85) hue-rotate(190deg) saturate(.5) brightness(.92);
+  --vegan: #7ee0b1; --student: #8ab4ff; --student-line: #2f4570; --warn-line: #6b5320;
   color-scheme: dark;
 }
 
@@ -66,7 +92,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .tagline { margin: 0; color: var(--muted); font-size: 13px; }
 .topbar-actions { margin-left: auto; display: flex; gap: 8px; }
 
-@media (max-width: 700px) { .tagline { display: none; } }
+/* su telefono i bottoni della topbar restano solo icona (il testo è nel
+   title), altrimenti non ci stanno tutti e quelli a destra escono dallo schermo */
+@media (max-width: 700px) {
+  .tagline { display: none; }
+  .topbar-actions .lbl { display: none; }
+  .topbar-actions { gap: 6px; }
+  .topbar h1 { overflow: hidden; text-overflow: ellipsis; }
+}
 
 .ghost {
   background: var(--bg-elev-2);
@@ -116,7 +149,7 @@ a.primary, a.ghost { display: inline-block; text-decoration: none; }
 }
 
 .map-wrap { position: relative; }
-#map { position: absolute; inset: 0; background: #10131a; }
+#map { position: absolute; inset: 0; background: var(--map-bg); }
 
 /* ---------- filtri ---------- */
 .filters { padding: 12px 14px 4px; display: grid; gap: 14px; }
@@ -202,7 +235,7 @@ output { color: var(--text); font-weight: 600; }
   color: var(--muted);
 }
 .badge.veg { color: var(--cheap); border-color: #2c6b4f; }
-.badge.vegan { color: #7ee0b1; border-color: #2c6b4f; }
+.badge.vegan { color: var(--vegan); border-color: #2c6b4f; }
 .badge.guess { opacity: .75; font-style: italic; }
 .badge.open { color: var(--cheap); }
 .badge.closed { color: var(--pricey); }
@@ -230,7 +263,7 @@ output { color: var(--text); font-weight: 600; }
   left: 10px; bottom: 20px;
   z-index: 500;
   display: flex; flex-direction: column; gap: 3px;
-  background: rgba(15,17,21,.9);
+  background: var(--overlay);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 8px 10px;
@@ -251,8 +284,8 @@ output { color: var(--text); font-weight: 600; }
 .dot.pricey { background: var(--map-pricey); }
 .dot.unknown { background: var(--map-unknown); }
 
-.leaflet-container { background: #10131a; font: inherit; }
-.leaflet-tile { filter: brightness(.72) invert(1) contrast(.85) hue-rotate(190deg) saturate(.5) brightness(.92); }
+.leaflet-container { background: var(--map-bg); font: inherit; }
+.leaflet-tile { filter: var(--tile-filter); }
 .marker-cluster {
   background: rgba(255,138,61,.25);
   border-radius: 50%;
@@ -415,7 +448,7 @@ output { color: var(--text); font-weight: 600; }
 .price.est { font-weight: 500; }
 
 /* ---------- storico e prezzi da verificare ---------- */
-.badge.warn { color: var(--mid); border-color: #6b5320; cursor: help; }
+.badge.warn { color: var(--mid); border-color: var(--warn-line); cursor: help; }
 .history { margin-top: 8px; }
 .history > summary { cursor: pointer; font-size: 12.5px; color: var(--muted); padding: 4px 0; }
 .history .price-list { margin: 6px 0 2px; }
@@ -426,7 +459,7 @@ output { color: var(--text); font-weight: 600; }
 .feedback-note time { color: var(--muted); white-space: nowrap; }
 
 /* ---------- fatti segnalati dagli utenti ---------- */
-.badge.student { color: #8ab4ff; border-color: #2f4570; }
+.badge.student { color: var(--student); border-color: var(--student-line); }
 
 /* titolo e domanda (es. sconto studenti) sulla stessa riga: la domanda sta
    piccola a destra, con un margine per non finire sotto la × di chiusura */

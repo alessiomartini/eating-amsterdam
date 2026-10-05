@@ -195,6 +195,28 @@ function wire() {
     });
   });
 
+  // tema chiaro/scuro: di default segue il sistema; il bottone salva la scelta
+  const themeBtns = document.querySelectorAll('.theme-btn');
+  const sysDark = () => matchMedia('(prefers-color-scheme: dark)').matches;
+  const applyTheme = (t) => {
+    if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+    const dark = t ? t === 'dark' : sysDark();
+    themeBtns.forEach((b) => {
+      b.textContent = dark ? '☀' : '☾';
+      b.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+      b.setAttribute('aria-label', b.title);
+    });
+  };
+  let theme = null;
+  try { theme = localStorage.getItem('ea-theme'); } catch (e) {}
+  applyTheme(theme);
+  themeBtns.forEach((b) => b.addEventListener('click', () => {
+    const cur = document.documentElement.dataset.theme;
+    theme = (cur ? cur === 'dark' : sysDark()) ? 'light' : 'dark';
+    applyTheme(theme);
+    try { localStorage.setItem('ea-theme', theme); } catch (e) {}
+  }));
+
   el('btn-feedback').addEventListener('click', () => {
     // il contesto evita il classico "non funziona" senza sapere cosa guardava
     const filters = readFilters();
