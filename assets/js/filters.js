@@ -55,6 +55,7 @@ export function resolvePrice(place, items, useEstimates = true) {
   let amount = 0;
   let hasEstimate = false;
   let uncertain = false;
+  let stale = false;
   const breakdown = [];
 
   for (const id of items) {
@@ -64,10 +65,11 @@ export function resolvePrice(place, items, useEstimates = true) {
     amount += entry.amount;
     if (entry.source === 'estimate') hasEstimate = true;
     if (entry.uncertain) uncertain = true;
+    if (entry.stale) stale = true;
     breakdown.push({ id, amount: entry.amount, source: entry.source });
   }
 
-  return { amount: Math.round(amount * 100) / 100, hasEstimate, uncertain, itemIds: [...items], breakdown };
+  return { amount: Math.round(amount * 100) / 100, hasEstimate, uncertain, stale, itemIds: [...items], breakdown };
 }
 
 export function distanceKm(a, b) {

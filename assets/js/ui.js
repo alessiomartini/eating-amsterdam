@@ -68,6 +68,7 @@ function flagMini(place) {
   }).join('')}</div>`;
 }
 
+const STALE_HINT = 'This price is more than 12 months old — worth re-checking. Add yours to refresh it.';
 const UNCERTAIN_HINT = 'The latest report is far from the earlier ones — it may be a typo or a different dish. Add yours to settle it.';
 
 /**
@@ -84,7 +85,8 @@ function priceCell(place) {
   const breakdown = shown.breakdown
     .map((b) => `${ITEM_BY_ID[b.id]?.label ?? b.id} ${money(b.amount)}${b.source === 'estimate' ? ' (estimate)' : ''}`)
     .join(' + ');
-  const flag = shown.uncertain ? ` <span class="badge warn" title="${esc(UNCERTAIN_HINT)}">?</span>` : '';
+  const flag = (shown.uncertain ? ` <span class="badge warn" title="${esc(UNCERTAIN_HINT)}">?</span>` : '')
+    + (shown.stale ? ` <span class="badge warn" title="${esc(STALE_HINT)}">re-check</span>` : '');
 
   if (shown.hasEstimate) {
     return `<span class="price est" title="${esc(breakdown)}">≈${money(shown.amount)} ${icons}</span>${flag}`;
@@ -187,14 +189,16 @@ function itemsTable(place) {
     if (entry?.source === 'estimate') {
       value = `<span class="est" title="estimate · ${esc(entry.basis.join(' · '))}">≈${money(entry.amount)}</span>`;
     } else if (entry?.source === 'menu') {
-      value = `<strong title="from their menu">${money(entry.amount)}</strong>`;
+      const old = entry.stale ? ` <span class="badge warn" title="${esc(STALE_HINT)}">re-check</span>` : '';
+      value = `<strong title="from their menu">${money(entry.amount)}</strong>${old}`;
     } else if (entry?.source === 'measured') {
       const when = entry.date ? ` on ${esc(entry.date)}` : '';
       const others = entry.samples > 1 ? ` · ${entry.samples} reports` : '';
       const warn = entry.uncertain
         ? `<span class="badge warn" title="${esc(UNCERTAIN_HINT)}">? unverified</span>`
         : '';
-      value = `<strong title="latest${when}${others}">${money(entry.amount)}</strong> ${warn}`;
+      const old = entry.stale ? ` <span class="badge warn" title="${esc(STALE_HINT)}">re-check</span>` : '';
+      value = `<strong title="latest${when}${others}">${money(entry.amount)}</strong> ${warn}${old}`;
     }
 
     return `<tr>

@@ -12,6 +12,7 @@
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
     "scrape:menus": "node scripts/scrape-menus.mjs",
+    "check:stale": "node scripts/stale-prices.mjs",
     "stamp": "node scripts/stamp-version.mjs",
     "sync:backend": "node scripts/sync-backend.mjs",
     "backend:setup": "node backend/setup.mjs"
