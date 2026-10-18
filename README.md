@@ -294,7 +294,7 @@ data/places.json           il dataset
 
 Il backend per i prezzi condivisi c'è già (sezione sopra). Per le idee non
 ancora realizzate e le proposte allo studio vedi
-[`FUTURE-ARCHITECTURE.md`](FUTURE-ARCHITECTURE.md).
+[`ROADMAP.md`](ROADMAP.md).
 
 ## Licenze
 
