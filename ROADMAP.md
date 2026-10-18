@@ -10,7 +10,7 @@ Unico file per todo, idee, decisioni e diario, letto da Projects Overview
 - [x] Aggiornamento automatico da OpenStreetMap
 - [ ] Foto del locale nella scheda
 - [ ] Foto del menù con estrazione dei prezzi
-- [ ] Segnalare i prezzi più vecchi di 12 mesi da riverificare
+- [x] Segnalare i prezzi più vecchi di 12 mesi da riverificare
 
 ## Idee
 
@@ -61,8 +61,10 @@ Per come è fatto il progetto oggi vedi `README.md` (sito) e
 - **Foto del menù con estrazione dei prezzi**: oggi `scripts/scrape-menus.mjs`
   legge solo pagine HTML; una foto del menu scattata da un utente richiederebbe
   OCR, non ancora affrontato.
-- **Segnalazione dei prezzi vecchi** (> 12 mesi) da riverificare: lo storico
-  c'è già (tabella `prices`), manca solo il filtro/badge in UI.
+- **Segnalazione dei prezzi vecchi** (> 12 mesi): fatta, badge "re-check" in
+  lista e scheda. Limite: `npm run check:stale` elenca solo i prezzi da menu
+  (`menu.scrapedAt`); quelli della community stanno nel Worker, non nel repo,
+  quindi li segnala solo la UI. Manca ancora un filtro per nasconderli.
 - **`data/feedback.json` e `npm run sync:backend`**: il workflow settimanale
   che porta prezzi e segnalazioni dal Worker nel repo esiste, ma non c'è
   ancora nessuna interfaccia per marcare una segnalazione come "letta/risolta"
@@ -71,4 +73,5 @@ Per come è fatto il progetto oggi vedi `README.md` (sito) e
 
 ## Log
 - 2026-10-18: FUTURE-ARCHITECTURE.md unito in ROADMAP.md (protocollo unico)
+- 2026-10-18: 🤖 badge "re-check" sui prezzi (misurati o da menu) più vecchi di 12 mesi, calcolato al render, più `npm run check:stale`
 - 2026-10-15: creata la roadmap per Projects Overview

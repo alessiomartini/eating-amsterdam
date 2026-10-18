@@ -81,3 +81,21 @@ test('vino, cocktail e cornetto valgono dove ha senso', () => {
   assert.ok(estimate('wine', bar).amount > 0);
   assert.ok(estimate('pasta', italianRestaurant).amount > 0);
 });
+
+test('isStale: più vecchio di 12 mesi rispetto a now', async () => {
+  const { isStale } = await import('../assets/js/items.js');
+  const now = new Date('2026-10-18T00:00:00Z');
+  assert.equal(isStale('2025-10-17', now), true);
+  assert.equal(isStale('2025-10-18', now), false);
+  assert.equal(isStale('2026-09-10T00:24:40.328Z', now), false);
+  assert.equal(isStale(null, now), false, 'senza data non si segnala');
+  assert.equal(isStale('boh', now), false);
+});
+
+test('buildItems segnala stale solo su prezzi veri vecchi', async () => {
+  const { buildItems } = await import('../assets/js/items.js');
+  const table = buildItems({ menu: null }, [{ item: 'coffee', amount: 3, date: '2020-01-01' }]);
+  assert.equal(table.coffee.stale, true);
+  const fresh = buildItems({ menu: null }, [{ item: 'coffee', amount: 3, date: new Date().toISOString().slice(0, 10) }]);
+  assert.equal(fresh.coffee.stale, undefined);
+});

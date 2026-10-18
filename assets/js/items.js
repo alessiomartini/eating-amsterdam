@@ -227,5 +227,25 @@ export function buildItems(place, prices) {
     if (guess) table[id] = { ...guess, source: 'estimate' };
   }
 
+  for (const entry of Object.values(table)) {
+    if (entry.source !== 'estimate' && isStale(entry.date)) entry.stale = true;
+  }
+
   return table;
+}
+
+/** Un prezzo con data più vecchia di questi mesi va riverificato. */
+export const STALE_MONTHS = 12;
+
+/**
+ * True se `date` (AAAA-MM-GG o ISO) è più vecchia di STALE_MONTHS mesi rispetto
+ * a `now`. Senza data valida non si segnala nulla: non si inventa un'età.
+ */
+export function isStale(date, now = new Date()) {
+  if (!date) return false;
+  const when = new Date(date);
+  if (Number.isNaN(when.getTime())) return false;
+  const limit = new Date(now);
+  limit.setUTCMonth(limit.getUTCMonth() - STALE_MONTHS);
+  return when < limit;
 }
