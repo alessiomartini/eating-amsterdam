@@ -72,6 +72,7 @@ Per come è fatto il progetto oggi vedi `README.md` (sito) e
   "Guardare dentro").
 
 ## Log
+- 2026-10-19: installabile come app a sé dal telefono (manifest con nome, icona e perimetro propri)
 - 2026-10-18: FUTURE-ARCHITECTURE.md unito in ROADMAP.md (protocollo unico)
 - 2026-10-18: 🤖 badge "re-check" sui prezzi (misurati o da menu) più vecchi di 12 mesi, calcolato al render, più `npm run check:stale`
 - 2026-10-15: creata la roadmap per Projects Overview
