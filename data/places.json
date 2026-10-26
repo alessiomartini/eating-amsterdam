@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19",
+  "updatedAt": "2026-10-26",
   "source": "OpenStreetMap (ODbL)",
   "places": [
     {
@@ -2053,7 +2053,7 @@
       "address": "Eerste Oosterparkstraat 91, 1091GW Amsterdam",
       "website": null,
       "phone": null,
-      "openingHours": "Mo-Su 17:00-21:00",
+      "openingHours": "We,Th 16:30-20:00; Su 14:00-20:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
@@ -18185,7 +18185,7 @@
       "openingHours": "Su-Th 11:00-01:00; Fr-Sa 11:00-03:00",
       "takeaway": null,
       "delivery": null,
-      "outdoorSeating": null,
+      "outdoorSeating": "yes",
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2816953204",
@@ -25513,30 +25513,6 @@
       "source": "osm"
     },
     {
-      "id": "osm:node/4882389416",
-      "name": "Cafe Zandvoort",
-      "lat": 52.371017,
-      "lon": 4.85488,
-      "category": "pub",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/4882389416",
-      "source": "osm"
-    },
-    {
       "id": "osm:node/2893582408",
       "name": "Cafe Zwart",
       "lat": 52.43941,
@@ -32252,6 +32228,30 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/393093591",
+      "name": "Cotti Coffee",
+      "lat": 52.356457,
+      "lon": 4.927003,
+      "category": "cafe",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Linnaeusstraat 82, 1092CN Amsterdam",
+      "website": null,
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/393093591",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/251165505",
       "name": "Cotton Club",
       "lat": 52.37263,
@@ -36073,6 +36073,30 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/2814048679",
+      "name": "De Indo van Jan Eef",
+      "lat": 52.370539,
+      "lon": 4.854038,
+      "category": "restaurant",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Jan Evertsenstraat 87-H, 1057BS Amsterdam",
+      "website": null,
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/2814048679",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/1349087394",
       "name": "De Italiaan",
       "lat": 52.365491,
@@ -37484,30 +37508,6 @@
       }
     },
     {
-      "id": "osm:node/10799554505",
-      "name": "De neef van Fred",
-      "lat": 52.371007,
-      "lon": 4.857093,
-      "category": "restaurant",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": "yes",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/10799554505",
-      "source": "osm"
-    },
-    {
       "id": "osm:node/2814130822",
       "name": "De Neef van Fred",
       "lat": 52.371015,
@@ -38450,7 +38450,7 @@
       "openingHours": "Mo-We 17:00-22:00; Th,Su 12:00-22:00; Fr-Sa 12:00-22:30",
       "takeaway": null,
       "delivery": null,
-      "outdoorSeating": null,
+      "outdoorSeating": "yes",
       "wheelchair": null,
       "brand": "De Pizzabakkers",
       "osmUrl": "https://www.openstreetmap.org/node/6736380755",
@@ -38680,8 +38680,8 @@
     {
       "id": "osm:node/484183956",
       "name": "De Poort van Muiden",
-      "lat": 52.330626,
-      "lon": 5.066821,
+      "lat": 52.33063,
+      "lon": 5.066834,
       "category": "restaurant",
       "cuisines": [],
       "diet": {
@@ -38689,8 +38689,8 @@
         "vegan": null,
         "inferred": false
       },
-      "address": null,
-      "website": null,
+      "address": "Amsterdamsestraat 26, 1398BL Muiden",
+      "website": "https://depoortvanmuiden.nl/",
       "phone": null,
       "openingHours": null,
       "takeaway": null,
@@ -38699,7 +38699,16 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/484183956",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://depoortvanmuiden.nl/",
+        "scrapedAt": "2026-10-26T09:27:55.193Z",
+        "items": {
+          "coffee": 5,
+          "first": 4.5,
+          "main": 8
+        }
+      }
     },
     {
       "id": "osm:node/475209057",
@@ -56731,6 +56740,30 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/12922356338",
+      "name": "Hasta La Vista, Baby - Restaurant & Rooftop Bar",
+      "lat": 52.339979,
+      "lon": 4.870959,
+      "category": "bar",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": null,
+      "website": null,
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/12922356338",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/4591010791",
       "name": "Hatsune",
       "lat": 52.343017,
@@ -57119,6 +57152,30 @@
         "scrapedAt": "2026-09-14T09:19:42.650Z",
         "items": {}
       }
+    },
+    {
+      "id": "osm:node/14309806567",
+      "name": "Heinde",
+      "lat": 52.388106,
+      "lon": 4.833375,
+      "category": "restaurant",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": null,
+      "website": null,
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": "no",
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/14309806567",
+      "source": "osm"
     },
     {
       "id": "osm:node/4398938991",
@@ -59049,7 +59106,7 @@
       "openingHours": "Mo-Th,Su 12:00-01:00; Fr-Sa 12:00-02:00",
       "takeaway": null,
       "delivery": null,
-      "outdoorSeating": null,
+      "outdoorSeating": "yes",
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/725239184",
@@ -59133,38 +59190,6 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4268073894",
       "source": "osm"
-    },
-    {
-      "id": "osm:node/2725662878",
-      "name": "Hot&Hot Hotpot",
-      "lat": 52.374986,
-      "lon": 4.901075,
-      "category": "restaurant",
-      "cuisines": [
-        "chinese",
-        "bubble_tea"
-      ],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "Zeedijk 57, 1012AS Amsterdam",
-      "website": "https://hotandhot.eu",
-      "phone": "+31 20 221 2245",
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/2725662878",
-      "source": "osm",
-      "menu": {
-        "url": "https://hotandhot.eu",
-        "scrapedAt": "2026-09-14T09:20:06.897Z",
-        "items": {}
-      }
     },
     {
       "id": "osm:node/1519491735",
@@ -74458,7 +74483,7 @@
       "openingHours": null,
       "takeaway": null,
       "delivery": null,
-      "outdoorSeating": null,
+      "outdoorSeating": "yes",
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/11738626469",
@@ -76659,6 +76684,30 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/1640960750",
+      "name": "Lunchroom Oase",
+      "lat": 52.360922,
+      "lon": 4.932852,
+      "category": "cafe",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Celebesstraat 68, 1094ET Amsterdam",
+      "website": null,
+      "phone": null,
+      "openingHours": "Mo-Fr 07:00-20:00; Sa 08:00-20:00; Su 08:00-18:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/1640960750",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/977340214",
       "name": "Lunchroom Wilhelmina",
       "lat": 52.362963,
@@ -78670,6 +78719,32 @@
         "scrapedAt": "2026-09-21T09:23:12.206Z",
         "items": {}
       }
+    },
+    {
+      "id": "osm:node/14310041940",
+      "name": "marmaris",
+      "lat": 52.388135,
+      "lon": 4.837487,
+      "category": "restaurant",
+      "cuisines": [
+        "italian"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": null,
+      "website": null,
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": "yes",
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/14310041940",
+      "source": "osm"
     },
     {
       "id": "osm:node/2862835839",
@@ -82024,6 +82099,35 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/1350283586",
+      "name": "Mister Foody",
+      "lat": 52.355079,
+      "lon": 4.994854,
+      "category": "fast_food",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": null,
+      "website": null,
+      "phone": null,
+      "openingHours": "Mo-Su 16:00-23:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/1350283586",
+      "source": "osm",
+      "menu": {
+        "url": "https://www.toko-ijburg.nl/",
+        "scrapedAt": "2026-10-12T11:26:51.000Z",
+        "items": {}
+      }
+    },
+    {
       "id": "osm:node/2724317533",
       "name": "Mister Meatball",
       "lat": 52.375953,
@@ -84201,7 +84305,11 @@
       "lat": 52.364454,
       "lon": 4.853964,
       "category": "cafe",
-      "cuisines": [],
+      "cuisines": [
+        "coffee_shop",
+        "cake",
+        "tea"
+      ],
       "diet": {
         "vegetarian": null,
         "vegan": null,
@@ -84213,7 +84321,7 @@
       "openingHours": null,
       "takeaway": null,
       "delivery": null,
-      "outdoorSeating": null,
+      "outdoorSeating": "yes",
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/14295880043",
@@ -87425,6 +87533,37 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2348138319",
       "source": "osm"
+    },
+    {
+      "id": "osm:node/9039146810",
+      "name": "Nouri's Lunchroom",
+      "lat": 52.370829,
+      "lon": 4.854031,
+      "category": "restaurant",
+      "cuisines": [],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Jan Evertsenstraat 88-H, 1056EG Amsterdam",
+      "website": "https://www.nourislunchroom-amsterdam.nl",
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/9039146810",
+      "source": "osm",
+      "menu": {
+        "url": "https://www.nourislunchroom-amsterdam.nl",
+        "scrapedAt": "2026-10-26T09:27:56.158Z",
+        "items": {
+          "first": 7.5
+        }
+      }
     },
     {
       "id": "osm:node/2925733001",
@@ -93289,6 +93428,37 @@
       }
     },
     {
+      "id": "osm:node/2725662878",
+      "name": "Peijie Hotpot",
+      "lat": 52.374986,
+      "lon": 4.901075,
+      "category": "restaurant",
+      "cuisines": [
+        "chinese"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Zeedijk 57, 1012AS Amsterdam",
+      "website": "https://peijiehotpot.com/",
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/2725662878",
+      "source": "osm",
+      "menu": {
+        "url": "https://hotandhot.eu",
+        "scrapedAt": "2026-09-14T09:20:06.897Z",
+        "items": {}
+      }
+    },
+    {
       "id": "osm:node/5057713933",
       "name": "Pek Sandwiches",
       "lat": 52.386983,
@@ -93867,7 +94037,7 @@
         "inferred": false
       },
       "address": "Ten Katestraat 30-A, 1053CG Amsterdam",
-      "website": "http://pestolab.nl",
+      "website": "https://pestolab.nl/",
       "phone": null,
       "openingHours": "We-Mo 12:00-21:30",
       "takeaway": "yes",
@@ -94831,6 +95001,37 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/13448712788",
       "source": "osm"
+    },
+    {
+      "id": "osm:node/11010941886",
+      "name": "pina",
+      "lat": 52.375989,
+      "lon": 4.959648,
+      "category": "cafe",
+      "cuisines": [
+        "coffee_shop"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Pina Bauschplein 2, 1095PN Amsterdam",
+      "website": "http://pina.amsterdam",
+      "phone": null,
+      "openingHours": "Mo-Fr 08:30-16:00; Sa,Su 10:00-16:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": "yes",
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/11010941886",
+      "source": "osm",
+      "menu": {
+        "url": "http://pina.amsterdam",
+        "scrapedAt": "2026-10-26T09:27:54.330Z",
+        "items": {}
+      }
     },
     {
       "id": "osm:node/9929424672",
@@ -98245,35 +98446,6 @@
       }
     },
     {
-      "id": "osm:node/1338094260",
-      "name": "Radijs",
-      "lat": 52.371058,
-      "lon": 4.857112,
-      "category": "restaurant",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "Jan Evertsenstraat 41hs, 1057BM Amsterdam",
-      "website": "https://radijs-amsterdam.nl",
-      "phone": "+31 20 751 3232",
-      "openingHours": "Su-Th 12:00-01:00; Fr-Sa 12:00-02:00",
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": "yes",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/1338094260",
-      "source": "osm",
-      "menu": {
-        "url": "https://radijs-amsterdam.nl",
-        "scrapedAt": "2026-10-05T10:56:29.247Z",
-        "items": {}
-      }
-    },
-    {
       "id": "osm:node/3942353859",
       "name": "Radion",
       "lat": 52.345736,
@@ -98496,7 +98668,7 @@
       "openingHours": null,
       "takeaway": null,
       "delivery": null,
-      "outdoorSeating": null,
+      "outdoorSeating": "yes",
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3400741581",
@@ -107629,30 +107801,6 @@
       "source": "osm"
     },
     {
-      "id": "osm:node/12922356338",
-      "name": "Skybar",
-      "lat": 52.339979,
-      "lon": 4.870959,
-      "category": "bar",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/12922356338",
-      "source": "osm"
-    },
-    {
       "id": "osm:node/2720882880",
       "name": "SLA",
       "lat": 52.378895,
@@ -110743,7 +110891,7 @@
       "address": "Wijttenbachstraat 14, Amsterdam",
       "website": null,
       "phone": null,
-      "openingHours": null,
+      "openingHours": "Tu-Sa 12:00-21:00; Su 14:00-21:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
@@ -116993,8 +117141,8 @@
     {
       "id": "osm:node/484183903",
       "name": "Taveerne de Mol",
-      "lat": 52.330564,
-      "lon": 5.067037,
+      "lat": 52.330612,
+      "lon": 5.066951,
       "category": "pub",
       "cuisines": [],
       "diet": {
@@ -117002,7 +117150,7 @@
         "vegan": null,
         "inferred": false
       },
-      "address": null,
+      "address": "Amsterdamsestraat 24, 1398BL Muiden",
       "website": null,
       "phone": null,
       "openingHours": null,
@@ -118926,30 +119074,6 @@
         "scrapedAt": "2026-10-12T11:29:00.022Z",
         "items": {}
       }
-    },
-    {
-      "id": "osm:node/4676464610",
-      "name": "The Capricolo Company",
-      "lat": 52.330092,
-      "lon": 5.069659,
-      "category": "ice_cream",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/4676464610",
-      "source": "osm"
     },
     {
       "id": "osm:node/3128954086",
@@ -122940,35 +123064,6 @@
       "menu": {
         "url": "https://tokobersama.nl",
         "scrapedAt": "2026-10-12T11:26:55.110Z",
-        "items": {}
-      }
-    },
-    {
-      "id": "osm:node/1350283586",
-      "name": "Toko IJburg",
-      "lat": 52.355079,
-      "lon": 4.994854,
-      "category": "fast_food",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": "https://www.toko-ijburg.nl/",
-      "phone": null,
-      "openingHours": null,
-      "takeaway": "yes",
-      "delivery": "yes",
-      "outdoorSeating": null,
-      "wheelchair": "no",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/1350283586",
-      "source": "osm",
-      "menu": {
-        "url": "https://www.toko-ijburg.nl/",
-        "scrapedAt": "2026-10-12T11:26:51.000Z",
         "items": {}
       }
     },
@@ -129904,7 +129999,7 @@
       "openingHours": "Mo-Fr 11:30-22:00",
       "takeaway": null,
       "delivery": null,
-      "outdoorSeating": null,
+      "outdoorSeating": "yes",
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/465504865",
