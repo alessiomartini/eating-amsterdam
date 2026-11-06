@@ -131,10 +131,8 @@ l'utente stava guardando (filtri attivi, numero di risultati, locale
 selezionato): evita il classico "non funziona" senza sapere cosa fosse in
 schermo.
 
-Col backend acceso la segnalazione parte direttamente e finisce in
-`data/feedback.json` al rinfresco successivo. Senza backend si apre una issue
-GitHub già scritta, e all'utente resta un clic su Submit. In entrambi i casi una
-copia resta nel browser di chi scrive.
+La segnalazione va al Worker condiviso `site-notes` (stesso D1 di tutti i siti, solo scrittura; resta in coda nel browser
+finché il server non l'ha accettata); una copia resta nel browser di chi scrive.
 
 ## Provarlo in locale
 
