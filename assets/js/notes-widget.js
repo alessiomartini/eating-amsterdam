@@ -9,7 +9,7 @@
  *
  * Usage:  <script src="js/notes-widget.js?v=2" data-site="my-repo-name"></script>
  * Options (data-* on the script tag): data-site (required), data-label ("Feedback"),
- *   data-lang ("it" default | "en"), data-legacy ("key1,key2#field": old localStorage keys to migrate).
+ *   data-lang ("it" default | "en"), data-legacy ("key1,key2#field,key3#": old localStorage keys to migrate).
  * Optional JS hook: window.SiteNotes.setContext(function () { return {filter: ...}; })
  */
 (function () {
@@ -52,15 +52,15 @@
   // Old per-site storage (queues, lists, local-only copies) -> the single list. Each item is copied
   // once, then the old key is removed, so nothing is lost and nothing is duplicated (same text = same note).
   // Items flagged as already sent (sent:true, pending:false) stay "inviata"; the others are resent.
-  // A legacy entry "key#field" reads key's JSON field (an array) without removing the key (it belongs to
-  // the app's own data), once only, and treats those notes as already sent.
+  // A legacy entry "key#field" (or "key#" for the whole value) reads key's JSON array without removing
+  // the key (it belongs to the app's own data), once only, and treats those notes as already sent.
   function migrate() {
     var keys = ['site-notes.pending.' + SITE].concat((cfg.legacy || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean));
     var list = read(), changed = false, done = [];
     try { done = JSON.parse(localStorage.getItem('site-notes.migrated.' + SITE) || '[]'); } catch (e) {}
     keys.forEach(function (spec) {
-      var k = spec.split('#')[0], field = spec.split('#')[1];
-      if (field && done.indexOf(spec) >= 0) return;
+      var k = spec.split('#')[0], field = spec.split('#')[1], ro = spec.indexOf('#') >= 0;
+      if (ro && done.indexOf(spec) >= 0) return;
       var raw; try { raw = localStorage.getItem(k); } catch (e) { return; }
       if (raw === null) return;
       var parsed; try { parsed = JSON.parse(raw); } catch (e) { parsed = null; }
@@ -75,9 +75,9 @@
         var ctx = o.context;
         list.push({ id: uid(), text: text.slice(0, MAX_TEXT), page: String(o.page || (o.context && o.context.page) || '/').slice(0, 200),
           context: ctx == null ? null : typeof ctx === 'string' ? ctx : JSON.stringify(ctx), at: at,
-          sent: field ? true : o.sent === true || o.pending === false });
+          sent: ro ? true : o.sent === true || o.pending === false });
       });
-      if (field) { done.push(spec); try { localStorage.setItem('site-notes.migrated.' + SITE, JSON.stringify(done)); } catch (e) {} }
+      if (ro) { done.push(spec); try { localStorage.setItem('site-notes.migrated.' + SITE, JSON.stringify(done)); } catch (e) {} }
       else { try { localStorage.removeItem(k); } catch (e) {} }
       changed = true;
     });
