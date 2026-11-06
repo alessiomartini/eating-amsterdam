@@ -401,6 +401,8 @@ output { color: var(--text); font-weight: 600; }
     padding-bottom: env(safe-area-inset-bottom);
     height: calc(52px + env(safe-area-inset-bottom));
   }
+  /* il bottone Feedback (js/notes-widget.js) sta sopra la barra delle schede */
+  body .sn-w { bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
   .mobile-tabs button { background: none; border: 0; color: var(--muted); font-weight: 600; cursor: pointer; }
   .mobile-tabs button.active { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
   .form-grid { grid-template-columns: 1fr 1fr; }
@@ -455,8 +457,6 @@ output { color: var(--text); font-weight: 600; }
 .history .price-list li { font-size: 13px; padding: 4px 10px; }
 
 /* ---------- segnalazioni ---------- */
-.feedback-note { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding: 7px 10px; background: var(--bg-elev-2); border-radius: 8px; margin-top: 6px; }
-.feedback-note time { color: var(--muted); white-space: nowrap; }
 
 /* ---------- fatti segnalati dagli utenti ---------- */
 .badge.student { color: var(--student); border-color: var(--student-line); }

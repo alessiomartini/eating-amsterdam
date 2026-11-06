@@ -3,7 +3,7 @@
 
 import { store } from './store.js';
 import { decorate, priceBand, setLiveFlags, setLivePrices } from './data.js';
-import { fetchPlaceDetails, isOnline, submitFeedback, submitFlag, submitPrice } from './api.js';
+import { fetchPlaceDetails, isOnline, submitFlag, submitPrice } from './api.js';
 import { CATEGORIES } from './filters.js';
 import { ITEM_BY_ID, REFERENCE_ITEMS, itemApplies } from './items.js';
 import { isOpenNow, humanize } from './hours.js';
@@ -525,50 +525,6 @@ export function openAddPlaceModal({ center, onAdded }) {
     dialog.close();
     onAdded?.(place);
     toast('Place added');
-  });
-}
-
-/* ---------------------------------------------------------------- segnalazioni */
-
-/**
- * La casella per dire cosa non va: la segnalazione va al Worker condiviso site-notes (vedi api.js).
- * Una copia resta comunque salvata nel browser, così nulla va perso.
- */
-export function openFeedbackModal({ context }) {
-  const dialog = document.getElementById('modal');
-  const previous = store.notes();
-
-  sheet(dialog, `
-    <h2>Something to improve?</h2>
-    <p class="sub">Missing place, wrong price, confusing filter — anything.</p>
-
-    <form id="note-form" style="display:grid;gap:10px">
-      <textarea name="text" rows="4" required placeholder="Kriterion is missing. The döner filter shows places that don't do döner…"
-        style="width:100%;background:var(--bg-elev-2);color:inherit;border:1px solid var(--line);border-radius:8px;padding:10px"></textarea>
-      <label class="chip" style="justify-self:start"><input type="checkbox" name="withContext" checked /><span>Attach what I was looking at</span></label>
-      <div class="actions">
-        <button type="submit" class="primary">Send</button>
-      </div>
-    </form>
-
-    <p class="hint">Goes straight to the people working on the site. A copy stays in this browser.</p>
-
-    ${previous.length ? `<h3>Sent from this browser</h3>${previous.slice(0, 8).map((n) => `
-      <div class="feedback-note"><span>${esc(n.text)}</span><time>${esc(n.at.slice(0, 10))}</time></div>`).join('')}` : ''}
-  `);
-
-  dialog.querySelector('#note-form').addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const text = String(data.get('text')).trim();
-    if (!text) return;
-
-    const attached = data.get('withContext') ? context : null;
-    store.addNote({ text, context: attached });
-
-    const outcome = await submitFeedback({ text, context: attached });
-    dialog.close();
-    toast(outcome === 'queued' ? 'Saved — will be sent when you are back online' : 'Sent — thank you');
   });
 }
 

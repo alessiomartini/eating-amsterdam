@@ -3,7 +3,7 @@
 import { decorate, loadPlaces } from './data.js';
 import { applyFilters, DEFAULT_FILTERS, ITEM_CHIPS } from './filters.js';
 import { focusPlace, highlight, initMap, invalidate, setPlaces, showUser } from './map.js';
-import { openAddPlaceModal, openDataModal, openDetail, openFeedbackModal, renderList, toast } from './ui.js';
+import { openAddPlaceModal, openDataModal, openDetail, renderList, toast } from './ui.js';
 import { store } from './store.js';
 import { flushOutbox, initApi } from './api.js';
 
@@ -217,18 +217,15 @@ function wire() {
     try { localStorage.setItem('ea-theme', theme); } catch (e) {}
   }));
 
-  el('btn-feedback').addEventListener('click', () => {
-    // il contesto evita il classico "non funziona" senza sapere cosa guardava
+  // Feedback: widget canonico js/notes-widget.js; il contesto evita il classico "non funziona" senza sapere cosa guardava
+  window.SiteNotes.setContext(() => {
     const filters = readFilters();
-    openFeedbackModal({
-      context: {
-        dataset: state.meta,
-        results: state.filtered.length,
-        selected: state.places.find((p) => p.id === state.selectedId)?.name ?? null,
-        filters: { ...filters, items: [...filters.items] },
-        viewport: `${window.innerWidth}×${window.innerHeight}`,
-      },
-    });
+    return {
+      dataset: state.meta,
+      results: state.filtered.length,
+      selected: state.places.find((p) => p.id === state.selectedId)?.name ?? null,
+      filters: { ...filters, items: [...filters.items] },
+    };
   });
 
   el('mobile-tabs').addEventListener('click', (event) => {

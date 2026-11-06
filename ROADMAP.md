@@ -72,7 +72,7 @@ Per come è fatto il progetto oggi vedi `README.md` (sito) e
   "Guardare dentro").
 
 ## Log
-- 2026-11-06: il feedback va ora al Worker condiviso site-notes (coda locale finché non è accettato), anche senza backend dei prezzi; tolta la issue GitHub precompilata; `/api/feedback` del backend dei prezzi non è più usato dal sito; serve il deploy di site-notes.
+- 2026-11-06: il feedback va ora al Worker condiviso site-notes (coda locale finché non è accettato), anche senza backend dei prezzi; tolta la issue GitHub precompilata; `/api/feedback` del backend dei prezzi non è più usato dal sito; serve il deploy di site-notes. widget note v2 canonico (site-notes/widget): tolti bottone/modale/coda vecchi, migrate outbox e note locali dello store.
 - 2026-10-19: installabile come app a sé dal telefono (manifest con nome, icona e perimetro propri)
 - 2026-10-18: FUTURE-ARCHITECTURE.md unito in ROADMAP.md (protocollo unico)
 - 2026-10-18: 🤖 badge "re-check" sui prezzi (misurati o da menu) più vecchi di 12 mesi, calcolato al render, più `npm run check:stale`
