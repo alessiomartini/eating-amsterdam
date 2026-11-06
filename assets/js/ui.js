@@ -530,13 +530,8 @@ export function openAddPlaceModal({ center, onAdded }) {
 
 /* ---------------------------------------------------------------- segnalazioni */
 
-const REPO = 'alessiomartini/eating-amsterdam';
-
 /**
- * La casella per dire cosa non va. Senza un backend l'unico modo perché una
- * segnalazione arrivi davvero a chi sviluppa — e sia leggibile da lì senza che
- * nessuno faccia copia-incolla — è farla diventare una issue su GitHub: il testo
- * viaggia già scritto nell'URL, all'utente resta un clic su "Submit".
+ * La casella per dire cosa non va: la segnalazione va al Worker condiviso site-notes (vedi api.js).
  * Una copia resta comunque salvata nel browser, così nulla va perso.
  */
 export function openFeedbackModal({ context }) {
@@ -556,9 +551,7 @@ export function openFeedbackModal({ context }) {
       </div>
     </form>
 
-    <p class="hint">${isOnline()
-      ? 'Goes straight to the people working on the site. A copy stays in this browser.'
-      : 'Send opens a prefilled GitHub issue — the text is already written, you only press Submit. It needs a GitHub account, and it is public.'}</p>
+    <p class="hint">Goes straight to the people working on the site. A copy stays in this browser.</p>
 
     ${previous.length ? `<h3>Sent from this browser</h3>${previous.slice(0, 8).map((n) => `
       <div class="feedback-note"><span>${esc(n.text)}</span><time>${esc(n.at.slice(0, 10))}</time></div>`).join('')}` : ''}
@@ -573,29 +566,9 @@ export function openFeedbackModal({ context }) {
     const attached = data.get('withContext') ? context : null;
     store.addNote({ text, context: attached });
 
-    if (isOnline()) {
-      const outcome = await submitFeedback({ text, context: attached });
-      dialog.close();
-      toast(outcome === 'queued' ? 'Saved — will be sent when you are back online' : 'Sent — thank you');
-      return;
-    }
-
-    // senza backend l'unico modo perché arrivi davvero è farla diventare una issue
-    const body = [
-      text,
-      '',
-      '---',
-      data.get('withContext') ? `<!-- context -->\n\`\`\`json\n${JSON.stringify(context, null, 2)}\n\`\`\`` : '',
-      '_Sent from the Eating Amsterdam site._',
-    ].filter(Boolean).join('\n');
-
-    const url = `https://github.com/${REPO}/issues/new`
-      + `?labels=feedback&title=${encodeURIComponent(text.slice(0, 70))}`
-      + `&body=${encodeURIComponent(body)}`;
-
-    window.open(url, '_blank', 'noopener');
+    const outcome = await submitFeedback({ text, context: attached });
     dialog.close();
-    toast('Saved — finish by pressing Submit on GitHub');
+    toast(outcome === 'queued' ? 'Saved — will be sent when you are back online' : 'Sent — thank you');
   });
 }
 

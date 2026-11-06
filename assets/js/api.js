@@ -37,6 +37,7 @@ export async function initApi() {
     if (res.ok) apiBase = (await res.json()).apiBase || null;
   } catch { /* nessuna configurazione: si resta in locale */ }
   if (apiBase) flushOutbox();
+  flushNotes();
   return apiBase;
 }
 
@@ -107,15 +108,51 @@ export async function submitPrice({ placeId, item, dish, amount }) {
   }
 }
 
-export async function submitFeedback({ text, context }) {
-  if (!apiBase) return 'local';
-  const payload = { text, context, reporter: store.all().author || null };
+/* ---------------------------------------------------------------- segnalazioni
+ * Le segnalazioni vanno al Worker condiviso `site-notes` (D1 unico di tutti i siti, repo
+ * alessiomartini/site-notes), non al backend dei prezzi: solo scrittura, le legge Claude dal D1.
+ * Restano in coda nel browser finché il server non le ha accettate (riprovo ad ogni caricamento). */
+
+const NOTES_URL = 'https://site-notes.alemarti-2001.workers.dev/eating-amsterdam/notes';
+const NOTES_QUEUE_KEY = 'eating-amsterdam:notes-outbox:v1';
+
+// ?sono-alessio marca questo browser come di Alessio (author 'alessio' in site-notes): un'etichetta, non un login.
+function noteAuthor() {
   try {
-    const res = await send('/api/feedback', payload);
-    if (res.ok) return 'sent';
-    return 'rejected';
+    if (new URLSearchParams(location.search).has('sono-alessio')) localStorage.setItem('site-notes.author', 'alessio');
+    return localStorage.getItem('site-notes.author') || undefined;
+  } catch { return undefined; }
+}
+
+const readNotesQueue = () => {
+  try { return JSON.parse(localStorage.getItem(NOTES_QUEUE_KEY) ?? '[]'); } catch { return []; }
+};
+const writeNotesQueue = (items) => {
+  try { localStorage.setItem(NOTES_QUEUE_KEY, JSON.stringify(items.slice(-20))); } catch { /* quota piena */ }
+};
+
+async function postNote(note) {
+  const res = await fetch(NOTES_URL, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(note) });
+  // 4xx: il server ha detto no, rimandare non aiuta (la nota esce dalla coda)
+  if (!res.ok && res.status >= 500) throw new Error(`HTTP ${res.status}`);
+}
+
+export async function flushNotes() {
+  const left = [];
+  for (const note of readNotesQueue()) {
+    try { await postNote(note); } catch { left.push(note); }
+  }
+  writeNotesQueue(left);
+}
+
+/** @returns 'sent' | 'queued' */
+export async function submitFeedback({ text, context }) {
+  const note = { text, page: location.pathname + location.hash, context: context ? JSON.stringify(context) : undefined, author: noteAuthor() };
+  try {
+    await postNote(note);
+    return 'sent';
   } catch {
-    enqueue('/api/feedback', payload);
+    writeNotesQueue([...readNotesQueue(), note]);
     return 'queued';
   }
 }
