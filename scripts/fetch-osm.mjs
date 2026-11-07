@@ -137,7 +137,7 @@ async function keepLocalFields(places) {
   return places.map((p) => {
     const before = old.get(p.id);
     if (!before) return p;
-    return { ...p, google: before.google, community: before.community, menu: before.menu };
+    return { ...p, google: before.google, community: before.community, menu: before.menu, photo: before.photo };
   });
 }
 

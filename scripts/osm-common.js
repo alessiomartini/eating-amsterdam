@@ -86,6 +86,18 @@ function buildAddress(tags) {
   return [street, city].filter(Boolean).join(', ') || null;
 }
 
+/**
+ * Riferimenti a Wikimedia nei tag OSM, da cui poi `npm run enrich:photos` risolve
+ * una foto. Restituisce null se il locale non ne ha: così il dataset non si gonfia.
+ */
+export function photoRefFromTags(tags) {
+  const ref = {};
+  if (/^Q\d+$/.test(tags.wikidata ?? '')) ref.wikidata = tags.wikidata;
+  if (/^(File|Category):/i.test(tags.wikimedia_commons ?? '')) ref.commons = tags.wikimedia_commons.trim();
+  if (/^https?:\/\/(commons\.wikimedia\.org|upload\.wikimedia\.org)\//i.test(tags.image ?? '')) ref.image = tags.image.trim();
+  return Object.keys(ref).length ? ref : null;
+}
+
 /** Converte un elemento Overpass nel formato usato dal sito. */
 export function normalizeElement(el) {
   const tags = el.tags || {};
@@ -123,6 +135,7 @@ export function normalizeElement(el) {
     brand: tags.brand || null,
     osmUrl: `https://www.openstreetmap.org/${el.type}/${el.id}`,
     source: 'osm',
+    ...(photoRefFromTags(tags) ? { photoRef: photoRefFromTags(tags) } : {}),
   };
 }
 

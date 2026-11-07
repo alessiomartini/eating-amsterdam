@@ -8,7 +8,7 @@ Unico file per todo, idee, decisioni e diario, letto da Projects Overview
 ## Lasciato a metà
 - [x] Mappa con filtri per cibo/bevanda e prezzo totale
 - [x] Aggiornamento automatico da OpenStreetMap
-- [ ] Foto del locale nella scheda
+- [x] Foto del locale nella scheda (solo dove OSM ha un riferimento Wikimedia, copertura ~0,5%)
 - [ ] Foto del menù con estrazione dei prezzi
 - [x] Segnalare i prezzi più vecchi di 12 mesi da riverificare
 
@@ -56,8 +56,18 @@ Per come è fatto il progetto oggi vedi `README.md` (sito) e
 
 ### Lasciato a metà
 
-- **Foto del locale nella scheda**: servirebbe una fonte di immagini
-  affidabile (es. Google Places Photos) e non è ancora collegata.
+- **Foto del locale nella scheda**: fatta con la sola fonte libera e senza chiavi,
+  Wikimedia Commons. `npm run enrich:photos` parte dai tag OSM `wikidata`,
+  `wikimedia_commons`, `image` (ora salvati in `photoRef` da `fetch:osm`) e risolve il
+  file (file indicato in OSM > P18 di Wikidata > primo file di una categoria Commons,
+  solo se il nome della categoria contiene quello del locale), poi salva in
+  `place.photo` miniatura (hotlink, nessun file nel repo), autore, licenza e pagina del
+  file; la scheda mostra la foto con l'attribuzione. Scelta di Commons perché ogni
+  file ha autore e licenza chiari, a differenza di Google Places (non collegato, ToS
+  restrittivi). Limite noto: copertura bassa, 23 locali su 4713 (~0,5%) con foto, perché
+  solo ~38 locali hanno un riferimento Wikimedia in OSM; il resto non mostra foto.
+  Cresce solo se qualcuno aggiunge i tag in OSM. Il rinfresco settimanale lancia lo
+  script (`continue-on-error`).
 - **Foto del menù con estrazione dei prezzi**: oggi `scripts/scrape-menus.mjs`
   legge solo pagine HTML; una foto del menu scattata da un utente richiederebbe
   OCR, non ancora affrontato.
@@ -72,6 +82,7 @@ Per come è fatto il progetto oggi vedi `README.md` (sito) e
   "Guardare dentro").
 
 ## Log
+- 2026-11-07: 🤖 foto del locale da Wikimedia Commons nella scheda (`enrich:photos`, `photoRef` in `fetch:osm`, attribuzione autore/licenza, test sul parsing); copertura 23/4713.
 - 2026-11-06: il feedback va ora al Worker condiviso site-notes (coda locale finché non è accettato), anche senza backend dei prezzi; tolta la issue GitHub precompilata; `/api/feedback` del backend dei prezzi non è più usato dal sito; serve il deploy di site-notes. widget note v2 canonico (site-notes/widget): tolti bottone/modale/coda vecchi, migrate outbox e note locali dello store. widget note allineato alla versione finale (migrazione key#field, dedupe), ?v=3.
 - 2026-10-19: installabile come app a sé dal telefono (manifest con nome, icona e perimetro propri)
 - 2026-10-18: FUTURE-ARCHITECTURE.md unito in ROADMAP.md (protocollo unico)

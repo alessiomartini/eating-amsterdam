@@ -295,6 +295,18 @@
         "url": "https://www.cafetmandje.nl",
         "scrapedAt": "2026-09-10T00:24:51.696Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q5017290",
+        "commons": "Category:Café 't Mandje"
+      },
+      "photo": {
+        "title": "File:Café ‘t Mandje.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Caf%C3%A9_%E2%80%98t_Mandje.jpg/960px-Caf%C3%A9_%E2%80%98t_Mandje.jpg",
+        "author": "FaceMePLS from The Hague, The Netherlands",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Caf%C3%A9_%E2%80%98t_Mandje.jpg"
       }
     },
     {
@@ -919,6 +931,17 @@
         "url": "https://www.samhoudplaces.com/",
         "scrapedAt": "2026-09-09T20:33:13.320Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q4540372"
+      },
+      "photo": {
+        "title": "File:Samhoud Moshik - Februari 2018.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Samhoud_Moshik_-_Februari_2018.jpg/960px-Samhoud_Moshik_-_Februari_2018.jpg",
+        "author": "Zanaq ( talk )",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Samhoud_Moshik_-_Februari_2018.jpg"
       }
     },
     {
@@ -1857,6 +1880,9 @@
         "url": "https://www.aandepoel.nl",
         "scrapedAt": "2026-09-09T20:33:19.819Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q2460503"
       }
     },
     {
@@ -2662,6 +2688,17 @@
         "items": {
           "first": 4.5
         }
+      },
+      "photoRef": {
+        "commons": "Category:Albina, Albert Cuypstraat, Amsterdam"
+      },
+      "photo": {
+        "title": "File:2016 0624 Tjauw min moksie meti speciaal.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/2016_0624_Tjauw_min_moksie_meti_speciaal.jpg/960px-2016_0624_Tjauw_min_moksie_meti_speciaal.jpg",
+        "author": "Takeaway",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "page": "https://commons.wikimedia.org/wiki/File:2016_0624_Tjauw_min_moksie_meti_speciaal.jpg"
       }
     },
     {
@@ -11733,6 +11770,17 @@
         "url": "https://www.bhattipasal.nl/voetboogstraat",
         "scrapedAt": "2026-09-09T20:35:01.013Z",
         "items": {}
+      },
+      "photoRef": {
+        "commons": "Category:Bhatti Pasal, Voetboogstraat, Amsterdam"
+      },
+      "photo": {
+        "title": "File:Bhatti Pasal, Voetboogstraat, Amsterdam 2024-11-26.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Bhatti_Pasal%2C_Voetboogstraat%2C_Amsterdam_2024-11-26.jpg/960px-Bhatti_Pasal%2C_Voetboogstraat%2C_Amsterdam_2024-11-26.jpg",
+        "author": "Andy Li",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "page": "https://commons.wikimedia.org/wiki/File:Bhatti_Pasal,_Voetboogstraat,_Amsterdam_2024-11-26.jpg"
       }
     },
     {
@@ -12409,6 +12457,17 @@
         "url": "https://www.bistrodelamer.com/bistrodelamer",
         "scrapedAt": "2026-09-09T20:35:09.474Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q122459927"
+      },
+      "photo": {
+        "title": "File:Traiteur Loekie in 1963.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Traiteur_Loekie_in_1963.jpg/960px-Traiteur_Loekie_in_1963.jpg",
+        "author": "Gerard Dukker",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Traiteur_Loekie_in_1963.jpg"
       }
     },
     {
@@ -12833,7 +12892,19 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/way/57862001",
-      "source": "osm"
+      "source": "osm",
+      "photoRef": {
+        "wikidata": "Q2357041",
+        "commons": "Category:Blauwe Theehuis"
+      },
+      "photo": {
+        "title": "File:Blauwe Theehuis 2.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Blauwe_Theehuis_2.jpg/960px-Blauwe_Theehuis_2.jpg",
+        "author": "Jvhertum",
+        "license": "Public domain",
+        "licenseUrl": null,
+        "page": "https://commons.wikimedia.org/wiki/File:Blauwe_Theehuis_2.jpg"
+      }
     },
     {
       "id": "osm:node/2818887330",
@@ -14353,6 +14424,17 @@
         "url": "https://www.restaurantbougainville.com/en/",
         "scrapedAt": "2026-09-09T20:35:32.840Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q106204199"
+      },
+      "photo": {
+        "title": "File:Declub1.jpg",
+        "thumb": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Declub1.jpg",
+        "author": "bureau Monumenten & Archeologie (bMA)",
+        "license": "Attribution",
+        "licenseUrl": null,
+        "page": "https://commons.wikimedia.org/wiki/File:Declub1.jpg"
       }
     },
     {
@@ -14723,7 +14805,10 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/538534998",
-      "source": "osm"
+      "source": "osm",
+      "photoRef": {
+        "wikidata": "Q84571344"
+      }
     },
     {
       "id": "osm:node/2743662730",
@@ -15797,6 +15882,9 @@
         "url": "https://bridgesrestaurant.nl",
         "scrapedAt": "2026-09-09T20:35:54.839Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q23009996"
       }
     },
     {
@@ -16339,6 +16427,18 @@
         "url": "https://www.brouwerijhetij.nl",
         "scrapedAt": "2026-09-10T00:25:02.890Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q3496897",
+        "commons": "Category:Brouwerij 't IJ"
+      },
+      "photo": {
+        "title": "File:Brouwerijhetij.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Brouwerijhetij.jpg/960px-Brouwerijhetij.jpg",
+        "author": "SJSV",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "page": "https://commons.wikimedia.org/wiki/File:Brouwerijhetij.jpg"
       }
     },
     {
@@ -16426,6 +16526,9 @@
         "url": "https://brouwerijtroost.nl/en/",
         "scrapedAt": "2026-09-10T00:25:04.809Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q28034318"
       }
     },
     {
@@ -16455,6 +16558,9 @@
         "url": "https://brouwerijtroost.nl",
         "scrapedAt": "2026-09-10T00:26:56.475Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q28034318"
       }
     },
     {
@@ -19058,6 +19164,17 @@
         "url": "https://www.papeneiland.nl",
         "scrapedAt": "2026-09-10T00:25:07.380Z",
         "items": {}
+      },
+      "photoRef": {
+        "commons": "Category:Cafe 't Papeneiland, Prinsengracht 2, Amsterdam"
+      },
+      "photo": {
+        "title": "File:Amsterdam Prinsengracht 2 718.JPG",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Amsterdam_Prinsengracht_2_718.JPG/960px-Amsterdam_Prinsengracht_2_718.JPG",
+        "author": "Arch",
+        "license": "Public domain",
+        "licenseUrl": null,
+        "page": "https://commons.wikimedia.org/wiki/File:Amsterdam_Prinsengracht_2_718.JPG"
       }
     },
     {
@@ -21220,6 +21337,18 @@
         "url": "https://www.cafedeschelp.nl/",
         "scrapedAt": "2026-10-12T11:24:54.285Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q23931083",
+        "commons": "Category:Groot Laboratorium"
+      },
+      "photo": {
+        "title": "File:Groot Lab (brug).jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Groot_Lab_%28brug%29.jpg/960px-Groot_Lab_%28brug%29.jpg",
+        "author": "Paulbe",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Groot_Lab_(brug).jpg"
       }
     },
     {
@@ -29630,6 +29759,9 @@
         "url": "https://www.cielbleu.nl",
         "scrapedAt": "2026-09-09T20:37:53.302Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q5119566"
       }
     },
     {
@@ -36249,6 +36381,9 @@
         "url": "https://www.cafedejaren.nl",
         "scrapedAt": "2026-09-09T20:38:41.195Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q28656899"
       }
     },
     {
@@ -36367,6 +36502,9 @@
         "url": "https://www.restaurant-dejuwelier.nl/restaurantdejuwelier",
         "scrapedAt": "2026-09-09T20:38:46.656Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q124477482"
       }
     },
     {
@@ -49937,6 +50075,17 @@
         "url": "https://restaurantflore.com",
         "scrapedAt": "2026-09-09T20:40:40.070Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q124246755"
+      },
+      "photo": {
+        "title": "File:2018 De L'Europe Amsterdam.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/2018_De_L%27Europe_Amsterdam.jpg/960px-2018_De_L%27Europe_Amsterdam.jpg",
+        "author": "Steve",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "page": "https://commons.wikimedia.org/wiki/File:2018_De_L%27Europe_Amsterdam.jpg"
       }
     },
     {
@@ -62174,7 +62323,19 @@
       "wheelchair": "limited",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/251127914",
-      "source": "osm"
+      "source": "osm",
+      "photoRef": {
+        "wikidata": "Q2190368",
+        "commons": "Category:Zeedijk 1, Amsterdam"
+      },
+      "photo": {
+        "title": "File:Zeed1.jpg",
+        "thumb": "https://upload.wikimedia.org/wikipedia/commons/5/56/Zeed1.jpg",
+        "author": "bureau Monumenten & Archeologie (bMA)",
+        "license": "Attribution",
+        "licenseUrl": null,
+        "page": "https://commons.wikimedia.org/wiki/File:Zeed1.jpg"
+      }
     },
     {
       "id": "osm:node/2725878701",
@@ -63569,6 +63730,17 @@
         "url": "https://www.restaurantjasmijn.nl/",
         "scrapedAt": "2026-09-14T09:20:52.731Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q17611405"
+      },
+      "photo": {
+        "title": "File:Abcoude Kerkplein 3.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Abcoude_Kerkplein_3.jpg/960px-Abcoude_Kerkplein_3.jpg",
+        "author": "HenkvD",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Abcoude_Kerkplein_3.jpg"
       }
     },
     {
@@ -74490,7 +74662,19 @@
       "wheelchair": "no",
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1890385348",
-      "source": "osm"
+      "source": "osm",
+      "photoRef": {
+        "wikidata": "Q2433228",
+        "commons": "Category:Lloyd Hotel"
+      },
+      "photo": {
+        "title": "File:Lloyd.jpg",
+        "thumb": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Lloyd.jpg",
+        "author": "bureau Monumenten & Archeologie (bMA)",
+        "license": "Attribution",
+        "licenseUrl": null,
+        "page": "https://commons.wikimedia.org/wiki/File:Lloyd.jpg"
+      }
     },
     {
       "id": "osm:node/3231411555",
@@ -87068,6 +87252,9 @@
         "url": "https://www.nomansart.com",
         "scrapedAt": "2026-09-28T10:15:04.563Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q7044400"
       }
     },
     {
@@ -91853,6 +92040,9 @@
         "items": {
           "coffee": 3.5
         }
+      },
+      "photoRef": {
+        "commons": "Category:Upstairs Pannenkoekenhuis, Grimburgwal, Amsterdam"
       }
     },
     {
@@ -99449,6 +99639,17 @@
         "url": "https://www.cafereynders.nl/",
         "scrapedAt": "2026-10-05T10:56:45.074Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q47011077"
+      },
+      "photo": {
+        "title": "File:Reynders-amsterdam.jpg",
+        "thumb": "https://upload.wikimedia.org/wikipedia/commons/1/19/Reynders-amsterdam.jpg",
+        "author": "Paul2",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Reynders-amsterdam.jpg"
       }
     },
     {
@@ -99755,6 +99956,9 @@
         "url": "https://www.212.amsterdam/restaurant-212",
         "scrapedAt": "2026-10-05T10:56:49.409Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q107096159"
       }
     },
     {
@@ -100202,6 +100406,9 @@
         "items": {
           "first": 7.5
         }
+      },
+      "photoRef": {
+        "wikidata": "Q3125913"
       }
     },
     {
@@ -100641,6 +100848,18 @@
         "url": "https://www.rijksrestaurant.nl",
         "scrapedAt": "2026-10-05T10:56:57.865Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q68339650",
+        "commons": "Category:Restaurant Rijks"
+      },
+      "photo": {
+        "title": "File:Restaurant Rijks 02.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Restaurant_Rijks_02.jpg/960px-Restaurant_Rijks_02.jpg",
+        "author": "Hanno Lans",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Restaurant_Rijks_02.jpg"
       }
     },
     {
@@ -100670,6 +100889,17 @@
         "url": "https://www.rijnbar.nl/",
         "scrapedAt": "2026-10-05T10:56:56.338Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q14855228"
+      },
+      "photo": {
+        "title": "File:Rijnbar-2016.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Rijnbar-2016.jpg/960px-Rijnbar-2016.jpg",
+        "author": "Paul Berendsen",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Rijnbar-2016.jpg"
       }
     },
     {
@@ -101439,6 +101669,18 @@
         "url": "https://rongastrobar.nl/restaurants/ron-gastrobar",
         "scrapedAt": "2026-10-05T10:57:11.752Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q22950262",
+        "commons": "Category:Ron Gastrobar"
+      },
+      "photo": {
+        "title": "File:Ron Gastrobar Amsterdam (Q22950262) - Terras.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Ron_Gastrobar_Amsterdam_%28Q22950262%29_-_Terras.jpg/960px-Ron_Gastrobar_Amsterdam_%28Q22950262%29_-_Terras.jpg",
+        "author": "Hay Kranen",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Ron_Gastrobar_Amsterdam_(Q22950262)_-_Terras.jpg"
       }
     },
     {
@@ -105062,6 +105304,9 @@
         "items": {
           "first": 3.75
         }
+      },
+      "photoRef": {
+        "wikidata": "Q46719869"
       }
     },
     {
@@ -105091,6 +105336,9 @@
         "url": "https://cafeschiller.nl",
         "scrapedAt": "2026-10-05T10:57:47.926Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q29046898"
       }
     },
     {
@@ -107065,6 +107313,17 @@
         "url": "http://sichuanfood.nl",
         "scrapedAt": "2026-10-05T10:58:01.175Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q7507429"
+      },
+      "photo": {
+        "title": "File:Sichuanfood-amsterdam.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Sichuanfood-amsterdam.jpg/960px-Sichuanfood-amsterdam.jpg",
+        "author": "Paul2",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Sichuanfood-amsterdam.jpg"
       }
     },
     {
@@ -107585,6 +107844,9 @@
         "url": "https://restaurantsinne.nl",
         "scrapedAt": "2026-10-05T10:58:07.082Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q23306259"
       }
     },
     {
@@ -110669,6 +110931,17 @@
         "url": "https://restaurantspectrum.com",
         "scrapedAt": "2026-10-05T10:58:21.277Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q19887997"
+      },
+      "photo": {
+        "title": "File:Rm1892-4.JPG",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Rm1892-4.JPG/960px-Rm1892-4.JPG",
+        "author": "Effeietsanders ( talk )",
+        "license": "CC BY-SA 3.0 nl",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/nl/deed.en",
+        "page": "https://commons.wikimedia.org/wiki/File:Rm1892-4.JPG"
       }
     },
     {
@@ -126730,6 +127003,17 @@
         "url": "https://www.restaurantvermeer.nl/",
         "scrapedAt": "2026-10-19T09:24:06.544Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q7316098"
+      },
+      "photo": {
+        "title": "File:Restaurant Vermeer exterior.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Restaurant_Vermeer_exterior.jpg/960px-Restaurant_Vermeer_exterior.jpg",
+        "author": "Mx. Granger",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "page": "https://commons.wikimedia.org/wiki/File:Restaurant_Vermeer_exterior.jpg"
       }
     },
     {
@@ -127350,6 +127634,17 @@
         "url": "https://www.vinkeles.com",
         "scrapedAt": "2026-10-19T09:24:10.585Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q17195570"
+      },
+      "photo": {
+        "title": "File:Amsterdam - Keizersgracht 384.JPG",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Amsterdam_-_Keizersgracht_384.JPG/960px-Amsterdam_-_Keizersgracht_384.JPG",
+        "author": "Rudolphous",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Amsterdam_-_Keizersgracht_384.JPG"
       }
     },
     {
@@ -131344,6 +131639,17 @@
         "url": "https://www.okura.nl/nl/yamazato",
         "scrapedAt": "2026-10-19T09:24:40.899Z",
         "items": {}
+      },
+      "photoRef": {
+        "wikidata": "Q8048010"
+      },
+      "photo": {
+        "title": "File:Hotel Okura Amsterdam - Yamazato Restaurant - Waitress in Kimono.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Hotel_Okura_Amsterdam_-_Yamazato_Restaurant_-_Waitress_in_Kimono.jpg/960px-Hotel_Okura_Amsterdam_-_Yamazato_Restaurant_-_Waitress_in_Kimono.jpg",
+        "author": "Annevangulik",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Hotel_Okura_Amsterdam_-_Yamazato_Restaurant_-_Waitress_in_Kimono.jpg"
       }
     },
     {

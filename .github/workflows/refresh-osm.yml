@@ -40,6 +40,10 @@ jobs:
         run: npm run scrape:menus -- --limit ${{ inputs.scrape_limit || 300 }} --max-age ${{ inputs.scrape_max_age || 90 }}
         continue-on-error: true
 
+      - name: Foto da Wikimedia Commons (solo locali con tag wikidata/commons)
+        run: npm run enrich:photos
+        continue-on-error: true
+
       - name: Arricchisci con i voti Google (se la chiave è configurata)
         if: env.GOOGLE_MAPS_API_KEY != ''
         run: npm run enrich:google -- --limit 400
