@@ -228,6 +228,19 @@ function itemsTable(place) {
   return `${updatedLine}<table class="items">${rows.join('')}</table>${history}`;
 }
 
+/** Foto da Wikimedia Commons con l'attribuzione richiesta dalla licenza (autore, licenza, pagina del file). */
+function photoFigure(place) {
+  const photo = place.photo;
+  if (!photo?.thumb || !/^https:\/\//.test(photo.thumb)) return '';
+  const license = photo.licenseUrl
+    ? `<a href="${esc(photo.licenseUrl)}" target="_blank" rel="noopener">${esc(photo.license)}</a>`
+    : esc(photo.license);
+  return `<figure class="place-photo">
+    <img src="${esc(photo.thumb)}" alt="${esc(place.name)}" loading="lazy" referrerpolicy="no-referrer" />
+    <figcaption>Photo: ${esc(photo.author)} · ${license} · <a href="${esc(photo.page)}" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+  </figure>`;
+}
+
 export function openDetail(place, { onChange } = {}) {
   const dialog = document.getElementById('detail');
 
@@ -259,6 +272,7 @@ export function openDetail(place, { onChange } = {}) {
         <h2>${esc(place.name)}</h2>
         ${flagMini(place)}
       </div>
+      ${photoFigure(place)}
       <p class="sub">${esc(CATEGORY_LABEL[place.category] ?? place.category)}${place.cuisines?.length ? ` · ${esc(place.cuisines.join(', '))}` : ''}</p>
       <div class="badges">${flagBadges(place)}${dietBadges(place)}${open === true ? '<span class="badge open">open now</span>' : open === false ? '<span class="badge closed">closed now</span>' : ''}</div>
 
