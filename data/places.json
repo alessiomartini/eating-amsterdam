@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02",
+  "updatedAt": "2026-11-09",
   "source": "OpenStreetMap (ODbL)",
   "places": [
     {
@@ -291,14 +291,14 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1739766984",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q5017290",
+        "commons": "Category:Café 't Mandje"
+      },
       "menu": {
         "url": "https://www.cafetmandje.nl",
         "scrapedAt": "2026-09-10T00:24:51.696Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q5017290",
-        "commons": "Category:Café 't Mandje"
       },
       "photo": {
         "title": "File:Café ‘t Mandje.jpg",
@@ -927,13 +927,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4574227869",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q4540372"
+      },
       "menu": {
         "url": "https://www.samhoudplaces.com/",
         "scrapedAt": "2026-09-09T20:33:13.320Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q4540372"
       },
       "photo": {
         "title": "File:Samhoud Moshik - Februari 2018.jpg",
@@ -1876,13 +1876,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2808257495",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q2460503"
+      },
       "menu": {
         "url": "https://www.aandepoel.nl",
         "scrapedAt": "2026-09-09T20:33:19.819Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q2460503"
       }
     },
     {
@@ -2682,15 +2682,15 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2506116240",
       "source": "osm",
+      "photoRef": {
+        "commons": "Category:Albina, Albert Cuypstraat, Amsterdam"
+      },
       "menu": {
         "url": "https://www.albina-amsterdam.nl",
         "scrapedAt": "2026-09-09T20:33:30.731Z",
         "items": {
           "first": 4.5
         }
-      },
-      "photoRef": {
-        "commons": "Category:Albina, Albert Cuypstraat, Amsterdam"
       },
       "photo": {
         "title": "File:2016 0624 Tjauw min moksie meti speciaal.jpg",
@@ -4700,17 +4700,17 @@
       "lon": 4.842974,
       "category": "restaurant",
       "cuisines": [
-        "venezuelan"
+        "peruvian"
       ],
       "diet": {
-        "vegetarian": null,
-        "vegan": null,
+        "vegetarian": "yes",
+        "vegan": "yes",
         "inferred": false
       },
       "address": "Anthony Fokkerweg 61, 1059CP Amsterdam",
       "website": "https://www.arepashopamsterdam.nl/",
       "phone": "+31 6 17377575",
-      "openingHours": "Sa-Su 11:00-15:00",
+      "openingHours": "Mo-Fr 11:00-15:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
@@ -9604,8 +9604,8 @@
       },
       "address": "Admiraal De Ruijterweg 273A, 1055LV Amsterdam",
       "website": "https://www.barvergist.nl/",
-      "phone": "0629361642",
-      "openingHours": "Mo,Th-Fr 15:00-0:00,Sa-Su 12:00-0:00",
+      "phone": "+31 6 2936 1642",
+      "openingHours": "Mo,Th-Fr 15:00-00:00; Sa-Su 12:00-00:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
@@ -11766,13 +11766,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/5752469055",
       "source": "osm",
+      "photoRef": {
+        "commons": "Category:Bhatti Pasal, Voetboogstraat, Amsterdam"
+      },
       "menu": {
         "url": "https://www.bhattipasal.nl/voetboogstraat",
         "scrapedAt": "2026-09-09T20:35:01.013Z",
         "items": {}
-      },
-      "photoRef": {
-        "commons": "Category:Bhatti Pasal, Voetboogstraat, Amsterdam"
       },
       "photo": {
         "title": "File:Bhatti Pasal, Voetboogstraat, Amsterdam 2024-11-26.jpg",
@@ -12453,13 +12453,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2737808629",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q122459927"
+      },
       "menu": {
         "url": "https://www.bistrodelamer.com/bistrodelamer",
         "scrapedAt": "2026-09-09T20:35:09.474Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q122459927"
       },
       "photo": {
         "title": "File:Traiteur Loekie in 1963.jpg",
@@ -14420,13 +14420,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/6192682978",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q106204199"
+      },
       "menu": {
         "url": "https://www.restaurantbougainville.com/en/",
         "scrapedAt": "2026-09-09T20:35:32.840Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q106204199"
       },
       "photo": {
         "title": "File:Declub1.jpg",
@@ -15878,13 +15878,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/318453914",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q23009996"
+      },
       "menu": {
         "url": "https://bridgesrestaurant.nl",
         "scrapedAt": "2026-09-09T20:35:54.839Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q23009996"
       }
     },
     {
@@ -16423,14 +16423,14 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/332059860",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q3496897",
+        "commons": "Category:Brouwerij 't IJ"
+      },
       "menu": {
         "url": "https://www.brouwerijhetij.nl",
         "scrapedAt": "2026-09-10T00:25:02.890Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q3496897",
-        "commons": "Category:Brouwerij 't IJ"
       },
       "photo": {
         "title": "File:Brouwerijhetij.jpg",
@@ -16522,13 +16522,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2788449102",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q28034318"
+      },
       "menu": {
         "url": "https://brouwerijtroost.nl/en/",
         "scrapedAt": "2026-09-10T00:25:04.809Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q28034318"
       }
     },
     {
@@ -16554,13 +16554,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/3855416069",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q28034318"
+      },
       "menu": {
         "url": "https://brouwerijtroost.nl",
         "scrapedAt": "2026-09-10T00:26:56.475Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q28034318"
       }
     },
     {
@@ -17049,39 +17049,6 @@
       "menu": {
         "url": "https://www.buiten-amsterdam.nl",
         "scrapedAt": "2026-09-09T20:36:01.304Z",
-        "items": {}
-      }
-    },
-    {
-      "id": "osm:node/4863991341",
-      "name": "Bullewijck par Hasard",
-      "lat": 52.306881,
-      "lon": 4.948342,
-      "category": "restaurant",
-      "cuisines": [
-        "burger",
-        "sandwich",
-        "breakfast"
-      ],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "Hogehilweg 20, 1101CD Amsterdam",
-      "website": "https://www.bullewijck.nl",
-      "phone": "+31 20 820 7520",
-      "openingHours": "Mo, We 09:00-18:00; Tu, Th 09:00-21:00; Fr 09:00-15:00; Sa,Su,PH off; 2024 Aug 6-2024 Aug 23 off",
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": "yes",
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/4863991341",
-      "source": "osm",
-      "menu": {
-        "url": "https://www.bullewijck.nl",
-        "scrapedAt": "2026-09-09T20:35:58.683Z",
         "items": {}
       }
     },
@@ -19160,13 +19127,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2186331503",
       "source": "osm",
+      "photoRef": {
+        "commons": "Category:Cafe 't Papeneiland, Prinsengracht 2, Amsterdam"
+      },
       "menu": {
         "url": "https://www.papeneiland.nl",
         "scrapedAt": "2026-09-10T00:25:07.380Z",
         "items": {}
-      },
-      "photoRef": {
-        "commons": "Category:Cafe 't Papeneiland, Prinsengracht 2, Amsterdam"
       },
       "photo": {
         "title": "File:Amsterdam Prinsengracht 2 718.JPG",
@@ -21337,10 +21304,6 @@
         "url": "https://www.cafedeschelp.nl/",
         "scrapedAt": "2026-10-12T11:24:54.285Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q23931083",
-        "commons": "Category:Groot Laboratorium"
       },
       "photo": {
         "title": "File:Groot Lab (brug).jpg",
@@ -29755,13 +29718,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4162314589",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q5119566"
+      },
       "menu": {
         "url": "https://www.cielbleu.nl",
         "scrapedAt": "2026-09-09T20:37:53.302Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q5119566"
       }
     },
     {
@@ -36377,13 +36340,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/251823631",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q28656899"
+      },
       "menu": {
         "url": "https://www.cafedejaren.nl",
         "scrapedAt": "2026-09-09T20:38:41.195Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q28656899"
       }
     },
     {
@@ -36498,13 +36461,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/9152828410",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q124477482"
+      },
       "menu": {
         "url": "https://www.restaurant-dejuwelier.nl/restaurantdejuwelier",
         "scrapedAt": "2026-09-09T20:38:46.656Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q124477482"
       }
     },
     {
@@ -43063,7 +43026,7 @@
       },
       "address": "Rembrandtplein 16, 1017CV Amsterdam",
       "website": "https://downtown-restaurant.nl/",
-      "phone": "020 233 4806",
+      "phone": "+31 20 233 4806",
       "openingHours": "Mo-Su 12:00-01:00",
       "takeaway": null,
       "delivery": null,
@@ -49959,8 +49922,8 @@
     {
       "id": "osm:node/2737854842",
       "name": "Flo's Appetizing",
-      "lat": 52.361541,
-      "lon": 4.899044,
+      "lat": 52.361535,
+      "lon": 4.89905,
       "category": "cafe",
       "cuisines": [
         "bagels"
@@ -50071,13 +50034,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1310974815",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q124246755"
+      },
       "menu": {
         "url": "https://restaurantflore.com",
         "scrapedAt": "2026-09-09T20:40:40.070Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q124246755"
       },
       "photo": {
         "title": "File:2018 De L'Europe Amsterdam.jpg",
@@ -63726,13 +63689,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2874204307",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q17611405"
+      },
       "menu": {
         "url": "https://www.restaurantjasmijn.nl/",
         "scrapedAt": "2026-09-14T09:20:52.731Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q17611405"
       },
       "photo": {
         "title": "File:Abcoude Kerkplein 3.jpg",
@@ -64117,7 +64080,7 @@
     },
     {
       "id": "osm:node/2816521477",
-      "name": "Jinweise Beef Noodle",
+      "name": "Jinweide Hand-Pulled Beef Noodles",
       "lat": 52.354117,
       "lon": 4.886254,
       "category": "restaurant",
@@ -64130,16 +64093,23 @@
         "inferred": false
       },
       "address": "Hobbemakade 63, 1071XL Amsterdam",
-      "website": null,
-      "phone": null,
-      "openingHours": null,
+      "website": "https://jinweide.nl/",
+      "phone": "+31201234567",
+      "openingHours": "Tu-Th 11:30-21:30; Fr 11:30-22:00; Sa 12:00-22:00; Su 12:00-21:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": null,
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2816521477",
-      "source": "osm"
+      "source": "osm",
+      "menu": {
+        "url": "https://jinweide.nl/",
+        "scrapedAt": "2026-11-09T12:19:40.555Z",
+        "items": {
+          "first": 4.5
+        }
+      }
     },
     {
       "id": "osm:node/2797099451",
@@ -65155,8 +65125,8 @@
     {
       "id": "osm:node/1927111667",
       "name": "Julia's",
-      "lat": 52.338133,
-      "lon": 4.873426,
+      "lat": 52.339053,
+      "lon": 4.87059,
       "category": "fast_food",
       "cuisines": [],
       "diet": {
@@ -65164,10 +65134,10 @@
         "vegan": "no",
         "inferred": false
       },
-      "address": "Spoorslag 23, 1082MM Amsterdam",
+      "address": "Benjamin Brittenstraat, 1082ML Amsterdam",
       "website": "https://www.julias.nl/vestigingen/amsterdam-zuid-wtc/",
       "phone": null,
-      "openingHours": "Mo-We 07:00 - 21:30; Th-Fr 07:00 - 22:30; Sa-Su 10:00 - 21:00",
+      "openingHours": "Mo-We 06:30-22:00; Th-Fr 06:30-22:30; Sa-Su 08:00-22:00",
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": "yes",
@@ -69164,6 +69134,10 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/253130481",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q2344748",
+        "commons": "Category:Filmtheater Kriterion"
+      },
       "addedBecause": "Kriterion: cinema studentesco con bar, aperto fino alle 3",
       "community": {
         "prices": [
@@ -69184,6 +69158,14 @@
         "url": "https://www.kriterion.nl",
         "scrapedAt": "2026-09-14T09:21:38.717Z",
         "items": {}
+      },
+      "photo": {
+        "title": "File:Kriterion2.jpg",
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Kriterion2.jpg/960px-Kriterion2.jpg",
+        "author": "Picasdre",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "page": "https://commons.wikimedia.org/wiki/File:Kriterion2.jpg"
       }
     },
     {
@@ -73111,6 +73093,32 @@
           "first": 11.95
         }
       }
+    },
+    {
+      "id": "osm:node/5812407053",
+      "name": "Le Smash",
+      "lat": 52.371291,
+      "lon": 4.871289,
+      "category": "fast_food",
+      "cuisines": [
+        "burger"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "De Clercqstraat 34, Amsterdam",
+      "website": null,
+      "phone": null,
+      "openingHours": null,
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/5812407053",
+      "source": "osm"
     },
     {
       "id": "osm:node/11873963554",
@@ -77681,6 +77689,32 @@
       "source": "osm"
     },
     {
+      "id": "osm:node/3706860682",
+      "name": "Malai",
+      "lat": 52.376044,
+      "lon": 4.90683,
+      "category": "restaurant",
+      "cuisines": [
+        "chinese"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": null,
+      "website": null,
+      "phone": null,
+      "openingHours": "10:00-22:00",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/3706860682",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/6693359041",
       "name": "Malva",
       "lat": 52.344212,
@@ -77815,32 +77849,6 @@
       "wheelchair": null,
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2721771371",
-      "source": "osm"
-    },
-    {
-      "id": "osm:node/3706860682",
-      "name": "Mama Pancake",
-      "lat": 52.376044,
-      "lon": 4.90683,
-      "category": "cafe",
-      "cuisines": [
-        "pancake"
-      ],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/3706860682",
       "source": "osm"
     },
     {
@@ -81968,7 +81976,7 @@
         "inferred": false
       },
       "address": "Arnold Schönberglaan 7, 1082MJ Amsterdam",
-      "website": "https://www.mimafood.nl/",
+      "website": "https://www.mimafood.nl",
       "phone": "+31 20 2614879",
       "openingHours": "Mo-Su 11:30-21:30",
       "takeaway": "yes",
@@ -83371,30 +83379,6 @@
       }
     },
     {
-      "id": "osm:node/5812407053",
-      "name": "Mook pancakes",
-      "lat": 52.371291,
-      "lon": 4.871289,
-      "category": "cafe",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": "De Clercqstraat 34, Amsterdam",
-      "website": null,
-      "phone": null,
-      "openingHours": "Mo-Su 09:00-17:00",
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": null,
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/5812407053",
-      "source": "osm"
-    },
-    {
       "id": "osm:node/4454997791",
       "name": "Moon",
       "lat": 52.383826,
@@ -83621,6 +83605,39 @@
       "menu": {
         "url": "https://www.mosamsterdam.nl/",
         "scrapedAt": "2026-09-21T09:23:40.258Z",
+        "items": {}
+      }
+    },
+    {
+      "id": "osm:node/4863991341",
+      "name": "Mosa",
+      "lat": 52.306881,
+      "lon": 4.948342,
+      "category": "restaurant",
+      "cuisines": [
+        "burger",
+        "sandwich",
+        "breakfast"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Hogehilweg 20, 1101CD Amsterdam",
+      "website": "https://www.mosa-amsterdam.nl",
+      "phone": "+31 20 820 7520",
+      "openingHours": "Mo 08:00-18:00; Tu-Fr 08:00-22:30; Sa 10:00-22:30; Su,PH off",
+      "takeaway": null,
+      "delivery": null,
+      "outdoorSeating": "yes",
+      "wheelchair": null,
+      "brand": null,
+      "osmUrl": "https://www.openstreetmap.org/node/4863991341",
+      "source": "osm",
+      "menu": {
+        "url": "https://www.bullewijck.nl",
+        "scrapedAt": "2026-09-09T20:35:58.683Z",
         "items": {}
       }
     },
@@ -84548,7 +84565,7 @@
         "vegan": null,
         "inferred": false
       },
-      "address": "Gedempte Gracht 47, 1506CB Zaandam",
+      "address": null,
       "website": "https://www.multivlaai.nl/multivlaai-zaandam",
       "phone": null,
       "openingHours": "Mo-Fr 08:00-18:00; Sa 08:30-18:00; Su 11:00-18:00",
@@ -84556,7 +84573,7 @@
       "delivery": null,
       "outdoorSeating": null,
       "wheelchair": "yes",
-      "brand": "Bruna",
+      "brand": "MultiVlaai",
       "osmUrl": "https://www.openstreetmap.org/node/2893594005",
       "source": "osm",
       "menu": {
@@ -87248,13 +87265,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2808553793",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q7044400"
+      },
       "menu": {
         "url": "https://www.nomansart.com",
         "scrapedAt": "2026-09-28T10:15:04.563Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q7044400"
       }
     },
     {
@@ -88958,30 +88975,6 @@
       }
     },
     {
-      "id": "osm:node/2139829099",
-      "name": "Ola Happiness Station",
-      "lat": 52.339686,
-      "lon": 4.873416,
-      "category": "ice_cream",
-      "cuisines": [],
-      "diet": {
-        "vegetarian": null,
-        "vegan": null,
-        "inferred": false
-      },
-      "address": null,
-      "website": null,
-      "phone": null,
-      "openingHours": null,
-      "takeaway": null,
-      "delivery": null,
-      "outdoorSeating": null,
-      "wheelchair": "yes",
-      "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/2139829099",
-      "source": "osm"
-    },
-    {
       "id": "osm:node/9035347001",
       "name": "Olakino Poké Bowl",
       "lat": 52.357751,
@@ -89276,7 +89269,7 @@
       }
     },
     {
-      "id": "osm:node/5220611321",
+      "id": "osm:node/2818887990",
       "name": "Oliver's",
       "lat": 52.337562,
       "lon": 4.870899,
@@ -89287,20 +89280,20 @@
         "vegan": null,
         "inferred": false
       },
-      "address": null,
+      "address": "Claude Debussylaan 78, 1082MD Amsterdam",
       "website": "https://olivers.nl",
-      "phone": null,
+      "phone": "+31 20 646 1626",
       "openingHours": null,
       "takeaway": null,
       "delivery": null,
       "outdoorSeating": "yes",
       "wheelchair": "yes",
       "brand": null,
-      "osmUrl": "https://www.openstreetmap.org/node/5220611321",
+      "osmUrl": "https://www.openstreetmap.org/node/2818887990",
       "source": "osm",
       "menu": {
         "url": "https://olivers.nl",
-        "scrapedAt": "2026-09-28T10:15:27.635Z",
+        "scrapedAt": "2026-11-09T12:19:40.102Z",
         "items": {}
       }
     },
@@ -92034,15 +92027,15 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1886938107",
       "source": "osm",
+      "photoRef": {
+        "commons": "Category:Upstairs Pannenkoekenhuis, Grimburgwal, Amsterdam"
+      },
       "menu": {
         "url": "https://upstairspannenkoeken.nl/the-menu-upstairs-pancakes-amsterdam/",
         "scrapedAt": "2026-09-28T10:15:59.683Z",
         "items": {
           "coffee": 3.5
         }
-      },
-      "photoRef": {
-        "commons": "Category:Upstairs Pannenkoekenhuis, Grimburgwal, Amsterdam"
       }
     },
     {
@@ -99635,13 +99628,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1427417016",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q47011077"
+      },
       "menu": {
         "url": "https://www.cafereynders.nl/",
         "scrapedAt": "2026-10-05T10:56:45.074Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q47011077"
       },
       "photo": {
         "title": "File:Reynders-amsterdam.jpg",
@@ -99952,13 +99945,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2725878761",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q107096159"
+      },
       "menu": {
         "url": "https://www.212.amsterdam/restaurant-212",
         "scrapedAt": "2026-10-05T10:56:49.409Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q107096159"
       }
     },
     {
@@ -100400,15 +100393,15 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2725794732",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q3125913"
+      },
       "menu": {
         "url": "https://www.restaurantlastage.nl/menu/",
         "scrapedAt": "2026-10-05T10:56:59.212Z",
         "items": {
           "first": 7.5
         }
-      },
-      "photoRef": {
-        "wikidata": "Q3125913"
       }
     },
     {
@@ -100844,14 +100837,14 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4307691520",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q68339650",
+        "commons": "Category:Restaurant Rijks"
+      },
       "menu": {
         "url": "https://www.rijksrestaurant.nl",
         "scrapedAt": "2026-10-05T10:56:57.865Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q68339650",
-        "commons": "Category:Restaurant Rijks"
       },
       "photo": {
         "title": "File:Restaurant Rijks 02.jpg",
@@ -100885,13 +100878,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4744112210",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q14855228"
+      },
       "menu": {
         "url": "https://www.rijnbar.nl/",
         "scrapedAt": "2026-10-05T10:56:56.338Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q14855228"
       },
       "photo": {
         "title": "File:Rijnbar-2016.jpg",
@@ -101665,14 +101658,14 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/1339610641",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q22950262",
+        "commons": "Category:Ron Gastrobar"
+      },
       "menu": {
         "url": "https://rongastrobar.nl/restaurants/ron-gastrobar",
         "scrapedAt": "2026-10-05T10:57:11.752Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q22950262",
-        "commons": "Category:Ron Gastrobar"
       },
       "photo": {
         "title": "File:Ron Gastrobar Amsterdam (Q22950262) - Terras.jpg",
@@ -105298,15 +105291,15 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2722209299",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q46719869"
+      },
       "menu": {
         "url": "https://caferestaurantscheltema.nl/",
         "scrapedAt": "2026-10-05T10:57:41.200Z",
         "items": {
           "first": 3.75
         }
-      },
-      "photoRef": {
-        "wikidata": "Q46719869"
       }
     },
     {
@@ -105332,13 +105325,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/432860310",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q29046898"
+      },
       "menu": {
         "url": "https://cafeschiller.nl",
         "scrapedAt": "2026-10-05T10:57:47.926Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q29046898"
       }
     },
     {
@@ -107309,13 +107302,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2725914020",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q7507429"
+      },
       "menu": {
         "url": "http://sichuanfood.nl",
         "scrapedAt": "2026-10-05T10:58:01.175Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q7507429"
       },
       "photo": {
         "title": "File:Sichuanfood-amsterdam.jpg",
@@ -107840,13 +107833,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4576285030",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q23306259"
+      },
       "menu": {
         "url": "https://restaurantsinne.nl",
         "scrapedAt": "2026-10-05T10:58:07.082Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q23306259"
       }
     },
     {
@@ -108897,6 +108890,32 @@
       }
     },
     {
+      "id": "osm:node/14352502797",
+      "name": "Smullers",
+      "lat": 52.338512,
+      "lon": 4.870603,
+      "category": "fast_food",
+      "cuisines": [
+        "friture"
+      ],
+      "diet": {
+        "vegetarian": null,
+        "vegan": null,
+        "inferred": false
+      },
+      "address": "Benjamin Brittenstraat, 1082ML Amsterdam",
+      "website": null,
+      "phone": null,
+      "openingHours": "Mo-We 06:45-19:00; Sa 07:30-20:00; Th,Fr 06:45-20:00; Su 08:30-19:00",
+      "takeaway": "yes",
+      "delivery": null,
+      "outdoorSeating": null,
+      "wheelchair": "yes",
+      "brand": "Smullers",
+      "osmUrl": "https://www.openstreetmap.org/node/14352502797",
+      "source": "osm"
+    },
+    {
       "id": "osm:node/1539937895",
       "name": "Smullers",
       "lat": 52.379361,
@@ -108920,32 +108939,6 @@
       "wheelchair": "yes",
       "brand": "Smullers",
       "osmUrl": "https://www.openstreetmap.org/node/1539937895",
-      "source": "osm"
-    },
-    {
-      "id": "osm:node/2611370309",
-      "name": "Smullers",
-      "lat": 52.338194,
-      "lon": 4.873411,
-      "category": "fast_food",
-      "cuisines": [
-        "friture"
-      ],
-      "diet": {
-        "vegetarian": "yes",
-        "vegan": "no",
-        "inferred": false
-      },
-      "address": "Spoorslag 21, 1082MM Amsterdam",
-      "website": null,
-      "phone": null,
-      "openingHours": "Mo-Tu,Sa-Su 11:00-22:00; We 10:00-22:00; Th-Fr 10:00-23:00",
-      "takeaway": "only",
-      "delivery": null,
-      "outdoorSeating": "no",
-      "wheelchair": "yes",
-      "brand": "Smullers",
-      "osmUrl": "https://www.openstreetmap.org/node/2611370309",
       "source": "osm"
     },
     {
@@ -110927,13 +110920,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/6295614085",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q19887997"
+      },
       "menu": {
         "url": "https://restaurantspectrum.com",
         "scrapedAt": "2026-10-05T10:58:21.277Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q19887997"
       },
       "photo": {
         "title": "File:Rm1892-4.JPG",
@@ -112237,8 +112230,8 @@
     {
       "id": "osm:node/2139829098",
       "name": "Starbucks",
-      "lat": 52.339651,
-      "lon": 4.873126,
+      "lat": 52.338875,
+      "lon": 4.870563,
       "category": "cafe",
       "cuisines": [
         "coffee_shop"
@@ -112248,8 +112241,8 @@
         "vegan": null,
         "inferred": false
       },
-      "address": "Zuidplein 10, Amsterdam",
-      "website": "https://www.starbucks.nl",
+      "address": "Benjamin Brittenstraat, 1082ML Amsterdam",
+      "website": "https://www.starbucks.nl/nl/store-locator/58542-292737",
       "phone": "+31 6 20614824",
       "openingHours": "Mo-We 06:45-19:00; Sa 07:30-20:00; Th,Fr 06:45-20:00; Su 08:30-19:00",
       "takeaway": "yes",
@@ -121292,7 +121285,7 @@
         "vegan": "only",
         "inferred": false
       },
-      "address": "Hobbemakade 71, Amsterdam",
+      "address": "Hobbemakade 71, 1071XM Amsterdam",
       "website": "https://theoldsoul.nl/",
       "phone": "+31 20 227 8889",
       "openingHours": "We-Su 17:00-22:00",
@@ -124169,6 +124162,9 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/2725878182",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q141169496"
+      },
       "menu": {
         "url": "https://tomosushi.nl",
         "scrapedAt": "2026-10-12T11:26:57.483Z",
@@ -126999,13 +126995,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/251127910",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q7316098"
+      },
       "menu": {
         "url": "https://www.restaurantvermeer.nl/",
         "scrapedAt": "2026-10-19T09:24:06.544Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q7316098"
       },
       "photo": {
         "title": "File:Restaurant Vermeer exterior.jpg",
@@ -127630,13 +127626,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/4571078874",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q17195570"
+      },
       "menu": {
         "url": "https://www.vinkeles.com",
         "scrapedAt": "2026-10-19T09:24:10.585Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q17195570"
       },
       "photo": {
         "title": "File:Amsterdam - Keizersgracht 384.JPG",
@@ -131635,13 +131631,13 @@
       "brand": null,
       "osmUrl": "https://www.openstreetmap.org/node/10983187021",
       "source": "osm",
+      "photoRef": {
+        "wikidata": "Q8048010"
+      },
       "menu": {
         "url": "https://www.okura.nl/nl/yamazato",
         "scrapedAt": "2026-10-19T09:24:40.899Z",
         "items": {}
-      },
-      "photoRef": {
-        "wikidata": "Q8048010"
       },
       "photo": {
         "title": "File:Hotel Okura Amsterdam - Yamazato Restaurant - Waitress in Kimono.jpg",
