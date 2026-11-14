@@ -160,3 +160,34 @@ test('vino e pasta rispettano comunque i limiti di plausibilità', () => {
   assert.equal(findItemPrice(['Wijnkaart pagina 3'], 'wine'), null, 'niente prezzo sulla riga, niente da leggere');
   assert.equal(findItemPrice(['Pasta della casa € 45,00'], 'pasta'), null, 'una pasta a 45 € è un errore');
 });
+
+// --- menu in PDF ---
+
+import { readFileSync } from 'node:fs';
+import { findPdfMenuLinks, extractItemsFromText } from '../scripts/menu-parse.js';
+import { hasPdftotext, pdfToText } from '../scripts/pdf-text.js';
+
+test('trova i link a PDF che sembrano un menu, solo sullo stesso host', () => {
+  const html = `
+    <a href="/wp-content/uploads/Menukaart-2026.pdf">Download</a>
+    <a href="/files/info.pdf">Drinks &amp; food</a>
+    <a href="/files/jaarverslag.pdf">Jaarverslag</a>
+    <a href="https://altro.example/menu.pdf">Menu</a>
+    <a href="/menu">Menu (HTML)</a>
+    <a href="/dranken.pdf?v=3#p1">Dranken</a>`;
+  assert.deepEqual(findPdfMenuLinks(html, 'https://locale.example/'), [
+    'https://locale.example/wp-content/uploads/Menukaart-2026.pdf',
+    'https://locale.example/files/info.pdf',
+  ]);
+});
+
+test('legge i prezzi dal testo estratto da un PDF (stessa plausibilità dell\'HTML)', () => {
+  const text = 'Menukaart\n\nKoffie        3,50\nBiertje       4,80\f\nHoofdgerechten\nBurger   16,50\nPasta pesto 14,00\nDessert\nTiramisu  7,00\nTel 020 555 12 34\n';
+  assert.deepEqual(extractItemsFromText(text), { coffee: 3.5, beer: 4.8, pasta: 14, main: 14 });
+});
+
+test('pdftotext su un PDF reale di prova (solo se installato)', { skip: !hasPdftotext }, async () => {
+  const text = await pdfToText(readFileSync(new URL('./fixtures/menu.pdf', import.meta.url)));
+  assert.ok(text);
+  assert.deepEqual(extractItemsFromText(text), { coffee: 3.5, beer: 4.8, pasta: 14, main: 14 });
+});

@@ -36,6 +36,10 @@ jobs:
       - name: Scarica i locali da OpenStreetMap
         run: npm run fetch:osm
 
+      - name: Installa pdftotext (menu in PDF)
+        run: sudo apt-get install -y poppler-utils
+        continue-on-error: true
+
       - name: Leggi i prezzi dai siti dei locali
         run: npm run scrape:menus -- --limit ${{ inputs.scrape_limit || 300 }} --max-age ${{ inputs.scrape_max_age || 90 }}
         continue-on-error: true

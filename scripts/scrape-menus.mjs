@@ -11,7 +11,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { extractItems, findMenuLinks, isAllowedByRobots } from './menu-parse.js';
+import { hasPdftotext, pdfToText } from './pdf-text.js';
+import { extractItems, extractItemsFromText, findMenuLinks, findPdfMenuLinks, isAllowedByRobots } from './menu-parse.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FILE = join(ROOT, 'data', 'places.json');
@@ -19,6 +20,7 @@ const FILE = join(ROOT, 'data', 'places.json');
 const USER_AGENT = 'eating-amsterdam/0.1 (+https://github.com/alessiomartini/eating-amsterdam)';
 const TIMEOUT_MS = 12000;
 const MAX_BYTES = 1_500_000;
+const MAX_PDF_BYTES = 10_000_000;
 const PER_HOST_DELAY_MS = 1200;
 const CONCURRENCY = 6;
 
@@ -46,6 +48,32 @@ async function getText(url) {
     if (Number(res.headers.get('content-length')) > MAX_BYTES) return null;
     const text = await res.text();
     return text.slice(0, MAX_BYTES);
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// pdftotext (poppler) è un programma di sistema: se manca, i PDF si saltano.
+if (!hasPdftotext) log('pdftotext non trovato: i menu in PDF vengono saltati.');
+
+async function getPdf(url) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS * 2);
+  try {
+    const res = await fetch(url, {
+      headers: { 'User-Agent': USER_AGENT, Accept: 'application/pdf' },
+      redirect: 'follow',
+      signal: controller.signal,
+    });
+    if (!res.ok) return null;
+    const type = res.headers.get('content-type') ?? '';
+    if (!type.includes('pdf') && !type.includes('octet-stream')) return null;
+    if (Number(res.headers.get('content-length')) > MAX_PDF_BYTES) return null;
+    const buf = Buffer.from(await res.arrayBuffer());
+    if (buf.length > MAX_PDF_BYTES || buf.subarray(0, 5).toString() !== '%PDF-') return null;
+    return buf;
   } catch {
     return null;
   } finally {
@@ -92,7 +120,29 @@ async function scrapePlace(place) {
     }
   }
 
-  return { url: sourceUrl, items };
+  // ancora poco: molti siti pubblicano il menu solo come PDF
+  let menuSource;
+  if (hasPdftotext && !enough()) {
+    const pdfLinks = findPdfMenuLinks(html, home);
+    for (const link of pdfLinks) {
+      await new Promise((r) => setTimeout(r, PER_HOST_DELAY_MS));
+      if (!(await allowed(link))) continue;
+      const buf = await getPdf(link);
+      if (!buf) continue;
+      const text = await pdfToText(buf);
+      if (!text) continue;
+      for (const [id, price] of Object.entries(extractItemsFromText(text))) {
+        if (items[id] == null || price < items[id]) {
+          items[id] = price;
+          sourceUrl = link;
+          menuSource = 'pdf';
+        }
+      }
+      if (enough()) break;
+    }
+  }
+
+  return { url: sourceUrl, items, ...(menuSource && { menuSource }) };
 }
 
 /** Esegue i lavori a gruppi, senza mai due richieste in parallelo sullo stesso host. */
@@ -151,7 +201,12 @@ await runPool(todo, async (place) => {
     log(`  ✓ ${place.name}: ${Object.entries(result.items).map(([k, v]) => `${k} €${v}`).join(', ')}`);
   }
   // registriamo anche i tentativi a vuoto, così non li ripetiamo ogni settimana
-  place.menu = { url: result.url, scrapedAt: new Date().toISOString(), items: result.items };
+  place.menu = {
+    url: result.url,
+    scrapedAt: new Date().toISOString(),
+    items: result.items,
+    ...(result.menuSource && { menuSource: result.menuSource }),
+  };
   done += 1;
   if (done % 50 === 0) log(`  …${done}/${todo.length}`);
 });

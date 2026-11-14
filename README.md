@@ -176,6 +176,15 @@ Si comporta bene: si identifica con uno User-Agent, rispetta `robots.txt`, non f
 mai due richieste insieme sullo stesso host e lascia un secondo fra una pagina e
 l'altra. Registra anche i tentativi a vuoto, per non ripeterli ogni settimana.
 
+Molti locali pubblicano il menu solo come PDF: se la homepage o le pagine di menu
+non bastano, lo scraper segue al massimo due link a `.pdf` dello stesso host che
+sembrano un menu (nome del file o testo con menu/kaart/drinks/food…), li scarica
+con le stesse regole (robots.txt, tetto di 10 MB) ed estrae il testo con
+`pdftotext -layout` (pacchetto `poppler-utils`, nessuna dipendenza npm). Il testo
+passa dallo stesso parser dell'HTML; in `menu` del locale compare `menuSource: "pdf"`
+e `menu.url` punta al PDF. Senza `pdftotext` i PDF vengono saltati con una riga di log.
+I menu in forma di immagine (OCR) non sono gestiti.
+
 **Non fa scraping di Google Maps**: quelle pagine sono coperte dai ToS di Google,
 cambiano di continuo e bloccano gli IP dei datacenter. Il "simbolo dell'euro" di
 Google si ottiene in modo lecito dalla Places API, qui sotto.

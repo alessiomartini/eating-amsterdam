@@ -190,9 +190,26 @@ export function findSectionPrice(lines, sectionId) {
   return best;
 }
 
+/** Testo semplice (es. l'output di `pdftotext -layout`) in righe pulite. */
+export function textToLines(text) {
+  return decodeEntities(text.replace(/\f/g, '\n'))
+    .split('\n')
+    .map((line) => line.replace(/[ \t\u00a0]+/g, ' ').trim())
+    .filter(Boolean);
+}
+
 /** Tutte le voci ricavabili da una pagina. */
 export function extractItems(html) {
-  const lines = htmlToLines(html);
+  return extractItemsFromLines(htmlToLines(html));
+}
+
+/** Tutte le voci ricavabili da un testo semplice (menu in PDF già estratto). */
+export function extractItemsFromText(text) {
+  return extractItemsFromLines(textToLines(text));
+}
+
+/** Stessa logica di prezzi e plausibilità, qualunque sia la fonte delle righe. */
+export function extractItemsFromLines(lines) {
   const items = {};
   for (const itemId of Object.keys(ITEM_KEYWORDS)) {
     const price = findItemPrice(lines, itemId);
@@ -230,6 +247,32 @@ export function findMenuLinks(html, baseUrl) {
     } catch { /* href malformato */ }
   }
   return [...links].slice(0, 3);
+}
+
+/**
+ * Link a un PDF che sembra un menu: href che finisce in .pdf (anche con query)
+ * e, o il nome del file, o il testo del link, parla di menu/carta/bevande.
+ * Solo lo stesso host, come per le pagine; al massimo 2.
+ */
+export function findPdfMenuLinks(html, baseUrl) {
+  const wanted = /menu|menukaart|kaart|carta|drinks|dranken|drinken|food|eten|gerechten|prijs|prijzen|price|lunch|diner|dinner|brunch/i;
+  const links = new Set();
+
+  for (const match of html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]{0,120}?)<\/a>/gi)) {
+    const [, href, label] = match;
+    if (/^(mailto:|tel:|javascript:|#)/i.test(href)) continue;
+    try {
+      const url = new URL(decodeEntities(href), baseUrl);
+      if (url.protocol !== 'https:' && url.protocol !== 'http:') continue;
+      if (!/\.pdf$/i.test(url.pathname)) continue;
+      if (url.hostname !== new URL(baseUrl).hostname) continue;
+      const text = decodeURIComponent(url.pathname) + ' ' + label.replace(/<[^>]+>/g, '');
+      if (!wanted.test(text)) continue;
+      url.hash = '';
+      links.add(url.toString());
+    } catch { /* href malformato */ }
+  }
+  return [...links].slice(0, 2);
 }
 
 /** Parser minimo di robots.txt per il gruppo User-agent che ci riguarda. */
