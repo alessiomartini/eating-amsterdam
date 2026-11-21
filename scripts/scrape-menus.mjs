@@ -12,7 +12,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { hasPdftotext, pdfToText } from './pdf-text.js';
-import { extractItems, extractItemsFromText, findMenuLinks, findPdfMenuLinks, isAllowedByRobots } from './menu-parse.js';
+import { hasTesseract, imageToText } from './ocr-text.js';
+import { extractItems, extractItemsFromText, findMenuLinks, findPdfMenuLinks, findImageMenuLinks, isAllowedByRobots } from './menu-parse.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FILE = join(ROOT, 'data', 'places.json');
@@ -21,6 +22,7 @@ const USER_AGENT = 'eating-amsterdam/0.1 (+https://github.com/alessiomartini/eat
 const TIMEOUT_MS = 12000;
 const MAX_BYTES = 1_500_000;
 const MAX_PDF_BYTES = 10_000_000;
+const MAX_IMAGE_BYTES = 8_000_000;
 const PER_HOST_DELAY_MS = 1200;
 const CONCURRENCY = 6;
 
@@ -74,6 +76,31 @@ async function getPdf(url) {
     const buf = Buffer.from(await res.arrayBuffer());
     if (buf.length > MAX_PDF_BYTES || buf.subarray(0, 5).toString() !== '%PDF-') return null;
     return buf;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// tesseract è opzionale: se manca, le immagini dei menu si saltano.
+if (!hasTesseract) log('tesseract non trovato: i menu come immagine vengono saltati.');
+
+async function getImage(url) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS * 2);
+  try {
+    const res = await fetch(url, {
+      headers: { 'User-Agent': USER_AGENT, Accept: 'image/jpeg,image/png,image/webp' },
+      redirect: 'follow',
+      signal: controller.signal,
+    });
+    if (!res.ok) return null;
+    const type = res.headers.get('content-type') ?? '';
+    if (!/^image\/(jpeg|png|webp)/.test(type)) return null;
+    if (Number(res.headers.get('content-length')) > MAX_IMAGE_BYTES) return null;
+    const buf = Buffer.from(await res.arrayBuffer());
+    return buf.length > MAX_IMAGE_BYTES ? null : buf;
   } catch {
     return null;
   } finally {
@@ -136,6 +163,26 @@ async function scrapePlace(place) {
           items[id] = price;
           sourceUrl = link;
           menuSource = 'pdf';
+        }
+      }
+      if (enough()) break;
+    }
+  }
+
+  // ancora poco: menu fotografato, letto con l'OCR (se tesseract c'è)
+  if (hasTesseract && !enough()) {
+    for (const link of findImageMenuLinks(html, home)) {
+      await new Promise((r) => setTimeout(r, PER_HOST_DELAY_MS));
+      if (!(await allowed(link))) continue;
+      const buf = await getImage(link);
+      if (!buf) continue;
+      const text = await imageToText(buf);
+      if (!text) continue;
+      for (const [id, price] of Object.entries(extractItemsFromText(text))) {
+        if (items[id] == null || price < items[id]) {
+          items[id] = price;
+          sourceUrl = link;
+          menuSource = 'ocr';
         }
       }
       if (enough()) break;

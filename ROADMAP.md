@@ -9,9 +9,9 @@ Unico file per todo, idee, decisioni e diario, letto da Projects Overview
 - [x] Mappa con filtri per cibo/bevanda e prezzo totale
 - [x] Aggiornamento automatico da OpenStreetMap
 - [x] Foto del locale nella scheda (solo dove OSM ha un riferimento Wikimedia, copertura ~0,5%)
-- [ ] Foto del menù con estrazione dei prezzi
+- [x] Foto del menù con estrazione dei prezzi
   - [x] Prezzi dai menù in PDF (pdftotext)
-  - [ ] Menù come immagine (OCR)
+  - [x] Menù come immagine (OCR)
 - [x] Segnalare i prezzi più vecchi di 12 mesi da riverificare
 
 ## Idee
@@ -71,15 +71,20 @@ Per come è fatto il progetto oggi vedi `README.md` (sito) e
   Cresce solo se qualcuno aggiunge i tag in OSM. Il rinfresco settimanale lancia lo
   script (`continue-on-error`).
 - **Foto del menù con estrazione dei prezzi**: oggi `scripts/scrape-menus.mjs`
-  legge solo pagine HTML; una foto del menu scattata da un utente richiederebbe
-  OCR, non ancora affrontato.
+  legge pagine HTML, PDF e immagini di menu pubblicate dal locale (OCR con `tesseract`,
+  vedi sotto). Una foto scattata da un utente non è gestita: resta fuori perimetro.
 - **Menù in PDF**: `scrape-menus` segue fino a 2 link `.pdf` dello stesso host che
   sembrano un menu, solo se HTML e pagine di menu non bastano, e ne estrae il testo con
   `pdftotext -layout` (poppler, processo figlio: nessuna dipendenza npm). Stesso parser
   e stessi limiti di plausibilità dell'HTML (`extractItemsFromText`); il locale riceve
   `menu.menuSource: "pdf"`. Senza `pdftotext` si salta con una riga di log; il
   workflow settimanale lo installa (`poppler-utils`, `continue-on-error`). Scartati:
-  PDF su altri host (come per le pagine) e PDF oltre 10 MB. L'OCR resta da fare.
+  PDF su altri host (come per le pagine) e PDF oltre 10 MB. 
+- **Menù come immagine**: fino a 2 immagini `.jpg/.png/.webp` dello stesso host con
+  menu/kaart/prijzen/drinks nel nome o nell'alt (max 8 MB), lette con `tesseract`
+  (eng+nld, processo figlio, nessuna dipendenza npm), con una pulizia dei difetti OCR
+  tipici ("12.5O"); `menuSource: "ocr"`. Opzionale: senza `tesseract` si salta con una
+  riga di log; il workflow settimanale lo installa. Non testato su siti reali in blocco.
 - **Segnalazione dei prezzi vecchi** (> 12 mesi): fatta, badge "re-check" in
   lista e scheda. Limite: `npm run check:stale` elenca solo i prezzi da menu
   (`menu.scrapedAt`); quelli della community stanno nel Worker, non nel repo,
@@ -91,6 +96,7 @@ Per come è fatto il progetto oggi vedi `README.md` (sito) e
   "Guardare dentro").
 
 ## Log
+- 2026-11-21: 🤖 lo scraper dei menù legge anche i menù pubblicati come immagine (OCR con `tesseract`, `menuSource: "ocr"`, opzionale), con test e `tesseract-ocr` nel workflow.
 - 2026-11-14: 🤖 lo scraper dei menù legge anche i menù pubblicati come PDF (`pdftotext`, `menuSource: "pdf"`), con test e step `poppler-utils` nel workflow; l'OCR delle immagini resta da fare.
 - 2026-11-07: 🤖 foto del locale da Wikimedia Commons nella scheda (`enrich:photos`, `photoRef` in `fetch:osm`, attribuzione autore/licenza, test sul parsing); copertura 23/4713.
 - 2026-11-06: il feedback va ora al Worker condiviso site-notes (coda locale finché non è accettato), anche senza backend dei prezzi; tolta la issue GitHub precompilata; `/api/feedback` del backend dei prezzi non è più usato dal sito; serve il deploy di site-notes. widget note v2 canonico (site-notes/widget): tolti bottone/modale/coda vecchi, migrate outbox e note locali dello store. widget note allineato alla versione finale (migrazione key#field, dedupe), ?v=3.

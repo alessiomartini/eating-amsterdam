@@ -183,7 +183,11 @@ con le stesse regole (robots.txt, tetto di 10 MB) ed estrae il testo con
 `pdftotext -layout` (pacchetto `poppler-utils`, nessuna dipendenza npm). Il testo
 passa dallo stesso parser dell'HTML; in `menu` del locale compare `menuSource: "pdf"`
 e `menu.url` punta al PDF. Senza `pdftotext` i PDF vengono saltati con una riga di log.
-I menu in forma di immagine (OCR) non sono gestiti.
+Stesso schema per i menu fotografati: fino a 2 immagini `.jpg/.png/.webp` dello stesso
+host (link o `<img>`) il cui nome o testo parla di menu/kaart/prijzen/drinks, lette con
+`tesseract` (eng+nld, processo figlio, tetto di 8 MB; pacchetti `tesseract-ocr` e
+`tesseract-ocr-nld`) e passate dallo stesso parser: `menuSource: "ocr"`. Senza
+`tesseract` si salta con una riga di log.
 
 **Non fa scraping di Google Maps**: quelle pagine sono coperte dai ToS di Google,
 cambiano di continuo e bloccano gli IP dei datacenter. Il "simbolo dell'euro" di

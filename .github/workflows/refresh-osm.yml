@@ -36,8 +36,8 @@ jobs:
       - name: Scarica i locali da OpenStreetMap
         run: npm run fetch:osm
 
-      - name: Installa pdftotext (menu in PDF)
-        run: sudo apt-get install -y poppler-utils
+      - name: Installa pdftotext e tesseract (menu in PDF e come immagine)
+        run: sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-nld
         continue-on-error: true
 
       - name: Leggi i prezzi dai siti dei locali
