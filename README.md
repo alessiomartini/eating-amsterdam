@@ -1,314 +1,314 @@
 # 🥙 Eating Amsterdam
 
-Mappa collaborativa dei posti dove si mangia bene spendendo poco ad Amsterdam e
-dintorni: snackbar, döner, falafel, ristoranti economici. Non si filtra per tipo
-di locale o cucina, ma per **cosa si vuole bere o mangiare**: si scelgono una o
-più voci (caffè, birra, döner, pizza...) e la mappa mostra solo i locali che le
-hanno tutte, colorati per il prezzo totale di quello che si è scelto. Filtri
-anche per voto, distanza e **opzioni vegetariane/vegane**.
+A collaborative map of places where you can eat well on a budget in Amsterdam and
+the surrounding area: snack bars, döner, falafel, cheap restaurants. It does not filter by type
+of venue or cuisine, but by **what you want to drink or eat**: you pick one or
+more items (coffee, beer, döner, pizza...) and the map shows only the venues that
+have all of them, coloured by the total price of what you picked. Filters
+also for rating, distance and **vegetarian/vegan options**.
 
-L'interfaccia è in inglese; il codice e questi appunti restano in italiano.
-Sito statico, senza backend e senza database: si può pubblicare gratis su GitHub Pages.
+The interface is in English; the code and these notes are in English too (or bilingual EN/IT).
+Static site, no backend and no database: it can be published for free on GitHub Pages.
 
-## Le voci di riferimento
+## The reference items
 
-Invece di prezzi sciolti ("ho pagato 7,50"), ogni locale risponde alle stesse
-domande, così i locali diventano confrontabili:
+Instead of loose prices ("I paid 7.50"), every venue answers the same
+questions, so that venues become comparable:
 
-| da bere | da spizzicare | da sedersi |
+| to drink | to nibble | to sit down |
 |---|---|---|
-| caffè, birra, vino, cocktail più economico | patatine, croissant, döner, pizza, gelato | pasta, primo e secondo più economici |
+| cheapest coffee, beer, wine, cocktail | fries, croissant, döner, pizza, ice cream | cheapest pasta, first and second course |
 
-Ogni voce compare solo dove ha senso: il döner dove si fa il döner, il cocktail
-non in un chiosco di friet, la pasta in un posto italiano. Il "piatto più
-economico del locale", invece — una pseudo-voce che valeva per qualunque posto —
-non c'è più: non voleva dire niente per confrontare due locali diversi,
-esattamente come filtrare per tipo di cucina o categoria del locale. Si sceglie
-sempre una voce concreta, o niente.
+Each item appears only where it makes sense: döner where döner is made, cocktail
+not in a friet kiosk, pasta in an Italian place. The "cheapest dish of the venue", instead — a
+pseudo-item that applied to any place — is gone:
+it meant nothing for comparing two different venues,
+exactly like filtering by cuisine type or venue category. You always pick
+a concrete item, or nothing.
 
-Si può scegliere **più di una voce insieme** ("mi va caffè e birra"): il locale
-compare solo se le offre entrambe (AND, non "quasi"), e il prezzo mostrato — usato
-anche per ordinare e colorare i marker — è la **somma semplice** delle voci
-scelte, non una media pesata: coloranti e classifica cambiano a seconda di cosa
-si è scelto, non restano un numero fisso per locale.
+You can pick **more than one item together** ("I fancy coffee and beer"): the venue
+appears only if it offers both (AND, not "almost"), and the price shown — also used
+to sort and colour the markers — is the **simple sum** of the items
+picked, not a weighted average: colours and ranking change depending on what
+you picked, they are not a fixed number per venue.
 
-Ogni prezzo porta con sé la propria provenienza, e la provenienza è sempre
-visibile:
+Every price carries its own provenance, and the provenance is always
+visible:
 
 | | |
 |---|---|
-| **misurato** | l'ha inserito qualcuno che era lì. È il dato buono |
-| **da menu** | letto dal sito del locale (`npm run scrape:menus`) |
-| **stimato** | calcolato da noi, mostrato con `≈` e in corsivo |
+| **measured** | entered by someone who was there. This is the good data |
+| **from menu** | read from the venue's website (`npm run scrape:menus`) |
+| **estimated** | computed by us, shown with `≈` and in italics |
 
-Le stime non entrano mai nella media dei prezzi reali e si possono escludere dai
-filtri con "Real prices only". Una stima spacciata per prezzo vero sarebbe
-peggio di nessun prezzo.
+Estimates never enter the average of real prices and can be excluded from the
+filters with "Real prices only". An estimate passed off as a real price would be
+worse than no price.
 
-### Il bollino sconto studenti
+### The student discount badge
 
-Alcuni locali fanno sconti agli studenti — 'Skek per esempio — ma non esiste un
-tag OpenStreetMap standard per dirlo, e non compare in nessuna API: lo sa solo
-chi c'è stato. Quindi è una segnalazione come i prezzi, con la stessa regola:
-vale l'ultima, e **se le segnalazioni si contraddicono la contraddizione si
-mostra** invece di far vincere in silenzio la più recente. Il bollino 🎓 compare
-in lista e c'è il filtro corrispondente.
+Some venues give student discounts — 'Skek for example — but there is no
+standard OpenStreetMap tag for it, and it appears in no API: only
+people who have been there know it. So it is a report like prices, with the same rule:
+the latest one wins, and **if reports contradict each other the contradiction is
+shown** instead of silently letting the most recent win. The 🎓 badge appears
+in the list and there is a matching filter.
 
-La struttura è generica (tabella `flags`): aggiungere altri fatti booleani —
-"solo contanti", "aperto a notte fonda" — costa una voce in `assets/js/flags.js`
-e una nel Worker.
+The structure is generic (`flags` table): adding other boolean facts —
+"cash only", "open late at night" — costs one entry in `assets/js/flags.js`
+and one in the Worker.
 
-### Lo storico, come nelle app dei carburanti
+### The history, as in fuel-price apps
 
-Di ogni voce si mostra **l'ultimo prezzo inserito**, non la media: i prezzi
-cambiano e una media invecchia. Lo storico completo resta consultabile nella
-scheda del locale.
+For each item it shows **the last price entered**, not the average: prices
+change and an average gets old. The full history can be consulted in the
+venue's card.
 
-Se l'ultimo prezzo si discosta troppo dai precedenti (più del 60% sopra o del
-40% sotto, con almeno due prezzi prima) compare la spunta **`?`**: il prezzo si
-mostra comunque, ma dicendo che non ne siamo sicuri. Può essere un errore di
-battitura, un piatto diverso, o un rincaro vero — lo risolve il prossimo che
-passa di lì e inserisce il suo.
+If the last price differs too much from the previous ones (more than 60% above or 40% below,
+with at least two prices before) a **`?`** mark appears: the price is
+still shown, but saying that we are not sure. It may be a
+typo, a different dish, or a real price rise — the next person who
+passes by and enters theirs will settle it.
 
 ---
 
-## Il nodo dei prezzi (e perché non si fa scraping di Google Maps)
+## The price problem (and why we do not scrape Google Maps)
 
-Serve dirlo subito, perché condiziona tutto il resto:
+This needs saying up front, because it shapes everything else:
 
-| Dato | Da dove arriva |
+| Data | Where it comes from |
 |---|---|
-| Nome, posizione, indirizzo, tipo di cucina, orari | **OpenStreetMap** (Overpass API) — gratis, senza chiave |
-| Tag `diet:vegetarian` / `diet:vegan` | **OpenStreetMap** |
-| Stelle e numero di recensioni | **Google Places API** (facoltativo, serve una chiave) |
-| Fascia di prezzo `€`…`€€€€` | **Google Places API** (`priceLevel`) |
-| **Prezzi del menu** | **il sito del locale**, letto da `scripts/scrape-menus.mjs` |
-| **Prezzo del singolo piatto** | **gli utenti** — è l'unica fonte davvero affidabile |
+| Name, position, address, cuisine type, opening hours | **OpenStreetMap** (Overpass API) — free, no key |
+| `diet:vegetarian` / `diet:vegan` tags | **OpenStreetMap** |
+| Stars and number of reviews | **Google Places API** (optional, needs a key) |
+| Price band `€`…`€€€€` | **Google Places API** (`priceLevel`) |
+| **Menu prices** | **the venue's website**, read by `scripts/scrape-menus.mjs` |
+| **Price of the single dish** | **users** — the only truly reliable source |
 
-Due precisazioni:
+Two clarifications:
 
-1. **Lo scraping delle pagine di Google Maps non è una buona strada.** Viola i
-   Termini di servizio di Google, l'HTML cambia di continuo e gli IP dei server
-   vengono bloccati in fretta. La Places API fa la stessa cosa in modo lecito, con
-   una quota gratuita mensile che per un progetto come questo basta e avanza.
-2. **Nemmeno la Places API dà i prezzi.** Restituisce solo `priceLevel`, cioè una
-   fascia da `€` a `€€€€`, non "il döner costa 7,50 €". Ecco perché il sito è
-   costruito attorno ai prezzi inseriti dagli utenti: è l'unico modo per avere il
-   dato che serve davvero, ed è anche la cosa che rende il progetto utile rispetto
-   a Google Maps.
+1. **Scraping Google Maps pages is not a good route.** It violates Google's
+   Terms of Service, the HTML changes constantly and server IPs
+   get blocked quickly. The Places API does the same thing legally, with
+   a monthly free quota that is more than enough for a project like this.
+2. **Not even the Places API gives prices.** It returns only `priceLevel`, i.e.
+   a band from `€` to `€€€€`, not "the döner costs €7.50". That is why the site is
+   built around prices entered by users: it is the only way to get the
+   data that is really needed, and it is also what makes the project useful compared to
+   Google Maps.
 
-Quando ci sono più prezzi per la stessa voce si usa la **mediana**, non la media,
-così un singolo prezzo sbagliato non falsa tutto. I marker sono colorati per fascia:
-🟢 ≤ 10 € · 🟡 10–18 € · 🔴 > 18 € · ⚪ prezzo ancora ignoto.
+When there are several prices for the same item the **median** is used, not the mean,
+so a single wrong price does not distort everything. Markers are coloured by band:
+🟢 ≤ €10 · 🟡 €10–18 · 🔴 > €18 · ⚪ price still unknown.
 
 ---
 
-## Cosa finisce in mappa
+## What ends up on the map
 
-Non solo ristoranti e fast food: anche **bar, pub e biergarten**, perché ad
-Amsterdam nelle bruine kroegen e nei bar studenteschi si mangia e si beve per
-poco, che è il punto di questo sito.
+Not only restaurants and fast food: also **bars, pubs and beer gardens**, because in
+Amsterdam in the brown cafés and student bars you eat and drink
+cheaply, which is the point of this site.
 
-Restano fuori i locali che OpenStreetMap classifica come altro — 'Skek è un
-`amenity=pub` e si prende, ma Kriterion è un `amenity=cinema` e nessuna query
-per categoria lo prenderà mai. Per quelli c'è `data/extra-places.json`: si
-elenca l'id OSM e il prossimo rinfresco li include.
+Venues that OpenStreetMap classifies as something else are left out — 'Skek is an
+`amenity=pub` and is included, but Kriterion is an `amenity=cinema` and no query
+by category will ever pick it up. For those there is `data/extra-places.json`: you
+list the OSM id and the next refresh includes them.
 
-Per capire perché un locale manca:
+To understand why a venue is missing:
 
 ```bash
 node scripts/osm-lookup.mjs "Kriterion"
 ```
 
-Stampa i tag che OSM conosce, così si vede subito se il problema è la query, il
-bounding box, o che il locale su OSM non c'è proprio. C'è anche come workflow,
-per lanciarlo senza avere il progetto in locale.
+It prints the tags OSM knows, so you can see right away whether the problem is the query, the
+bounding box, or that the venue is simply not on OSM. It is also available as a workflow,
+to run it without having the project locally.
 
-## Segnalazioni dal sito
+## Reports from the site
 
-Il bottone **Feedback** apre una casella di testo, con allegato quello che
-l'utente stava guardando (filtri attivi, numero di risultati, locale
-selezionato): evita il classico "non funziona" senza sapere cosa fosse in
-schermo.
+The **Feedback** button opens a text box, with attached what the
+user was looking at (active filters, number of results, selected
+venue): it avoids the classic "it doesn't work" with no idea what was
+on screen.
 
-La segnalazione va al Worker condiviso `site-notes` (stesso D1 di tutti i siti, solo scrittura; resta in coda nel browser
-finché il server non l'ha accettata); una copia resta nel browser di chi scrive.
+The report goes to the shared `site-notes` Worker (same D1 as all the sites, write-only; it stays queued in the browser
+until the server has accepted it); a copy stays in the writer's browser.
 
-## Provarlo in locale
+## Trying it locally
 
 ```bash
 npm run dev       # http://localhost:5173
-npm test          # test unitari del parser degli orari
+npm test          # unit tests of the opening-hours parser
 ```
 
-Non serve installare nulla: nessuna dipendenza npm, Leaflet arriva da CDN.
+Nothing to install: no npm dependencies, Leaflet comes from a CDN.
 
-Al primo avvio `data/places.json` è vuoto, quindi **il sito interroga Overpass
-direttamente dal browser** e mette in cache il risultato per una settimana. Dopo
-qualche secondo compaiono i locali della zona.
+On first start `data/places.json` is empty, so **the site queries Overpass
+directly from the browser** and caches the result for a week. After
+a few seconds the venues of the area appear.
 
-**Che zona copre.** Non il confine comunale ma un rettangolo più largo
-(`METRO_BBOX` in `scripts/osm-common.js`): Amsterdam più Diemen, Amstelveen,
-Ouder-Amstel, Badhoevedorp e il bordo sud di Zaandam. Per chi cerca un döner un
-confine amministrativo non vuole dire niente. Per cambiarla basta modificare
-quelle quattro coordinate.
+**What area it covers.** Not the municipal border but a wider rectangle
+(`METRO_BBOX` in `scripts/osm-common.js`): Amsterdam plus Diemen, Amstelveen,
+Ouder-Amstel, Badhoevedorp and the southern edge of Zaandam. For someone looking for a döner an
+administrative border means nothing. To change it, just edit
+those four coordinates.
 
-Per committare il dataset nel repo (così il sito carica istantaneamente e funziona
-anche se Overpass è giù):
+To commit the dataset into the repo (so the site loads instantly and works
+even if Overpass is down):
 
 ```bash
 npm run fetch:osm
 ```
 
-## Leggere i prezzi dai menu
+## Reading prices from menus
 
 ```bash
 npm run scrape:menus -- --limit 300 --max-age 90
 ```
 
-Per ogni locale che ha un sito (2437 sui 4027 del dataset) legge la homepage e,
-se non basta, un paio di pagine che sembrano il menu. Riconosce i formati di
-prezzo olandesi e inglesi (`€ 3,50`, `3.50 euro`, `€12,-`), scarta i valori
-implausibili — un caffè a 45 € è un numero di telefono, non un caffè — e per
-primi e secondi prende il piatto più economico della sezione.
+For each venue that has a website (2437 of the 4027 in the dataset) it reads the homepage and,
+if that is not enough, a couple of pages that look like the menu. It recognises Dutch and English
+price formats (`€ 3,50`, `3.50 euro`, `€12,-`), discards implausible values
+— a coffee at €45 is a phone number, not a coffee — and for
+first and second courses takes the cheapest dish of the section.
 
-Si comporta bene: si identifica con uno User-Agent, rispetta `robots.txt`, non fa
-mai due richieste insieme sullo stesso host e lascia un secondo fra una pagina e
-l'altra. Registra anche i tentativi a vuoto, per non ripeterli ogni settimana.
+It behaves well: it identifies itself with a User-Agent, respects `robots.txt`, never makes
+two requests at once to the same host and leaves a second between one page and
+the next. It also records failed attempts, so as not to repeat them every week.
 
-Molti locali pubblicano il menu solo come PDF: se la homepage o le pagine di menu
-non bastano, lo scraper segue al massimo due link a `.pdf` dello stesso host che
-sembrano un menu (nome del file o testo con menu/kaart/drinks/food…), li scarica
-con le stesse regole (robots.txt, tetto di 10 MB) ed estrae il testo con
-`pdftotext -layout` (pacchetto `poppler-utils`, nessuna dipendenza npm). Il testo
-passa dallo stesso parser dell'HTML; in `menu` del locale compare `menuSource: "pdf"`
-e `menu.url` punta al PDF. Senza `pdftotext` i PDF vengono saltati con una riga di log.
-Stesso schema per i menu fotografati: fino a 2 immagini `.jpg/.png/.webp` dello stesso
-host (link o `<img>`) il cui nome o testo parla di menu/kaart/prijzen/drinks, lette con
-`tesseract` (eng+nld, processo figlio, tetto di 8 MB; pacchetti `tesseract-ocr` e
-`tesseract-ocr-nld`) e passate dallo stesso parser: `menuSource: "ocr"`. Senza
-`tesseract` si salta con una riga di log.
+Many venues publish the menu only as a PDF: if the homepage or the menu pages
+are not enough, the scraper follows at most two links to `.pdf` on the same host
+that look like a menu (file name or text with menu/kaart/drinks/food…), downloads them
+with the same rules (robots.txt, 10 MB cap) and extracts the text with
+`pdftotext -layout` (`poppler-utils` package, no npm dependency). The text
+goes through the same parser as the HTML; in the venue's `menu` there appears `menuSource: "pdf"`
+and `menu.url` points to the PDF. Without `pdftotext` PDFs are skipped with a log line.
+Same scheme for photographed menus: up to 2 `.jpg/.png/.webp` images on the same
+host (link or `<img>`) whose name or text mentions menu/kaart/prijzen/drinks, read with
+`tesseract` (eng+nld, child process, 8 MB cap; `tesseract-ocr` and
+`tesseract-ocr-nld` packages) and passed through the same parser: `menuSource: "ocr"`. Without
+`tesseract` it is skipped with a log line.
 
-**Non fa scraping di Google Maps**: quelle pagine sono coperte dai ToS di Google,
-cambiano di continuo e bloccano gli IP dei datacenter. Il "simbolo dell'euro" di
-Google si ottiene in modo lecito dalla Places API, qui sotto.
+**It does not scrape Google Maps**: those pages are covered by Google's ToS,
+change constantly and block datacenter IPs. Google's "euro symbol" is
+obtained legally from the Places API, below.
 
-## Come nasce una stima
+## How an estimate is made
 
-Quando per una voce non c'è né un prezzo misurato né uno dal menu, il sito ne
-stima uno (`assets/js/items.js`) partendo da un prezzo tipico di Amsterdam e
-correggendolo con i segnali disponibili:
+When for an item there is neither a measured price nor one from the menu, the site
+estimates one (`assets/js/items.js`) starting from a typical Amsterdam price and
+adjusting it with the available signals:
 
-- la **fascia di prezzo di Google** (`priceLevel`), se c'è: è il segnale migliore;
-- altrimenti il **tipo di locale** (un fast food costa meno di un ristorante);
-- la **zona**, come distanza dalla Dam: centro, prima cintura, periferia;
-- il **voto**, con peso piccolo: i locali molto votati costano un po' di più.
+- Google's **price band** (`priceLevel`), if present: it is the best signal;
+- otherwise the **type of venue** (a fast food costs less than a restaurant);
+- the **area**, as distance from the Dam: centre, first ring, outskirts;
+- the **rating**, with small weight: highly rated venues cost a bit more.
 
-Il risultato è un intervallo, non un numero secco: quando manca `priceLevel`
-l'intervallo si allarga, perché è il modo onesto di dire quanto ne sappiamo poco.
-I numeri di partenza sono un'ipotesi ragionevole, non un dato: esistono per
-essere sostituiti dai prezzi veri man mano che arrivano.
+The result is a range, not a single number: when `priceLevel` is missing
+the range widens, because that is the honest way of saying how little we know.
+The starting numbers are a reasonable guess, not data: they exist to
+be replaced by real prices as they arrive.
 
-## Voti e fasce di prezzo da Google (facoltativo)
+## Ratings and price bands from Google (optional)
 
 ```bash
-export GOOGLE_MAPS_API_KEY=...          # console.cloud.google.com → abilita "Places API (New)"
-npm run enrich:google -- --limit 200    # a scaglioni, per tenere d'occhio la quota
+export GOOGLE_MAPS_API_KEY=...          # console.cloud.google.com → enable "Places API (New)"
+npm run enrich:google -- --limit 200    # in batches, to keep an eye on the quota
 ```
 
-Lo script abbina ogni locale OSM alla scheda Google più vicina entro 200 m e salva
-`rating`, `reviews` e `priceLevel` dentro `data/places.json`. Senza chiave il sito
-funziona lo stesso: mancano solo le stelle.
+The script matches each OSM venue with the nearest Google listing within 200 m and saves
+`rating`, `reviews` and `priceLevel` into `data/places.json`. Without a key the site
+works all the same: only the stars are missing.
 
-## Raccogliere i prezzi degli utenti
+## Collecting users' prices
 
-I contributi (prezzi, voti, note, preferiti, locali aggiunti a mano) sono salvati
-nel `localStorage` del browser di chi li scrive. Dal pannello **⚙️ Dati** si
-esportano in un file JSON; per farli diventare parte del dataset condiviso:
+Contributions (prices, ratings, notes, favourites, venues added by hand) are saved
+in the `localStorage` of the browser of whoever writes them. From the **⚙️ Data** panel they are
+exported to a JSON file; to make them part of the shared dataset:
 
 ```bash
 npm run merge:contributions -- contributi-di-alessio.json
 git commit -am "prezzi: contributi di alessio"
 ```
 
-C'è anche un [template di issue](.github/ISSUE_TEMPLATE/nuovo-prezzo.yml) per chi
-preferisce segnalare un prezzo senza toccare il sito.
+There is also an [issue template](.github/ISSUE_TEMPLATE/nuovo-prezzo.yml) for those who
+prefer to report a price without touching the site.
 
-> Questa è la modalità senza backend, che resta il comportamento predefinito.
-> Con il backend acceso (`backend/`) i prezzi diventano pubblici nel momento in
-> cui si inseriscono, e l'export serve solo a farsene una copia.
+> This is the no-backend mode, which remains the default behaviour.
+> With the backend switched on (`backend/`) prices become public the moment
+> they are entered, and the export only serves to make a copy.
 
-## Prezzi condivisi (backend)
+## Shared prices (backend)
 
-Con un Cloudflare Worker e un database D1 i prezzi smettono di restare nel
-browser di chi li scrive: si vedono subito su tutti i dispositivi. Le istruzioni
-sono in [`backend/README.md`](backend/README.md): `npx wrangler login` e poi
-`npm run backend:setup`, che fa tutto il resto.
+With a Cloudflare Worker and a D1 database prices no longer stay in the
+browser of whoever writes them: they are seen immediately on all devices. The instructions
+are in [`backend/README.md`](backend/README.md): `npx wrangler login` and then
+`npm run backend:setup`, which does everything else.
 
-Finché `data/config.json` ha `apiBase: null` il sito funziona esattamente come
-prima, quindi il backend si può accendere e spegnere senza toccare il resto.
+As long as `data/config.json` has `apiBase: null` the site works exactly as
+before, so the backend can be switched on and off without touching the rest.
 
-Come si comporta il sito quando è acceso:
+How the site behaves when it is on:
 
-- un prezzo inserito parte subito verso il server, e **se la rete non c'è resta
-  in coda** e riparte al caricamento successivo o appena il telefono torna
-  online. È un sito che si usa per strada: non deve perdere niente;
-- aprendo la scheda di un locale si scaricano i prezzi arrivati dopo l'ultima
-  sincronizzazione, così si vede subito quello che hanno inserito gli altri;
-- il workflow settimanale porta prezzi e segnalazioni dentro il repo
-  (`data/places.json` e `data/feedback.json`): il sito resta veloce, funziona
-  anche col Worker giù, e i dati sono versionati.
+- a price entered goes straight to the server, and **if there is no network it stays
+  queued** and goes out at the next load or as soon as the phone is back
+  online. It is a site used on the street: it must not lose anything;
+- opening a venue's card downloads the prices that arrived after the last
+  synchronisation, so you immediately see what others have entered;
+- the weekly workflow brings prices and reports into the repo
+  (`data/places.json` and `data/feedback.json`): the site stays fast, works
+  even with the Worker down, and the data is versioned.
 
-## Pubblicare online
+## Publishing online
 
-`Settings → Pages → Source: GitHub Actions`, poi ogni push su `main` pubblica il
-sito ([workflow](.github/workflows/deploy-pages.yml)). Un secondo
-[workflow](.github/workflows/refresh-osm.yml) riscarica i dati OSM ogni lunedì
-mattina e committa le differenze.
+`Settings → Pages → Source: GitHub Actions`, then every push to `main` publishes the
+site ([workflow](.github/workflows/deploy-pages.yml)). A second
+[workflow](.github/workflows/refresh-osm.yml) re-downloads the OSM data every Monday
+morning and commits the differences.
 
 ---
 
-## Com'è fatto
+## How it is built
 
 ```
-index.html                 struttura della pagina
-assets/css/style.css       tema chiaro/scuro (segue il sistema, bottone ☀/☾ in topbar, scelta in localStorage "ea-theme"), layout mappa + lista
+index.html                 page structure
+assets/css/style.css       light/dark theme (follows the system, ☀/☾ button in topbar, choice in localStorage "ea-theme"), map + list layout
 assets/js/
-  app.js                   avvio e collegamento dei pezzi
-  data.js                  caricamento dataset, campi derivati (prezzo, voto)
-  filters.js               logica dei filtri: voci scelte (AND), somma, ordinamento
-  map.js                   Leaflet + cluster di marker
-  ui.js                    lista, scheda locale, finestre di dialogo
-  store.js                 contributi dell'utente (localStorage)
-  hours.js                 "aperto ora" da opening_hours di OSM
-  items.js                 le voci di riferimento e le stime
-scripts/menu-parse.js      estrazione dei prezzi dall'HTML (senza rete)
-scripts/osm-lookup.mjs     come è taggato un locale su OSM (diagnosi)
-scripts/stamp-version.mjs  marca gli asset per invalidare la cache
-data/extra-places.json     locali da includere a mano, per id OSM
-data/config.json           URL del backend (null = tutto in locale)
-scripts/sync-backend.mjs   porta prezzi e segnalazioni dal backend al repo
-backend/                   Cloudflare Worker + schema D1 + istruzioni
-scripts/scrape-menus.mjs   scraper dei menu dai siti dei locali
-tests/                     `npm test` — parser di orari e menu, voci e filtri
+  app.js                   startup and wiring of the pieces
+  data.js                  dataset loading, derived fields (price, rating)
+  filters.js               filter logic: chosen items (AND), sum, sorting
+  map.js                   Leaflet + marker clusters
+  ui.js                    list, venue card, dialogs
+  store.js                 user contributions (localStorage)
+  hours.js                 "open now" from OSM's opening_hours
+  items.js                 the reference items and the estimates
+scripts/menu-parse.js      price extraction from HTML (no network)
+scripts/osm-lookup.mjs     how a venue is tagged on OSM (diagnosis)
+scripts/stamp-version.mjs  stamps the assets to invalidate the cache
+data/extra-places.json     venues to include by hand, by OSM id
+data/config.json           backend URL (null = everything local)
+scripts/sync-backend.mjs   brings prices and reports from the backend into the repo
+backend/                   Cloudflare Worker + D1 schema + instructions
+scripts/scrape-menus.mjs   menu scraper from the venues' websites
+tests/                     `npm test` — hours and menu parser, items and filters
 scripts/
-  osm-common.js            zona coperta, query Overpass e normalizzazione
-                           (condiviso fra lo script Node e il browser)
-  fetch-osm.mjs            popola data/places.json
-  enrich-google.mjs        aggiunge stelle e fascia di prezzo
-  merge-contributions.mjs  unisce i contributi esportati nel dataset
-  serve.mjs                server statico per lo sviluppo
-data/places.json           il dataset
+  osm-common.js            covered area, Overpass query and normalisation
+                           (shared between the Node script and the browser)
+  fetch-osm.mjs            populates data/places.json
+  enrich-google.mjs        adds stars and price band
+  merge-contributions.mjs  merges exported contributions into the dataset
+  serve.mjs                static server for development
+data/places.json           the dataset
 ```
 
-### Idee per il seguito
+### Ideas for what comes next
 
-Il backend per i prezzi condivisi c'è già (sezione sopra). Per le idee non
-ancora realizzate e le proposte allo studio vedi
+The backend for shared prices already exists (section above). For ideas not
+yet realised and proposals under consideration see
 [`ROADMAP.md`](ROADMAP.md).
 
-## Licenze
+## Licences
 
-I dati dei locali vengono da OpenStreetMap, licenza
-[ODbL](https://www.openstreetmap.org/copyright): l'attribuzione è già in mappa e va
-mantenuta. I dati Google restano soggetti ai Termini di servizio di Google.
+Venue data comes from OpenStreetMap, licence
+[ODbL](https://www.openstreetmap.org/copyright): the attribution is already on the map and must be
+kept. Google data remains subject to Google's Terms of Service.

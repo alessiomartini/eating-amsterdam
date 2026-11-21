@@ -1,106 +1,106 @@
 # Roadmap
 
 <!--
-Unico file per todo, idee, decisioni e diario, letto da Projects Overview
-(https://alessiomartini.github.io/projects-overview/). Protocollo: templates/ROADMAP.md di projects-overview.
+Single file for todos, ideas, decisions and diary, read by Projects Overview
+(https://alessiomartini.github.io/projects-overview/). Protocol: templates/ROADMAP.md of projects-overview.
 -->
 
-## Lasciato a metà
-- [x] Mappa con filtri per cibo/bevanda e prezzo totale
-- [x] Aggiornamento automatico da OpenStreetMap
-- [x] Foto del locale nella scheda (solo dove OSM ha un riferimento Wikimedia, copertura ~0,5%)
-- [x] Foto del menù con estrazione dei prezzi
-  - [x] Prezzi dai menù in PDF (pdftotext)
-  - [x] Menù come immagine (OCR)
-- [x] Segnalare i prezzi più vecchi di 12 mesi da riverificare
+## Left half-done
+- [x] Map with filters by food/drink and total price
+- [x] Automatic update from OpenStreetMap
+- [x] Photo of the venue in the card (only where OSM has a Wikimedia reference, coverage ~0.5%)
+- [x] Menu photos with price extraction
+  - [x] Prices from PDF menus (pdftotext)
+  - [x] Menus as images (OCR)
+- [x] Flag prices older than 12 months to re-check
 
-## Idee
+## Ideas
 
-### Feedback centralizzato (idea, non ancora decisa)
+### Centralised feedback (idea, not yet decided)
 
-- [ ] Feedback centralizzato (idea, non ancora decisa)
+- [ ] Centralised feedback (idea, not yet decided)
 
-Oggi questo repo ha un proprio database Cloudflare D1 dedicato
-(`eating-amsterdam`, vedi `backend/README.md`) con Worker proprio, e lo stesso
-vale per altri due siti di Alessio (`ear-training`, `geopolitics-atlas`), ognuno
-con il proprio D1 + Worker per raccogliere note/feedback.
+Today this repo has its own dedicated Cloudflare D1 database
+(`eating-amsterdam`, see `backend/README.md`) with its own Worker, and the same
+goes for two other sites of Alessio's (`ear-training`, `geopolitics-atlas`), each
+with its own D1 + Worker to collect notes/feedback.
 
-Idea allo studio, **non presa**: consolidare in un unico database D1
-condiviso fra tutti i siti di Alessio, con una tabella tipo
+Idea under consideration, **not taken**: consolidate into a single D1 database
+shared by all of Alessio's sites, with a table like
 
 ```sql
 notes(id, site, page, text, created_at, ...)
 ```
 
-dove `site` distingue la provenienza, dietro un unico Worker con una allowlist
-CORS per dominio (come oggi fa `ALLOWED_ORIGINS` in `backend/wrangler.toml`,
-ma con più domini invece di uno).
+where `site` tells where a note comes from, behind a single Worker with a CORS
+allowlist per domain (as `ALLOWED_ORIGINS` in `backend/wrangler.toml` does today,
+but with several domains instead of one).
 
-**Pro:**
-- meno account/infrastruttura Cloudflare da mantenere (un D1 + un Worker
-  invece di uno per sito);
-- un solo posto dove leggere tutte le note di tutti i siti.
+**Pros:**
+- fewer Cloudflare accounts/infrastructure to maintain (one D1 + one Worker
+  instead of one per site);
+- a single place to read all the notes of all the sites.
 
-**Contro:**
-- un bug nel Worker condiviso romperebbe la raccolta note ovunque, mentre
-  oggi ogni sito è isolato: un problema in uno non tocca gli altri;
-- andrebbe migrato lo storico già presente nei D1 esistenti (qui: tabelle
-  `prices`, `flags`, `feedback` del database `eating-amsterdam`).
+**Cons:**
+- a bug in the shared Worker would break note collection everywhere, whereas
+  today each site is isolated: a problem in one does not touch the others;
+- the history already present in the existing D1 databases would have to be migrated (here: tables
+  `prices`, `flags`, `feedback` of the `eating-amsterdam` database).
 
-Priorità bassa: il sistema attuale (Worker + D1 dedicato, vedi
-`backend/src/worker.js`) funziona bene così com'è.
+Low priority: the current system (Worker + dedicated D1, see
+`backend/src/worker.js`) works well as it is.
 
-## Decisioni e cose provate
+## Decisions and things tried
 
-Note su cosa manca, cosa è lasciato a metà, e proposte non ancora decise.
-Per come è fatto il progetto oggi vedi `README.md` (sito) e
+Notes on what is missing, what is left half-done, and proposals not yet decided.
+For how the project is built today see `README.md` (site) and
 `backend/README.md` (Worker + D1).
 
-### Lasciato a metà
+### Left half-done
 
-- **Foto del locale nella scheda**: fatta con la sola fonte libera e senza chiavi,
-  Wikimedia Commons. `npm run enrich:photos` parte dai tag OSM `wikidata`,
-  `wikimedia_commons`, `image` (ora salvati in `photoRef` da `fetch:osm`) e risolve il
-  file (file indicato in OSM > P18 di Wikidata > primo file di una categoria Commons,
-  solo se il nome della categoria contiene quello del locale), poi salva in
-  `place.photo` miniatura (hotlink, nessun file nel repo), autore, licenza e pagina del
-  file; la scheda mostra la foto con l'attribuzione. Scelta di Commons perché ogni
-  file ha autore e licenza chiari, a differenza di Google Places (non collegato, ToS
-  restrittivi). Limite noto: copertura bassa, 23 locali su 4713 (~0,5%) con foto, perché
-  solo ~38 locali hanno un riferimento Wikimedia in OSM; il resto non mostra foto.
-  Cresce solo se qualcuno aggiunge i tag in OSM. Il rinfresco settimanale lancia lo
+- **Photo of the venue in the card**: done with the only free source that needs no keys,
+  Wikimedia Commons. `npm run enrich:photos` starts from the OSM tags `wikidata`,
+  `wikimedia_commons`, `image` (now saved in `photoRef` by `fetch:osm`) and resolves the
+  file (file named in OSM > P18 of Wikidata > first file of a Commons category,
+  only if the category name contains the venue's name), then saves in
+  `place.photo` the thumbnail (hotlink, no file in the repo), author, licence and file
+  page; the card shows the photo with its attribution. Commons was chosen because every
+  file has a clear author and licence, unlike Google Places (not connected, restrictive
+  ToS). Known limit: low coverage, 23 venues out of 4713 (~0.5%) with a photo, because
+  only ~38 venues have a Wikimedia reference in OSM; the rest show no photo.
+  It grows only if someone adds the tags in OSM. The weekly refresh runs the
   script (`continue-on-error`).
-- **Foto del menù con estrazione dei prezzi**: oggi `scripts/scrape-menus.mjs`
-  legge pagine HTML, PDF e immagini di menu pubblicate dal locale (OCR con `tesseract`,
-  vedi sotto). Una foto scattata da un utente non è gestita: resta fuori perimetro.
-- **Menù in PDF**: `scrape-menus` segue fino a 2 link `.pdf` dello stesso host che
-  sembrano un menu, solo se HTML e pagine di menu non bastano, e ne estrae il testo con
-  `pdftotext -layout` (poppler, processo figlio: nessuna dipendenza npm). Stesso parser
-  e stessi limiti di plausibilità dell'HTML (`extractItemsFromText`); il locale riceve
-  `menu.menuSource: "pdf"`. Senza `pdftotext` si salta con una riga di log; il
-  workflow settimanale lo installa (`poppler-utils`, `continue-on-error`). Scartati:
-  PDF su altri host (come per le pagine) e PDF oltre 10 MB. 
-- **Menù come immagine**: fino a 2 immagini `.jpg/.png/.webp` dello stesso host con
-  menu/kaart/prijzen/drinks nel nome o nell'alt (max 8 MB), lette con `tesseract`
-  (eng+nld, processo figlio, nessuna dipendenza npm), con una pulizia dei difetti OCR
-  tipici ("12.5O"); `menuSource: "ocr"`. Opzionale: senza `tesseract` si salta con una
-  riga di log; il workflow settimanale lo installa. Non testato su siti reali in blocco.
-- **Segnalazione dei prezzi vecchi** (> 12 mesi): fatta, badge "re-check" in
-  lista e scheda. Limite: `npm run check:stale` elenca solo i prezzi da menu
-  (`menu.scrapedAt`); quelli della community stanno nel Worker, non nel repo,
-  quindi li segnala solo la UI. Manca ancora un filtro per nasconderli.
-- **`data/feedback.json` e `npm run sync:backend`**: il workflow settimanale
-  che porta prezzi e segnalazioni dal Worker nel repo esiste, ma non c'è
-  ancora nessuna interfaccia per marcare una segnalazione come "letta/risolta"
-  a parte modificare `status` a mano via SQL (vedi `backend/README.md` →
-  "Guardare dentro").
+- **Menu photos with price extraction**: today `scripts/scrape-menus.mjs`
+  reads HTML pages, PDFs and menu images published by the venue (OCR with `tesseract`,
+  see below). A photo taken by a user is not handled: it stays out of scope.
+- **PDF menus**: `scrape-menus` follows up to 2 `.pdf` links on the same host that
+  look like a menu, only if the HTML and menu pages are not enough, and extracts their text with
+  `pdftotext -layout` (poppler, child process: no npm dependency). Same parser
+  and same plausibility limits as the HTML (`extractItemsFromText`); the venue gets
+  `menu.menuSource: "pdf"`. Without `pdftotext` it is skipped with a log line; the
+  weekly workflow installs it (`poppler-utils`, `continue-on-error`). Discarded:
+  PDFs on other hosts (as for pages) and PDFs over 10 MB. 
+- **Menus as images**: up to 2 `.jpg/.png/.webp` images on the same host with
+  menu/kaart/prijzen/drinks in the name or alt (max 8 MB), read with `tesseract`
+  (eng+nld, child process, no npm dependency), with a clean-up of typical OCR
+  defects ("12.5O"); `menuSource: "ocr"`. Optional: without `tesseract` it is skipped with a
+  log line; the weekly workflow installs it. Not tested in bulk on real sites.
+- **Flagging old prices** (> 12 months): done, "re-check" badge in
+  list and card. Limit: `npm run check:stale` lists only menu prices
+  (`menu.scrapedAt`); community prices live in the Worker, not in the repo,
+  so only the UI flags them. A filter to hide them is still missing.
+- **`data/feedback.json` and `npm run sync:backend`**: the weekly workflow
+  that brings prices and reports from the Worker into the repo exists, but there is
+  still no interface to mark a report as "read/resolved"
+  other than editing `status` by hand via SQL (see `backend/README.md` →
+  "Looking inside").
 
 ## Log
-- 2026-11-21: 🤖 lo scraper dei menù legge anche i menù pubblicati come immagine (OCR con `tesseract`, `menuSource: "ocr"`, opzionale), con test e `tesseract-ocr` nel workflow.
-- 2026-11-14: 🤖 lo scraper dei menù legge anche i menù pubblicati come PDF (`pdftotext`, `menuSource: "pdf"`), con test e step `poppler-utils` nel workflow; l'OCR delle immagini resta da fare.
-- 2026-11-07: 🤖 foto del locale da Wikimedia Commons nella scheda (`enrich:photos`, `photoRef` in `fetch:osm`, attribuzione autore/licenza, test sul parsing); copertura 23/4713.
-- 2026-11-06: il feedback va ora al Worker condiviso site-notes (coda locale finché non è accettato), anche senza backend dei prezzi; tolta la issue GitHub precompilata; `/api/feedback` del backend dei prezzi non è più usato dal sito; serve il deploy di site-notes. widget note v2 canonico (site-notes/widget): tolti bottone/modale/coda vecchi, migrate outbox e note locali dello store. widget note allineato alla versione finale (migrazione key#field, dedupe), ?v=3.
-- 2026-10-19: installabile come app a sé dal telefono (manifest con nome, icona e perimetro propri)
-- 2026-10-18: FUTURE-ARCHITECTURE.md unito in ROADMAP.md (protocollo unico)
-- 2026-10-18: 🤖 badge "re-check" sui prezzi (misurati o da menu) più vecchi di 12 mesi, calcolato al render, più `npm run check:stale`
-- 2026-10-15: creata la roadmap per Projects Overview
+- 2026-11-21: 🤖 ROADMAP translated to English (language rule: projects in English or bilingual EN/IT). 🤖 the menu scraper also reads menus published as images (OCR with `tesseract`, `menuSource: "ocr"`, optional), with tests and `tesseract-ocr` in the workflow.
+- 2026-11-14: 🤖 the menu scraper also reads menus published as PDFs (`pdftotext`, `menuSource: "pdf"`), with tests and a `poppler-utils` step in the workflow; image OCR still to do.
+- 2026-11-07: 🤖 venue photo from Wikimedia Commons in the card (`enrich:photos`, `photoRef` in `fetch:osm`, author/licence attribution, parsing tests); coverage 23/4713.
+- 2026-11-06: feedback now goes to the shared site-notes Worker (local queue until accepted), even without the prices backend; removed the prefilled GitHub issue; `/api/feedback` of the prices backend is no longer used by the site; site-notes deploy needed. canonical notes widget v2 (site-notes/widget): removed old button/modal/queue, migrated outbox and local notes of the store. notes widget aligned to the final version (key#field migration, dedupe), ?v=3.
+- 2026-10-19: installable as a standalone app from the phone (manifest with its own name, icon and scope)
+- 2026-10-18: FUTURE-ARCHITECTURE.md merged into ROADMAP.md (single protocol)
+- 2026-10-18: 🤖 "re-check" badge on prices (measured or from menu) older than 12 months, computed at render time, plus `npm run check:stale`
+- 2026-10-15: created the roadmap for Projects Overview
