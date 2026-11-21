@@ -275,6 +275,44 @@ export function findPdfMenuLinks(html, baseUrl) {
   return [...links].slice(0, 2);
 }
 
+/**
+ * Immagini che sembrano un menu (per l'OCR): <a href> o <img src> verso
+ * .jpg/.jpeg/.png/.webp dello stesso host, con menu/kaart/prijzen/drinks... nel
+ * nome del file, nell'alt o nel testo del link. Loghi e icone esclusi; al massimo 2.
+ */
+export function findImageMenuLinks(html, baseUrl) {
+  const wanted = /menu|menukaart|kaart|carta|prijs|prijzen|price|drinks|dranken|drinken|gerechten|lunch|diner|dinner|brunch/i;
+  const unwanted = /logo|icon|favicon|sprite|avatar|banner/i;
+  const candidates = [];
+
+  for (const match of html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]{0,300}?)<\/a>/gi)) {
+    const [, href, inner] = match;
+    const alt = /alt=["']([^"']*)["']/i.exec(inner)?.[1] ?? '';
+    candidates.push([href, inner.replace(/<[^>]+>/g, ' ') + ' ' + alt]);
+  }
+  for (const match of html.matchAll(/<img\b[^>]*>/gi)) {
+    const tag = match[0];
+    const src = /\b(?:data-src|src)=["']([^"']+)["']/i.exec(tag)?.[1];
+    if (src) candidates.push([src, /alt=["']([^"']*)["']/i.exec(tag)?.[1] ?? '']);
+  }
+
+  const links = new Set();
+  for (const [href, label] of candidates) {
+    if (/^(mailto:|tel:|javascript:|#|data:)/i.test(href)) continue;
+    try {
+      const url = new URL(decodeEntities(href), baseUrl);
+      if (url.protocol !== 'https:' && url.protocol !== 'http:') continue;
+      if (!/\.(jpe?g|png|webp)$/i.test(url.pathname)) continue;
+      if (url.hostname !== new URL(baseUrl).hostname) continue;
+      const text = decodeURIComponent(url.pathname) + ' ' + label;
+      if (!wanted.test(text) || unwanted.test(decodeURIComponent(url.pathname))) continue;
+      url.hash = '';
+      links.add(url.toString());
+    } catch { /* href malformato */ }
+  }
+  return [...links].slice(0, 2);
+}
+
 /** Parser minimo di robots.txt per il gruppo User-agent che ci riguarda. */
 export function isAllowedByRobots(robotsTxt, path, userAgent = 'eating-amsterdam') {
   if (!robotsTxt) return true;

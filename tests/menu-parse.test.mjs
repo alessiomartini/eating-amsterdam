@@ -191,3 +191,40 @@ test('pdftotext su un PDF reale di prova (solo se installato)', { skip: !hasPdft
   assert.ok(text);
   assert.deepEqual(extractItemsFromText(text), { coffee: 3.5, beer: 4.8, pasta: 14, main: 14 });
 });
+
+// --- menu come immagine (OCR) ---
+
+import { findImageMenuLinks } from '../scripts/menu-parse.js';
+import { hasTesseract, imageToText, normalizeOcrText } from '../scripts/ocr-text.js';
+
+test('trova le immagini che sembrano un menu, solo sullo stesso host, al massimo 2', () => {
+  const html = `
+    <a href="/uploads/Menukaart-2026.jpg"><img src="/uploads/thumb.jpg" alt="x"></a>
+    <img src="/img/drinks.PNG" alt="">
+    <img src="/img/logo-menu.png" alt="Menu">
+    <img src="/img/sfeer.jpg" alt="Onze prijzen">
+    <img src="/img/gevel.jpg" alt="De gevel">
+    <img src="https://altro.example/menu.jpg" alt="Menu">
+    <a href="/menu.pdf">Menu</a>
+    <img data-src="/img/kaart.webp?v=2">`;
+  assert.deepEqual(findImageMenuLinks(html, 'https://locale.example/'), [
+    'https://locale.example/uploads/Menukaart-2026.jpg',
+    'https://locale.example/img/drinks.PNG',
+  ]);
+  assert.deepEqual(findImageMenuLinks('<img src="/img/sfeer.jpg" alt="Onze prijzen">', 'https://locale.example/'), [
+    'https://locale.example/img/sfeer.jpg',
+  ]);
+});
+
+test('legge i prezzi da un testo OCR con i difetti tipici', () => {
+  const text = 'MENUKAART\nKoffie   € 3,5O\nBiertje 4.8O\nHoofdgerechten\nBurger  € 16,50\nPasta pesto 12.5O\nDessert\nTiramisu 7,OO\n';
+  assert.equal(normalizeOcrText('12.5O'), '12.50');
+  assert.equal(normalizeOcrText('1O,50'), '10,50');
+  assert.deepEqual(extractItemsFromText(normalizeOcrText(text)), { coffee: 3.5, beer: 4.8, pasta: 12.5, main: 12.5 });
+});
+
+test('tesseract su un\'immagine di prova (solo se installato)', { skip: !hasTesseract }, async () => {
+  const text = await imageToText(readFileSync(new URL('./fixtures/menu.png', import.meta.url)));
+  assert.ok(text);
+  assert.deepEqual(extractItemsFromText(text), { coffee: 3.5, beer: 4.8, pasta: 14, main: 14 });
+});
